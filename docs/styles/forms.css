@@ -1,0 +1,188 @@
+/* CSS Document */
+
+.forms {
+	margin: auto;
+	max-width: 100%;
+	
+}
+
+.forms-radios input {
+	float: left;
+	width: 1em;
+	margin: 0 0 1em 1em;
+	padding: 1px 4px;
+	text-align: right;
+}
+
+.forms-radios label {
+	float: left;
+	width: 90%;
+	color: #074b83;
+	margin: 0 0 0.1em 1em;
+	padding: 1px 4px;
+	text-align: left;
+}
+
+label {
+	float: left;
+	width: 8em;
+	color: #074b83;
+	font-weight: 200;
+	text-align: right;
+}
+
+input {
+	float: left;
+	width: 16em;
+	margin: 0 0 1em 1em;
+	border: 2px ridge #0c87eb;
+	padding: 1px 4px;
+}
+
+input:hover {
+	box-shadow: -1px 1px 3px 0 rgba(69,223,231,0.8), 1px 1px 3px 0 rgba(203,23,202,0.8);
+}
+
+input:focus {
+	border: 2px groove #5d34a4;
+}
+
+input:required, input[required] {
+	border: 2px dashed red;
+}
+
+input:valid {
+	border: 2px ridge #0c87eb;
+}
+
+input:invalid {
+	border: 2px solid orange;
+}
+
+textarea {
+	float: left;
+	width: 24em;
+	margin: 0 0 1em 1em;
+	border: 2px ridge #0c87eb;
+	padding: 1px 4px;
+}
+
+textarea:hover {
+	box-shadow: -1px 1px 3px 0 rgba(69,223,231,0.8), 1px 1px 3px 0 rgba(203,23,202,0.8);
+}
+
+textarea:focus {
+	border: 2px groove #5d34a4;
+}
+
+select {
+	width: 16em;
+	margin: 0 0 1em 1em;
+	border: 2px ridge #0c87eb;
+	padding: 1px 4px;
+}
+
+select:hover {
+	box-shadow: -1px 1px 3px 0 rgba(69,223,231,0.8), 1px 1px 3px 0 rgba(203,23,202,0.8);
+}
+
+select:focus {
+	border: 2px groove #5d34a4;
+}
+
+#submit, #reset {
+	width: 8em;
+	box-shadow: -1px -1px 3px 0px rgba(69,223,231,0.8), 1px 1px 3px 0px rgba(69,223,231,0.8);
+}
+
+#submit:hover, #reset:hover {
+	box-shadow: -1px 1px 3px 0 rgba(203,23,202,0.8), 1px 1px 3px 0 rgba(203,23,202,0.8);
+}
+
+#submit {
+	margin-left: 9em;
+}
+
+br {
+	clear: both;
+}
+
+#table_cart {
+	background-color: #e0d6f2;
+	padding: 2px 4px;
+	margin: 4px 8px;
+	border-radius: 4px;
+}
+
+#table_cart th {
+	background-color: #c1ade5;
+}
+
+.item {
+	float: left;
+	width: 12em;
+	margin: 0 0 1em 1em;
+	padding: 1px 4px;
+	text-align: center;
+}
+
+.price {
+	float: left;
+	width: 6em;
+	text-align: center;
+	background-color: transparent;
+}
+
+.qty {
+	float: left;
+	width: 2em;
+	text-align: center;
+}
+
+.subtotal {
+	float: left;
+	width: 6em;
+	text-align: right;
+	background-color: transparent;
+}
+
+.table_feedback {
+	padding: 2px 4px;
+	margin: 4px 8px;
+	border-radius: 4px;
+	font-size: 0.8em;
+	border-collapse: collapse;
+	border: 1px solid #444;
+	overflow-x: auto;
+}
+
+.table_feedback tr:nth-child(even) {
+	background-color: #f6f3fb;
+}
+
+.table_feedback tr:nth-child(odd) {
+	background-color: #e0d6f2;
+}
+
+.table_feedback th {
+	width: 3em;
+	padding: 4px 8px;
+	background-color: #c1ade5;
+	border-bottom: 1px solid #333;
+}
+
+.table_feedback td {
+	width: 3em;
+	margin:auto;
+	padding: 8px 4px;
+	text-align: center;
+	border-bottom: 1px solid #333;
+}
+
+.table_feedback tr:hover {
+	background-color: #ddd;
+}
+
+.table_feedback .radio {
+	width: 1em;
+}

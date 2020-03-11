@@ -1,0 +1,90 @@
+/* CSS Document */
+
+.page-content {
+	padding: 12px;
+}
+
+.sticky {
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding-bottom: 1px;
+	z-index: 100;
+}
+
+.sticky + .page-content {
+	padding-top: 48px;
+}
+
+/* Boxing */
+.boxes {
+	box-sizing:content-box;
+}
+
+.box-icon-left {
+	width: 10%;
+	height: 100px;
+	float: left;
+	display: inline;
+	padding-right: 15px;
+}
+
+.box-icon-right {
+	width: calc(90% - 15px);
+	height: 100px;
+	line-height: 100px;
+	/*position: relative;
+	margin: auto;*/
+	float: left;
+	display: inline;
+	
+}
+
+.box-icon-right p {
+	line-height: 0.2;
+	display: inline;
+	vertical-align: middle;
+	font-size: 4em;
+	padding-left: 12px;
+	text-shadow: 1px 1px 2px black, 0px 0px 12px #8FE0E4, 0px 0px 8px purple;
+}
+
+.clearfix {
+	overflow: auto;
+}
+
+.boxes:after, .box-icon-left:after, .box-icon-right:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Margin Adjustments */
+.themes-margin {
+	margin: 12px !important;
+}
+
+.themes-margin-top {
+	margin-top: 12px !important;
+}
+
+.themes-margin-bottom {
+	margin-bottom: 12px !important;
+}
+
+.themes-margin-left {
+	margin-left: 12px !important;
+}
+
+.themes-margin-right {
+	margin-right: 12px !important;
+}
+
+/* Borders */
+.themes-round {
+	border-radius: 4px !important;
+}
+
+.border-orange {
+	border: 0.1em solid #000;
+}
