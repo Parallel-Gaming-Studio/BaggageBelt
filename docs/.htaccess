@@ -1,0 +1,28 @@
+# Set the default file for the site
+DirectoryIndex index.php
+
+# Prevent users from accessing site scripts
+RedirectMatch 403 /\..*$
+RedirectMatch 403 ^/includes/.*$
+
+# Hide indexes
+Options -Indexes
+
+# Hide files starting with a period
+<Files "(^\.)">
+	Order Allow,Deny
+	Deny from all
+</Files>
+
+# Redirect users to error pages
+ErrorDocument 400: /400.php
+ErrorDocument 401: /401.php
+ErrorDocument 403: /403.php
+ErrorDocument 404: /404.php
+ErrorDocument 500: /500.php
+
+# Allow Scripting
+AddType text/x-generic js memgz jsgz datagz asm.jsgz
+AddType application/octet-stream memgz datagz unity3dgz
+AddType application/x-javascript jsgz
+AddType application/javascript jsgz
