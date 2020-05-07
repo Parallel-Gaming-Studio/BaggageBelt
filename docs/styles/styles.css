@@ -1,13 +1,20 @@
 /* CSS Document */
-
+/* Custom fonts */
 @font-face {
     font-family: Roboto-Bold;
     src: url(Roboto-Bold.ttf);
 }
 @font-face {
-	font-family: BigShouldersDisplay-SemiBold;
-	src: url("BigShouldersDisplay-SemiBold.ttf");
+    font-family: BigShouldersDisplay-SemiBold;
+    src: url("BigShouldersDisplay-SemiBold.ttf");
 }
+
+body {
+    overflow: -moz-scrollbars-none;
+    overflow: hidden !important;
+}
+
+/* Play/End Scene Keypads */
 .keypad-container {
     position: relative;
     display: inline-block;
@@ -45,6 +52,7 @@
     margin-right: auto;
     filter: grayscale(70%);
 }
+/* Play Scene filled letter spaces */
 .word-spaces-container {
     position: relative;
     display: inline-block;
@@ -67,30 +75,34 @@
     margin-left: auto;
     margin-right: auto;
 }
+/* Play Scene timer */
 .timer-box {
-	position: absolute;
-	margin: 0px;
-	text-align: center;
-	font-size: 74pt;
-	font-family: BigShouldersDisplay-Semibold;
-	color: #FFFFFF;
+    position: absolute;
+    margin: 0px;
+    text-align: center;
+    font-size: 74pt;
+    font-family: BigShouldersDisplay-Semibold;
+    color: #FFFFFF;
 }
+/* Play Scene score */
 .score-box {
-	position: absolute;
-	margin: 0px;
-	text-align: center;
-	font-size: 74pt;
-	font-family: BigShouldersDisplay-Semibold;
-	color: #FFFFFF;
+    position: absolute;
+    margin: 0px;
+    text-align: center;
+    font-size: 74pt;
+    font-family: BigShouldersDisplay-Semibold;
+    color: #FFFFFF;
 }
+/* Play Scene animated score alert */
 .score-alert-box {
-	position: absolute;
-	margin: 0px;
-	text-align: center;
-	font-size: 74pt;
-	font-family: BigShouldersDisplay-Semibold;
-	color: #FFFFFF;
+    position: absolute;
+    margin: 0px;
+    text-align: center;
+    font-size: 74pt;
+    font-family: BigShouldersDisplay-Semibold;
+    color: #FFFFFF;
 }
+/* Text Effects */
 .glow {
     font-size: 80px;
     color: #fff;
@@ -100,14 +112,13 @@
     animation: glow 1s ease-in-out infinite alternate;
 }
 .pulse {
-	font-size: 80px;
+    font-size: 80px;
     color: #fff;
     text-align: center;
     -webkit-animation: glow 1s ease-in-out 1 alternate;
     -moz-animation: glow 1s ease-in-out 1 alternate;
     animation: glow 1s ease-in-out 1 alternate;
 }
-
 @-webkit-keyframes glow {
     from {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
@@ -116,103 +127,147 @@
         text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
     }
 }
-
+/* Leaderboard table */
 .table-container {
-	position: absolute;
-	display: inline-block;
-	padding: 0px;
+    position: absolute;
+    display: inline-block;
+    padding: 0px;
 }
-
 .table-container table {
     table-layout: fixed;
     width: 100%;
     text-align: center;
     vertical-align: center;
-    font-size: 36pt;
-    font-size: 2.5vw;
     border-collapse: separate;
-    border-spacing: 25px 5px;
+    /*border-spacing: 1.1vw 1.1vw;*/
+    border-spacing: 1vw 1.3vh;
 }
-
 .table-container td:nth-child(1) {
     width: 10%;
 }
-
 .table-container td:nth-child(2) {
     width: 30%;
 }
-
 .table-container td:nth-child(3) {
     width: 30%;
 }
-
 .table-container td {
     text-align: center;
     font-family: roboto-bold;
-    color: #fff;    
     background-color: #2581af;
     border-radius: 4px;
     -moz-box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.4);
     -webkit-box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.4);
     box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.4);
 }
-
-.Initials {
-	position: absolute;
-	margin: 0px;
-	text-align: center;
-	font-size: 16pt;
-	font-family: roboto-bold;
-	color: #f41c63;
+.top-10-data {
+    color: #fff;
 }
-
+/* End Scene initials */
+.Initials {
+    position: absolute;
+    margin: 0px;
+    text-align: center;
+    font-size: 16pt;
+    font-family: roboto-bold;
+    color: #f41c63;
+}
+/* Timeout Overlay */
 #timeoutOverlay {
-	position: fixed;
-	display: block;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.6);
-	z-index: 100;
-	cursor: pointer;
-	text-align: center;
-	-moz-text-shadow: 2px 4px 0px rgba(90, 90, 90, 0.9);
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    cursor: pointer;
+    text-align: center;
+    -moz-text-shadow: 2px 4px 0px rgba(90, 90, 90, 0.9);
     -webkit-text-shadow: 2px 4px 0px rgba(90, 90, 90, 0.9);
     text-shadow: 2px 4px 0px rgba(90, 90, 90, 0.9);
 }
-
 #timeoutHeader {
-	position: absolute;
-	top: 35%;
-	left: 50%;
-	font-size: 5vw;
-	font-family: Roboto-Bold;
-	color: #fff;
-	transform: translate(-50%, -65%);
-	-ms-transform: translate(-50%, -65%);
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    font-size: 5vw;
+    font-family: Roboto-Bold;
+    color: #fff;
+    -ms-transform: translate(-50%, -65%);
+    transform: translate(-50%, -65%);
 }
-
 #timeoutInstructions {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	font-size: 3vw;
-	font-family: Roboto-Bold;
-	color: #fff;
-	transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 3vw;
+    font-family: Roboto-Bold;
+    color: #fff;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-
 #timeoutTimer {
-	position: absolute;
-	top: 65%;
-	left: 50%;
-	font-size: 4vw;
-	font-family: Roboto-Bold;
-	color: #fff;
-	transform: translate(-50%, -35%);
-	-ms-transform: translate(-50%, -35%);
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    font-size: 4vw;
+    font-family: Roboto-Bold;
+    color: #fff;
+    -ms-transform: translate(-50%, -35%);
+    transform: translate(-50%, -35%);
+}
+#fadeOutOverlay {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-image: url("../images/start_scene/start_runway_bg.png");
+    -webkit-filter: blur(8px) grayscale() opacity(1.0);
+    filter: blur(8px) grayscale() opacity(1.0);
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1000;
+}
+#fadeOutLoader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 30vw;
+    height: 30vw;
+    margin: -19vw 0 0 -19vw;
+    border: 4vw solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4vw solid #f41c63;
+    border-bottom: 4vw solid #2581af;
+    z-index: 1001;
+    
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
