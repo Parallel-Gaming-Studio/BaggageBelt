@@ -1,5 +1,13 @@
+# Set the permissive order directive
+Order Allow,Deny
+
 # Set the default file for the site
 DirectoryIndex index.html
+
+# Allow access to specific file types
+<Files ~ "\.(html|js|php)$">
+	Allow from all
+</Files>
 
 # Prevent users from accessing site scripts
 RedirectMatch 403 /\..*$
@@ -10,7 +18,6 @@ Options -Indexes
 
 # Hide files starting with a period
 <Files "(^\.)">
-	Order Allow,Deny
 	Deny from all
 </Files>
 
