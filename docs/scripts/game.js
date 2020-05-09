@@ -223,28 +223,13 @@ game.timeoutOverlay.init(); // Force initialization of the timer during script l
 
 // Image hooks (Shorthand Object Notation)
 // - Start Scene
-//   - Images
-
-//   - Buttons
-
-
+$.get("scripts/scene_start.js");
 // - Play Scene
-//   - Images
-
-//   - Buttons
-
-
+$.get("scripts/scene_play.js");
 // - End Scene
-//   - Images
-
-//   - Buttons
-
-
+$.get("scripts/scene_end.js");
 // - Leaderboard Scene
-//   - Images
-
-//   - Buttons
-
+$.get("scripts/scene_leaderboard.js");
 
 /* Game States and transitions
  ** -- Start Scene
