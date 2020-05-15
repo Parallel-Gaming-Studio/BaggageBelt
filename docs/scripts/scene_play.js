@@ -1,7 +1,7 @@
 // JavaScript Document
 
 // DEBUG
-console.log("play_scene.js loaded successfully");
+console.log("scene_play.js loaded successfully");
 
 //   - Images
 
