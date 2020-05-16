@@ -40,6 +40,7 @@ for (var i = 0; i < game.mouse.length; i++) {
 
 // Declare Game Variables
 // - Globals
+game.scale = 1.0;                       // Scale for adjusting object sizes
 game.timeoutTime = 120;					// Timeout time before returning to landing page
 game.lastTimeSized = new Date();        // Used to track window resizing without window events
 
