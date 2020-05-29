@@ -181,9 +181,17 @@ game.drawOnce = function () {
             break;
         case 'leaderboard':
             // Draw images on the canvas
+            this.leaderboardBackground.draw();
+            this.leaderboardTitle.draw();
+            this.leaderboardBackdrop.draw();
+            this.leaderboardScoreBox.draw();
+            //this.leaderboardSponsorBox.draw();   --if being used
+            this.top10players.adjustStyle();
+            this.finalPlayerScore.draw();
             
             // Display buttons
-            
+            this.menuButton.adjustStyle();
+            this.leaderboardRetryButton.adjustStyle();
             break;
         default:
             break;
