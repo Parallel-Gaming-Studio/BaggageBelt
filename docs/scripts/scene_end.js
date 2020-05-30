@@ -8,7 +8,7 @@ console.log("scene_end.js loaded successfully");
 //End_Scene Play background 
 game.endBackground = {
     // Get handle to image
-    image: document.getElementById("endBackground"),
+    image: document.getElementById("endBaggageBeltBackground"),
     // Declare object transform information
     org_width: 1920 * game.scale,
     org_height: 1080 * game.scale,
@@ -170,7 +170,7 @@ game.endSponsoredTimerBox.init(); // Force initialize endPlayerTimeBoard's event
 //End_Scene Title Background
 game.endTitle = {
     // Get handle to image
-    image: document.getElementById("titleWhite"),
+    image: document.getElementById("BaggageBeltTitle"),
     // Declare object transform information
     org_width: 413 * game.scale,
     org_height: 262 * game.scale,
@@ -221,7 +221,7 @@ game.endGamePoints = {
 };
 
 //End_Scene Player Score
-game.endScore = {
+game.endPlayerScore = {
     // Get handle to div element
     div: document.getElementById("endScore"),
     // Declare object transform information
