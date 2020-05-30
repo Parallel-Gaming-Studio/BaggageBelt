@@ -163,14 +163,6 @@ game.drawOnce = function () {
     switch (this.currState) {
         case 'start':
             // Draw images on the canvas
-            this.startBackground.draw();
-            this.ABoFTitle.draw();
-			
-            // Display buttons
-            this.startButton.adjustStyle();
-            this.leaderboardButton.adjustStyle();
-            this.quitButton.adjustStyle();
-            this.menuButton.adjustStyle();
             break;
         case 'play':
             // Draw images on the canvas
