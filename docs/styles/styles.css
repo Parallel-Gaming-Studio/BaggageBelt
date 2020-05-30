@@ -183,7 +183,7 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
+    z-index: 9999;
     cursor: pointer;
     text-align: center;
     -moz-text-shadow: 2px 4px 0px rgba(90, 90, 90, 0.9);
@@ -226,7 +226,7 @@ body {
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    background-image: url("../images/start_scene/start_runway_bg.png");
+    background-image: url("../images/start_scene/background.png");
     -webkit-filter: blur(8px) grayscale() opacity(1.0);
     filter: blur(8px) grayscale() opacity(1.0);
     width: 100%;
@@ -236,13 +236,12 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: 1000;
+    z-index: 9000;
 }
 #fadeOutLoader {
     position: absolute;
     left: 50%;
     top: 50%;
-
     width: 30vw;
     height: 30vw;
     margin: -19vw 0 0 -19vw;
@@ -250,8 +249,7 @@ body {
     border-radius: 50%;
     border-top: 4vw solid #f41c63;
     border-bottom: 4vw solid #2581af;
-    z-index: 1001;
-    
+    z-index: 9001;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }

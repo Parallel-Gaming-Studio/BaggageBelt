@@ -2,6 +2,7 @@
 
 // DEBUG
 console.log("scene_end.js loaded successfully");
+
 //Start End Scene
 
 // Images
@@ -823,3 +824,7 @@ game.endSubmitButton = {
     }
 };
 game.endSubmitButton.init(); // Force initialize object on first script load 
+
+//   - Images
+
+//   - Buttons

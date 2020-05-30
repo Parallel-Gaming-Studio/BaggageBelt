@@ -134,6 +134,16 @@ game.update = function (dt) {
             this.gameController.gsStart(dt);
             break;
     };
+
+    // Update all timers
+    for (var i = 0; i < game.timers.length; i++) {
+        game.timers[i].update(dt);
+        // DEBUG
+        /*if (game.timers[i].timerExpired) {
+            console.log(game.timers[i].toString());
+        }
+        console.log(game.timers[i].displayMinuteSeconds());*/
+    }
     
     // Force a draw when the window resizes
     if (this.lastTimeSized < (engine.timeSizing)) {
@@ -163,6 +173,9 @@ game.drawOnce = function () {
     switch (this.currState) {
         case 'start':
             // Draw images on the canvas
+			
+            // Display buttons
+            
             break;
         case 'play':
             // Draw images on the canvas
@@ -192,7 +205,15 @@ game.drawOnce = function () {
 			this.endPlayerTimeBoard.draw();
             break;
         case 'leaderboard':
-           
+			
+            // Display buttons
+            
+            break;
+        case 'leaderboard':
+            // Draw images on the canvas
+            
+            // Display buttons
+            
             break;
         default:
             break;
