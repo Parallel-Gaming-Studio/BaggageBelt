@@ -173,7 +173,10 @@ game.drawOnce = function () {
     switch (this.currState) {
         case 'start':
             // Draw images on the canvas
-			
+
+            // Display buttons
+
+
             // Display buttons
             
             break;
@@ -205,7 +208,6 @@ game.drawOnce = function () {
 			this.endPlayerTimeBoard.draw();
             break;
         case 'leaderboard':
-			
             // Display buttons
             
             break;
@@ -213,7 +215,6 @@ game.drawOnce = function () {
             // Draw images on the canvas
             
             // Display buttons
-            
             break;
         default:
             break;

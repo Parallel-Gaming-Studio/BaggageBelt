@@ -2,7 +2,6 @@
 
 // DEBUG
 console.log("scene_end.js loaded successfully");
-
 //Start End Scene
 
 // Images
@@ -486,7 +485,6 @@ game.playKeyPadSpace = {
         this.resize();
     }
 };
-
 
 game.inputKeypad = {
 	// Get handle to div
