@@ -135,8 +135,7 @@ game.update = function (dt) {
             break;
     };
     
-<<<<<<< HEAD
-=======
+
     // Update all timers
     for (var i = 0; i < game.timers.length; i++) {
         game.timers[i].update(dt);
@@ -147,7 +146,7 @@ game.update = function (dt) {
         console.log(game.timers[i].displayMinuteSeconds());*/
     }
     
->>>>>>> Test_Branch
+
     // Force a draw when the window resizes
     if (this.lastTimeSized < (engine.timeSizing)) {
         this.drawOnce();
@@ -176,12 +175,10 @@ game.drawOnce = function () {
     switch (this.currState) {
         case 'start':
             // Draw images on the canvas
-<<<<<<< HEAD
-=======
-			
+
             // Display buttons
             
->>>>>>> Test_Branch
+
             break;
         case 'play':
             // Draw images on the canvas
@@ -191,7 +188,7 @@ game.drawOnce = function () {
             break;
         case 'end':
             // Draw images on the canvas
-<<<<<<< HEAD
+
 			this.endBackground.draw();
             this.endTimeBoardBG.draw();
             this.endTitle.draw();
@@ -213,7 +210,7 @@ game.drawOnce = function () {
             break;
         case 'leaderboard':
            
-=======
+
 			
             // Display buttons
             
@@ -222,8 +219,7 @@ game.drawOnce = function () {
             // Draw images on the canvas
             
             // Display buttons
-            
->>>>>>> Test_Branch
+
             break;
         default:
             break;
@@ -279,8 +275,7 @@ $("#fadeOutLoader").delay(1000).fadeOut(1000);
 $("#fadeOutOverlay").delay(1000).fadeOut(1000);
 
 // Run Game
-<<<<<<< HEAD
+
 game.run(); // Force game to start on first script load
-=======
+
 game.run(); // Force game to start on first script load
->>>>>>> Test_Branch
