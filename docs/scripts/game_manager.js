@@ -186,6 +186,7 @@ game.drawOnce = function () {
             // Display buttons
             
             break;
+			
         case 'end':
             // Draw images on the canvas
 
@@ -198,6 +199,8 @@ game.drawOnce = function () {
             this.endGameOver.draw();
             this.endInitialsBG.draw();
             this.endPlayerInitials.draw();
+			this.endTitle.draw();
+
 			
             // Display buttons
             this.endSubmitButton.adjustStyle();
@@ -208,7 +211,7 @@ game.drawOnce = function () {
 			//Time
 			this.endPlayerTimeBoard.draw();
             break;
-        case 'leaderboard':
+        	case 'leaderboard':
            
 
 			
