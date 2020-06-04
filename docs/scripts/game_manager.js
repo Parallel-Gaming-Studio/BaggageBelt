@@ -195,12 +195,12 @@ game.drawOnce = function () {
             this.endTitle.draw();
             this.endGamePoints.draw();
             this.endPlayerScore.draw();
-            this.endKeyboardBackground.draw();
+            this.endKeypadBackdrop.draw();
             this.endGameOver.draw();
-            this.endInitialsBG.draw();
+            this.endInitialsBox.draw();
             this.endPlayerInitials.draw();
 			this.endTitle.draw();
-
+			this.endSponsoredTimerBox.draw();
 			
             // Display buttons
             this.endSubmitButton.adjustStyle();

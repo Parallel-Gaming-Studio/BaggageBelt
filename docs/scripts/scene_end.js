@@ -41,14 +41,14 @@ game.endTimeBoardBG = {
     height: 0,
     posX: 0,
     posY: 0,
-    org_posY: 50,
+    org_posY: 40,
     // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1.2 - Math.max(engine.widthProportion, engine.heightProportion));
 
         this.posX = 30 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = Math.max(50, Math.min(40, this.org_posY - engine.heightDifference));
+        this.posY = Math.max(40, Math.min(40, this.org_posY - engine.heightDifference));
     },
     // Draw the object
     draw: function () {
@@ -183,8 +183,8 @@ game.endTitle = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 30 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height;
+        this.posX = 20 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height;
     },
     // Draw the object
     draw: function () {
@@ -223,7 +223,7 @@ game.endGamePoints = {
 //End_Scene Player Score
 game.endPlayerScore = {
     // Get handle to div element
-    div: document.getElementById("endScore"),
+    div: document.getElementById("endPlayerScore"),
     // Declare object transform information
     org_width: 200 * game.scale,
     org_height: 95 * game.scale,
@@ -316,11 +316,11 @@ game.endGameOver = {
     // Adjust the object's transform
     resize: function () {
 
-        this.width = game.endKeyboardBackground.width;
+        this.width = game.endKeypadBackdrop.width;
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = game.endKeyboardBackground.posX;
-        this.posY = game.endKeyboardBackground.posY + (game.endKeyboardBackground.height * 0.05 * (1 - (this.height / game.endKeyboardBackground.height)));
+        this.posX = game.endKeypadBackdrop.posX;
+        this.posY = game.endKeypadBackdrop.posY + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
     },
     // Draw the object
     draw: function () {
@@ -345,8 +345,8 @@ game.endInitialsBox = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (game.endKeyboardBackground.posX + game.endKeyboardBackground.width - this.width / 2) / 1.7;
-        this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeyboardBackground.height * 0.05 * (1 - (this.height / game.endKeyboardBackground.height)));
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width / 2) / 1.7;
+        this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
     },
     // Draw the object
     draw: function () {
@@ -382,8 +382,8 @@ game.endPlayerInitials = {
         this.width = game.endInitialsBG.width * 0.3;
         this.height = game.endInitialsBG.height * 0.95;
 
-        this.posX = game.endInitialsBG.posX + game.endInitialsBG.width - this.width;
-        this.posY = game.endInitialsBG.posY + game.endInitialsBG.height * 0.025;
+        this.posX = game.endInitialsBox.posX + game.endInitialsBox.width - this.width;
+        this.posY = game.endInitialsBox.posY + game.endInitialsBox.height * 0.025;
 
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
@@ -442,10 +442,10 @@ game.endKeypadBackdrop = {
     // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1- Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = ((engine.width - (game.endTitle.posX + game.endTitle.width)) + (this.width / 2)) / 4;
-        this.posY = engine.height - this.height + 5;
+        this.posX = ((engine.width - (game.endTitle.posX + game.endTitle.width)) + (this.width / 2)) / 10;
+        this.posY = engine.height - this.height + 10;
     },
     // Draw the object
     draw: function () {
@@ -454,12 +454,278 @@ game.endKeypadBackdrop = {
     }
 };
 
+game.playKeyPadSpace = {
+	// Get handle to image
+    image: document.getElementById("playKeyPadSpace"),
+	// Declare object transform information
+    org_width: 94 * game.scale,
+    org_height: 102 * game.scale,
+    width: 0,
+    height: 0,
+    org_posX: 60,
+    org_posY: 0,
+    posX: 0,
+    posY: 0,
+	// Adjust the object's transform
+    resize: function () {
+
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion)); //Math.min(, (this.org_width + 5) * 13);
+        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // Attach Left Side with Buffer
+        this.posX = Math.max(60, Math.min(40, this.org_posX - engine.widthDifference));
+        this.posY = Math.max(game.playLetterSpace.height + game.playLetterSpace.posY + 40, engine.height - this.height * 2.2);
+    },
+	// Draw the object
+    draw: function () {
+        this.resize();
+    },
+	// Apply changes via CSS
+    adjustStyle: function () {
+        this.resize();
+    }
+};
+
+
+game.inputKeypad = {
+	// Get handle to div
+    div: document.getElementById("inputKeypad"),
+    // Get handle to initials
+	initials: document.getElementById("endPlayerInitials"),
+	// Declare object transform information
+    org_width: 0,
+    org_height: 0,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posX: 30,
+    // Declare member variables
+    divArray: [],
+    keyArray: [],
+    btnMargin: 5,
+    btnWidth: 0,
+    btnHeight: 0,
+    btnPerRow: 0,
+	// Adjust the object's transform
+    resize: function () {
+        // Adjust based on game state
+        switch (game.currState) {
+            case 'play':
+                this.width = game.playSponsor.posX - 40;
+                this.height = (game.playKeyPadSpace.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion)) + this.btnMargin * 4) * 2;
+
+                // Attach Left Side with Buffer
+                this.posX = Math.max(20, Math.min(30, this.org_posX - engine.widthDifference));
+                this.posY = engine.height - this.height - 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+                this.btnWidth = this.width / 14;
+
+                // Update CSS for all children
+                for (var i = 0; i < this.keyArray.length; i++) {
+                    var domElement = document.getElementById(this.keyArray[i]);
+                    domElement.style.width = this.btnWidth + "px";
+                    domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
+                    domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
+                }
+                break;
+            case 'end':
+                this.width = game.endKeyboardBackground.width - 40 - game.endSubmitButton.width;
+                this.height = engine.height - game.endKeyboardBackground.posY - 20;
+
+                // Attach to Top-Left of Keyboard Background
+                this.posX = game.endKeyboardBackground.posX + 10;
+                this.posY = game.endKeyboardBackground.posY + 10;
+
+                this.btnWidth = this.width / 13.1;
+
+                // Update CSS for all children
+                for (var i = 0; i < this.keyArray.length; i++) {
+                    var domElement = document.getElementById(this.keyArray[i]);
+                    domElement.style.width = this.btnWidth + "px";
+                    domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
+                    domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
+                }
+                break;
+            default:
+                break;
+        }
+    },
+	// Apply changes via CSS
+    adjustStyle: function () {
+        if (this.keyArray.length == 0) this.buildKeypad();
+        this.resize();
+        this.div.style.position = "absolute";
+        this.div.style.display = "inline-block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.zIndex = 1;
+    },
+    // Hide keypad and clear arrays
+    hideKeypad: function () {
+        this.divArray = [];
+        this.keyArray = [];
+    },
+    // Build the keypad
+    buildKeypad: function () {
+        var letter = "";
+
+        // Define variables starting DOM definitions
+        var divPrefix = '<div id="containerDiv_';
+        var btnPrefix = '<img id="letterButton_';
+        var innerDivPrefix = '<div id="letterDiv_';
+        
+        // Build a string to hold all the buttons
+        var buttonBuilder = '';
+
+        // Create all buttons
+        for (var i = 0; i < 26; i++) {
+            // Identify the letter for this button
+            letter = String.fromCharCode(65 + i);
+
+            // Open outer div based on game state
+            switch (game.currState) {
+                case 'play':
+                    buttonBuilder += divPrefix + letter + '" class="keypad-container" style="width:' + (this.width / 13) + 'px">';
+                    break;
+                case 'end':
+                    buttonBuilder += divPrefix + letter + '" class="keypad-container" style="width:' + (this.width / 13) + 'px">';
+                    break;
+            }
+
+            // Inner Image
+            buttonBuilder += btnPrefix + letter + '" class="keypad-image" src="images/key_blank.png">';
+
+            // Open inner div
+            buttonBuilder += innerDivPrefix + letter + '" class="keypad-center-letter">';
+
+            // Write letter
+            buttonBuilder += letter;
+
+            // Close inner div
+            buttonBuilder += "</div>";
+
+            // Close outer div
+            buttonBuilder += "</div>";
+
+            // Insert a break after the 13th button
+            if (i == 12) {
+                buttonBuilder += "<br>";
+            }
+
+            // Add the button to the array
+            this.keyArray.push("containerDiv_" + String.fromCharCode(65 + i));
+        }
+        // Define the number of buttons per row
+        this.btnPerRow = Math.ceil(this.keyArray.length / 2);
+
+        // Display the buttons in the container
+        this.div.innerHTML = buttonBuilder;
+
+        // Apply user interaction to the inner elements of each button
+        // Get a list of all the images
+        var imgElement = this.div.getElementsByTagName("img");
+        for (var i = 0; i < imgElement.length; i++) {
+            // Check the element's name
+            if (imgElement[i].id.substring(0, 13) == "letterButton_") {
+                for (var j = 0; j < 26; j++) {
+                    // Create an identity matching string
+                    var letter = "letterButton_" + String.fromCharCode(65 + j);
+                    if (imgElement[i].id == letter) {
+                        // Give the element a name for easy identification
+                        imgElement[i].name = String.fromCharCode(65 + j);
+                        // Add a click event to the element
+                        imgElement[i].addEventListener("click", function (e) {
+
+                            // Reset timeout overlay timer
+                            game.timeoutOverlay.refreshTimer();
+
+                            // Apply actions based on the game state
+                            switch (game.currState) {
+                                case 'play':
+                                    if (e.srcElement.parentNode.childNodes[1].getAttribute("class") === 'keypad-center-letter') {
+
+                                        // Set key letter to inactve
+                                        e.srcElement.parentNode.childNodes[1].classList.remove("keypad-center-letter");
+                                        e.srcElement.parentNode.childNodes[1].classList.add("keypad-center-letter-inactive");
+
+                                        // Set key image to inactive
+                                        e.srcElement.classList.remove("keypad-image");
+                                        e.srcElement.classList.add("keypad-image-inactive");
+
+                                        // Test letter with chosen word
+                                        game.playLetterSpaces.testLetter(e.srcElement.name);
+                                    }
+                                    break;
+                                case 'end':
+                                    // Add letter to the player's initials
+                                    game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[1].name);
+                                    break;
+                            }
+                        });
+                        continue;
+                    }
+                }
+            }
+        }
+
+        // Get a list of all the divs
+        var divElement = this.div.getElementsByTagName("div");
+        for (var i = 0; i < divElement.length; i++) {
+            // Check the element's name
+            if (divElement[i].id.substring(0, 10) == "letterDiv_") {
+                for (var j = 0; j < 26; j++) {
+                    // Create an identity matching string
+                    var letter = "letterDiv_" + String.fromCharCode(65 + j);
+                    if (divElement[i].id == letter) {
+                        // Give the element a name for easy identification
+                        divElement[i].name = String.fromCharCode(65 + j);
+                        // Add a click event to the element
+                        divElement[i].addEventListener("click", function (e) {
+
+                            // Reset timeout overlay timer
+                            game.timeoutOverlay.refreshTimer();
+
+                            // Apply actions based on the game state
+                            switch (game.currState) {
+                                case 'play':
+                                    if (e.srcElement.getAttribute("class") === 'keypad-center-letter') {
+
+                                        // Set key letter to inactve
+                                        e.srcElement.classList.remove("keypad-center-letter");
+                                        e.srcElement.classList.add("keypad-center-letter-inactive");
+
+                                        // Set key image to inactive
+                                        e.srcElement.parentNode.childNodes[0].classList.remove("keypad-image");
+                                        e.srcElement.parentNode.childNodes[0].classList.add("keypad-image-inactive");
+
+                                        // Test letter with chosen word
+                                        game.playLetterSpaces.testLetter(e.srcElement.name);
+                                    }
+                                    break;
+                                case 'end':
+                                    // Add letter to the player's initials
+                                    game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[0].name);
+                                    break;
+                            }
+                        });
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+};
+
+
 
 // Buttons
 //End_Scene Menu Button
 game.endMenuButton = {
     // Get handle to image
-    image: document.getElementById("endMenuButton"),
+    image: document.getElementById("menuButton"),
     // Declare object transform information
     org_width: 275 * game.scale,
     org_height: 138 * game.scale,
@@ -513,8 +779,8 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (game.endKeyboardBackground.posX + game.endKeyboardBackground.width - this.width) * 0.97;
-        this.posY = (game.endKeyboardBackground.posY + game.endKeyboardBackground.height - this.height) * 0.95;
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.97;
+        this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object
     draw: function () {
