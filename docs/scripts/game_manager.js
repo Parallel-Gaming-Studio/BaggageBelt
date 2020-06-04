@@ -135,6 +135,16 @@ game.update = function (dt) {
             break;
     };
     
+    // Update all timers
+    for (var i = 0; i < game.timers.length; i++) {
+        game.timers[i].update(dt);
+        // DEBUG
+        /*if (game.timers[i].timerExpired) {
+            console.log(game.timers[i].toString());
+        }
+        console.log(game.timers[i].displayMinuteSeconds());*/
+    }
+    
     // Force a draw when the window resizes
     if (this.lastTimeSized < (engine.timeSizing)) {
         this.drawOnce();
@@ -163,9 +173,15 @@ game.drawOnce = function () {
     switch (this.currState) {
         case 'start':
             // Draw images on the canvas
+            this.startBackground.draw();
+            this.BBTitle.draw();
+			this.ButtonsBackdrop.draw();
 			
             // Display buttons
-            
+            this.startButton.adjustStyle();
+            this.leaderboardButton.adjustStyle();
+            this.quitButton.adjustStyle();
+            this.menuButton.adjustStyle();
             break;
         case 'play':
             // Draw images on the canvas

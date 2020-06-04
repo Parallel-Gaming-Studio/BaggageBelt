@@ -43,6 +43,15 @@ for (var i = 0; i < game.mouse.length; i++) {
 game.scale = 1.0;                       // Scale for adjusting object sizes
 game.timeoutTime = 120;					// Timeout time before returning to landing page
 game.lastTimeSized = new Date();        // Used to track window resizing without window events
+game.timers = [];                       // Array for all timers
+
+/* << TIMER EXAMPLE USAGE >>
+var myTime = new Timer();
+console.log(`Time: ${myTime.startTime}\nTime Left: ${myTime.timeLeft}`);
+myTime.setup(2, false, "Test");
+console.log(`Time: ${myTime.startTime}\nTime Left: ${myTime.timeLeft}`);
+game.timers.push(myTime);
+<< TIMER EXAMPLE USAGE >> */
 
 // - Player object information (persists through scenes)
 game.player = {
