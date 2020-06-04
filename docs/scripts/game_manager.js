@@ -204,7 +204,7 @@ game.drawOnce = function () {
 			
             // Display buttons
             this.endSubmitButton.adjustStyle();
-            this.endMenuButton.adjustStyle();
+            this.menuButton.adjustStyle();
             
 			//Time
 			this.endPlayerTimeBoard.draw();

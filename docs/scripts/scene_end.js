@@ -722,9 +722,6 @@ game.inputKeypad = {
 
 
 // Buttons
-//End_Scene Menu Button
-
-
 //End_Scene Submit Button
 game.endSubmitButton = {
     // Get handle to image
