@@ -206,18 +206,11 @@ game.drawOnce = function () {
             this.endSubmitButton.adjustStyle();
             this.endMenuButton.adjustStyle();
             
-            // Keypad
-            this.endKeyboardKeys.draw();
 			//Time
 			this.endPlayerTimeBoard.draw();
             break;
-        	case 'leaderboard':
-           
-
 			
-            // Display buttons
-            
-            break;
+       
         case 'leaderboard':
             // Draw images on the canvas
             

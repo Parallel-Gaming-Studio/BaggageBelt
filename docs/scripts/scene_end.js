@@ -723,9 +723,9 @@ game.inputKeypad = {
 
 // Buttons
 //End_Scene Menu Button
-game.menuButton = {
+game.endMenuButton = {
 	// Get handle to image
-    image: document.getElementById("menuButton"),
+    image: document.getElementById("endMenuButton"),
 	// Declare object transform information
     org_width: 275 * game.scale,
     org_height: 138 * game.scale,
@@ -737,7 +737,7 @@ game.menuButton = {
 	// Initialize the object
     init: function () {
         // Add event listener to the button
-        this.image.addEventListener("click", game.menuButton.clickMe);
+        this.image.addEventListener("click", game.endMenuButton.clickMe);
     },
 	// Adjust the object's transform
     resize: function () {
@@ -791,7 +791,6 @@ game.menuButton = {
         }
     }
 };
-game.menuButton.init();// Force initialize object on first script load
 
 //End_Scene Submit Button
 game.endSubmitButton = {
@@ -813,7 +812,7 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.97;
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.60;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object
