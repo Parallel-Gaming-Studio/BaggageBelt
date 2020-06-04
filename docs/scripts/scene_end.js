@@ -41,14 +41,14 @@ game.endTimeBoardBG = {
     height: 0,
     posX: 0,
     posY: 0,
-    org_posY: 40,
+    org_posY: 50,
     // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1.2 - Math.max(engine.widthProportion, engine.heightProportion));
 
         this.posX = 30 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = Math.max(40, Math.min(40, this.org_posY - engine.heightDifference));
+        this.posY = Math.max(50, Math.min(50, this.org_posY - engine.heightDifference));
     },
     // Draw the object
     draw: function () {
@@ -723,44 +723,7 @@ game.inputKeypad = {
 
 // Buttons
 //End_Scene Menu Button
-game.endMenuButton = {
-	// Get handle to image
-    image: document.getElementById("endMenuButton"),
-	// Declare object transform information
-    org_width: 275 * game.scale,
-    org_height: 138 * game.scale,
-    width: 0,
-    height: 0,
-    posX: 0,
-    posY: 0,
-    org_posY: 50,
-	
-	
-	// Adjust the object's transform
-    resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        // Attach Top-Right Side
-        this.posX = engine.width - this.width;
-        this.posY = Math.max(50, Math.min(40, this.org_posY - engine.heightDifference));
-    },
-	// Draw the object
-    draw: function () {
-        this.adjustStyle();
-    },
-	// Apply changes via CSS
-    adjustStyle: function () {
-        this.resize();
-        this.image.style.position = "absolute";
-        this.image.style.display = "block";
-        this.image.style.left = this.posX.toString() + "px";
-        this.image.style.top = this.posY.toString() + "px";
-        this.image.style.width = this.width + "px";
-        this.image.style.height = this.height + "px";
-        this.image.style.zIndex = 1;
-    }
-};
 
 //End_Scene Submit Button
 game.endSubmitButton = {
