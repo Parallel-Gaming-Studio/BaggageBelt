@@ -734,11 +734,8 @@ game.endMenuButton = {
     posX: 0,
     posY: 0,
     org_posY: 50,
-	// Initialize the object
-    init: function () {
-        // Add event listener to the button
-        this.image.addEventListener("click", game.endMenuButton.clickMe);
-    },
+	
+	
 	// Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
@@ -762,33 +759,6 @@ game.endMenuButton = {
         this.image.style.width = this.width + "px";
         this.image.style.height = this.height + "px";
         this.image.style.zIndex = 1;
-    },
-	// Handle user interaction based on game state
-    clickMe: function () {
-		// Determine the current game state
-        switch (game.currState) {
-            case 'start':
-				// Inform Google the user quit the game
-                game.google.quit();
-				// Redirect the user to the O'Hare landing page
-                window.location.replace("http://www.flywithbutchohare.com/");
-                break;
-            default:
-				// All but the Start Scene returns to the Start Scene
-				// Hide all elements
-                game.hideElements.hideAll();
-                // Reset leaderboard table
-                game.top10players.hideTable();
-				// Reset the player object
-                game.player.reset();
-				// Refresh the timeout timer
-                game.timeoutOverlay.refreshTimer();
-				// Set the new game state to the Start Scene
-                game.currState = game.gameState[0];
-				// Redraw all objects
-                game.drawOnce();
-                break;
-        }
     }
 };
 
