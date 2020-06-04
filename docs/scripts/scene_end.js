@@ -379,8 +379,8 @@ game.endPlayerInitials = {
     // Adjust the object's transform
     resize: function () {
 
-        this.width = game.endInitialsBG.width * 0.3;
-        this.height = game.endInitialsBG.height * 0.95;
+        this.width = game.endInitialsBox.width * 0.3;
+        this.height = game.endInitialsBox.height * 0.95;
 
         this.posX = game.endInitialsBox.posX + game.endInitialsBox.width - this.width;
         this.posY = game.endInitialsBox.posY + game.endInitialsBox.height * 0.025;
@@ -723,17 +723,23 @@ game.inputKeypad = {
 
 // Buttons
 //End_Scene Menu Button
-game.endMenuButton = {
-    // Get handle to image
+game.menuButton = {
+	// Get handle to image
     image: document.getElementById("menuButton"),
-    // Declare object transform information
+	// Declare object transform information
     org_width: 275 * game.scale,
     org_height: 138 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
     posY: 0,
-    // Adjust the object's transform
+    org_posY: 50,
+	// Initialize the object
+    init: function () {
+        // Add event listener to the button
+        this.image.addEventListener("click", game.menuButton.clickMe);
+    },
+	// Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
@@ -742,11 +748,11 @@ game.endMenuButton = {
         this.posX = engine.width - this.width;
         this.posY = Math.max(50, Math.min(40, this.org_posY - engine.heightDifference));
     },
-    // Draw the object
+	// Draw the object
     draw: function () {
         this.adjustStyle();
     },
-    // Apply changes via CSS
+	// Apply changes via CSS
     adjustStyle: function () {
         this.resize();
         this.image.style.position = "absolute";
@@ -756,8 +762,36 @@ game.endMenuButton = {
         this.image.style.width = this.width + "px";
         this.image.style.height = this.height + "px";
         this.image.style.zIndex = 1;
+    },
+	// Handle user interaction based on game state
+    clickMe: function () {
+		// Determine the current game state
+        switch (game.currState) {
+            case 'start':
+				// Inform Google the user quit the game
+                game.google.quit();
+				// Redirect the user to the O'Hare landing page
+                window.location.replace("http://www.flywithbutchohare.com/");
+                break;
+            default:
+				// All but the Start Scene returns to the Start Scene
+				// Hide all elements
+                game.hideElements.hideAll();
+                // Reset leaderboard table
+                game.top10players.hideTable();
+				// Reset the player object
+                game.player.reset();
+				// Refresh the timeout timer
+                game.timeoutOverlay.refreshTimer();
+				// Set the new game state to the Start Scene
+                game.currState = game.gameState[0];
+				// Redraw all objects
+                game.drawOnce();
+                break;
+        }
     }
 };
+game.menuButton.init();// Force initialize object on first script load
 
 //End_Scene Submit Button
 game.endSubmitButton = {
