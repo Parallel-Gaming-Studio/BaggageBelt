@@ -45,7 +45,7 @@ game.endTimeBoardBG = {
     // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1.2 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         this.posX = 30 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posY = Math.max(50, Math.min(50, this.org_posY - engine.heightDifference));
@@ -525,7 +525,7 @@ game.playKeyPadSpace = {
 	// Adjust the object's transform
     resize: function () {
 
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion)); //Math.min(, (this.org_width + 5) * 13);
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         // Attach Left Side with Buffer

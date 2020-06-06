@@ -31,8 +31,8 @@ body {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-family: Roboto-Bold;
-    color: #FFFFFF;
+    font-family: BebasNeue-Regular;
+    color: #22253b;
 }
 .keypad-center-letter-inactive {
     position: absolute;
