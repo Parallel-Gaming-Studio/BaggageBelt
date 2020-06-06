@@ -70,7 +70,11 @@ game.endSponsoredTimerBox = {
     org_posY: 82,
     posX: 0,
     posY: 0,
- 
+ 	// Initialize the object
+    init: function () {
+        // Add event listener to the button
+        this.div.addEventListener("click", game.endSponsoredTimerBox.clickMe);
+    },
     // Adjust the object's transform
     resize: function () {
 
@@ -87,8 +91,26 @@ game.endSponsoredTimerBox = {
     // Draw the object
     draw: function () {
         this.adjustStyle();
+    },
+	// Apply changes via CSS
+    adjustStyle: function () {
+        this.resize();
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.fontSize = this.font_size + "pt";
+        this.div.style.zIndex = 3;
+    },
+	// Handle user interaction based on game state
+    clickMe: function () {
+        // Refresh the timeout timer
+        game.timeoutOverlay.refreshTimer();
     }
 };
+game.endSponsoredTimerBox.init(); // Force initialize the object's event listener
 
 //End_Scene Time Left
 game.endPlayerTimeBoard = {
