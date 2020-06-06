@@ -174,8 +174,9 @@ game.drawOnce = function () {
         case 'start':
             // Draw images on the canvas
             this.startBackground.draw();
-            this.BBTitle.draw();
 			this.ButtonsBackdrop.draw();
+            this.BBTitle.draw();
+			
 			
             // Display buttons
             this.startButton.adjustStyle();
