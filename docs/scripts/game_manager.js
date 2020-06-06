@@ -201,13 +201,14 @@ game.drawOnce = function () {
             this.endPlayerInitials.draw();
 			this.endTitle.draw();
 			this.endSponsoredTimerBox.draw();
-			
+		
             // Display buttons
             this.endSubmitButton.adjustStyle();
             this.menuButton.adjustStyle();
-            
+			
 			//Time
 			this.endPlayerTimeBoard.draw();
+
             break;
 			
        

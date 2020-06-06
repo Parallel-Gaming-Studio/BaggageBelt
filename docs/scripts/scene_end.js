@@ -57,10 +57,40 @@ game.endTimeBoardBG = {
     }
 };
 
-//End_Scene Time Left
+//End Scene Sponsor Time Box
 game.endSponsoredTimerBox = {
     // Get handle to div
     div: document.getElementById("endSponsoredTimerBox"),
+    // Declare object transform information
+    org_width: 200 * game.scale,
+    org_height: 95 * game.scale,
+    width: 0,
+    height: 0,
+    org_posX: 150,
+    org_posY: 82,
+    posX: 0,
+    posY: 0,
+ 
+    // Adjust the object's transform
+    resize: function () {
+
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // Attach Left Side
+        this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
+        this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.adjustStyle();
+    }
+};
+
+//End_Scene Time Left
+game.endPlayerTimeBoard = {
+    // Get handle to div
+    div: document.getElementById("endPlayerTimeBoard"),
     // Declare object transform information
     org_width: 200 * game.scale,
     org_height: 95 * game.scale,
@@ -82,7 +112,7 @@ game.endSponsoredTimerBox = {
     // Initialize the object
     init: function () {
         // Add event listener to the button
-        this.div.addEventListener("click", game.endSponsoredTimerBox.clickMe);
+        this.div.addEventListener("click", game.endPlayerTimeBoard.clickMe);
     },
     // Adjust the object's transform
     resize: function () {
@@ -165,7 +195,8 @@ game.endSponsoredTimerBox = {
         game.timeoutOverlay.refreshTimer();
     }
 };
-game.endSponsoredTimerBox.init(); // Force initialize endPlayerTimeBoard's event listener
+game.endPlayerTimeBoard.init(); // Force initialize endPlayerTimeBoard's event listener
+
 
 //End_Scene Title Background
 game.endTitle = {
