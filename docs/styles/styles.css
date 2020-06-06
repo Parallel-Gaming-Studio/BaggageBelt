@@ -8,6 +8,10 @@
     font-family: BigShouldersDisplay-SemiBold;
     src: url("BigShouldersDisplay-SemiBold.ttf");
 }
+@font-face {
+	font-family: BebasNeue-Regular;
+	src: url("BebasNeue-Regular.ttf");
+}
 
 body {
     overflow: -moz-scrollbars-none;
@@ -101,6 +105,16 @@ body {
     font-size: 74pt;
     font-family: BigShouldersDisplay-Semibold;
     color: #FFFFFF;
+}
+/* End Scene timer */
+.timer-box-end {
+	position: aboslute;
+	margin: 0px;
+	text-align: center;
+	font-size: 72pt;
+	font-family: BebasNeue-Regular;
+	font-weight: bold;
+	color: #ffffff;
 }
 /* Text Effects */
 .glow {
@@ -226,7 +240,7 @@ body {
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    background-image: url("../images/start_scene/BaggageBelt_StartScene_Background.png");
+    background-image: url("../images/start_scene/background.png");
     -webkit-filter: blur(8px) grayscale() opacity(1.0);
     filter: blur(8px) grayscale() opacity(1.0);
     width: 100%;
