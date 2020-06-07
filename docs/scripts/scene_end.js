@@ -35,8 +35,8 @@ game.endTimeBoardBG = {
     // Get handle to image
     image: document.getElementById("endTimeBoardBG"),
     // Declare object transform information
-    org_width: 413 * game.scale,
-    org_height: 350 * game.scale,
+    org_width: 346 * game.scale,
+    org_height: 465 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -62,8 +62,8 @@ game.endSponsoredTimerBox = {
     // Get handle to div
     div: document.getElementById("endSponsoredTimerBox"),
     // Declare object transform information
-    org_width: 200 * game.scale,
-    org_height: 95 * game.scale,
+    org_width: 266 * game.scale,
+    org_height: 200 * game.scale,
     width: 0,
     height: 0,
     org_posX: 150,
@@ -228,8 +228,8 @@ game.endTitle = {
     // Get handle to image
     image: document.getElementById("endTitle"),
     // Declare object transform information
-    org_width: 413 * game.scale,
-    org_height: 262 * game.scale,
+    org_width: 523 * game.scale,
+    org_height: 112 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -281,8 +281,8 @@ game.endPlayerScore = {
     // Get handle to div element
     div: document.getElementById("endPlayerScore"),
     // Declare object transform information
-    org_width: 200 * game.scale,
-    org_height: 95 * game.scale,
+    org_width: 210 * game.scale,
+    org_height: 147 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -363,8 +363,8 @@ game.endGameOver = {
     // Get handle to image
     image: document.getElementById("endGameOver"),
     // Declare object transform information
-    org_width: 1323 * game.scale,
-    org_height: 210 * game.scale,
+    org_width: 430 * game.scale,
+    org_height: 118 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -390,8 +390,8 @@ game.endInitialsBox = {
     // Get handle to image
     image: document.getElementById("endInitialsBox"),
     // Declare object transform information
-    org_width: 811 * game.scale,
-    org_height: 103 * game.scale,
+    org_width: 880 * game.scale,
+    org_height: 100 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -489,8 +489,8 @@ game.endKeypadBackdrop = {
     // Get handle to image
     image: document.getElementById("endKeypadBackdrop"),
     // Declare object transform information
-    org_width: 1323 * game.scale,
-    org_height: 870 * game.scale,
+    org_width: 940 * game.scale,
+    org_height: 730 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -783,8 +783,8 @@ game.endSubmitButton = {
     // Get handle to image
     image: document.getElementById("endSubmitButton"),
     // Declare object transform information
-    org_width: 215 * game.scale,
-    org_height: 86 * game.scale,
+    org_width: 156 * game.scale,
+    org_height: 53 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
