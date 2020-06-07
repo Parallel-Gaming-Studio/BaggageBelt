@@ -239,7 +239,7 @@ game.endTitle = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 20 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = 300 + 150 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posY = game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height;
     },
     // Draw the object
@@ -500,8 +500,8 @@ game.endKeypadBackdrop = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1- Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = ((engine.width - (game.endTitle.posX + game.endTitle.width)) + (this.width / 2)) / 10;
-        this.posY = engine.height - this.height + 10;
+        this.posX = 150 + 75 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = engine.height - this.height + 1;
     },
     // Draw the object
     draw: function () {
@@ -523,15 +523,14 @@ game.playKeyPadSpace = {
     posX: 0,
     posY: 0,
 	// Adjust the object's transform
-    resize: function () {
-
+   resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        // Attach Left Side with Buffer
-        this.posX = Math.max(60, Math.min(40, this.org_posX - engine.widthDifference));
-        this.posY = Math.max(game.playLetterSpace.height + game.playLetterSpace.posY + 40, engine.height - this.height * 2.2);
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width / 2) / 1.7;
+        this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
     },
+    // Draw the object
 	// Draw the object
     draw: function () {
         this.resize();
@@ -549,8 +548,8 @@ game.inputKeypad = {
     // Get handle to initials
 	initials: document.getElementById("endPlayerInitials"),
 	// Declare object transform information
-    org_width: 0,
-    org_height: 0,
+    org_width: 447,
+    org_height: 139,
     width: 0,
     height: 0,
     posX: 0,
