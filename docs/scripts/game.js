@@ -231,6 +231,88 @@ game.timeoutOverlay = {
 };
 game.timeoutOverlay.init(); // Force initialization of the timer during script load
 
+//Sponsor control
+game.sponsors = {
+    sponsorArray: ['ARGO TEA', 'AUNTIE ANNES', 'BROOKSTONE', 'BSMOOTH', 'BURRITO BEACH', 'CHICAGO SPORTS', 'CNN', 'COACH', 'DUNKIN DONUTS', 'DUTY FREE STORE', 'FIELD', 'HUDSON', 'MAC COSMETICS', 'NUTS ON CLARK', 'ROCKY MOUNTAIN CHOCOLATE', 'SARAHS CANDIES', 'SHOE HOSPITAL', 'SPIRIT OF THE RED HORSE', 'TALIE'],
+    sponsor: '',
+    sponsorId: '',
+    update: function () {
+        this.sponsor = this.sponsorArray[Math.floor(Math.random() * (this.sponsorArray.length - 1))];
+        game.sponsor = this.sponsor;
+    },
+    //Get the sponsor
+    getSponsor: function () {
+        this.update();
+        switch (this.sponsor) {
+            case "ARGO TEA":
+                this.sponsorId = "sponsorArgo";
+                break;
+            case "AUNTIE ANNES":
+                this.sponsorId = "sponsorAuntieAnnes";
+                break;
+            case "BROOKSTONE":
+                this.sponsorId = "sponsorBrookstone";
+                break;
+            case "BSMOOTH":
+                this.sponsorId = "sponsorBSmooth";
+                break;
+            case "BURRITO BEACH":
+                this.sponsorId = "sponsorBurritoBeach";
+                break;
+            case "CHICAGO SPORTS":
+                this.sponsorId = "sponsorChicagoSports";
+                break;
+            case "CNN":
+                this.sponsorId = "sponsorCNN";
+                break;
+            case "COACH":
+                this.sponsorId = "sponsorCoach";
+                break;
+            case "DUNKIN DONUTS":
+                this.sponsorId = "sponsorDunkinDonuts";
+                break;
+            case "DUTY FREE STORE":
+                this.sponsorId = "sponsorDutyFreeStore";
+                break;
+            case "FIELD":
+                this.sponsorId = "sponsorField";
+                break;
+            case "HUDSON":
+                this.sponsorId = "sponsorHudson";
+                break;
+            case "MAC COSMETICS":
+                this.sponsorId = "sponsorMacCosmetics";
+                break;
+            case "NUTS ON CLARK":
+                this.sponsorId = "sponsorNutsOnClark";
+                break;
+            case "ROCKY MOUNTAIN CHOCOLATE":
+                this.sponsorId = "sponsorRockyMountainChocolate";
+                break;
+            case "SARAHS CANDIES":
+                this.sponsorId = "sponsorSarahsCandies";
+                break;
+            case "SHOE HOSPITAL":
+                this.sponsorId = "sponsorShoeHospital";
+                break;
+            case "SPIRIT OF THE RED HORSE":
+                this.sponsorId = "sponsorSpiritOfTheRedHorse";
+                break;
+            case "TALIE":
+                this.sponsorId = "sponsorTalie";
+                break;
+            default:
+                this.sponsorId = "__INVALID__";
+                break;
+        }
+        //Update the game's sponsor
+        game.sponsorId = this.sponsorId;
+
+        //Return the sponsor ID
+        return this.sponsorId;
+    }
+};
+
 // Load dependency scripts
 async function loadScripts() {
     // Load scripts synchronously
