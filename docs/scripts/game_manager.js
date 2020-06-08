@@ -99,6 +99,11 @@ game.gameController = {
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
 				// Update game state to Start Scene
+                //Reset player object
+                game.player.reset();
+                //Reset leaderboard table
+                game.top10players.hideTable();
+                //Update game state to Start Scene
                 game.currState = game.gameState[0];
 				// Hide all elements
                 game.hideElements.hideAll();
@@ -198,12 +203,11 @@ game.drawOnce = function () {
         case 'leaderboard':
             // Draw images on the canvas
             this.leaderboardBackground.draw();
-            this.leaderboardTitle.draw();
-            this.leaderboardBackdrop.draw();
-            this.leaderboardScoreBox.draw();
-            //this.leaderboardSponsorBox.draw();   --if being used
-            this.top10players.adjustStyle();
+            this.leaderboardPlayerScore.draw();
+            this.leaderboardSponsorBox.draw();
+            this.leaderboardSponsorLogo.draw();
             this.finalPlayerScore.draw();
+            this.top10players.adjustStyle();
             
             // Display buttons
             this.menuButton.adjustStyle();
