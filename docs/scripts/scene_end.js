@@ -240,7 +240,7 @@ game.endTitle = {
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         this.posX = 300 + 300 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.endGameOver.posY + game.endKeypadBackdrop.height;
+        this.posY = game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height;
     },
     // Draw the object
     draw: function () {
