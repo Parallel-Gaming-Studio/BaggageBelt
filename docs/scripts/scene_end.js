@@ -372,10 +372,10 @@ game.endGameOver = {
     // Adjust the object's transform
     resize: function () {
 
-        this.width = game.endKeypadBackdrop.width;
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = game.endKeypadBackdrop.posX;
+        this.posX = game.endKeypadBackdrop.posX + (game.endKeypadBackdrop.width / 2) - (this.width / 2);
         this.posY = game.endKeypadBackdrop.posY + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
     },
     // Draw the object
@@ -500,8 +500,8 @@ game.endKeypadBackdrop = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1- Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 150 + 75 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = engine.height - this.height + 1;
+        this.posX = (engine.width / 2 - this.width / 2) - 75 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = engine.height / 2 - this.height / 2;
     },
     // Draw the object
     draw: function () {
