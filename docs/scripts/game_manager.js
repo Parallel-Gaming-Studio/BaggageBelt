@@ -135,7 +135,6 @@ game.update = function (dt) {
             break;
     };
     
-
     // Update all timers
     for (var i = 0; i < game.timers.length; i++) {
         game.timers[i].update(dt);
@@ -146,7 +145,6 @@ game.update = function (dt) {
         console.log(game.timers[i].displayMinuteSeconds());*/
     }
     
-
     // Force a draw when the window resizes
     if (this.lastTimeSized < (engine.timeSizing)) {
         this.drawOnce();
@@ -175,10 +173,16 @@ game.drawOnce = function () {
     switch (this.currState) {
         case 'start':
             // Draw images on the canvas
-
+            this.startBackground.draw();
+			this.ButtonsBackdrop.draw();
+            this.BBTitle.draw();
+			
+			
             // Display buttons
-            
-
+            this.startButton.adjustStyle();
+            this.leaderboardButton.adjustStyle();
+            this.quitButton.adjustStyle();
+            this.menuButton.adjustStyle();
             break;
         case 'play':
             // Draw images on the canvas
@@ -186,37 +190,17 @@ game.drawOnce = function () {
             // Display buttons
             
             break;
-			
         case 'end':
             // Draw images on the canvas
-
-			this.endBackground.draw();
-            this.endTimeBoardBG.draw();
-            this.endTitle.draw();
-            this.endGamePoints.draw();
-            this.endPlayerScore.draw();
-            this.endKeypadBackdrop.draw();
-            this.endGameOver.draw();
-            this.endInitialsBox.draw();
-            this.endPlayerInitials.draw();
-			this.endTitle.draw();
-			this.endSponsoredTimerBox.draw();
-		
+			
             // Display buttons
-            this.endSubmitButton.adjustStyle();
-            this.menuButton.adjustStyle();
-			
-			//Time
-			this.endPlayerTimeBoard.draw();
-
+            
             break;
-			
-       
         case 'leaderboard':
             // Draw images on the canvas
             
             // Display buttons
-
+            
             break;
         default:
             break;
@@ -272,7 +256,4 @@ $("#fadeOutLoader").delay(1000).fadeOut(1000);
 $("#fadeOutOverlay").delay(1000).fadeOut(1000);
 
 // Run Game
-
-game.run(); // Force game to start on first script load
-
 game.run(); // Force game to start on first script load

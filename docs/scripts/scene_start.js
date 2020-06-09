@@ -24,12 +24,12 @@ game.startBackground = {
     }
 };
 
-game.BBTitle = {
+game.ButtonsBackdrop = {
 	// Get handle to image
-    image: document.getElementById("BaggageBeltTitle"),
+    image: document.getElementById("ButtonsBackdrop"),
 	// Declare object transform information
     org_width: 900 * game.scale,
-    org_height: 390 * game.scale,
+    org_height: 412 * game.scale,
     width: 0,
     height: 0,
     posX: 753,
@@ -40,7 +40,9 @@ game.BBTitle = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posX = engine.width / 2 - this.width / 2;
-        this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+		this.posY = engine.height - this.height - 160;
+
+        //this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
 	// Draw the object
     draw: function () {
@@ -49,12 +51,12 @@ game.BBTitle = {
     }
 };
 
-game.ButtonsBackdrop = {
+game.BBTitle = {
 	// Get handle to image
-    image: document.getElementById("ButtonsBackdrop"),
+    image: document.getElementById("BaggageBeltTitle"),
 	// Declare object transform information
-    org_width: 450 * game.scale,
-    org_height: 206 * game.scale,
+    org_width: 900 * game.scale,
+    org_height: 390 * game.scale,
     width: 0,
     height: 0,
     posX: 753,
@@ -96,9 +98,9 @@ game.menuButton = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        // Attach Top-Right Side
-        this.posX = engine.width - this.width;
-        this.posY = Math.max(50, Math.min(40, this.org_posY - engine.heightDifference));
+        // Attach Top-Left Side
+        this.posX = 20;
+        this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
 	// Draw the object
     draw: function () {
@@ -165,7 +167,7 @@ game.startButton = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posX = engine.width / 3 - this.width / 2;
-        this.posY = engine.height - this.height - 40;
+        this.posY = engine.height - this.height - 160;
     },
 	// Draw the object
     draw: function () {
@@ -222,7 +224,7 @@ game.leaderboardButton = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posX = (engine.width / 2) - this.width / 2;
-        this.posY = engine.height - this.height - 40;
+        this.posY = engine.height - this.height - 160;
     },
 	// Draw the object
     draw: function () {
@@ -277,7 +279,7 @@ game.quitButton = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posX = (engine.width / 3 * 2) - this.width / 2;
-        this.posY = engine.height - this.height - 40;
+        this.posY = engine.height - this.height - 160;
     },
 	// Draw the object
     draw: function () {
