@@ -192,10 +192,27 @@ game.drawOnce = function () {
             break;
         case 'end':
             // Draw images on the canvas
-			
+			this.endBackground.draw();
+            this.endTimeBoardBG.draw();
+            this.endTitle.draw();
+            this.endGamePoints.draw();
+            this.endPlayerScore.draw();
+            this.endKeypadBackdrop.draw();
+            this.endGameOver.draw();
+            this.endInitialsBox.draw();
+            this.endPlayerInitials.draw();
+			this.endTitle.draw();
+			this.endSponsoredTimerBox.draw();
+		
             // Display buttons
-            
+            this.endSubmitButton.adjustStyle();
+            this.menuButton.adjustStyle();
+			
+			//Time
+			this.endPlayerTimeBoard.draw();
+
             break;
+		
         case 'leaderboard':
             // Draw images on the canvas
             

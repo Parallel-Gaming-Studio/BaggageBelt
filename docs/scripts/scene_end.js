@@ -239,8 +239,8 @@ game.endTitle = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 300 + 150 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height;
+        this.posX = 300 + 300 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endGameOver.posY + game.endKeypadBackdrop.height;
     },
     // Draw the object
     draw: function () {
@@ -797,7 +797,7 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.60;
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 20;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object
