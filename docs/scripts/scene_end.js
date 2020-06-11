@@ -43,14 +43,15 @@ game.endTimeBoardBG = {
     posY: 0,
     org_posY: 50,
     // Adjust the object's transform
-    resize: function () {
+  resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 30 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = Math.max(50, Math.min(50, this.org_posY - engine.heightDifference));
+        // Attach Top-Left Side
+	  this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width + 20 + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));        
+	  this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
-    // Draw the object
+	// Draw the object
     draw: function () {
         this.resize();
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
@@ -83,7 +84,7 @@ game.endSponsoredTimerBox = {
 
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 16 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 220 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
@@ -111,6 +112,37 @@ game.endSponsoredTimerBox = {
     }
 };
 game.endSponsoredTimerBox.init(); // Force initialize the object's event listener
+
+game.leaderboardSponsorLogo = {
+    // Get handle
+    image: function () {
+        return document.getElementById(game.sponsors.getSponsor());
+    },
+    // Declare object information
+    org_width: 200 * game.scale,
+    org_height: 200 * game.scale,
+    width: 0,
+    height: 0,
+    org_posX: 1590,
+    org_posY: 785,
+    posX: 0,
+    posY: 0,
+    // Adjust transformation
+    resize: function () {
+        this.width = game.leaderboardSponsor.width * 0.70;
+        this.height = this.width;
+
+        // Attach Bottom Side
+        this.posX = game.leaderboardSponsor.posX + 35 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.leaderboardSponsor.posY + game.leaderboardSponsor.height / 2 - this.height / 3;
+    },
+    // Draw object
+    draw: function () {
+        this.resize();
+        engine.context.drawImage(this.image(), this.posX, this.posY, this.width, this.height);
+    }
+};
+
 
 //End_Scene Time Left
 game.endPlayerTimeBoard = {
@@ -147,7 +179,7 @@ game.endPlayerTimeBoard = {
 
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 16 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 1 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
@@ -239,9 +271,9 @@ game.endTitle = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 300 + 300 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height;
-    },
+		this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width/2 - this.width/2;
+		this.posY = Math.max(40, game.endKeypadBackdrop.posY/2 - this.height/2);   
+	},
     // Draw the object
     draw: function () {
         this.resize();
@@ -266,8 +298,8 @@ game.endGamePoints = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = 30 + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.endTitle.posY + game.endTitle.height;
+      	this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 220 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
@@ -797,7 +829,7 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 20;
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.72;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object

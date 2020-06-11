@@ -193,11 +193,11 @@ game.drawOnce = function () {
         case 'end':
             // Draw images on the canvas
 			this.endBackground.draw();
-            this.endTimeBoardBG.draw();
             this.endTitle.draw();
             this.endGamePoints.draw();
             this.endPlayerScore.draw();
             this.endKeypadBackdrop.draw();
+			this.endTimeBoardBG.draw();
             this.endGameOver.draw();
             this.endInitialsBox.draw();
             this.endPlayerInitials.draw();
