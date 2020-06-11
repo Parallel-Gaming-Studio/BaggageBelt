@@ -49,8 +49,8 @@ game.endTimeBoardBG = {
 
         // Attach Top-Left Side
 	  this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width + 20 + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));        
-	  this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
-    },
+	  this.posY = 0;   
+  },
 	// Draw the object
     draw: function () {
         this.resize();
