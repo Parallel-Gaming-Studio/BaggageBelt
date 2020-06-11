@@ -1,4 +1,4 @@
-# Baggage Belt
+![Baggage Belt Title](/docs/images/start_scene/title.png)
 
 ## Primary Objective
 The player must transfer all the luggage from the baggage trucks to the conveyor belts for their respective planes before time runs out.
