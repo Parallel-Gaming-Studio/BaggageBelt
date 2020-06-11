@@ -603,8 +603,8 @@ game.inputKeypad = {
                 this.height = (game.playKeyPadSpace.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion)) + this.btnMargin * 4) * 2;
 
                 // Attach Left Side with Buffer
-                this.posX = Math.max(20, Math.min(30, this.org_posX - engine.widthDifference));
-                this.posY = engine.height - this.height - 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+               this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.72;
+        	   this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
 
                 this.btnWidth = this.width / 14;
 
@@ -617,12 +617,12 @@ game.inputKeypad = {
                 }
                 break;
             case 'end':
-                this.width = game.endKeyboardBackground.width - 40 - game.endSubmitButton.width;
-                this.height = engine.height - game.endKeyboardBackground.posY - 20;
+                this.width = game.endKeypadBackdrop.width - 40 - game.endSubmitButton.width;
+                this.height = engine.height - game.endKeypadBackdrop.posY - 20;
 
                 // Attach to Top-Left of Keyboard Background
-                this.posX = game.endKeyboardBackground.posX + 10;
-                this.posY = game.endKeyboardBackground.posY + 10;
+                this.posX = game.endKeypadBackdrop.posX + 10;
+                this.posY = game.endKeypadBackdrop.posY + 10;
 
                 this.btnWidth = this.width / 13.1;
 
@@ -683,7 +683,7 @@ game.inputKeypad = {
             }
 
             // Inner Image
-            buttonBuilder += btnPrefix + letter + '" class="keypad-image" src="images/key_blank.png">';
+            buttonBuilder += btnPrefix + letter + '" class="keypad-image" src="images/end_scene/key_blank.png">';
 
             // Open inner div
             buttonBuilder += innerDivPrefix + letter + '" class="keypad-center-letter">';

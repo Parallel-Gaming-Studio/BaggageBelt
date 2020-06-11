@@ -208,6 +208,9 @@ game.drawOnce = function () {
             this.endSubmitButton.adjustStyle();
             this.menuButton.adjustStyle();
 			
+			// Keypad
+            this.inputKeypad.draw();
+			
 			//Time
 			this.endPlayerTimeBoard.draw();
 
