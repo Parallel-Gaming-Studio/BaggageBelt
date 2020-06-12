@@ -245,7 +245,7 @@ game.top10players = {
         }
         this.resize();
 
-        this.boardElements = document.getElementById("top10s");
+        this.boardElements = document.getElementsByName("top10s");
 
         for (var i = 0; i < this.boardElements.length; i++) {
             if (this.boardElements[i].tagName.toLowerCase() == "td") {
