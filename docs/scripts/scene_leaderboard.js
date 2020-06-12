@@ -42,7 +42,7 @@ game.leaderboardPlayerScore = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posX = 30 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = 325 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = 3 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     //Draw object
     draw: function () {
@@ -105,7 +105,7 @@ game.finalPlayerScore = {
 
         //Attach Left Side
         this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2;
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 2 - this.height / 2;
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 1.73 - this.height / 2;
 
         //Adjust font
         this.textResize();
