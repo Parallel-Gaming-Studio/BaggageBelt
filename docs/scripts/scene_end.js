@@ -179,7 +179,7 @@ game.endPlayerTimeBoard = {
 
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 250 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 200 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
