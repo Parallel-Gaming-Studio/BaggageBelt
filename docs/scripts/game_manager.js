@@ -202,7 +202,9 @@ game.drawOnce = function () {
             this.endInitialsBox.draw();
             this.endPlayerInitials.draw();
 			this.endTitle.draw();
-			this.endSponsoredTimerBox.draw();
+			this.endSponsoredTimerBox.draw()
+           	this.endSponsorLogo.draw()
+
 		
             // Display buttons
             this.endSubmitButton.adjustStyle();

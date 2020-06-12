@@ -129,7 +129,7 @@ game.endSponsorLogo = {
     posY: 0,
     // Adjust transformation
     resize: function () {
-        this.width = game.leaderboardSponsor.width * 0.70;
+        this.width = game.endSponsoredTimerBox.width * 0.70;
         this.height = this.width;
 
         // Attach Bottom Side
@@ -347,6 +347,7 @@ game.endPlayerScore = {
         } else if (this.font_size < this.org_font_size) {
             // Reset the font size to normal
             this.font_size = this.org_font_size;
+
             // Reduce the font size by 1
             mySpan.css("font-size", this.font_size);
         }
@@ -361,7 +362,7 @@ game.endPlayerScore = {
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 100 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 250 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 		
         // Adjust font size
         this.textResize();
