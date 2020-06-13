@@ -177,7 +177,6 @@ game.drawOnce = function () {
 			this.ButtonsBackdrop.draw();
             this.BBTitle.draw();
 			
-			
             // Display buttons
             this.startButton.adjustStyle();
             this.leaderboardButton.adjustStyle();
@@ -186,9 +185,11 @@ game.drawOnce = function () {
             break;
         case 'play':
             // Draw images on the canvas
+			this.playBackground.draw();
+			
 			
             // Display buttons
-            
+             this.menuButton.adjustStyle();
             break;
         case 'end':
             // Draw images on the canvas
