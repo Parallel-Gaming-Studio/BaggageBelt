@@ -295,11 +295,11 @@ game.endGamePoints = {
     // Adjust the object's transform
     resize: function () {
 
-        this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-      	this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 100 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.posY;
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height/2;
     },
     // Draw the object
     draw: function () {
@@ -358,11 +358,11 @@ game.endPlayerScore = {
     // Adjust the object's transform
     resize: function () {
 
-        this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 250 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.posY;
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - 100 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 		
         // Adjust font size
         this.textResize();
