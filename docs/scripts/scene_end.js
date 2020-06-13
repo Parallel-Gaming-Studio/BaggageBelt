@@ -133,8 +133,8 @@ game.endSponsorLogo = {
         this.height = this.width;
 
         // Attach Bottom Side
-        this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width/2) - this.width/2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 220 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endSponsoredTimerBox.posX + (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endSponsoredTimerBox.posY + game.endSponsoredTimerBox.height/2;
     },
     // Draw object
     draw: function () {
