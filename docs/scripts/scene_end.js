@@ -361,8 +361,8 @@ game.endPlayerScore = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.posY;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - 100 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.posY + 50;
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - 100;
 		
         // Adjust font size
         this.textResize();
