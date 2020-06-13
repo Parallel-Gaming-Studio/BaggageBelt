@@ -108,8 +108,9 @@ body {
 }
 /* End Scene timer */
 .timer-box-end {
-	position: aboslute;
+	position: absolute;
 	margin: 0px;
+	padding: 0px;
 	text-align: center;
 	font-size: 72pt;
 	font-family: BebasNeue-Regular;

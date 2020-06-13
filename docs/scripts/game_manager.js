@@ -193,13 +193,21 @@ game.drawOnce = function () {
         case 'end':
             // Draw images on the canvas
 			this.endBackground.draw();
+			this.endKeypadBackdrop.draw();
+			
 			this.endTimeBoardBG.draw();
-			this.endSponsoredTimerBox.draw()
-           	this.endSponsorLogo.draw()
-            this.endTitle.draw();
+			this.endSponsoredTimerBox.draw();
+			
+			// Time
+			this.endPlayerTimeBoard.draw();
+			
+           	this.endSponsorLogo.draw();
+            
+			
+			this.endTitle.draw();
             this.endGamePoints.draw();
             this.endPlayerScore.draw();
-            this.endKeypadBackdrop.draw();
+            
             this.endGameOver.draw();
             this.endInitialsBox.draw();
             this.endPlayerInitials.draw();
@@ -211,8 +219,7 @@ game.drawOnce = function () {
 			// Keypad
             //this.inputKeypad.draw();
 			
-			//Time
-			this.endPlayerTimeBoard.draw();
+			
 
             break;
 		
