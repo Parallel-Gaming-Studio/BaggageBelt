@@ -84,7 +84,7 @@ body {
     position: absolute;
     margin: 0px;
     text-align: center;
-    font-size: 74pt;
+    font-size: 72;
     font-family: BigShouldersDisplay-Semibold;
     color: #FFFFFF;
 }
@@ -108,13 +108,13 @@ body {
 }
 /* End Scene timer */
 .timer-box-end {
-	position: aboslute;
+	position: absolute;
 	margin: 0px;
+	padding: 0px;
 	text-align: center;
 	font-size: 72pt;
-	font-family: BebasNeue-Regular;
-	font-weight: bold;
-	color: #ffffff;
+	font-family: BigShouldersDisplay-Semibold;
+	color: #FFFFFF;
 }
 /* Text Effects */
 .glow {
