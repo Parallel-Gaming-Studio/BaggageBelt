@@ -185,17 +185,7 @@ game.drawOnce = function () {
             break;
         case 'play':
             // Draw images on the canvas
-			this.playBackground.draw();
-			this.playSponsoredTimer.draw();
-			this.playScoreBox.draw();
-			this.playLargePlaneLeft.draw();
-			this.playLargePlaneRight.draw();
-			this.playSmallPlaneLeft.draw();
-			this.playSmallPlaneRight.draw();
-			this.playLuggageCartLvl1.draw();
-			
-            // Display buttons
-             this.menuButton.adjustStyle();
+	
             break;
         case 'end':
             // Draw images on the canvas

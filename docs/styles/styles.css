@@ -93,9 +93,10 @@ body {
     position: absolute;
     margin: 0px;
     text-align: center;
-    font-size: 74pt;
-    font-family: BigShouldersDisplay-Semibold;
-    color: #FFFFFF;
+    font-size: 80pt;
+    font-family: BebasNeue-Regular;
+    color: #22253b;
+}
 }
 /* Play Scene animated score alert */
 .score-alert-box {

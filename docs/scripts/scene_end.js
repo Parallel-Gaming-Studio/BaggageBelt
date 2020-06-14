@@ -112,17 +112,14 @@ game.endSponsorLogo = {
     org_posY: 785,
     posX: 0,
     posY: 0,
-	org_font_size: 72,
-	font_size: 0,
     // Adjust transformation
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-
-        // Attach Bottom Side
-        this.posX = game.endSponsoredTimerBox.posX  + game.endSponsoredTimerBox.width / 2 - this.width / 2;
-        this.posY = game.endSponsoredTimerBox.posY + (game.endPlayerTimeBoard.posY - game.endSponsoredTimerBox.posY) / 2 - this.height/2;
-    },
+  		this.height = game.endSponsoredTimerBox.posY - game.endPlayerTimeBoard.posY - 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+  		this.width = this.height;
+		// Attach Bottom Side
+		this.posX = game.endSponsoredTimerBox.posX  + game.endSponsoredTimerBox.width / 2 - this.width / 2;
+  		this.posY = game.endSponsoredTimerBox.posY + (game.endPlayerTimeBoard.posY - game.endSponsoredTimerBox.posY) / 2 - this.height/2;
+},
     // Draw object
     draw: function () {
         this.resize();
@@ -166,9 +163,8 @@ game.endPlayerTimeBoard = {
 
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width / 2) - this.width / 2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 200 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 200 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 190 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+     
         // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
@@ -274,22 +270,20 @@ game.endGamePoints = {
     // Get handle to image
     image: document.getElementById("endGamePoints"),
     // Declare object transform information
-    org_width: 413 * game.scale,
-    org_height: 263 * game.scale,
+    org_width: 210 * game.scale,
+    org_height: 147 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
     poxY: 0,
-	org_font_size: 50,
+        org_font_size: 50,
     font_size: 0,
     // Adjust the object's transform
     resize: function () {
-
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-
-        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.posY - 20;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height / 2;
+        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.width / 2 - this.width / 2;
+        this.posY = game.endSponsoredTimerBox.posY + game.endSponsoredTimerBox.height + 20 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
@@ -351,8 +345,8 @@ game.endPlayerScore = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.posY + 40;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - 100;
+        this.posX = game.endGamePoints.posX + game.endGamePoints.posY;
+        this.posY = game.endGamePoints.posY + game.endGamePoints.height - 100;
 
         // Adjust font size
         this.textResize();
@@ -420,13 +414,12 @@ game.endInitialsBox = {
     posX: 0,
     poxY: 0,
     // Adjust the object's transform
-    resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width / 2) / 1.7;
-        this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
-    },
+   resize: function () {
+  		this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+  		this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+	   	this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2 - this.width / 2);
+  		this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * ((this.height / game.endKeypadBackdrop.height)));
+},
     // Draw the object
     draw: function () {
         this.resize();
