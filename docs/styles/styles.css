@@ -95,8 +95,7 @@ body {
     text-align: center;
     font-size: 80pt;
     font-family: BebasNeue-Regular;
-    color: #22253b;
-}
+    color: #808080	;
 }
 /* Play Scene animated score alert */
 .score-alert-box {

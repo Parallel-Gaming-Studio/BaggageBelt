@@ -304,7 +304,7 @@ game.endPlayerScore = {
     posX: 0,
     poxY: 0,
     // Declare member variables
-    org_font_size: 50,
+    org_font_size: 40,
     font_size: 0,
     // Initialize the object
     init: function () {
@@ -345,8 +345,8 @@ game.endPlayerScore = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = game.endGamePoints.posX + game.endGamePoints.posY;
-        this.posY = game.endGamePoints.posY + game.endGamePoints.height - 100;
+        this.posX = game.endGamePoints.posX + game.endTimeBoardBG.posY ;
+        this.posY = game.endGamePoints.posY + game.endGamePoints.height - 50;
 
         // Adjust font size
         this.textResize();
@@ -812,7 +812,9 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.72;
+		
+		
+        this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object
