@@ -560,7 +560,7 @@ game.playKeyPadSpace = {
 
 game.inputKeypad = {
     // Get handle to div
-    div: document.getElementById("inputKeypad"),
+    image: document.getElementById("inputKeypad"),
     // Get handle to initials
     initials: document.getElementById("endPlayerInitials"),
     // Declare object transform information
@@ -587,8 +587,8 @@ game.inputKeypad = {
                 this.height = (game.playKeyPadSpace.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion)) + this.btnMargin * 4) * 2;
 
                 // Attach Left Side with Buffer
-                this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.72;
-                this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
+                this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.70;
+                this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 1;
 
                 this.btnWidth = this.width / 14;
 
@@ -791,6 +791,7 @@ game.inputKeypad = {
 };
 
 
+
 // Buttons
 //End_Scene Submit Button
 game.endSubmitButton = {
@@ -812,9 +813,7 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-		
-		
-        this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width;
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.72;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object

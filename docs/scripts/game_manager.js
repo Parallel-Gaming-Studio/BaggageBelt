@@ -214,7 +214,7 @@ game.drawOnce = function () {
             this.menuButton.adjustStyle();
 			
 			// Keypad
-            //this.inputKeypad.draw();
+            this.inputKeypad.draw();
 			
 			
 
