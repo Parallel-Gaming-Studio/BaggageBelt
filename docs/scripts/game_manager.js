@@ -44,6 +44,8 @@ game.gameController = {
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
+				// Reset the player
+				game.player.reset();
 				// Set the new game state to Play Scene
                 game.currState = game.gameState[1];
 				// Hide all elements
@@ -75,6 +77,9 @@ game.gameController = {
     },
     gsEnd: function (dt) {
         // End Scene
+		
+		// Handle the initials animation
+		game.endPlayerInitials.animateInitials(dt);
 
 		// DEBUG
         // Toggle next state
@@ -197,10 +202,8 @@ game.drawOnce = function () {
 			
 			// Time
 			this.endPlayerTimeBoard.draw();
-			
            	this.endSponsorLogo.draw();
             
-			
 			this.endTitle.draw();
             this.endGamePoints.draw();
             this.endPlayerScore.draw();
@@ -214,10 +217,8 @@ game.drawOnce = function () {
             this.menuButton.adjustStyle();
 			
 			// Keypad
-            this.inputKeypad.draw();
+            this.inputKeypad.adjustStyle();
 			
-			
-
             break;
 		
         case 'leaderboard':

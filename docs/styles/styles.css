@@ -33,6 +33,7 @@ body {
     text-align: center;
     font-family: BebasNeue-Regular;
     color: #22253b;
+	pointer-events: none;
 }
 .keypad-center-letter-inactive {
     position: absolute;
@@ -42,7 +43,7 @@ body {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-family: Roboto-Bold;
+    font-family: BebasNeue-Regular;
     color: #999999;
 }
 .keypad-image {
@@ -185,10 +186,16 @@ body {
 .Initials {
     position: absolute;
     margin: 0px;
-    text-align: center;
-    font-size: 16pt;
-    font-family: roboto-bold;
-    color: #f41c63;
+	padding: 0px;
+    text-align: left;
+    font-size: 74pt;
+    font-family: BebasNeue-Regular;
+    color: #fff;
+	pointer-events: none;
+}
+#inputKeypad {
+	flex-flow: row wrap;
+	justify-content: center;
 }
 /* Timeout Overlay */
 #timeoutOverlay {

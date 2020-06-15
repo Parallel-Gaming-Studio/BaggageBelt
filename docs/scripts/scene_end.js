@@ -58,7 +58,7 @@ game.endTimeBoardBG = {
     }
 };
 
-//End Scene Sponsor Time Box
+// End Scene Sponsor Time Box
 game.endSponsoredTimerBox = {
     // Get handle to image
     image: document.getElementById("endSponsoredTimerBox"),
@@ -128,7 +128,7 @@ game.endSponsorLogo = {
 };
 
 
-//End_Scene Time Left
+// End_Scene Time Left
 game.endPlayerTimeBoard = {
     // Get handle to div
     div: document.getElementById("endPlayerTimeBoard"),
@@ -239,7 +239,7 @@ game.endPlayerTimeBoard = {
 game.endPlayerTimeBoard.init(); // Force initialize endPlayerTimeBoard's event listener
 
 
-//End_Scene Title Background
+// End_Scene Title Background
 game.endTitle = {
     // Get handle to image
     image: document.getElementById("endTitle"),
@@ -292,7 +292,7 @@ game.endGamePoints = {
     }
 };
 
-//End_Scene Player Score
+// End_Scene Player Score
 game.endPlayerScore = {
     // Get handle to div element
     div: document.getElementById("endPlayerScore"),
@@ -375,7 +375,7 @@ game.endPlayerScore = {
 };
 
 // Game Over Area
-//End_Scene Game Over
+// End_Scene Game Over
 game.endGameOver = {
     // Get handle to image
     image: document.getElementById("endGameOver"),
@@ -432,32 +432,42 @@ game.endPlayerInitials = {
     // Get handle to div element
     div: document.getElementById("endPlayerInitials"),
     // Declare object transform information
-    org_width: 811 * game.scale,
-    org_height: 103 * game.scale,
+    org_width: 350 * game.scale,
+    org_height: 95 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
     poxY: 0,
     // Declare member variables
-    org_font_size: 82,
+    org_font_size: 74,
     font_size: 0,
     score: 0,
     initials: "",
+	// Animation variables
+	lastUpdate: 0,
+	toggleUpdate: 0.35,
+	showUpdate: false,
     // Initialize the object
     init: function () {
         // Add event listener to the button
         this.div.addEventListener("click", game.endPlayerInitials.clickMe);
+		// Empty the initials
+		this.initialsValue = "";
+		// Reset the last update
+		this.lastUpdate = 0;
     },
     // Adjust the object's transform
     resize: function () {
 
-        this.width = game.endInitialsBox.width * 0.3;
+        this.width = game.endInitialsBox.width * 0.2;
         this.height = game.endInitialsBox.height * 0.95;
 
         this.posX = game.endInitialsBox.posX + game.endInitialsBox.width - this.width;
         this.posY = game.endInitialsBox.posY + game.endInitialsBox.height * 0.025;
-
+		
+		// Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+		this.posY -= this.font_size * 0.2 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
@@ -472,8 +482,8 @@ game.endPlayerInitials = {
         this.div.style.top = this.posY.toString() + "px";
         this.div.style.width = this.width + "px";
         this.div.style.height = this.height + "px";
-        this.div.style.zIndex = 1;
-        this.div.style.fontSize = this.font_size + "px";
+        this.div.style.zIndex = 4;
+        this.div.style.fontSize = this.font_size + "pt";
     },
     // Update and display the player's initials
     updateInitials: function (letter) {
@@ -492,6 +502,32 @@ game.endPlayerInitials = {
         this.initials = "";
         this.div.innerHTML = this.initials;
     },
+	// Animate the initials value
+	animateInitials: function(dt) {
+		// Update the time since the last update
+		this.lastUpdate += dt;
+		// Update the visible characters after toggleUpdate milliseconds
+		if (this.lastUpdate >= this.toggleUpdate) {
+			// Display/hide an underscore in the initials field
+			if (this.initials.length < 2) {
+				// Display
+				if (!this.showUpdate) {
+					this.initialsValue = this.initials + "_";
+				} else {
+					// Hide
+					this.initialsValue = this.initials;
+				}
+				// Toggle the update
+				this.showUpdate = !this.showUpdate;
+			} else {
+				this.initialsValue = this.initials;
+			}
+			// Reset the last update time
+			this.lastUpdate = 0;
+		}
+		// Write to the div element
+		this.div.innerHTML = this.initialsValue;
+	},
     // Handle user interaction based on game state
     clickMe: function () {
         // Refresh the timeout timer
@@ -528,7 +564,7 @@ game.endKeypadBackdrop = {
 
 game.playKeyPadSpace = {
     // Get handle to image
-    image: document.getElementById("playKeyPadSpace"),
+    image: document.getElementById("letterButton_"),
     // Declare object transform information
     org_width: 94 * game.scale,
     org_height: 102 * game.scale,
@@ -542,11 +578,7 @@ game.playKeyPadSpace = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width / 2) / 1.7;
-        this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
     },
-    // Draw the object
     // Draw the object
     draw: function () {
         this.resize();
@@ -557,15 +589,14 @@ game.playKeyPadSpace = {
     }
 };
 
-
 game.inputKeypad = {
     // Get handle to div
-    image: document.getElementById("inputKeypad"),
+    div: document.getElementById("inputKeypad"),
     // Get handle to initials
     initials: document.getElementById("endPlayerInitials"),
     // Declare object transform information
-    org_width: 447,
-    org_height: 139,
+    org_width: 0,
+    org_height: 0,
     width: 0,
     height: 0,
     posX: 0,
@@ -581,53 +612,30 @@ game.inputKeypad = {
     // Adjust the object's transform
     resize: function () {
         // Adjust based on game state
-        switch (game.currState) {
-            case 'play':
-                this.width = game.playSponsor.posX - 40;
-                this.height = (game.playKeyPadSpace.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion)) + this.btnMargin * 4) * 2;
+        
+		this.width = game.endInitialsBox.width; //game.endKeypadBackdrop.width - 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+		this.height = game.endSubmitButton.posY - (game.endPlayerInitials.posY + game.endPlayerInitials.height) - 60 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-                // Attach Left Side with Buffer
-                this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.70;
-                this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 1;
+		// Attach to Top-Left of Keyboard Background
+		this.posX = game.endInitialsBox.posX; // game.endKeypadBackdrop.posX + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+		this.posY = (game.endInitialsBox.posY + game.endInitialsBox.height) + 20 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-                this.btnWidth = this.width / 14;
+		this.btnWidth = this.width / 9.1;
 
-                // Update CSS for all children
-                for (var i = 0; i < this.keyArray.length; i++) {
-                    var domElement = document.getElementById(this.keyArray[i]);
-                    domElement.style.width = this.btnWidth + "px";
-                    domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
-                    domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
-                }
-                break;
-            case 'end':
-                this.width = game.endKeypadBackdrop.width - 40 - game.endSubmitButton.width;
-                this.height = engine.height - game.endKeypadBackdrop.posY - 20;
-
-                // Attach to Top-Left of Keyboard Background
-                this.posX = game.endKeypadBackdrop.posX + 10;
-                this.posY = game.endKeypadBackdrop.posY + 10;
-
-                this.btnWidth = this.width / 13.1;
-
-                // Update CSS for all children
-                for (var i = 0; i < this.keyArray.length; i++) {
-                    var domElement = document.getElementById(this.keyArray[i]);
-                    domElement.style.width = this.btnWidth + "px";
-                    domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
-                    domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
-                }
-                break;
-            default:
-                break;
-        }
+		// Update CSS for all children
+		for (var i = 0; i < this.keyArray.length; i++) {
+			var domElement = document.getElementById(this.keyArray[i]);
+			domElement.style.width = this.btnWidth + "px";
+			domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
+			domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
+		}
     },
     // Apply changes via CSS
     adjustStyle: function () {
         if (this.keyArray.length == 0) this.buildKeypad();
         this.resize();
         this.div.style.position = "absolute";
-        this.div.style.display = "inline-block";
+        this.div.style.display = "flex";
         this.div.style.left = this.posX.toString() + "px";
         this.div.style.top = this.posY.toString() + "px";
         this.div.style.width = this.width + "px";
@@ -657,14 +665,7 @@ game.inputKeypad = {
             letter = String.fromCharCode(65 + i);
 
             // Open outer div based on game state
-            switch (game.currState) {
-                case 'play':
-                    buttonBuilder += divPrefix + letter + '" class="keypad-container" style="width:' + (this.width / 13) + 'px">';
-                    break;
-                case 'end':
-                    buttonBuilder += divPrefix + letter + '" class="keypad-container" style="width:' + (this.width / 13) + 'px">';
-                    break;
-            }
+            buttonBuilder += divPrefix + letter + '" class="keypad-container" style="width:' + (this.width / 9) + 'px">';
 
             // Inner Image
             buttonBuilder += btnPrefix + letter + '" class="keypad-image" src="images/end_scene/key_blank.png">';
@@ -682,7 +683,7 @@ game.inputKeypad = {
             buttonBuilder += "</div>";
 
             // Insert a break after the 13th button
-            if (i == 12) {
+            if (i == 8) {
                 buttonBuilder += "<br>";
             }
 
@@ -690,7 +691,7 @@ game.inputKeypad = {
             this.keyArray.push("containerDiv_" + String.fromCharCode(65 + i));
         }
         // Define the number of buttons per row
-        this.btnPerRow = Math.ceil(this.keyArray.length / 2);
+        this.btnPerRow = 9; // Math.ceil(this.keyArray.length / 2);
 
         // Display the buttons in the container
         this.div.innerHTML = buttonBuilder;
@@ -713,28 +714,8 @@ game.inputKeypad = {
                             // Reset timeout overlay timer
                             game.timeoutOverlay.refreshTimer();
 
-                            // Apply actions based on the game state
-                            switch (game.currState) {
-                                case 'play':
-                                    if (e.srcElement.parentNode.childNodes[1].getAttribute("class") === 'keypad-center-letter') {
-
-                                        // Set key letter to inactve
-                                        e.srcElement.parentNode.childNodes[1].classList.remove("keypad-center-letter");
-                                        e.srcElement.parentNode.childNodes[1].classList.add("keypad-center-letter-inactive");
-
-                                        // Set key image to inactive
-                                        e.srcElement.classList.remove("keypad-image");
-                                        e.srcElement.classList.add("keypad-image-inactive");
-
-                                        // Test letter with chosen word
-                                        game.playLetterSpaces.testLetter(e.srcElement.name);
-                                    }
-                                    break;
-                                case 'end':
-                                    // Add letter to the player's initials
-                                    game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[1].name);
-                                    break;
-                            }
+							// Add letter to the player's initials
+							game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[1].name);
                         });
                         continue;
                     }
@@ -759,28 +740,8 @@ game.inputKeypad = {
                             // Reset timeout overlay timer
                             game.timeoutOverlay.refreshTimer();
 
-                            // Apply actions based on the game state
-                            switch (game.currState) {
-                                case 'play':
-                                    if (e.srcElement.getAttribute("class") === 'keypad-center-letter') {
-
-                                        // Set key letter to inactve
-                                        e.srcElement.classList.remove("keypad-center-letter");
-                                        e.srcElement.classList.add("keypad-center-letter-inactive");
-
-                                        // Set key image to inactive
-                                        e.srcElement.parentNode.childNodes[0].classList.remove("keypad-image");
-                                        e.srcElement.parentNode.childNodes[0].classList.add("keypad-image-inactive");
-
-                                        // Test letter with chosen word
-                                        game.playLetterSpaces.testLetter(e.srcElement.name);
-                                    }
-                                    break;
-                                case 'end':
-                                    // Add letter to the player's initials
-                                    game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[0].name);
-                                    break;
-                            }
+							// Add letter to the player's initials
+							game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[0].name);
                         });
                         continue;
                     }
@@ -791,15 +752,14 @@ game.inputKeypad = {
 };
 
 
-
 // Buttons
-//End_Scene Submit Button
+// End_Scene Submit Button
 game.endSubmitButton = {
     // Get handle to image
     image: document.getElementById("endSubmitButton"),
     // Declare object transform information
     org_width: 156 * game.scale,
-    org_height: 53 * game.scale,
+    org_height: 63 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -813,7 +773,8 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width - this.width) * 0.72;
+		
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2) - this.width / 2;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },
     // Draw the object
