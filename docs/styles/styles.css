@@ -8,6 +8,10 @@
     font-family: BigShouldersDisplay-SemiBold;
     src: url("BigShouldersDisplay-SemiBold.ttf");
 }
+@font-face {
+	font-family: BebasNeue-Regular;
+	src: url("BebasNeue-Regular.ttf");
+}
 
 body {
     overflow: -moz-scrollbars-none;
@@ -27,8 +31,9 @@ body {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-family: Roboto-Bold;
-    color: #FFFFFF;
+    font-family: BebasNeue-Regular;
+    color: #22253b;
+	pointer-events: none;
 }
 .keypad-center-letter-inactive {
     position: absolute;
@@ -38,7 +43,7 @@ body {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-family: Roboto-Bold;
+    font-family: BebasNeue-Regular;
     color: #999999;
 }
 .keypad-image {
@@ -80,18 +85,22 @@ body {
     position: absolute;
     margin: 0px;
     text-align: center;
-    font-size: 74pt;
+    font-size: 72;
     font-family: BigShouldersDisplay-Semibold;
     color: #FFFFFF;
 }
 /* Play Scene score */
+/* Play Scene score */
 .score-box {
     position: absolute;
     margin: 0px;
-    text-align: center;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
     font-size: 74pt;
-    font-family: BigShouldersDisplay-Semibold;
-    color: #FFFFFF;
+    font-family: BebasNeue-Regular;
+    color: #22253b;
+    pointer-events: none;
 }
 /* Play Scene animated score alert */
 .score-alert-box {
@@ -101,6 +110,16 @@ body {
     font-size: 74pt;
     font-family: BigShouldersDisplay-Semibold;
     color: #FFFFFF;
+}
+/* End Scene timer */
+.timer-box-end {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	font-size: 72pt;
+	font-family: BigShouldersDisplay-Semibold;
+	color: #FFFFFF;
 }
 /* Text Effects */
 .glow {
@@ -244,10 +263,16 @@ body {
 .Initials {
     position: absolute;
     margin: 0px;
-    text-align: center;
-    font-size: 16pt;
-    font-family: roboto-bold;
-    color: #f41c63;
+	padding: 0px;
+    text-align: left;
+    font-size: 74pt;
+    font-family: BebasNeue-Regular;
+    color: #fff;
+	pointer-events: none;
+}
+#inputKeypad {
+	flex-flow: row wrap;
+	justify-content: center;
 }
 /* Timeout Overlay */
 #timeoutOverlay {
