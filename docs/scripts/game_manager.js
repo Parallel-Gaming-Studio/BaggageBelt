@@ -44,6 +44,8 @@ game.gameController = {
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
+				// Reset the player
+				game.player.reset();
 				// Set the new game state to Play Scene
                 game.currState = game.gameState[1];
 				// Hide all elements
@@ -75,6 +77,9 @@ game.gameController = {
     },
     gsEnd: function (dt) {
         // End Scene
+		
+		// Handle the initials animation
+		game.endPlayerInitials.animateInitials(dt);
 
 		// DEBUG
         // Toggle next state
@@ -185,24 +190,37 @@ game.drawOnce = function () {
             break;
         case 'play':
             // Draw images on the canvas
-			this.playBackground.draw();
-			this.playSponsoredTimer.draw();
-			this.playScoreBox.draw();
-			this.playLargePlaneLeft.draw();
-			this.playLargePlaneRight.draw();
-			this.playSmallPlaneLeft.draw();
-			this.playSmallPlaneRight.draw();
-			this.playLuggageCartLvl1.draw();
-			
-            // Display buttons
-             this.menuButton.adjustStyle();
+	
             break;
         case 'end':
             // Draw images on the canvas
+			this.endBackground.draw();
+			this.endKeypadBackdrop.draw();
 			
-            // Display buttons
+			this.endTimeBoardBG.draw();
+			this.endSponsoredTimerBox.draw();
+			
+			// Time
+			this.endPlayerTimeBoard.draw();
+           	this.endSponsorLogo.draw();
             
+			this.endTitle.draw();
+            this.endGamePoints.draw();
+            this.endPlayerScore.draw();
+            
+            this.endGameOver.draw();
+            this.endInitialsBox.draw();
+            this.endPlayerInitials.draw();
+		
+            // Display buttons
+            this.endSubmitButton.adjustStyle();
+            this.menuButton.adjustStyle();
+			
+			// Keypad
+            this.inputKeypad.adjustStyle();
+			
             break;
+		
         case 'leaderboard':
             // Draw images on the canvas
             
