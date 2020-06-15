@@ -304,22 +304,15 @@ game.endPlayerScore = {
     posX: 0,
     poxY: 0,
     // Declare member variables
-    org_font_size: 40,
-    font_size: 0,
-    // Initialize the object
-    init: function () {
-        // Add event listener to the button
-        this.div.addEventListener("click", game.endPlayerScore.clickMe);
-    },
+    org_font_size: 74,
+    font_size: 74,
     textResize: function () {
         // Declare references to screen objects
         var mySpan = $("#endPlayerScoreSpan");
         var myDiv = $("#endPlayerScore");
-
         // Initialize the span
         mySpan.css("font-size", this.org_font_size);
         mySpan.html(myDiv.html());
-
         // Reduce the font size until the span is the correct width
         if (mySpan.width() > this.width) {
             while (mySpan.width() > this.width) {
@@ -329,50 +322,57 @@ game.endPlayerScore = {
                 mySpan.css("font-size", this.font_size - 1);
             }
         } else if (this.font_size < this.org_font_size) {
+            
             // Reset the font size to normal
             this.font_size = this.org_font_size;
-
             // Reduce the font size by 1
             mySpan.css("font-size", this.font_size);
         }
-
+        mySpan.css("font-size", this.font_size);
+        // Reduce the font size until the span is the correct height
+        if (mySpan.height() > this.height) {
+            while (mySpan.height() > this.height) {
+                // Get the font size as an integer, base 10
+                this.font_size = parseInt(mySpan.css("font-size"), 10);
+                // Reduce the font size by 1
+                mySpan.css("font-size", this.font_size - 1);
+            }
+        }
+        
+        mySpan.css("font-size", this.font_size);
         // Set the player score to the proper size
-        $("#endPlayerScore").css("font-size", this.font_size).html(mySpan.html());
+        myDiv.css("font-size", this.font_size).html(mySpan.html());
     },
     // Adjust the object's transform
     resize: function () {
-
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-
-        this.posX = game.endGamePoints.posX + game.endTimeBoardBG.posY ;
-        this.posY = game.endGamePoints.posY + game.endGamePoints.height - 50;
-
+        this.width = game.endGamePoints.width;
+        this.height = game.endGamePoints.height/2;// - 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endGamePoints.posX + game.endGamePoints.width / 2 - this.width / 2;
+        this.posY = game.endGamePoints.posY + game.endGamePoints.height / 2 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         // Adjust font size
         this.textResize();
     },
     // Draw the object
     draw: function () {
+        this.updateScore();
         this.adjustStyle();
     },
     // Apply changes via CSS
     adjustStyle: function () {
         this.resize();
         this.div.style.position = "absolute";
-        this.div.style.display = "block";
+        this.div.style.display = "flex";
         this.div.style.left = this.posX.toString() + "px";
         this.div.style.top = this.posY.toString() + "px";
         this.div.style.width = this.width + "px";
         this.div.style.height = this.height + "px";
         this.div.style.zIndex = 1;
     },
-    // Handle user interaction based on game state
-    clickMe: function () {
-        // Refresh the timeout timer
-        game.timeoutOverlay.refreshTimer();
+    // Update the score
+    updateScore: function() {
+        this.div.innerHTML = game.player.score;
     }
 };
-game.endPlayerScore.init(); // Force initialize the object's event listener
 
 // Game Over Area
 //End_Scene Game Over

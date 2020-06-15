@@ -89,13 +89,17 @@ body {
     color: #FFFFFF;
 }
 /* Play Scene score */
+/* Play Scene score */
 .score-box {
     position: absolute;
     margin: 0px;
-    text-align: center;
-    font-size: 80pt;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+    font-size: 74pt;
     font-family: BebasNeue-Regular;
-    color: #808080	;
+    color: #22253b;
+    pointer-events: none;
 }
 /* Play Scene animated score alert */
 .score-alert-box {
