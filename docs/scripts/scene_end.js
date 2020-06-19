@@ -144,12 +144,6 @@ game.endPlayerTimeBoard = {
     // Declare member variables
     org_font_size: 40,
     font_size: 0,
-    timeStart: null,
-    timeEnd: null,
-    timeSeconds: null,
-    timerStarted: false,
-    timerExpired: false,
-    timerDisplay: '',
     // Initialize the object
     init: function () {
         // Add event listener to the button
@@ -171,6 +165,7 @@ game.endPlayerTimeBoard = {
     // Draw the object
     draw: function () {
         this.adjustStyle();
+        this.displayTimer();
     },
     // Apply changes via CSS
     adjustStyle: function () {
@@ -184,56 +179,15 @@ game.endPlayerTimeBoard = {
         this.div.style.fontSize = this.font_size + "pt";
         this.div.style.zIndex = 4;
     },
-    update: function () {
-        // Handle timer events
-        if (!this.timerStarted) {
-            // Start the timer if it hasn't been started yet
-            this.startTimer();
-        } else {
-            // Update the time
-            this.updateTime();
-            // Display the timer
-            this.displayTimer();
-            // Expire the timer if less than 0 seconds remain
-            if ((this.timeSeconds) <= 0) {
-                this.expireTimer();
-            }
-        }
-    },
-    startTimer: function () {
-        // Flag timer as started
-        this.timerStarted = true;
-        // Set the start time
-        this.timeStart = Date.now();
-        // Set the end time
-        this.timeEnd = Date.now() + game.playTime;
-    },
+    
     displayTimer: function () {
-        // Display time in MM:SS format
-        if ((this.timeSeconds) >= 0) {
-            this.timerDisplay = "0" + Math.floor(this.timeSeconds / 60) + ":" + ((this.timeSeconds % 60) < 10 ? "0" : "") + (this.timeSeconds % 60);
-        } else {
-            this.timerDisplay = "00:00";
+        if (!game.playTimer.playTime.paused) {
+            game.playTimer.playTime.pauseTimer();
         }
-        // Display the time
-        this.div.innerHTML = this.timerDisplay;
-
-        // Flash the timer when less than 10 seconds are left
-        if ((this.timeSeconds) <= 10) {
-            this.div.classList.remove("pulse");
-            this.div.classList.add("glow");
-        } else if (this.div.getAttribute("class") === 'glow') {
-            this.div.classList.remove("glow");
-        }
+        this.div.innerHTML = game.playTimer.playTime.displayMinuteSeconds();
     },
-    updateTime: function () {
-        // Set the countdown in seconds
-        this.timeSeconds = Math.round((this.timeEnd - Date.now()) / 1000);
-    },
-    // Handle user interaction based on game state
-    clickMe: function () {
-        // Refresh the timeout timer
-        game.timeoutOverlay.refreshTimer();
+    resetTimer: function () {
+        game.playTimer.playTime.setup(1, true, "Play Time", "up");
     }
 };
 game.endPlayerTimeBoard.init(); // Force initialize endPlayerTimeBoard's event listener
