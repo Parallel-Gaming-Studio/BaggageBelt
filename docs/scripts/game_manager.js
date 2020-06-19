@@ -33,6 +33,7 @@ game.hideElements = {
     hideAll: function () {
         this.images();
         this.canvas();
+	//game.inputKeypad.hideKeypad();
     }
 };
 
