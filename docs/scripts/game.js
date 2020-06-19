@@ -40,8 +40,24 @@ for (var i = 0; i < game.mouse.length; i++) {
 
 // Declare Game Variables
 // - Globals
+game.scale = 1.0;                       // Scale for adjusting object sizes
 game.timeoutTime = 120;					// Timeout time before returning to landing page
 game.lastTimeSized = new Date();        // Used to track window resizing without window events
+game.timers = [];                       // Array for all timers
+
+// Sponsors
+game.lastSponsor = ""; // Previously used sponsor
+game.sponsor = ""; // Current sponsor
+game.nextSponsor = ""; // Next sponsor
+game.sponsorId = ""; // Current sponsor's ID
+
+/* << TIMER EXAMPLE USAGE >>
+var myTime = new Timer();
+console.log(`Time: ${myTime.startTime}\nTime Left: ${myTime.timeLeft}`);
+myTime.setup(2, false, "Test");
+console.log(`Time: ${myTime.startTime}\nTime Left: ${myTime.timeLeft}`);
+game.timers.push(myTime);
+<< TIMER EXAMPLE USAGE >> */
 
 // - Player object information (persists through scenes)
 game.player = {
@@ -221,261 +237,105 @@ game.timeoutOverlay = {
 };
 game.timeoutOverlay.init(); // Force initialization of the timer during script load
 
-// Image hooks (Shorthand Object Notation)
-// - Start Scene
-//   - Images
-
-//   - Buttons
-
-
-// - Play Scene
-//   - Images
-
-//   - Buttons
-
-
-// - End Scene
-//   - Images
-
-//   - Buttons
-
-
-// - Leaderboard Scene
-//   - Images
-
-//   - Buttons
-
-
-/* Game States and transitions
- ** -- Start Scene
- **  \ - Play Scene
- ** /  \ - End Scene
- ** \____\ - Leaderboard Scene
- **        \ - Start Scene
- */
-game.gameState = ['start', 'play', 'end', 'leaderboard'];
-game.currState = game.gameState[0];
-
-// Clear the screen of all elements
-game.hideElements = {
-    // Hide images
-    images: function () {
-		// Hide all <img> elements
-        var y = document.getElementsByTagName("img");
-        for (var i = 0; i < y.length; i++) {
-            y[i].style.display = "none";
-        }
-		// Hide all <div> elements
-        var z = document.getElementsByTagName("div");
-        for (var i = 0; i < z.length; i++) {
-            z[i].style.display = "none";
-        }
+// Sponsor control
+game.sponsors = {
+    sponsorArray: ['ARGO TEA', 'AUNTIE ANNES', 'BROOKSTONE', 'BSMOOTH', 'BURRITO BEACH', 'CHICAGO SPORTS', 'CNN', 'COACH', 'DUNKIN DONUTS', 'DUTY FREE STORE', 'FIELD', 'HUDSON', 'MAC COSMETICS', 'NUTS ON CLARK', 'ROCKY MOUNTAIN CHOCOLATE', 'SARAHS CANDIES', 'SHOE HOSPITAL', 'SPIRIT OF THE RED HORSE', 'TALIE'],
+    sponsor: '',
+    sponsorId: '',
+    update: function() {
+        this.sponsor = this.sponsorArray[Math.floor(Math.random() * (this.sponsorArray.length-1))];
+        game.sponsor = this.sponsor;
     },
-    // Hide canvas drawings
-    canvas: function () {
-        engine.context.clearRect(0, 0, engine.width, engine.height);
-    },
-    // Hide everything
-    hideAll: function () {
-        this.images();
-        this.canvas();
-    }
-};
-
-// Maintain live game data (timers, scores, etc.)
-game.gameController = {
-    gsStart: function (dt) {
-        // Start Scene
-
-        // Toggle next state
-        for (var i = 0; i < game.controls.length; i++) {
-            if (engine.input.pressed(game.controls[i])) {
-				// Set the new game state to Play Scene
-                game.currState = game.gameState[1];
-				// Hide all elements
-                game.hideElements.hideAll();
-                // Refresh timeout
-                game.timeoutOverlay.refreshTimer();
-				// Redraw all elements
-                game.drawOnce();
-            }
+    // Get the sponsor
+    getSponsor: function() {
+        this.update();
+        switch (this.sponsor) {
+            case "ARGO TEA":
+                this.sponsorId = "sponsorArgo";
+                break;
+            case "AUNTIE ANNES":
+                this.sponsorId = "sponsorAuntieAnnes";
+                break;
+            case "BROOKSTONE":
+                this.sponsorId = "sponsorBrookstone";
+                break;
+            case "BSMOOTH":
+                this.sponsorId = "sponsorBSmooth";
+                break;
+            case "BURRITO BEACH":
+                this.sponsorId = "sponsorBurritoBeach";
+                break;
+            case "CHICAGO SPORTS":
+                this.sponsorId = "sponsorChicagoSports";
+                break;
+            case "CNN":
+                this.sponsorId = "sponsorCNN";
+                break;
+            case "COACH":
+                this.sponsorId = "sponsorCoach";
+                break;
+            case "DUNKIN DONUTS":
+                this.sponsorId = "sponsorDunkinDonuts";
+                break;
+            case "DUTY FREE STORE":
+                this.sponsorId = "sponsorDutyFreeStore";
+                break;
+            case "FIELD":
+                this.sponsorId = "sponsorField";
+                break;
+            case "HUDSON":
+                this.sponsorId = "sponsorHudson";
+                break;
+            case "MAC COSMETICS":
+                this.sponsorId = "sponsorMacCosmetics";
+                break;
+            case "NUTS ON CLARK":
+                this.sponsorId = "sponsorNutsOnClark";
+                break;
+            case "ROCKY MOUNTAIN CHOCOLATE":
+                this.sponsorId = "sponsorRockyMountainChocolate";
+                break;
+            case "SARAHS CANDIES":
+                this.sponsorId = "sponsorSarahsCandies";
+                break;
+            case "SHOE HOSPITAL":
+                this.sponsorId = "sponsorShoeHospital";
+                break;
+            case "SPIRIT OF THE RED HORSE":
+                this.sponsorId = "sponsorSpiritOfTheRedHorse";
+                break;
+            case "TALIE":
+                this.sponsorId = "sponsorTalie";
+                break;
+            default:
+                this.sponsorId = "__INVALID__";
+                break;
         }
-    },
-    gsPlay: function (dt) {
-        // Play Scene
-
-		// DEBUG
-        // Toggle next state
-        for (var i = 0; i < game.controls.length; i++) {
-            if (engine.input.pressed(game.controls[i])) {
-				// Update game state to End Scene
-                game.currState = game.gameState[2];
-				// Hide all elements
-                game.hideElements.hideAll();
-                // Refresh timeout
-                game.timeoutOverlay.refreshTimer();
-				// Redraw all elements
-                game.drawOnce();
-            }
-        }
-    },
-    gsEnd: function (dt) {
-        // End Scene
-
-		// DEBUG
-        // Toggle next state
-        for (var i = 0; i < game.controls.length; i++) {
-            if (engine.input.pressed(game.controls[i])) {
-				// Update game state to Leaderboard Scene
-                game.currState = game.gameState[3];
-				// Hide all elements
-                game.hideElements.hideAll();
-                // Refresh timeout
-                game.timeoutOverlay.refreshTimer();
-				// Redraw all elements
-                game.drawOnce();
-            }
-        }
-    },
-    gsLeaderboard: function (dt) {
-        // Leaderboard Scene
-
-		// DEBUG
-        // Toggle next state
-        for (var i = 0; i < game.controls.length; i++) {
-            if (engine.input.pressed(game.controls[i])) {
-				// Update game state to Start Scene
-                game.currState = game.gameState[0];
-				// Hide all elements
-                game.hideElements.hideAll();
-                // Refresh timeout
-                game.timeoutOverlay.refreshTimer();
-				// Redraw all elements
-                game.drawOnce();
-            }
-        }
+        // Update the game's sponsor
+        game.sponsorId = this.sponsorId;
+        
+        // Return the sponsor ID
+        return this.sponsorId;
     }
 };
 
-// Update
-// - Heavy performance impact
-// - Limit actions that do not require real-time updates
-// - Executes every frame
-game.update = function (dt) {
-    // Monitor game states
-    switch (game.currState) {
-        case 'start':
-            this.gameController.gsStart(dt);
-            break;
-        case 'play':
-            this.gameController.gsPlay(dt);
-            break;
-        case 'end':
-            this.gameController.gsEnd(dt);
-            break;
-        case 'leaderboard':
-            this.gameController.gsLeaderboard(dt);
-            break;
-        default:
-            this.gameController.gsStart(dt);
-            break;
-    };
-    
-    // Force a draw when the window resizes
-    if (this.lastTimeSized < (engine.timeSizing)) {
-        this.drawOnce();
-        this.lastTimeSized = Date.now();
-    }
-
-    // Maintain Game Timeout
-    game.timeoutOverlay.update(dt);
-
-    // Handle mouse clicks
-    for (var i = 0; i < game.mouse.length; i++) {
-        if (engine.input.pressed(game.mouse[i])) {
-			// Refresh the overlay's timer
-            game.timeoutOverlay.refreshTimer();
-        }
-    }
+// Load dependency scripts
+async function loadScripts() {
+    // Load scripts synchronously
+    const scr1 = await $.cachedScript("scripts/scene_start.js").done((script, textStatus) => {
+        console.log(`<Game>[Start:Cache] ${textStatus}`);
+    });
+    const scr2 = await $.cachedScript("scripts/scene_play.js").done((script, textStatus) => {
+        console.log(`<Game>[Play:Cache] ${textStatus}`);
+    });
+    const scr3 = await $.cachedScript("scripts/scene_end.js").done((script, textStatus) => {
+        console.log(`<Game>[End:Cache] ${textStatus}`);
+    });
+    const scr4 = await $.cachedScript("scripts/scene_leaderboard.js").done((script, textStatus) => {
+        console.log(`<Game>[Leaderboard:Cache] ${textStatus}`);
+    });
+    const scr5 = await $.cachedScript("scripts/game_manager.js").done((script, textStatus) => {
+        console.log(`<Game>[Game Manager:Cache] ${textStatus}`);
+    });
 };
-
-// Draw functions
-// - Static
-//   - Draw static assets once, if they are active
-//   - Light performance impact
-//   - Useful during scene transitions and small animations
-game.drawOnce = function () {
-    // Draw based on the GameState
-    switch (this.currState) {
-        case 'start':
-            // Draw images on the canvas
-			
-            // Display buttons
-            
-            break;
-        case 'play':
-            // Draw images on the canvas
-			
-            // Display buttons
-            
-            break;
-        case 'end':
-            // Draw images on the canvas
-			
-            // Display buttons
-            
-            break;
-        case 'leaderboard':
-            // Draw images on the canvas
-            
-            // Display buttons
-            
-            break;
-        default:
-            break;
-    }
-    // DEBUG
-    console.log("<GAME> Loaded Scene: " + this.currState);
-};
-//   - First draw event
-window.onload = function () {
-    game.drawOnce();
-}
-
-// - Animation
-//   - Draw animations
-//     - Heavy performance impact
-//     - Only use when animating the full screen
-//     - Draws every frame
-game.draw = function () {
-    // Draw based on the GameState
-    switch (this.currState) {
-        case 'start':
-            break;
-        case 'play':
-            break;
-        case 'end':
-            break;
-        case 'leaderboard':
-            break;
-        default:
-            break;
-    }
-};
-
-// Window loses focus
-window.onblur = function () {
-	// Pause the game
-    return game.stop();
-};
-
-// Window gains focus
-window.onfocus = function () {
-	// Force redraw of all elements
-    game.run();
-    // Unpause the game
-    return game.drawOnce();
-};
-
-// Run Game
-game.run(); // Force game to start on first script load
+loadScripts();
