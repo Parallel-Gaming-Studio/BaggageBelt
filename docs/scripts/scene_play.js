@@ -71,8 +71,6 @@ game.playTimer = {
     playTime: new Timer(),
     // Initialize the object
     init: function () {
-        // Add event listener to the button
-        this.div.addEventListener("click", game.playTimer.clickMe);
         this.timer.setup(150, true, "Game Timer");
         game.timers.push(this.timer);
         this.playTime.setup(0, true, "Play Time", "up");
