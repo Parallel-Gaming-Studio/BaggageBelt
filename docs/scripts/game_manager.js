@@ -196,16 +196,25 @@ game.drawOnce = function () {
         case 'play':
             // Draw images on the canvas
 			this.playBackground.draw();
+			this.menuButton.adjustStyle();
 			this.playSponsoredTimer.draw();
 			this.playScoreBox.draw();
 			this.playLargePlaneLeft.draw();
 			this.playLargePlaneRight.draw();
 			this.playSmallPlaneLeft.draw();
 			this.playSmallPlaneRight.draw();
-			this.playLuggageCartLvl1.draw();
+			// this.playLuggageCartLvl1.draw();
+			// this.playLuggageCartLvl2.draw();
+			// this.playLuggageCartLvl3.draw();
+			this.playLuggageCartLvl4.draw();
+			this.playLuggageBlue.draw();
+			this.playLuggageGreen.draw();
+			this.playLuggagePurple.draw();
+			this.playLuggageRed.draw();
+			this.playLuggageYellow.draw();
 
             // Display buttons
-             this.menuButton.adjustStyle();
+            // this.menuButton.adjustStyle();
             break;
         case 'end':
             // Draw images on the canvas
