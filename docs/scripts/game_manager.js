@@ -42,6 +42,12 @@ game.gameController = {
     gsStart: function (dt) {
         // Start Scene
 
+        for (var i = 0; i < game.touch.length; i++) {
+            if (engine.input.released(game.touch[i])) {
+                console.log(`Touch type: ${game.touch[i].type}\nX: ${engine.input.mouse.x}\nY: ${engine.input.mouse.y}`);
+            }
+        }
+
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
