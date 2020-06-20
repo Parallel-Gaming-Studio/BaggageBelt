@@ -216,11 +216,10 @@ let luggage = [
     'url(images/luggage_yellow.png)'
 ];
 
-var randomLuggage = Math.floor(Math.random() * luggage.length);
 
-game.luggageDiv = {
+game.luggageDiv1 = {
     //get handle to div
-    div: document.getElementById("luggageCart1"),
+    div: document.getElementById("luggageDiv1"),
     //declare objects transform information
     org_width: 491 * game.scale,
     org_heigth: 170 * game.scale,
@@ -231,12 +230,12 @@ game.luggageDiv = {
     org_posY: 50,
     //Adjust the object's transform
     resize: function () {
-        this.width = 50;
-        this.height = 50;
+        this.width = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         //Attach to Cart
         this.posX = game.playLuggageCartLvl1.posX+20;
-        this.posY = game.playLuggageCartLvl1.posY+20;
+        this.posY = game.playLuggageCartLvl1.posY+30;
     },
     //Draw object
     draw: function () {
@@ -244,7 +243,10 @@ game.luggageDiv = {
     },
     //Apply changes via CSS
     adjustStyle: function () {
+        var randomLuggage = Math.floor(Math.random() * luggage.length);
         this.resize();
+        this.div.draggable = "true";
+        this.div.ondragstart = "drag(event)";
         this.div.style.position = "absolute";
         this.div.style.display = "block";
         this.div.style.left = this.posX.toString() + "px";
@@ -258,4 +260,174 @@ game.luggageDiv = {
     }
 
 }
+
+game.luggageDiv2 = {
+    //get handle to div
+    div: document.getElementById("luggageDiv2"),
+    //declare objects transform information
+    org_width: 491 * game.scale,
+    org_heigth: 170 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posY: 50,
+    //Adjust the object's transform
+    resize: function () {
+        this.width = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        //Attach to Cart
+        this.posX = game.luggageDiv1.posX+game.luggageDiv1.width;
+        this.posY = game.luggageDiv1.posY;
+    },
+    //Draw object
+    draw: function () {
+        this.adjustStyle();
+    },
+    //Apply changes via CSS
+    adjustStyle: function () {
+        var randomLuggage = Math.floor(Math.random() * luggage.length);
+        this.resize();
+        this.div.draggable = "true";
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.backgroundImage = luggage[randomLuggage];
+        this.div.style.backgroundRepeat = 'no-repeat';
+        this.div.style.backgroundSize = 'contain';
+        this.div.style.zIndex = 4;
+    }
+
+}
+
+game.luggageDiv3 = {
+    //get handle to div
+    div: document.getElementById("luggageDiv3"),
+    //declare objects transform information
+    org_width: 491 * game.scale,
+    org_heigth: 170 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posY: 50,
+    //Adjust the object's transform
+    resize: function () {
+        this.width = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        //Attach to Cart
+        this.posX = game.luggageDiv2.posX + game.luggageDiv2.width;
+        this.posY = game.luggageDiv1.posY;
+    },
+    //Draw object
+    draw: function () {
+        this.adjustStyle();
+    },
+    //Apply changes via CSS
+    adjustStyle: function () {
+        var randomLuggage = Math.floor(Math.random() * luggage.length);
+        this.resize();
+        this.div.draggable = "true";
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.backgroundImage = luggage[randomLuggage];
+        this.div.style.backgroundRepeat = 'no-repeat';
+        this.div.style.backgroundSize = 'contain';
+        this.div.style.zIndex = 4;
+    }
+
+}
+
+game.luggageDiv4 = {
+    //get handle to div
+    div: document.getElementById("luggageDiv4"),
+    //declare objects transform information
+    org_width: 491 * game.scale,
+    org_heigth: 170 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posY: 50,
+    //Adjust the object's transform
+    resize: function () {
+        this.width = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        //Attach to Cart
+        this.posX = game.luggageDiv3.posX + game.luggageDiv3.width;
+        this.posY = game.luggageDiv1.posY;
+    },
+    //Draw object
+    draw: function () {
+        this.adjustStyle();
+    },
+    //Apply changes via CSS
+    adjustStyle: function () {
+        var randomLuggage = Math.floor(Math.random() * luggage.length);
+        this.resize();
+        this.div.draggable = "true";
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.backgroundImage = luggage[randomLuggage];
+        this.div.style.backgroundRepeat = 'no-repeat';
+        this.div.style.backgroundSize = 'contain';
+        this.div.style.zIndex = 4;
+    }
+
+}
+
+game.largePlaneLeftDiv = {
+    //get handle to div
+    div: document.getElementById("largePlaneLeftBelt"),
+    //declare objects transform information
+    org_width: 491 * game.scale,
+    org_heigth: 170 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posY: 50,
+    //Adjust the object's transform
+    resize: function () {
+        this.width = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        //Attach to Plane Belt
+        this.posX = game.playLargePlaneLeft.posX;
+        this.posY = game.playLargePlaneLeft.posY;
+    },
+    //Draw object
+    draw: function () {
+        this.adjustStyle();
+    },
+    //Apply changes via CSS
+    adjustStyle: function () {
+        this.resize();
+        this.div.ondrop = "drop(event)";
+        this.div.ondragover = "allowDrop(event)";
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.borderStyle = "solid";
+        this.div.style.zIndex = 4;
+    }
+}
+
 //   - Buttons
