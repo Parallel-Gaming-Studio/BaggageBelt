@@ -407,8 +407,8 @@ game.largePlaneLeftDiv = {
         this.height = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         //Attach to Plane Belt
-        this.posX = game.playLargePlaneLeft.posX;
-        this.posY = game.playLargePlaneLeft.posY;
+        this.posX = game.playLargePlaneLeft.posX + 375;
+        this.posY = game.playLargePlaneLeft.posY + 175;
     },
     //Draw object
     draw: function () {
