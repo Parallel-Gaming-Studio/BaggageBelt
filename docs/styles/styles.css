@@ -190,6 +190,7 @@ body {
     top: 0px;
     left: 38%;
     z-index: 4;
+    pointer-events: none;
 }
 #top10table .leader-title {
     position: relative;
