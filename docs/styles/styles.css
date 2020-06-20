@@ -90,7 +90,6 @@ body {
     color: #FFFFFF;
 }
 /* Play Scene score */
-/* Play Scene score */
 .score-box {
     position: absolute;
     margin: 0px;
@@ -152,7 +151,7 @@ body {
     position: absolute;
     margin: 0px;
     text-align: center;
-    font-size: 130pt;
+    font-size: 74pt;
     font-family: BigShouldersDisplay-SemiBold;
     color: #ffffff;
 }
@@ -187,76 +186,60 @@ body {
     width: 40%;
     height: 100%;
     background-color: #ffffff;
+    font-family: BebasNeue-Regular;
     text-align: center;
     top: 0px;
     left: 38%;
     z-index: 4;
+    /*pointer-events: none;*/
 }
 #top10table .leader-title {
     position: relative;
     width: 90%;
-    height: 29%;
+    height: 30%;
     left: 5%;
 }
-#top10table leader.container {
+#top10table .leader-container {
     position: relative;
     width: 90%;
-    height: 70%;
+    height: 68%;
     left: 5%;
 }
-#top10table .table-header {
-    background-color: #212630;
-    font-family: Lato-Medium;
-    font-size: 54pt;
-    color: #ffffff;
-}
-#top10table .table-block {
+
+.table-block table {
     position: relative;
-    font-size: 36pt;
+    border-collapse: separate;
+    border-spacing: 1vw;
     width: 100%;
-}
-.table-container {
-    position: relative;
-    margin: 0px;
-    width: 100%;
-    padding: 0px;
-}
-.table-container table {
-    position: relative;
-    table-layout: fixed;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-}
-.table-container tr {
-    margin: 0px;
-    padding: 0px;
-    width: 100%;
-}
-.table-container td:nth-child(1) {
-    position: relative;
-    margin-right: 5px;
-    width: calc(10% - 10px);
-}
-.table-container td:nth-child(2) {
-    position: relative;
-    margin-right: 5px;
-    width: calc(40% - 15px);
-}
-.table-container td:nth-child(3) {
-    position: relative;
-    width: calc(50% - 15px);
-}
-.table-container td {
-    margin: 0px;
-    padding: 5px;
+    vertical-align: middle;
     text-align: center;
-    font-family: Roboto-Bold;
-    font-size: 36pt;
-    background-color: #1e9cd8;
-}
-.top-10-data {
     color: #fff;
+}
+table th {
+    background-color: #23253c;
+    font-size: 54pt;/*
+    margin-bottom: 1em;
+    width: 100%;*/
+}
+table th.after {
+    background-color: #fff;
+}
+table td {
+    /*margin-top: 0.2vh;*/
+    background-color: #607d8b;
+    font-size: 36pt;
+}
+table td.after {
+    background-color: #fff;
+}
+table td:nth-child(1) {
+    width: 10%;
+}
+table td:nth-child(2) {
+    width: 40%;
+}
+table td:nth-child(3) {
+    width: 50%;
 }
 
 /* End Scene initials */
