@@ -373,3 +373,7 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.game-Pieces {
+    display: block;
+}

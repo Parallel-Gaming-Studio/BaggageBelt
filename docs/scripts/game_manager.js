@@ -202,7 +202,8 @@ game.drawOnce = function () {
 			this.playLargePlaneRight.draw();
 			this.playSmallPlaneLeft.draw();
 			this.playSmallPlaneRight.draw();
-			this.playLuggageCartLvl1.draw();
+            this.playLuggageCartLvl1.draw();
+            this.luggageDiv.draw();
 
             // Display buttons
              this.menuButton.adjustStyle();

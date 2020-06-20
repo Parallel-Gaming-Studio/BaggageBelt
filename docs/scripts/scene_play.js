@@ -207,4 +207,55 @@ game.playLuggageCartLvl1 = {
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
+
+let luggage = [
+    'url(images/luggage_blue.png)',
+    'url(images/luggage_green.png)',
+    'url(images/luggage_red.png)',
+    'url(images/luggage_purple.png)',
+    'url(images/luggage_yellow.png)'
+];
+
+var randomLuggage = Math.floor(Math.random() * luggage.length);
+
+game.luggageDiv = {
+    //get handle to div
+    div: document.getElementById("luggageCart1"),
+    //declare objects transform information
+    org_width: 491 * game.scale,
+    org_heigth: 170 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posY: 50,
+    //Adjust the object's transform
+    resize: function () {
+        this.width = 50;
+        this.height = 50;
+
+        //Attach to Cart
+        this.posX = game.playLuggageCartLvl1.posX+20;
+        this.posY = game.playLuggageCartLvl1.posY+20;
+    },
+    //Draw object
+    draw: function () {
+        this.adjustStyle();
+    },
+    //Apply changes via CSS
+    adjustStyle: function () {
+        this.resize();
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.backgroundImage = luggage[randomLuggage];
+        this.div.style.backgroundRepeat = 'no-repeat';
+        this.div.style.backgroundSize = 'contain';
+        this.div.style.zIndex = 4;
+    }
+
+}
 //   - Buttons
