@@ -41,8 +41,8 @@ game.leaderboardPlayerScore = {
     resize: function() {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = 30 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = 3 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = engine.width - this.width * 2.1;
+        this.posY = engine.height - this.height * 2.32;
     },
         //Draw the object
     draw: function() {
@@ -157,8 +157,8 @@ game.leaderboardSponsorBox = {
     resize: function() {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = engine.width - this.width;
-        this.posY = engine.height - this.height;
+        this.posX = 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = 600 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
         //Draw the object
     draw: function() {
@@ -185,8 +185,8 @@ game.leaderboardSponsorLogo = {
         this.width = game.leaderboardSponsorBox.width * 0.70;
         this.height = this.width;
             //Attach Bottom Side
-        this.posX = game.leaderboardSponsorBox.posX + 35 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.leaderboardSponsorBox.posY + game.leaderboardSponsorBox.height / 2 - this.height / 3;
+        this.posX = game.leaderboardSponsorBox.posX + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.leaderboardSponsorBox.posY + game.leaderboardSponsorBox.height / 2 - this.height / 2;
     },
         //Draw the object
     draw: function() {
@@ -224,11 +224,11 @@ game.top10players = {
     },
         //Adjust the object's transform
     resize: function() {
-        this.width = (game.leaderboardSponsorBox.posX - (game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width)) - 100 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = (game.leaderboardPlayerScore.posX - (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width)) - 110 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = engine.height;
 
             //Attach Left Side with Buffer
-        this.posX = (game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width) + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width) + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posY = 0;
 
             //Adjust the height of the table's container
@@ -337,41 +337,6 @@ game.top10players = {
 game.top10players.init();   //Force object initialization on first script load
 
 //   - Buttons
-/* game.menuButton = {               //how was this noted out in my code but shows up on my localhost? 
-        //Get handle to image
-    image: document.getElementById("menuButton"),
-        //Declare object transform information
-    org_width: 283 * game.scale,
-    org_height: 138 * game.scale,
-    width: 0,
-    height: 0,
-    org_posY: 50,
-    posX: 0,
-    posY: 0,
-        //Adjust the object's transform
-    resize: function() {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = engine.width - this.width;
-        this.posY = Math.max(50, Math.min(40, this.org_posY - engine.heightDifference));
-    },
-        //Draw the object
-    draw: function() {
-        this.adjustStyle();
-    },
-        //Apply changes via CSS
-    adjustStyle: function() {
-        this.resize();
-        this.image.style.position = "absolute";
-        this.image.style.display = "block";
-        this.image.style.left = this.posX.toString() + "px";
-        this.image.style.top = this.posY.toString() + "px";
-        this.image.style.width = this.width + "px";
-        this.image.style.height = this.height + "px";
-        this.image.style.zIndex = 1;
-    }
-};     */
-
 game.leaderboardRetryButton = {
     //Get handle to image
     image: document.getElementById("leaderboardRetryButton"),
