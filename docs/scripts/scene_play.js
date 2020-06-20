@@ -88,14 +88,14 @@ game.playLargePlaneLeft = {
     height: 0,
     posX: 0,
     posY: 0,
-    org_posY: 50,
+    org_posY: 170,
     // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         this.posX = 0;
-        this.posY = Math.max(160, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+        this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
     // Draw the object
     draw: function () {
@@ -114,14 +114,14 @@ game.playLargePlaneRight = {
     height: 0,
     posX: 0,
     posY: 0,
-    org_posY: 50,
+    org_posY: 170,
     // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         this.posX = engine.width - this.width;
-        this.posY = Math.max(160, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+        this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
     // Draw the object
     draw: function () {
@@ -147,7 +147,7 @@ game.playSmallPlaneLeft = {
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         this.posX = 0;
-        this.posY = engine.height / 2 + this.height / 2;
+        this.posY = engine.height / 2 + this.height / 3;
     },
     // Draw the object
     draw: function () {
@@ -173,7 +173,7 @@ game.playSmallPlaneRight = {
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         this.posX = engine.width - this.width;
-        this.posY = engine.height / 2 + this.height / 2;
+        this.posY = engine.height / 2 + this.height / 3;
     },
     // Draw the object
     draw: function () {
