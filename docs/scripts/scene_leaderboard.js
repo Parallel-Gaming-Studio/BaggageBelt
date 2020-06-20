@@ -101,12 +101,12 @@ game.finalPlayerScore = {
 },
   //Adjust the object's transform
   resize: function() {
-    this.width = game.leaderboardPlayerScore.width * 0.8;
-    this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+      this.width = game.leaderboardPlayerScore.width;
+      this.height = game.leaderboardPlayerScore.height / 2;
     
     //Attach Left Side
-    this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2;
-    this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 1.73 - this.height / 2;
+      this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2;
+      this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 5.1 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     
     //Adjust font
     this.textResize();
@@ -121,7 +121,7 @@ game.finalPlayerScore = {
     adjustStyle: function() {
       this.resize();
       this.div.style.position = "absolute";
-      this.div.style.display = "block";
+      this.div.style.display = "flex";
       this.div.style.left = this.posX.toString() + "px";
       this.div.style.top = this.posY.toString() + "px";
       this.div.style.width = this.width + "px";
@@ -358,8 +358,8 @@ game.leaderboardRetryButton = {
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         //Remove an additional 25 (proportionate) from the X-position to match the shadow
-        this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 25 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height + 25 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 86 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height - 150 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     //Draw the object
     draw: function() {

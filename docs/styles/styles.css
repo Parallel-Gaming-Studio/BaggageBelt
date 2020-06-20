@@ -90,7 +90,6 @@ body {
     color: #FFFFFF;
 }
 /* Play Scene score */
-/* Play Scene score */
 .score-box {
     position: absolute;
     margin: 0px;
@@ -152,7 +151,7 @@ body {
     position: absolute;
     margin: 0px;
     text-align: center;
-    font-size: 130pt;
+    font-size: 74pt;
     font-family: BigShouldersDisplay-SemiBold;
     color: #ffffff;
 }
@@ -200,7 +199,7 @@ body {
 }
 #top10table leader.container {
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 70%;
     left: 5%;
 }
@@ -208,6 +207,7 @@ body {
     background-color: #212630;
     font-family: Lato-Medium;
     font-size: 54pt;
+    width: 100%;
     color: #ffffff;
 }
 #top10table .table-block {
