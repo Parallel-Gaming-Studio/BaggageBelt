@@ -192,7 +192,10 @@ game.drawOnce = function () {
 			this.playLargePlaneRight.draw();
 			this.playSmallPlaneLeft.draw();
 			this.playSmallPlaneRight.draw();
-			this.playLuggageCartLvl1.draw();
+			//this.playLuggageCartLvl1.draw();
+			//this.playLuggageCartLvl2.draw();
+			//this.playLuggageCartLvl3.draw();
+			this.playLuggageCartLvl4.draw();
 			
             // Display buttons
              this.menuButton.adjustStyle();
