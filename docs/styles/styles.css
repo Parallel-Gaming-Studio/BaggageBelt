@@ -118,7 +118,8 @@ body {
 	text-align: center;
 	font-size: 72pt;
 	font-family: BigShouldersDisplay-Semibold;
-	color: #FFFFFF;
+    color: #FFFFFF;
+    pointer-events: none;
 }
 /* Text Effects */
 .glow {
@@ -191,7 +192,7 @@ body {
     top: 0px;
     left: 38%;
     z-index: 4;
-    /*pointer-events: none;*/
+    pointer-events: none;
 }
 #top10table .leader-title {
     position: relative;
