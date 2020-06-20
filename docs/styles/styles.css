@@ -206,101 +206,41 @@ body {
     left: 5%;
 }
 
-#top10table table {
+.table-block table {
     position: relative;
-    border-collapse: collapse;
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
+    border-collapse: separate;
+    border-spacing: 1vw;
     width: 100%;
     vertical-align: middle;
     text-align: center;
     color: #fff;
 }
-#top10table table, th {
+table th {
     background-color: #23253c;
-    font-size: 54pt;
+    font-size: 54pt;/*
     margin-bottom: 1em;
-    width: 100%;
+    width: 100%;*/
 }
-#top10table table, td {
+table th.after {
+    background-color: #fff;
+}
+table td {
+    /*margin-top: 0.2vh;*/
     background-color: #607d8b;
     font-size: 36pt;
 }
-#top10table table, tr>td:nth-child(1) {
+table td.after {
+    background-color: #fff;
+}
+table td:nth-child(1) {
     width: 10%;
 }
-#top10table table, tr>td:nth-child(2) {
+table td:nth-child(2) {
     width: 40%;
 }
-#top10table table, tr>td:nth-child(3) {
-    width: 45%;
+table td:nth-child(3) {
+    width: 50%;
 }
-/*
-#top10table .table-header {
-    background-color: #23253c;
-    font-size: 54pt;
-    width: 100%;
-    height: 9%;
-    
-    color: #ffffff;
-}
-#top10table .table-block {
-    position: relative;
-    font-size: 36pt;
-    width: 100%;
-    height: 90%;
-    table-layout: auto;
-    
-    border-collapse: collapse;
-}
-
-.table-container {
-    position: relative;
-    margin: 0px;
-    width: 100%;
-    padding: 0px;
-}
-.table-container table {
-    position: relative;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border-spacing: 0px;
-    width: 100%;
-    height: inherit;
-    border-radius: 0px;
-    border: 0px;
-}
-.table-container tr {
-    position: relative;
-    margin: 0px;
-    padding: 0px;
-    width: 100%;
-} 
-.table-container td:nth-child(1) {
-    position: relative;
-    margin-right: 5px;
-    width: calc(10% - 10px);
-}
-.table-container td:nth-child(2) {
-    position: relative;
-    margin-right: 5px;
-    width: calc(40% - 15px);
-}
-.table-container td:nth-child(3) {
-    position: relative;
-    width: calc(50% - 15px);
-}
-.table-container td {
-    margin: 0px;
-    padding: 5px;
-    text-align: center;
-    font-size: 36pt;
-    background-color: #607d8b;
-}
-.top-10-data {
-    color: #fff;
-}*/
 
 /* End Scene initials */
 .Initials {

@@ -212,7 +212,7 @@ game.top10players = {
     org_table_font_size: 36,
     table_font_size: 0,
     org_padding: 5,
-    padding: 0,
+    // padding: 0,
     //Array to hold displayable items
     divArray: [],
     //Flag for the table's completion
@@ -236,7 +236,7 @@ game.top10players = {
         this.table_font_size = this.org_table_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         // Update padding sizes
-        this.padding = this.org_padding * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.padding = this.org_padding * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     //Apply changes via CSS
     adjustStyle: function () {
@@ -250,11 +250,18 @@ game.top10players = {
         // this.rowHeight = this.font_size + this.padding * 2;
         for (var i = 0; i < this.boardElements.length; i++) {
             if (this.boardElements[i].tagName.toLowerCase() == "td") {
-                this.boardElements[i].style.display = "inline-block";
+                this.boardElements[i].style.display = "table-cell";
                 this.boardElements[i].style.fontSize = this.table_font_size + "px";
-                // this.boardElements[i].style.padding = this.padding;
+                this.boardElements[i].style.padding = this.padding;
+            } else if (this.boardElements[i].tagName.toLowerCase() == "th") {
+                this.boardElements[i].style.display = "table-cell";
+                this.boardElements[i].style.fontSize = this.font_size + "px";
             } else if (this.boardElements[i].tagName.toLowerCase() == "tr") {
-                // this.boardElements[i].style.height = this.rowHeight;
+                this.boardElements[i].style.display = "table-row";
+            } else if (this.boardElements[i].tagName.toLowerCase() == "tbody") {
+                this.boardElements[i].style.display = "table-row-group";
+            } else if (this.boardElements[i].tagName.toLowerCase() == "table") {
+                this.boardElements[i].style.display = "table";
             } else {
                 this.boardElements[i].style.display = "block";
                 this.boardElements[i].style.fontSize = this.font_size + "px";
@@ -279,7 +286,7 @@ game.top10players = {
     buildTable: function () {
         var place = "";
         var divPrefix = '<div id="lbContainerDiv';
-        var tablePrefix = '<table><tr><th>TOP PLAYERS</th></tr>';
+        var tablePrefix = '<table><tr><th colspan="3" name="top10s">TOP PLAYERS</th></tr>';
         var rowPrefix = '<tr>';
         var dataPrefix = '<td class="top-10-data"';
         var tableBuilder = '';
