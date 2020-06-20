@@ -201,9 +201,9 @@ body {
 }
 #top10table .leader-container {
     position: relative;
-    width: 90%;
+    width: calc(90% + 2vw);
     height: 68%;
-    left: 5%;
+    left: calc(5% - 1vw);
 }
 
 .table-block table {
