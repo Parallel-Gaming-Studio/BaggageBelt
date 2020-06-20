@@ -44,6 +44,8 @@ game.gameController = {
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
+				// Reset the player
+				game.player.reset();
 				// Set the new game state to Play Scene
                 game.currState = game.gameState[1];
 				// Hide all elements
@@ -75,6 +77,9 @@ game.gameController = {
     },
     gsEnd: function (dt) {
         // End Scene
+		
+		// Handle the initials animation
+		game.endPlayerInitials.animateInitials(dt);
 
 		// DEBUG
         // Toggle next state
@@ -99,6 +104,11 @@ game.gameController = {
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
 				// Update game state to Start Scene
+		    //Reset player object
+		game.player.reset();
+		    //Reset leaderboard table
+		game.top10players.hideTable();
+		    //Update game state to Start Scene
                 game.currState = game.gameState[0];
 				// Hide all elements
                 game.hideElements.hideAll();
@@ -186,37 +196,58 @@ game.drawOnce = function () {
         case 'play':
             // Draw images on the canvas
 			this.playBackground.draw();
-			this.menuButton.adjustStyle();
 			this.playSponsoredTimer.draw();
 			this.playScoreBox.draw();
 			this.playLargePlaneLeft.draw();
 			this.playLargePlaneRight.draw();
 			this.playSmallPlaneLeft.draw();
 			this.playSmallPlaneRight.draw();
-			//this.playLuggageCartLvl1.draw();
-			//this.playLuggageCartLvl2.draw();
-			//this.playLuggageCartLvl3.draw();
-			this.playLuggageCartLvl4.draw();
-			this.playLuggageBlue.draw();
-			this.playLuggageGreen.draw();
-			this.playLuggagePurple.draw();
-			this.playLuggageRed.draw();
-			this.playLuggageYellow.draw();
-			
+			this.playLuggageCartLvl1.draw();
+
             // Display buttons
              this.menuButton.adjustStyle();
             break;
         case 'end':
             // Draw images on the canvas
+			this.endBackground.draw();
+			this.endKeypadBackdrop.draw();
 			
-            // Display buttons
+			this.endTimeBoardBG.draw();
+			this.endSponsoredTimerBox.draw();
+			
+			// Time
+			this.endPlayerTimeBoard.draw();
+           	this.endSponsorLogo.draw();
             
+			this.endTitle.draw();
+            this.endGamePoints.draw();
+            this.endPlayerScore.draw();
+            
+            this.endGameOver.draw();
+            this.endInitialsBox.draw();
+            this.endPlayerInitials.draw();
+		
+            // Display buttons
+            this.endSubmitButton.adjustStyle();
+            this.menuButton.adjustStyle();
+			
+			// Keypad
+            this.inputKeypad.adjustStyle();
+			
             break;
+		
         case 'leaderboard':
             // Draw images on the canvas
-            
+            this.leaderboardBackground.draw();
+	    this.leaderboardPlayerScore.draw();
+	    this.leaderboardSponsorBox.draw();
+	    this.leaderboardSponsorLogo.draw();
+	    this.finalPlayerScore.draw();
+            this.top10players.adjustStyle();
+		    
             // Display buttons
-            
+            this.menuButton.adjustStyle();
+	    this.leaderboardRetryButton.adjustStyle();
             break;
         default:
             break;
