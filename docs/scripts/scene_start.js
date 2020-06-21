@@ -40,7 +40,7 @@ game.ButtonsBackdrop = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.posX = engine.width / 2 - this.width / 2;
-        this.posY = engine.height - this.height - 160;
+        this.posY = game.BBTitle.posY + game.BBTitle.height + engine.height * 0.1 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         //this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
@@ -166,8 +166,8 @@ game.startButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = engine.width / 3 - this.width / 2;
-        this.posY = engine.height - this.height - 160;
+        this.posX = game.ButtonsBackdrop.posX + 15 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
@@ -188,8 +188,6 @@ game.startButton = {
     clickMe: function () {
         // Inform Google the user started playing a game
         game.google.start();
-        // Set game score to zero
-        game.score = 0;
         // Reset the player object
         game.player.reset();
         // Refresh the timeout timer
@@ -223,8 +221,8 @@ game.leaderboardButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (engine.width / 2) - this.width / 2;
-        this.posY = engine.height - this.height - 160;
+        this.posX = game.ButtonsBackdrop.posX + game.ButtonsBackdrop.width / 2 - this.width / 2;
+        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
@@ -278,8 +276,8 @@ game.quitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = (engine.width / 3 * 2) - this.width / 2;
-        this.posY = engine.height - this.height - 160;
+        this.posX = game.ButtonsBackdrop.posX + game.ButtonsBackdrop.width - this.width - 15 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {

@@ -79,6 +79,10 @@ engine.input = {
     _down: {},
     _pressed: {},
     _released: [],
+    _touchDown: {},
+    _touchStarted: {},
+    _touchEnded: {},
+    _touchReleased: [],
 
 	// Initialize the mouse coordinates to (0,0)
     mouse: {
@@ -87,7 +91,18 @@ engine.input = {
     },
 
     // Tracks the current, active touch events
-    activeTouches: {},
+    activeTouches: {
+        /* Use the following format:
+        x: 0,
+        y: 0,
+        type: "undefined",
+        time: "undefined"*/
+    },
+
+    // Returns the selected active touch event
+    getTouch: function(arg) {
+        return (this.activeTouches["$touch"+arg]);
+    },
 
 	// Bind supplied key/button to the specified event
     bind: function (key, event) {
@@ -208,43 +223,121 @@ engine.input = {
     // Touch event types
     // When the user's finger touches the screen
     ontouchstart: function(event) {
-        var touches = event.changedTouches;
+        console.log(`Event is: ${event}`);
 
-        for (var i = 0; i < touches.length; i++) {
-            // Store the touch info
-            this.activeTouches["$" + touches[i].identifier] = {
-                identifier: touches[i].identifier,
-                pageX: touches[i].pageX,
-                pageY: touches[i].pageY
-            };
-        }
-        console.log(`Touch Start: ${touches.length} ${event.type}`);
-        return this.onkeydown(event);
+        // Clear the END event
+        if (this._down["END"]) this._released.push("END");
+
+        // If the touchstart wasn't already identified as pressed, toggle it on
+        if (!this._down[event]) this._pressed[event] = true;
+
+        // Set the touchstart into the _down state
+        this._down[event] = true;
+    },
+
+    // When the user's finger moves across the screen
+    ontouchmove: function(event) {
+        console.log(`Event is: ${event}`);
+
+        // Clear the START
+        if (this._down["START"]) this._released.push("START");
+
+        // If the touchmove wasn't already identified as pressed, toggle it on
+        // if (!this._down[event]) this._pressed[event] = true;
+        if (!this._pressed[event]) this._pressed[event] = true;
+
+        // Set the touchmove into the _down state
+        this._down[event] = true;
     },
 
     // When the user's finger lifts off the screen
     ontouchend: function(event) {
-        var touches = event.changedTouches;
+        console.log(`Event is: ${event}`);
 
-        for (var i = 0; i < touches.length; i++) {
-            // Retrieve the touch info
-            var touchInfo = this.activeTouches["$" + touches[i].identifier];
-            touchInfo.dx = touches[i].pageX - touchInfo.pageX;
-            touchInfo.dy = touches[i].pageY - touchInfo.pageY;
-        }
-        console.log(`Touch end: ${touches.length} ${event.type}`);
-        return this.onkeyup(event);
+        // Clear the MOVE event
+        if (this._down["MOVE"]) this._released.push("MOVE");
+
+        // If he touchend wasn't already identified as pressed, toggle it on
+        if (!this._down[event]) this._pressed[event] = true;
+
+        // Set the touchend into the _down state
+        this._down[event] = true;
     },
 
-    ontouchmove: function(event) {
-        return this.onmousemove(event);
+    // Handle all touch events, driving traffic by type
+    touchHandler: function (e) {
+        var event;
+
+        // Pull the binding event
+        event = this._bindings[eventCode(e)];
+
+        console.log(`Touched: ${e.type}\nEvent: ${event} @ (${e.changedTouches[e.which].pageX},${e.changedTouches[e.which].pageY})`);
+
+        // Update the current event's location
+        // - Store the touch info
+        this.activeTouches["$touch" + e.which] = {
+            x: e.changedTouches[e.which].pageX,
+            y: e.changedTouches[e.which].pageY,
+            type: event,
+            time: Date.now()
+        };
+
+        // Return if no event was previously defined for this touch
+        if (!event) return;
+
+        // Determine which event fired and handle it appropriately
+        switch (event) {
+            case "START":
+                this.ontouchstart(event);
+                break;
+            case "MOVE":
+                this.ontouchmove(event);
+                break;
+            case "END":
+                this.ontouchend(event);
+                break;
+            case "LEAVE":
+                // Generally not accepted, but good to know it happened
+                console.log(`Event is: ${event}`);
+                break;
+            case "CANCEL":
+                // Generally not accepted, but good to know it happened
+                console.log(`Event is: ${event}`);
+                break;
+        }
+
+        console.log(`Touch Locations:\n${JSON.stringify(this.activeTouches)}`);
+
+        // Prevent this event from propagation (being called multiple times)
+        e.stopPropagation();
+        // Cancel the event if it's cancelable
+        return e.preventDefault();
     }
 };
 
+/* touch groups 
+    var touches = event.changedTouches;
+
+    for (var i = 0; i < touches.length; i++) {
+        // Store the touch info
+        this.activeTouches["$" + touches[i].identifier] = {
+            identifier: touches[i].identifier,
+            pageX: touches[i].pageX,
+            pageY: touches[i].pageY
+        };
+    }
+
+ for (var i = 0; i < touches.length; i++) {
+        // Retrieve the touch info
+        var touchInfo = this.activeTouches["$" + touches[i].identifier];
+        touchInfo.dx = touches[i].pageX - touchInfo.pageX;
+        touchInfo.dy = touches[i].pageY - touchInfo.pageY;
+    }*/
+
 // Bind the engine's touch handlers to the document's handlers
-document.ontouchstart = engine.input.ontouchstart.bind(engine.input);
-document.ontouchmove = engine.input.ontouchmove.bind(engine.input);
-document.ontouchend = engine.input.ontouchend.bind(engine.input);
+document.ontouchstart = engine.input.touchHandler.bind(engine.input);
+document.ontouchmove = engine.input.touchHandler.bind(engine.input);
+document.ontouchend = engine.input.touchHandler.bind(engine.input);
 
 // Bind the engine's input handlers to the document's handlers
 document.onkeydown = engine.input.onkeydown.bind(engine.input);
@@ -288,7 +381,6 @@ for (c = 65; c <= 90; c++) {
 
 // Create an eventCode for event types
 eventCode = function (e) {
-    console.log(`Event code: ${e.type}`);
 	// Return the event key code whether the key's state is up or down
     if (e.type === 'keydown' || e.type === 'keyup') {
         return e.keyCode;
@@ -309,17 +401,17 @@ eventCode = function (e) {
         } else {
             return engine.button.WHEELDOWN;
         }
-    } else if (e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchdown') {
-        switch(e.touch) {
-            case 0:
+    } else if (e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend' || e.type === 'touchleave' || e.type === 'touchcancel') {
+        switch(e.type) {
+            case 'touchstart':
                 return engine.touch.START;
-            case 1:
+            case 'touchmove':
                 return engine.touch.MOVE;
-            case 2:
+            case 'touchend':
                 return engine.touch.END;
-            case 3:
+            case 'touchleave':
                 return engine.touch.LEAVE;
-            case 4:
+            case 'touchcancel':
                 return engine.touch.CANCEL;
         }
     }
@@ -342,9 +434,9 @@ engine.canvas.onmousewheel = engine.input.onmousewheel.bind(engine.input);
 // engine.canvas.oncontextmenu = engine.input.oncontextmenu.bind(engine.input); // (Firefox only)
 
 // Bind the engine's touch events to the canvas
-engine.canvas.ontouchstart = engine.input.ontouchstart.bind(engine.input);
-engine.canvas.ontouchmove = engine.input.ontouchmove.bind(engine.input);
-engine.canvas.ontouchend = engine.input.ontouchend.bind(engine.input);
+engine.canvas.ontouchstart = engine.input.touchHandler.bind(engine.input);
+engine.canvas.ontouchmove = engine.input.touchHandler.bind(engine.input);
+engine.canvas.ontouchend = engine.input.touchHandler.bind(engine.input);
 
 // React proportions
 engine.widthProportion = (Math.abs(1920 - window.innerWidth) / 1920).toPrecision(4);

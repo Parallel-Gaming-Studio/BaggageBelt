@@ -43,8 +43,11 @@ game.gameController = {
         // Start Scene
 
         for (var i = 0; i < game.touch.length; i++) {
-            if (engine.input.released(game.touch[i])) {
-                console.log(`Touch type: ${game.touch[i].type}\nX: ${engine.input.mouse.x}\nY: ${engine.input.mouse.y}`);
+            if (engine.input.pressed(game.touch[i])) { // Always use pressed for touch events
+                try {
+                    var touchInfo = engine.input.getTouch(i);
+                    console.log(`Touch\nIndex: ${i}\nType: ${game.touch[i]}\nX: ${touchInfo.x}\nY: ${touchInfo.y}`);
+                } catch (e) {}
             }
         }
 
@@ -191,8 +194,8 @@ game.drawOnce = function () {
         case 'start':
             // Draw images on the canvas
             this.startBackground.draw();
-            this.ButtonsBackdrop.draw();
             this.BBTitle.draw();
+            this.ButtonsBackdrop.draw();
 
             // Display buttons
             this.startButton.adjustStyle();
