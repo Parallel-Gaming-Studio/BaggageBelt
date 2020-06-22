@@ -43,14 +43,14 @@ var __indexOf = Array.prototype.indexOf
     // Append an array of arguments to function fn after the previous function me
     __bind = function (fn, me) {
         return function () {
-			// Return the function with its new attributes
+            // Return the function with its new attributes
             return fn.apply(me, arguments);
         };
     };
 
 // Access the current browser's framerate for maximum control over animation
 _requestAnimationFrame = 
-	// Multibrowser support options:
+    // Multibrowser support options:
     window.requestAnimationFrame
     || // - Generic
     window.webkitRequestAnimationFrame
@@ -74,7 +74,7 @@ engine.timeSizing = new Date();
 
 // Setup user input control, bindings, and handling
 engine.input = {
-	// Initialize action types
+    // Initialize action types
     _bindings: {},
     _down: {},
     _pressed: {},
@@ -84,7 +84,7 @@ engine.input = {
     _touchEnded: {},
     _touchReleased: [],
 
-	// Initialize the mouse coordinates to (0,0)
+    // Initialize the mouse coordinates to (0,0)
     mouse: {
         x: 0,
         y: 0
@@ -104,29 +104,29 @@ engine.input = {
         return (this.activeTouches["$touch"+arg]);
     },
 
-	// Bind supplied key/button to the specified event
+    // Bind supplied key/button to the specified event
     bind: function (key, event) {
         return this._bindings[key] = event;
     },
 
-	// Definte functions for when the key/button is pressed
+    // Definte functions for when the key/button is pressed
     onkeydown: function (e) {
         var event;
 
-		// Pull the binding event
+        // Pull the binding event
         event = this._bindings[eventCode(e)];
 
-		// Return if no event was previously defined
+        // Return if no event was previously defined
         if (!event) {
             return;
         }
 
-		// If the key/button wasn't already identified as pressed, toggle it on
+        // If the key/button wasn't already identified as pressed, toggle it on
         if (!this._down[event]) {
             this._pressed[event] = true;
         }
 
-		// Set the key/button into the down state
+        // Set the key/button into the down state
         this._down[event] = true;
         // Prevent this event from propagation (being called multiple times)
         e.stopPropagation();
@@ -134,58 +134,58 @@ engine.input = {
         return e.preventDefault();
     },
 
-	// Define functions for when the key/button is released
+    // Define functions for when the key/button is released
     onkeyup: function (e) {
         var event;
 
-		// Pull the binding event
+        // Pull the binding event
         event = this._bindings[eventCode(e)];
 
-		// Return if no event was previously defined
+        // Return if no event was previously defined
         if (!event) {
             return;
         }
 
-		// Set the key/button into the released state
+        // Set the key/button into the released state
         this._released.push(event);
-		// Prevent this event from propagation (being called multiple times)
+        // Prevent this event from propagation (being called multiple times)
         e.stopPropagation();
-		// Cancel the event if it's cancelable
+        // Cancel the event if it's cancelable
         return e.preventDefault();
     },
 
-	// Clear the pressed state
+    // Clear the pressed state
     clearPressed: function () {
         var event, _i, _len, _ref;
 
-		// Define reference to action item(s)
+        // Define reference to action item(s)
         _ref = this._released;
 
-		// Clear the down state from referenced item(s)
+        // Clear the down state from referenced item(s)
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             event = _ref[_i];
             this._down[event] = false;
         }
 
-		// Clear the array of released items
+        // Clear the array of released items
         this._released = [];
 
-		// Clear the object of pressed items
+        // Clear the object of pressed items
         return this._pressed = {};
     },
 
     // Keyboard and Mouse event types
-	// Return the event of the calling item when it's pressed
+    // Return the event of the calling item when it's pressed
     pressed: function (event) {
         return this._pressed[event];
     },
 
-	// Return the event of the calling item when it's down
+    // Return the event of the calling item when it's down
     down: function (event) {
         return this._down[event];
     },
 
-	// Return the index of the calling item(s) when released
+    // Return the index of the calling item(s) when released
     released: function (event) {
         return __indexOf.call(this._released, event) >= 0;
     },
@@ -196,23 +196,23 @@ engine.input = {
         return this.mouse.y = e.pageY;
     },
 
-	// When a mouse button is pressed, set it in a down state
+    // When a mouse button is pressed, set it in a down state
     onmousedown: function (e) {
         return this.onkeydown(e);
     },
 
-	// When a mouse button is released, set it to an up state
+    // When a mouse button is released, set it to an up state
     onmouseup: function (e) {
         return this.onkeyup(e);
     },
 
-	// When the mouse wheel is scrolled, toggle it's down/up state
+    // When the mouse wheel is scrolled, toggle it's down/up state
     onmousewheel: function (e) {
         this.onkeydown(e);
         return this.onkeyup(e);
     },
 
-	// (Firefox only) Return the context menu during a mouse right click
+    // (Firefox only) Return the context menu during a mouse right click
     oncontextmenu: function (e) {
         if (this._bindings[engine.button.RIGHT]) {
             e.stopPropagation();
@@ -223,13 +223,12 @@ engine.input = {
     // Touch event types
     // When the user's finger touches the screen
     ontouchstart: function(event) {
-        console.log(`Event is: ${event}`);
-
         // Clear the END event
-        if (this._down["END"]) this._released.push("END");
+        if (this._down["END"]) this._down["END"] = false;
+        if (this._pressed["END"]) this._pressed["END"] = false;
 
         // If the touchstart wasn't already identified as pressed, toggle it on
-        if (!this._down[event]) this._pressed[event] = true;
+        this._pressed[event] = true;
 
         // Set the touchstart into the _down state
         this._down[event] = true;
@@ -237,14 +236,13 @@ engine.input = {
 
     // When the user's finger moves across the screen
     ontouchmove: function(event) {
-        console.log(`Event is: ${event}`);
-
         // Clear the START
-        if (this._down["START"]) this._released.push("START");
+        if (this._down["START"]) this._down["START"] = false;
+        if (this._pressed["START"]) this._pressed["START"] = false;
 
         // If the touchmove wasn't already identified as pressed, toggle it on
         // if (!this._down[event]) this._pressed[event] = true;
-        if (!this._pressed[event]) this._pressed[event] = true;
+        this._pressed[event] = true;
 
         // Set the touchmove into the _down state
         this._down[event] = true;
@@ -252,13 +250,12 @@ engine.input = {
 
     // When the user's finger lifts off the screen
     ontouchend: function(event) {
-        console.log(`Event is: ${event}`);
-
         // Clear the MOVE event
-        if (this._down["MOVE"]) this._released.push("MOVE");
+        if (this._down["MOVE"]) this._down["MOVE"] = false;
+        if (this._pressed["MOVE"]) this._pressed["MOVE"] = false;
 
         // If he touchend wasn't already identified as pressed, toggle it on
-        if (!this._down[event]) this._pressed[event] = true;
+        this._pressed[event] = true;
 
         // Set the touchend into the _down state
         this._down[event] = true;
@@ -270,8 +267,6 @@ engine.input = {
 
         // Pull the binding event
         event = this._bindings[eventCode(e)];
-
-        console.log(`Touched: ${e.type}\nEvent: ${event} @ (${e.changedTouches[e.which].pageX},${e.changedTouches[e.which].pageY})`);
 
         // Update the current event's location
         // - Store the touch info
@@ -306,33 +301,10 @@ engine.input = {
                 break;
         }
 
-        console.log(`Touch Locations:\n${JSON.stringify(this.activeTouches)}`);
-
         // Prevent this event from propagation (being called multiple times)
         e.stopPropagation();
-        // Cancel the event if it's cancelable
-        return e.preventDefault();
     }
 };
-
-/* touch groups 
-    var touches = event.changedTouches;
-
-    for (var i = 0; i < touches.length; i++) {
-        // Store the touch info
-        this.activeTouches["$" + touches[i].identifier] = {
-            identifier: touches[i].identifier,
-            pageX: touches[i].pageX,
-            pageY: touches[i].pageY
-        };
-    }
-
- for (var i = 0; i < touches.length; i++) {
-        // Retrieve the touch info
-        var touchInfo = this.activeTouches["$" + touches[i].identifier];
-        touchInfo.dx = touches[i].pageX - touchInfo.pageX;
-        touchInfo.dy = touches[i].pageY - touchInfo.pageY;
-    }*/
 
 // Bind the engine's touch handlers to the document's handlers
 document.ontouchstart = engine.input.touchHandler.bind(engine.input);
@@ -381,11 +353,11 @@ for (c = 65; c <= 90; c++) {
 
 // Create an eventCode for event types
 eventCode = function (e) {
-	// Return the event key code whether the key's state is up or down
+    // Return the event key code whether the key's state is up or down
     if (e.type === 'keydown' || e.type === 'keyup') {
         return e.keyCode;
     } else if (e.type === 'mousedown' || e.type === 'mouseup') {
-		// During up/down mouse events, return the calling button
+        // During up/down mouse events, return the calling button
         switch (e.button) {
             case 0:
                 return engine.button.LEFT;
@@ -395,7 +367,7 @@ eventCode = function (e) {
                 return engine.button.RIGHT;
         }
     } else if (e.type === 'mousewheel') {
-		// During mousewheel events, return the direction of the scroll
+        // During mousewheel events, return the direction of the scroll
         if (e.wheel > 0) {
             return engine.button.WHEELUP;
         } else {
@@ -442,13 +414,6 @@ engine.canvas.ontouchend = engine.input.touchHandler.bind(engine.input);
 engine.widthProportion = (Math.abs(1920 - window.innerWidth) / 1920).toPrecision(4);
 engine.heightProportion = (Math.abs(1080 - window.innerHeight) / 1080).toPrecision(4);
 
-// DEBUG
-// Report viewport dimensions when the window loads
-window.onload = function () {
-    console.log("(w: " + (engine.widthProportion * 100).toPrecision(4) + "%, h: " + (engine.heightProportion * 100).toPrecision(4) + "%)");
-    console.log("(w: " + engine.canvas.width + ", h: " + engine.canvas.height + ")");
-};
-
 engine.windowControl = {
     updateWindow: () => {
         engine.timeSizing = Date.now();
@@ -473,10 +438,6 @@ engine.windowControl = {
         // Set the engine's width to the canvas' width
         engine.width = engine.canvas.width;
 
-        // DEBUG
-        // Report the viewport dimensions when the window is resized
-        console.log("<ENGINE> (w: " + engine.canvas.width + ", h: " + engine.canvas.height + ")");
-
         // Return and set the engine's height to the canvas' height
         return engine.height = engine.canvas.height;
     }
@@ -497,59 +458,59 @@ $(document).on('pagecreate', (event) => {
 
 // Primary game loop
 GameObject = (function () {
-	// Declare all prototype (abstract functions)
+    // Declare all prototype (abstract functions)
     function GameObject() {};
     GameObject.prototype.update = function (dt) {};
     GameObject.prototype.draw = function () {};
     GameObject.prototype.run = function () {
         var s;
-		// Check if the game is running and return
+        // Check if the game is running and return
         if (this.running) {
             return;
         }
-		// Since the game is not running...
-		// Set the game in a running state
+        // Since the game is not running...
+        // Set the game in a running state
         this.running = true;
 
-		// Bind the running state
+        // Bind the running state
         s = __bind(function () {
             if (!this.running) {
                 return;
             }
-			// Perform a step (frame)
+            // Perform a step (frame)
             this.step();
-			// Return framerate performance data
+            // Return framerate performance data
             return _requestAnimationFrame(s);
         }, this);
-		// Update the previous step with this step
+        // Update the previous step with this step
         this.lastStep = Date.now();
-		// Return framerate performance data
+        // Return framerate performance data
         return _requestAnimationFrame(s);
     };
 
     GameObject.prototype.stop = function () {
-		// Set the game in a stopped/paused state
+        // Set the game in a stopped/paused state
         return this.running = false;
     }
 
     GameObject.prototype.step = function () {
-		// Step function executes every frame
+        // Step function executes every frame
         var dt, now;
-		// Get the current time
+        // Get the current time
         now = Date.now();
-		// Delta-Time: time(seconds) since last step
+        // Delta-Time: time(seconds) since last step
         dt = (now - this.lastStep) / 1000;
-		// Update last step to this step
+        // Update last step to this step
         this.lastStep = now;
-		// Perform a game update (every frame - high performance impact)
+        // Perform a game update (every frame - high performance impact)
         this.update(dt);
-		// Perform a new draw (every frame - high performance impact)
+        // Perform a new draw (every frame - high performance impact)
         this.draw();
-		// Return and clear any released keys/buttons
+        // Return and clear any released keys/buttons
         return engine.input.clearPressed();
     }
 
-	// Return the GameObject (to itself) to complete the game loop
+    // Return the GameObject (to itself) to complete the game loop
     return GameObject;
 })();
 engine.GameObject = GameObject; // Force the game to create the game object once the script loads

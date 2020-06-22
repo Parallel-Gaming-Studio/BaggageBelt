@@ -42,15 +42,6 @@ game.gameController = {
     gsStart: function (dt) {
         // Start Scene
 
-        for (var i = 0; i < game.touch.length; i++) {
-            if (engine.input.pressed(game.touch[i])) { // Always use pressed for touch events
-                try {
-                    var touchInfo = engine.input.getTouch(i);
-                    console.log(`Touch\nIndex: ${i}\nType: ${game.touch[i]}\nX: ${touchInfo.x}\nY: ${touchInfo.y}`);
-                } catch (e) {}
-            }
-        }
-
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
@@ -69,6 +60,28 @@ game.gameController = {
     },
     gsPlay: function (dt) {
         // Play Scene
+
+        // Touch Events
+        for (var i = 0; i < game.touch.length; i++) {
+            if (engine.input.pressed(game.touch[i])) {
+                for (var j = 0; j < Object.keys(engine.input.activeTouches).length; j++) {
+                    var touchInfo = engine.input.getTouch(j);
+                    if (touchInfo.type == "START") {
+                        // Perform actions when start is pressed
+                    } else if (touchInfo.type == "END") {
+                        // Perform actions when end is pressed
+                    }
+                }
+            }
+        }
+
+        // Mouse Events
+        if (engine.input.pressed(game.mouse[0])) {
+            // Perform actions when left mouse button is pressed
+        }
+        if (engine.input.released(game.mouse[0])) {
+            // Perform actions when left mouse button is released
+        }
 
         // DEBUG
         // Toggle next state
