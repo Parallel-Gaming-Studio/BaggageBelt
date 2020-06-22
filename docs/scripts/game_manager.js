@@ -67,9 +67,14 @@ game.gameController = {
         // Play Scene
 
         //Start game timers
+        if (game.playTimer.timer.paused) {
+            game.playTimer.timer.unpauseTimer();
+            game.playTimer.playTime.unpauseTimer();
+        }
         if (!game.playTimer.timer._timerExpired) {
             game.playTimer.displayTimer();
         }
+
 		// DEBUG
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {

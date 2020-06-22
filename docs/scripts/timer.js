@@ -38,18 +38,31 @@ class Timer {
     
     // Update the timer's count down if it's not paused
     update(dt) {
-        // Check timer expiration
-        if (!this._timerExpired) {
-            // Check paused state
-            if (!this.paused) {
-                // Expire the timer if less than 0 seconds are left
-                if (this.timeLeft <= 0) {
-                    this.expireTimer();
-                    this.pauseTimer();
-                    this.timeLeft = 0;
-                } else {
-                    // Reduce the time left by delta time
-                    this.timeLeft -= dt;
+        //check timer direction
+        if (this.direction == 'down') {
+            // Check timer expiration
+            if (!this._timerExpired) {
+                // Check paused state
+                if (!this.paused) {
+                    // Expire the timer if less than 0 seconds are left
+                    if (this.timeLeft <= 0) {
+                        this.expireTimer();
+                        this.pauseTimer();
+                        this.timeLeft = 0;
+                    } else {
+                        // Reduce the time left by delta time
+                        this.timeLeft -= dt;
+                    }
+                }
+            }
+        }
+        else {
+            // Check timer expiration
+            if (!this._timerExpired) {
+                // Check paused state
+                if (!this.paused) {
+                    // Increase the time left by delta time
+                    this.timeLeft += dt;
                 }
             }
         }
