@@ -38,6 +38,12 @@ for (var i = 0; i < game.mouse.length; i++) {
     engine.input.bind(engine.button[game.mouse[i]], game.mouse[i]);
 }
 
+// Touch bindings
+game.touch = ['START', 'MOVE', 'END', 'LEAVE', 'CANCEL'];
+for (var i = 0; i < game.touch.length; i++) {
+    engine.input.bind(engine.touch[game.touch[i]], game.touch[i]);
+}
+
 // Declare Game Variables
 // - Globals
 game.scale = 1.0;                       // Scale for adjusting object sizes
