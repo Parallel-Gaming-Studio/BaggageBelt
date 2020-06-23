@@ -28,7 +28,7 @@ game.playBackground = {
 
 game.playSponsoredTimer = {
     // Get handle to image
-    image: document.getElementById("timer"),
+    image: document.getElementById("playsponsoredTimer"),
     // Declare object transform information
     org_width: 450 * game.scale,
     org_heigth: 130 * game.scale,
