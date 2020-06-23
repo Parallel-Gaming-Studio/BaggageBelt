@@ -95,7 +95,14 @@ game.playTimer = {
     // Apply changes via CSS
     adjustStyle: function () {
         this.resize();
-
+        this.div.style.position = "absolute";
+        this.div.style.display = "block";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.fontSize = this.font_size + "pt";
+        this.div.style.zIndex = 4;
     },
     // Handle user interaction based on game state
     clickMe: function () {
