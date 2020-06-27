@@ -42,6 +42,12 @@ game.gameController = {
     gsStart: function (dt) {
         // Start Scene
 
+        //Reset Game Timer
+        game.playTimer.resetTimer();
+
+        //Reset Play time
+        game.endPlayerTimeBoard.resetTimer();
+        
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
@@ -60,6 +66,17 @@ game.gameController = {
     },
     gsPlay: function (dt) {
         // Play Scene
+
+        //Start game timers
+        if (game.playTimer.timer.paused) {
+            game.playTimer.timer.unpauseTimer();
+            game.playTimer.playTime.unpauseTimer();
+        }
+        if (!game.playTimer.timer._timerExpired) {
+            game.playTimer.displayTimer();
+        }
+
+		// DEBUG
 
         // Touch Events
         for (var i = 0; i < game.touch.length; i++) {
@@ -100,6 +117,15 @@ game.gameController = {
     },
     gsEnd: function (dt) {
         // End Scene
+		
+        //Reset Game Timer
+        game.playTimer.resetTimer();
+
+        //Pause Play Time
+        game.playTimer.playTime.paused = true;
+        
+		// Handle the initials animation
+		game.endPlayerInitials.animateInitials(dt);
 
         // Handle the initials animation
         game.endPlayerInitials.animateInitials(dt);
@@ -122,6 +148,12 @@ game.gameController = {
     gsLeaderboard: function (dt) {
         // Leaderboard Scene
 
+        //Reset Game Timer
+        game.playTimer.resetTimer();
+
+        //Reset Play time
+        game.endPlayerTimeBoard.resetTimer();
+        
         // DEBUG
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
@@ -222,6 +254,7 @@ game.drawOnce = function () {
 			this.playBackground.draw();
 			this.menuButton.adjustStyle();
 			this.playSponsoredTimer.draw();
+                        this.playTimer.draw();
 			this.playScoreBox.draw();
 			this.playLargePlaneLeft.draw();
 			this.playLargePlaneRight.draw();
