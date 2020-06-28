@@ -406,7 +406,9 @@ game.endPlayerInitials = {
         // Add event listener to the button
         this.div.addEventListener("click", game.endPlayerInitials.clickMe);
 		// Empty the initials
-		this.initialsValue = "";
+        this.initialsValue = "";
+        // Clear and display the initials
+        this.clearInitials();
 		// Reset the last update
 		this.lastUpdate = 0;
     },

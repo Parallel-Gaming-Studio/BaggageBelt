@@ -51,6 +51,8 @@ game.gameController = {
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
+                // Clear the initials on the End Scene
+                game.endPlayerInitials.clearInitials();
                 // Reset the player
                 game.player.reset();
                 // Set the new game state to Play Scene
@@ -104,6 +106,8 @@ game.gameController = {
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
+                // Clear the initials on the End Scene
+                game.endPlayerInitials.clearInitials();
                 // Update game state to End Scene
                 game.currState = game.gameState[2];
                 // Hide all elements
@@ -126,9 +130,6 @@ game.gameController = {
         
 		// Handle the initials animation
 		game.endPlayerInitials.animateInitials(dt);
-
-        // Handle the initials animation
-        game.endPlayerInitials.animateInitials(dt);
 
         // DEBUG
         // Toggle next state
@@ -158,12 +159,13 @@ game.gameController = {
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
-                // Update game state to Start Scene
+                // Clear the initials on the End Scene
+                game.endPlayerInitials.clearInitials();
                 //Reset player object
                 game.player.reset();
                 //Reset leaderboard table
                 game.top10players.hideTable();
-                //Update game state to Start Scene
+                // Update game state to Start Scene
                 game.currState = game.gameState[0];
                 // Hide all elements
                 game.hideElements.hideAll();

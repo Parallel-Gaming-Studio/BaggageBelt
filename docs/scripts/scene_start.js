@@ -133,6 +133,8 @@ game.menuButton = {
                 game.hideElements.hideAll();
                 // Reset leaderboard table
                 game.top10players.hideTable();
+                // Clear the initials on the End Scene
+                game.endPlayerInitials.clearInitials();
                 // Reset the player object
                 game.player.reset();
                 // Refresh the timeout timer
@@ -188,6 +190,8 @@ game.startButton = {
     clickMe: function () {
         // Inform Google the user started playing a game
         game.google.start();
+        // Clear the initials on the End Scene
+        game.endPlayerInitials.clearInitials();
         // Reset the player object
         game.player.reset();
         // Refresh the timeout timer
