@@ -28,7 +28,7 @@ game.playBackground = {
 
 game.playSponsoredTimer = {
     // Get handle to image
-    image: document.getElementById("playsponsoredTimer"),
+    image: document.getElementById("timer"),
     // Declare object transform information
     org_width: 450 * game.scale,
     org_heigth: 130 * game.scale,
@@ -41,7 +41,7 @@ game.playSponsoredTimer = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = engine.width / 3 - this.width / 2;
         this.posY = 0;
     },
@@ -50,7 +50,9 @@ game.playSponsoredTimer = {
         this.resize();
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
-}
+
+    
+};
 
 game.playTimer = {
     // Get handle to div
@@ -119,13 +121,13 @@ game.playTimer = {
     },
     displayTimer: function () {
         this.startTimer();
-       this.timer.displayMinuteSeconds();
+        this.timer.displayMinuteSeconds();
     },
     resetTimer: function () {
         this.timer.setup(150, true, "Game Timer");
     }
 };
-game.playTimer.init(); // Force initialize playTimer's event listener
+game.playTimer.init();
 
 game.playScoreBox = {
     // Get handle to image
@@ -142,7 +144,7 @@ game.playScoreBox = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 3 * 2) - this.width / 2;
         this.posY = 0;
     },
@@ -168,7 +170,7 @@ game.playLargePlaneLeft = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = 0;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
@@ -194,7 +196,7 @@ game.playLargePlaneRight = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = engine.width - this.width;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
@@ -220,7 +222,7 @@ game.playSmallPlaneLeft = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = 0;
         this.posY = engine.height / 2 + this.height / 3;
     },
@@ -246,7 +248,7 @@ game.playSmallPlaneRight = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = engine.width - this.width;
         this.posY = engine.height / 2 + this.height / 3;
     },
@@ -256,7 +258,152 @@ game.playSmallPlaneRight = {
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
+game.gemTriangle = {
+    // Get handle to image
+    image: document.getElementById("gemTriangle"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+};
 
+game.gemStar = {
+    // Get handle to image
+    image: document.getElementById("gemStar"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+};
+
+game.gemHeart = {
+    // Get handle to image
+    image: document.getElementById("gemHeart"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+};
+
+game.gemSquare = {
+    // Get handle to image
+    image: document.getElementById("gemSquare"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+};
+
+game.gemCircle = {
+    // Get handle to image
+    image: document.getElementById("gemCircle"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+};
+
+game.gemPentagon = {
+    // Get handle to image
+    image: document.getElementById("gemPentagon"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+};
+
+game.gemRectangle = {
+    // Get handle to image
+    image: document.getElementById("gemRectangle"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+    }
+}
 game.playLuggageBlue = {
     // Get handle to image
     image: document.getElementById("luggageBlue"),
@@ -272,7 +419,7 @@ game.playLuggageBlue = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -298,7 +445,7 @@ game.playLuggageGreen = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) - 95;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -324,7 +471,7 @@ game.playLuggagePurple = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) - 190;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -350,7 +497,7 @@ game.playLuggageRed = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) + 95;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -376,7 +523,7 @@ game.playLuggageYellow = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) + 190;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -402,7 +549,7 @@ game.playLuggageCartLvl1 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -428,7 +575,7 @@ game.playLuggageCartLvl2 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -454,7 +601,7 @@ game.playLuggageCartLvl3 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -480,7 +627,7 @@ game.playLuggageCartLvl4 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -490,4 +637,31 @@ game.playLuggageCartLvl4 = {
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
+
+game.playShapeStand = {
+    // Get handle to image
+    image: document.getElementById("shapeStand"),
+    // Declare object transform information
+    org_width: 1370 * game.scale,
+    org_heigth: 170 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    org_posY: 50,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        this.posX = (engine.width / 2) - this.width / 2;
+        this.posY = engine.height - this.height;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
 //   - Buttons
