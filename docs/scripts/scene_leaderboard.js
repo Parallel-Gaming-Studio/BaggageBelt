@@ -105,12 +105,12 @@ game.finalPlayerScore = {
     },
     //Adjust the object's transform
     resize: function () {
-        this.width = game.leaderboardPlayerScore.width;
-        this.height = game.leaderboardPlayerScore.height / 2;
+        this.width = game.leaderboardPlayerScore.width * 0.8;
+        this.height = game.leaderboardPlayerScore.height * 0.2;
 
         //Attach Left Side
         this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2;
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 5.15 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 3 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         //Adjust font
         this.textResize();
