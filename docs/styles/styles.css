@@ -1,14 +1,6 @@
 /* CSS Document */
 /* Custom fonts */
 @font-face {
-    font-family: Roboto-Bold;
-    src: url(Roboto-Bold.ttf);
-}
-@font-face {
-    font-family: BigShouldersDisplay-SemiBold;
-    src: url("BigShouldersDisplay-SemiBold.ttf");
-}
-@font-face {
 	font-family: BebasNeue-Regular;
 	src: url("BebasNeue-Regular.ttf");
 }
@@ -72,7 +64,7 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 14px;
-    font-family: Roboto-Bold;
+    font-family: BebasNeue-Regular;
     color: #F41C63;
 }
 .word-spaces-image {
@@ -86,7 +78,7 @@ body {
     margin: 0px;
     text-align: center;
     font-size: 72;
-    font-family: BigShouldersDisplay-Semibold;
+    font-family: BebasNeue-Regular;
     color: #FFFFFF;
 }
 /* Play Scene score */
@@ -107,7 +99,7 @@ body {
     margin: 0px;
     text-align: center;
     font-size: 74pt;
-    font-family: BigShouldersDisplay-Semibold;
+    font-family: BebasNeue-Regular;
     color: #FFFFFF;
 }
 /* End Scene timer */
@@ -117,7 +109,7 @@ body {
 	padding: 0px;
 	text-align: center;
 	font-size: 72pt;
-	font-family: BigShouldersDisplay-Semibold;
+	font-family: BebasNeue-Regular;
     color: #FFFFFF;
     pointer-events: none;
 }
@@ -153,7 +145,7 @@ body {
     margin: 0px;
     text-align: center;
     font-size: 74pt;
-    font-family: BigShouldersDisplay-SemiBold;
+    font-family: BebasNeue-Regular;
     color: #ffffff;
 }
 /* Text Effects */
@@ -281,7 +273,7 @@ table td:nth-child(3) {
     top: 35%;
     left: 50%;
     font-size: 5vw;
-    font-family: Roboto-Bold;
+    font-family: BebasNeue-Regular;
     color: #fff;
     -ms-transform: translate(-50%, -65%);
     transform: translate(-50%, -65%);
@@ -291,7 +283,7 @@ table td:nth-child(3) {
     top: 50%;
     left: 50%;
     font-size: 3vw;
-    font-family: Roboto-Bold;
+    font-family: BebasNeue-Regular;
     color: #fff;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -301,7 +293,7 @@ table td:nth-child(3) {
     top: 65%;
     left: 50%;
     font-size: 4vw;
-    font-family: Roboto-Bold;
+    font-family: BebasNeue-Regular;
     color: #fff;
     -ms-transform: translate(-50%, -35%);
     transform: translate(-50%, -35%);

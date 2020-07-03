@@ -41,7 +41,7 @@ game.playSponsoredTimer = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = engine.width / 3 - this.width / 2;
         this.posY = 0;
     },
@@ -119,7 +119,7 @@ game.playTimer = {
     },
     displayTimer: function () {
         this.startTimer();
-       this.timer.displayMinuteSeconds();
+        this.div.innerHTML = this.timer.displayMinuteSeconds();
     },
     resetTimer: function () {
         this.timer.setup(150, true, "Game Timer");
@@ -129,7 +129,7 @@ game.playTimer.init(); // Force initialize playTimer's event listener
 
 game.playScoreBox = {
     // Get handle to image
-    image: document.getElementById("scoreBox"),
+    image: document.getElementById("playScoreBoxImage"),
     // Declare object transform information
     org_width: 450 * game.scale,
     org_heigth: 160 * game.scale,
@@ -142,7 +142,7 @@ game.playScoreBox = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 3 * 2) - this.width / 2;
         this.posY = 0;
     },
@@ -152,6 +152,11 @@ game.playScoreBox = {
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
+
+game.playScore = {
+
+}
+
 
 game.playLargePlaneLeft = {
     // Get handle to image
@@ -168,7 +173,7 @@ game.playLargePlaneLeft = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = 0;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
@@ -194,7 +199,7 @@ game.playLargePlaneRight = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = engine.width - this.width;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
     },
@@ -220,7 +225,7 @@ game.playSmallPlaneLeft = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = 0;
         this.posY = engine.height / 2 + this.height / 3;
     },
@@ -246,7 +251,7 @@ game.playSmallPlaneRight = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = engine.width - this.width;
         this.posY = engine.height / 2 + this.height / 5;
     },
@@ -272,7 +277,7 @@ game.playLuggageBlue = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -298,7 +303,7 @@ game.playLuggageGreen = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) - 95;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -324,7 +329,7 @@ game.playLuggagePurple = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) - 190;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -350,7 +355,7 @@ game.playLuggageRed = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) + 95;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -376,7 +381,7 @@ game.playLuggageYellow = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - (this.width / 2) + 190;
         this.posY = (engine.height - this.height) - 190;
     },
@@ -402,7 +407,7 @@ game.playLuggageCartLvl1 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -428,7 +433,7 @@ game.playLuggageCartLvl2 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -454,7 +459,7 @@ game.playLuggageCartLvl3 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },
@@ -480,7 +485,7 @@ game.playLuggageCartLvl4 = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        
+
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
     },

@@ -64,7 +64,7 @@ game.finalPlayerScore = {
     posX: 0,
     posY: 0,
     //Declare member variables
-    org_font_size: 74,
+    org_font_size: 80,
     font_size: 0,
     textResize: function () {
         // Declare references to screen objects

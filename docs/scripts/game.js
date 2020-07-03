@@ -57,22 +57,16 @@ game.sponsor = ""; // Current sponsor
 game.nextSponsor = ""; // Next sponsor
 game.sponsorId = ""; // Current sponsor's ID
 
-/* << TIMER EXAMPLE USAGE >>
-var myTime = new Timer();
-console.log(`Time: ${myTime.startTime}\nTime Left: ${myTime.timeLeft}`);
-myTime.setup(2, false, "Test");
-console.log(`Time: ${myTime.startTime}\nTime Left: ${myTime.timeLeft}`);
-game.timers.push(myTime);
-<< TIMER EXAMPLE USAGE >> */
-
 // - Player object information (persists through scenes)
 game.player = {
     score: 0,
     initials: "ZZ",
+    timeTotal: 0,   // Time in seconds
 	// Reset player object variables
     reset: function () {
         this.score = 0;
         this.initials = "";
+        this.timeTotal = 0;
 		// Reset global score
 		game.score = 0;
     }

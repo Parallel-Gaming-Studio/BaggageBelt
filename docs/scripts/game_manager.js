@@ -47,7 +47,7 @@ game.gameController = {
 
         //Reset Play time
         game.endPlayerTimeBoard.resetTimer();
-        
+
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
             if (engine.input.pressed(game.controls[i])) {
@@ -69,16 +69,20 @@ game.gameController = {
     gsPlay: function (dt) {
         // Play Scene
 
-        //Start game timers
-        if (game.playTimer.timer.paused) {
-            game.playTimer.timer.unpauseTimer();
-            game.playTimer.playTime.unpauseTimer();
-        }
         if (!game.playTimer.timer._timerExpired) {
             game.playTimer.displayTimer();
+        } else {
+            // Clear the initials on the End Scene
+            game.endPlayerInitials.clearInitials();
+            // Update game state to End Scene
+            game.currState = game.gameState[2];
+            // Hide all elements
+            game.hideElements.hideAll();
+            // Refresh timeout
+            game.timeoutOverlay.refreshTimer();
+            // Redraw all elements
+            game.drawOnce();
         }
-
-		// DEBUG
 
         // Touch Events
         for (var i = 0; i < game.touch.length; i++) {
@@ -121,15 +125,15 @@ game.gameController = {
     },
     gsEnd: function (dt) {
         // End Scene
-		
+
         //Reset Game Timer
         game.playTimer.resetTimer();
 
         //Pause Play Time
         game.playTimer.playTime.paused = true;
-        
-		// Handle the initials animation
-		game.endPlayerInitials.animateInitials(dt);
+
+        // Handle the initials animation
+        game.endPlayerInitials.animateInitials(dt);
 
         // DEBUG
         // Toggle next state
@@ -154,7 +158,7 @@ game.gameController = {
 
         //Reset Play time
         game.endPlayerTimeBoard.resetTimer();
-        
+
         // DEBUG
         // Toggle next state
         for (var i = 0; i < game.controls.length; i++) {
@@ -253,27 +257,36 @@ game.drawOnce = function () {
         case 'play':
             // Draw images on the canvas
 
-			this.playBackground.draw();
-			this.menuButton.adjustStyle();
-			this.playSponsoredTimer.draw();
-                        this.playTimer.draw();
-			this.playScoreBox.draw();
-			this.playLargePlaneLeft.draw();
-			this.playLargePlaneRight.draw();
-			this.playSmallPlaneLeft.draw();
-			this.playSmallPlaneRight.draw();
-			// this.playLuggageCartLvl1.draw();
-			// this.playLuggageCartLvl2.draw();
-			// this.playLuggageCartLvl3.draw();
-			this.playLuggageCartLvl4.draw();
-			this.playLuggageBlue.draw();
-			this.playLuggageGreen.draw();
-			this.playLuggagePurple.draw();
-			this.playLuggageRed.draw();
-			this.playLuggageYellow.draw();
+            this.playBackground.draw();
+            this.menuButton.adjustStyle();
 
-            // Display buttons
-            // this.menuButton.adjustStyle();
+            // Timer Box
+            this.playSponsoredTimer.draw();
+            this.playTimer.draw();
+
+            // Score Box
+            this.playScoreBox.draw();
+
+            // Planes
+            this.playLargePlaneLeft.draw();
+            this.playLargePlaneRight.draw();
+            this.playSmallPlaneLeft.draw();
+            this.playSmallPlaneRight.draw();
+
+            // Luggage Carts
+            // this.playLuggageCartLvl1.draw();
+            // this.playLuggageCartLvl2.draw();
+            // this.playLuggageCartLvl3.draw();
+            this.playLuggageCartLvl4.draw();
+
+            // Luggage
+            this.playLuggageBlue.draw();
+            this.playLuggageGreen.draw();
+            this.playLuggagePurple.draw();
+            this.playLuggageRed.draw();
+            this.playLuggageYellow.draw();
+
+            // Shapes
 
             break;
         case 'end':
