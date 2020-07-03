@@ -423,7 +423,7 @@ game.endPlayerInitials = {
 		
 		// Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-		this.posY -= this.font_size * 0.2 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+		this.posY -= this.font_size * 0.05 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
