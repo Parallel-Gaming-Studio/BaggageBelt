@@ -57,7 +57,7 @@ game.playTimer = {
     div: document.getElementById("playTimer"),
     // Declare object transform information
     org_width: 200 * game.scale,
-    org_height: 95 * game.scale,
+    org_height: 72 * game.scale,
     width: 0,
     height: 0,
     org_posX: 150,
@@ -65,7 +65,7 @@ game.playTimer = {
     posX: 0,
     posY: 0,
     // Declare member variables
-    org_font_size: 82,
+    org_font_size: 60,
     font_size: 0,
     timer: new Timer(),
     playTime: new Timer(),
@@ -82,8 +82,8 @@ game.playTimer = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (game.playSponsoredTimer.posX + game.playSponsoredTimer.width / 2) - this.width / 2;
-        this.posY = game.playSponsoredTimer.posY + game.playSponsoredTimer.height - this.height - 16 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = (game.playSponsoredTimer.posX + game.playSponsoredTimer.width * 0.7) - this.width / 2;
+        this.posY = game.playSponsoredTimer.height / 2 - this.height / 2;
 
         // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
@@ -127,6 +127,36 @@ game.playTimer = {
 };
 game.playTimer.init(); // Force initialize playTimer's event listener
 
+game.playSponsorLogo = {
+    // Get handle
+    image: function () {
+        return document.getElementById(game.sponsors.getSponsor());
+    },
+    // Declare object information
+    org_width: 200 * game.scale,
+    org_height: 200 * game.scale,
+    width: 0,
+    height: 0,
+    org_posX: 0,
+    org_posY: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust transformation
+    resize: function () {
+        this.height = 0.9 * this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.height;
+
+        // Attach Bottom Side
+        this.posX = (game.playSponsoredTimer.posX + game.playSponsoredTimer.width * 0.3) - this.width / 2;
+        this.posY = game.playSponsoredTimer.height / 2 - this.height / 2;
+    },
+    // Draw object
+    draw: function () {
+        this.resize();
+        engine.context.drawImage(this.image(), this.posX, this.posY, this.width, this.height);
+    }
+}
+
 game.playScoreBox = {
     // Get handle to image
     image: document.getElementById("playScoreBoxImage"),
@@ -154,9 +184,87 @@ game.playScoreBox = {
 };
 
 game.playScore = {
+    // Get handle to div
+    div: document.getElementById("playScoreBox"),
+    // Declare object transform information
+    org_width: 238 * game.scale,
+    org_height: 76 * game.scale,
+    width: 0,
+    height: 0,
+    org_posX: 0,
+    org_posY: 29,
+    posX: 0,
+    posY: 0,
+    // Declare member variables
+    org_font_size: 60,
+    font_size: 0,
+    textResize: function () {
+        // Declare references to screen objects
+        var mySpan = $("#playScoreBoxSpan");
+        var myDiv = $("#playScoreBox");
+        // Initialize the span
+        mySpan.css("font-size", this.org_font_size);
+        mySpan.html(myDiv.html());
+        // Reduce the font size until the span is the correct width
+        if (mySpan.width() > this.width) {
+            while (mySpan.width() > this.width) {
+                // Get the font size as an integer, base 10
+                this.font_size = parseInt(mySpan.css("font-size"), 10);
+                // Reduce the font size by 1
+                mySpan.css("font-size", this.font_size - 1);
+            }
+        } else if (this.font_size < this.org_font_size) {
 
+            // Reset the font size to normal
+            this.font_size = this.org_font_size;
+            // Reduce the font size by 1
+            mySpan.css("font-size", this.font_size);
+        }
+        mySpan.css("font-size", this.font_size);
+        // Reduce the font size until the span is the correct height
+        if (mySpan.height() > this.height) {
+            while (mySpan.height() > this.height) {
+                // Get the font size as an integer, base 10
+                this.font_size = parseInt(mySpan.css("font-size"), 10);
+                // Reduce the font size by 1
+                mySpan.css("font-size", this.font_size - 1);
+            }
+        }
+
+        mySpan.css("font-size", this.font_size);
+        // Set the player score to the proper size
+        myDiv.css("font-size", this.font_size).html(mySpan.html());
+    },
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.playScoreBox.posX + 156 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // Adjust font size
+        this.textResize();
+    },
+    // Draw the object
+    draw: function () {
+        this.updateScore();
+        this.adjustStyle();
+    },
+    // Apply changes via CSS
+    adjustStyle: function () {
+        this.resize();
+        this.div.style.position = "absolute";
+        this.div.style.display = "flex";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.zIndex = 5;
+    },
+    // Update the score
+    updateScore: function () {
+        this.div.innerHTML = game.player.score;
+    }
 }
-
 
 game.playLargePlaneLeft = {
     // Get handle to image

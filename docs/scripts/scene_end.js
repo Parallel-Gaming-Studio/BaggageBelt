@@ -71,8 +71,8 @@ game.endSponsoredTimerBox = {
     org_posY: 82,
     posX: 0,
     posY: 0,
-	font_size: 0,
-	org_font_size: 72,
+    font_size: 0,
+    org_font_size: 72,
     // Initialize the object
     init: function () {
         // Add event listener to the button
@@ -114,12 +114,12 @@ game.endSponsorLogo = {
     posY: 0,
     // Adjust transformation
     resize: function () {
-  		this.height = game.endSponsoredTimerBox.posY - game.endPlayerTimeBoard.posY - 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-  		this.width = this.height;
-		// Attach Bottom Side
-		this.posX = game.endSponsoredTimerBox.posX  + game.endSponsoredTimerBox.width / 2 - this.width / 2;
-  		this.posY = game.endSponsoredTimerBox.posY + (game.endPlayerTimeBoard.posY - game.endSponsoredTimerBox.posY) / 2 - this.height/2;
-},
+        this.height = game.endSponsoredTimerBox.posY - game.endPlayerTimeBoard.posY - 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.height;
+        // Attach Bottom Side
+        this.posX = game.endSponsoredTimerBox.posX + game.endSponsoredTimerBox.width / 2 - this.width / 2;
+        this.posY = game.endSponsoredTimerBox.posY + (game.endPlayerTimeBoard.posY - game.endSponsoredTimerBox.posY) / 2 - this.height / 2;
+    },
     // Draw object
     draw: function () {
         this.resize();
@@ -158,7 +158,7 @@ game.endPlayerTimeBoard = {
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width / 2) - this.width / 2;
         this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 190 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-     
+
         // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
@@ -179,7 +179,7 @@ game.endPlayerTimeBoard = {
         this.div.style.fontSize = this.font_size + "pt";
         this.div.style.zIndex = 4;
     },
-    
+
     displayTimer: function () {
         if (!game.playTimer.playTime.paused) {
             game.playTimer.playTime.pauseTimer();
@@ -230,7 +230,7 @@ game.endGamePoints = {
     height: 0,
     posX: 0,
     poxY: 0,
-        org_font_size: 50,
+    org_font_size: 50,
     font_size: 0,
     // Adjust the object's transform
     resize: function () {
@@ -276,7 +276,7 @@ game.endPlayerScore = {
                 mySpan.css("font-size", this.font_size - 1);
             }
         } else if (this.font_size < this.org_font_size) {
-            
+
             // Reset the font size to normal
             this.font_size = this.org_font_size;
             // Reduce the font size by 1
@@ -292,7 +292,7 @@ game.endPlayerScore = {
                 mySpan.css("font-size", this.font_size - 1);
             }
         }
-        
+
         mySpan.css("font-size", this.font_size);
         // Set the player score to the proper size
         myDiv.css("font-size", this.font_size).html(mySpan.html());
@@ -300,7 +300,7 @@ game.endPlayerScore = {
     // Adjust the object's transform
     resize: function () {
         this.width = game.endGamePoints.width;
-        this.height = game.endGamePoints.height/2;// - 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = game.endGamePoints.height / 2;
         this.posX = game.endGamePoints.posX + game.endGamePoints.width / 2 - this.width / 2;
         this.posY = game.endGamePoints.posY + game.endGamePoints.height / 2 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         // Adjust font size
@@ -323,7 +323,7 @@ game.endPlayerScore = {
         this.div.style.zIndex = 1;
     },
     // Update the score
-    updateScore: function() {
+    updateScore: function () {
         this.div.innerHTML = game.player.score;
     }
 };
@@ -368,12 +368,12 @@ game.endInitialsBox = {
     posX: 0,
     poxY: 0,
     // Adjust the object's transform
-   resize: function () {
-  		this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-  		this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-	   	this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2 - this.width / 2);
-  		this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * ((this.height / game.endKeypadBackdrop.height)));
-},
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2 - this.width / 2);
+        this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * ((this.height / game.endKeypadBackdrop.height)));
+    },
     // Draw the object
     draw: function () {
         this.resize();
@@ -397,20 +397,20 @@ game.endPlayerInitials = {
     font_size: 0,
     score: 0,
     initials: "",
-	// Animation variables
-	lastUpdate: 0,
-	toggleUpdate: 0.35,
-	showUpdate: false,
+    // Animation variables
+    lastUpdate: 0,
+    toggleUpdate: 0.35,
+    showUpdate: false,
     // Initialize the object
     init: function () {
         // Add event listener to the button
         this.div.addEventListener("click", game.endPlayerInitials.clickMe);
-		// Empty the initials
+        // Empty the initials
         this.initialsValue = "";
         // Clear and display the initials
         this.clearInitials();
-		// Reset the last update
-		this.lastUpdate = 0;
+        // Reset the last update
+        this.lastUpdate = 0;
     },
     // Adjust the object's transform
     resize: function () {
@@ -420,10 +420,10 @@ game.endPlayerInitials = {
 
         this.posX = game.endInitialsBox.posX + game.endInitialsBox.width - this.width;
         this.posY = game.endInitialsBox.posY + game.endInitialsBox.height * 0.025;
-		
-		// Adjust font size
+
+        // Adjust font size
         this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-		this.posY -= this.font_size * 0.05 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY -= this.font_size * 0.05 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
     },
     // Draw the object
     draw: function () {
@@ -458,32 +458,32 @@ game.endPlayerInitials = {
         this.initials = "";
         this.div.innerHTML = this.initials;
     },
-	// Animate the initials value
-	animateInitials: function(dt) {
-		// Update the time since the last update
-		this.lastUpdate += dt;
-		// Update the visible characters after toggleUpdate milliseconds
-		if (this.lastUpdate >= this.toggleUpdate) {
-			// Display/hide an underscore in the initials field
-			if (this.initials.length < 2) {
-				// Display
-				if (!this.showUpdate) {
-					this.initialsValue = this.initials + "_";
-				} else {
-					// Hide
-					this.initialsValue = this.initials;
-				}
-				// Toggle the update
-				this.showUpdate = !this.showUpdate;
-			} else {
-				this.initialsValue = this.initials;
-			}
-			// Reset the last update time
-			this.lastUpdate = 0;
-		}
-		// Write to the div element
-		this.div.innerHTML = this.initialsValue;
-	},
+    // Animate the initials value
+    animateInitials: function (dt) {
+        // Update the time since the last update
+        this.lastUpdate += dt;
+        // Update the visible characters after toggleUpdate milliseconds
+        if (this.lastUpdate >= this.toggleUpdate) {
+            // Display/hide an underscore in the initials field
+            if (this.initials.length < 2) {
+                // Display
+                if (!this.showUpdate) {
+                    this.initialsValue = this.initials + "_";
+                } else {
+                    // Hide
+                    this.initialsValue = this.initials;
+                }
+                // Toggle the update
+                this.showUpdate = !this.showUpdate;
+            } else {
+                this.initialsValue = this.initials;
+            }
+            // Reset the last update time
+            this.lastUpdate = 0;
+        }
+        // Write to the div element
+        this.div.innerHTML = this.initialsValue;
+    },
     // Handle user interaction based on game state
     clickMe: function () {
         // Refresh the timeout timer
@@ -568,23 +568,23 @@ game.inputKeypad = {
     // Adjust the object's transform
     resize: function () {
         // Adjust based on game state
-        
-		this.width = game.endInitialsBox.width; //game.endKeypadBackdrop.width - 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-		this.height = game.endSubmitButton.posY - (game.endPlayerInitials.posY + game.endPlayerInitials.height) - 60 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-		// Attach to Top-Left of Keyboard Background
-		this.posX = game.endInitialsBox.posX; // game.endKeypadBackdrop.posX + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-		this.posY = (game.endInitialsBox.posY + game.endInitialsBox.height) + 20 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = game.endInitialsBox.width; //game.endKeypadBackdrop.width - 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = game.endSubmitButton.posY - (game.endPlayerInitials.posY + game.endPlayerInitials.height) - 60 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-		this.btnWidth = this.width / 9.1;
+        // Attach to Top-Left of Keyboard Background
+        this.posX = game.endInitialsBox.posX; // game.endKeypadBackdrop.posX + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = (game.endInitialsBox.posY + game.endInitialsBox.height) + 20 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-		// Update CSS for all children
-		for (var i = 0; i < this.keyArray.length; i++) {
-			var domElement = document.getElementById(this.keyArray[i]);
-			domElement.style.width = this.btnWidth + "px";
-			domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
-			domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
-		}
+        this.btnWidth = this.width / 9.1;
+
+        // Update CSS for all children
+        for (var i = 0; i < this.keyArray.length; i++) {
+            var domElement = document.getElementById(this.keyArray[i]);
+            domElement.style.width = this.btnWidth + "px";
+            domElement.style.height = domElement.childNodes[1].style.getPropertyValue('height') + "px";
+            domElement.childNodes[1].style.fontSize = this.btnWidth * 0.50 + "px";
+        }
     },
     // Apply changes via CSS
     adjustStyle: function () {
@@ -670,8 +670,8 @@ game.inputKeypad = {
                             // Reset timeout overlay timer
                             game.timeoutOverlay.refreshTimer();
 
-							// Add letter to the player's initials
-							game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[1].name);
+                            // Add letter to the player's initials
+                            game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[1].name);
                         });
                         continue;
                     }
@@ -696,8 +696,8 @@ game.inputKeypad = {
                             // Reset timeout overlay timer
                             game.timeoutOverlay.refreshTimer();
 
-							// Add letter to the player's initials
-							game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[0].name);
+                            // Add letter to the player's initials
+                            game.endPlayerInitials.updateInitials(e.srcElement.parentNode.childNodes[0].name);
                         });
                         continue;
                     }
@@ -729,7 +729,7 @@ game.endSubmitButton = {
     resize: function () {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-		
+
         this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2) - this.width / 2;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;
     },

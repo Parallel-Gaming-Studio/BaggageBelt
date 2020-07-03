@@ -263,9 +263,11 @@ game.drawOnce = function () {
             // Timer Box
             this.playSponsoredTimer.draw();
             this.playTimer.draw();
+            this.playSponsorLogo.draw();
 
             // Score Box
             this.playScoreBox.draw();
+            this.playScore.draw();
 
             // Planes
             this.playLargePlaneLeft.draw();
