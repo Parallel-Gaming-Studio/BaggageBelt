@@ -8,7 +8,7 @@ console.log("scene_end.js loaded successfully");
 //End_Scene Play background 
 game.endBackground = {
     // Get handle to image
-    image: document.getElementById("endBackground"),
+    image: document.getElementById("bbBackground"),
     // Declare object transform information
     org_width: 1920 * game.scale,
     org_height: 1080 * game.scale,

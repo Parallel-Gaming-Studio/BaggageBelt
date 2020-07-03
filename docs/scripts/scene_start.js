@@ -4,7 +4,7 @@
 // - Images
 game.startBackground = {
     // Get handle to image
-    image: document.getElementById("BaggageBeltBackground"),
+    image: document.getElementById("bbBackground"),
     // Declare object transform information
     org_width: 1920 * game.scale,
     org_heigth: 1080 * game.scale,

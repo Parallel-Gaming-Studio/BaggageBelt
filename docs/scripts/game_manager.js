@@ -256,8 +256,8 @@ game.drawOnce = function () {
             break;
         case 'play':
             // Draw images on the canvas
-
             this.playBackground.draw();
+            this.playTitle.draw();
             this.menuButton.adjustStyle();
 
             // Timer Box
@@ -276,9 +276,9 @@ game.drawOnce = function () {
             this.playSmallPlaneRight.draw();
 
             // Luggage Carts
-            // this.playLuggageCartLvl1.draw();
-            // this.playLuggageCartLvl2.draw();
-            // this.playLuggageCartLvl3.draw();
+            this.playLuggageCartLvl1.draw();
+            this.playLuggageCartLvl2.draw();
+            this.playLuggageCartLvl3.draw();
             this.playLuggageCartLvl4.draw();
 
             // Luggage
@@ -289,6 +289,14 @@ game.drawOnce = function () {
             this.playLuggageYellow.draw();
 
             // Shapes
+            this.shapeStand.draw();
+            this.gemTriangle.draw();
+            this.gemStar.draw();
+            this.gemHeart.draw();
+            this.gemSquare.draw();
+            this.gemCircle.draw();
+            this.gemPentagon.draw();
+            this.gemRectangle.draw();
 
             break;
         case 'end':

@@ -26,6 +26,31 @@ game.playBackground = {
     }
 };
 
+game.playTitle = {
+    // Get handle to image
+    image: document.getElementById("playTitle"),
+    // Declare object transform information
+    org_width: 298 * game.scale,
+    org_height: 64 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        this.posX = engine.width * 0.9 - this.width / 2;
+        this.posY = 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
 game.playSponsoredTimer = {
     // Get handle to image
     image: document.getElementById("playSponsoredTimer"),
@@ -143,7 +168,7 @@ game.playSponsorLogo = {
     posY: 0,
     // Adjust transformation
     resize: function () {
-        this.height = 0.9 * this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = 0.8 * this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.width = this.height;
 
         // Attach Bottom Side
@@ -284,11 +309,25 @@ game.playLargePlaneLeft = {
 
         this.posX = 0;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+
+        /* let ctx = engine.context;
+        // Drop Area
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.fillStyle = "purple";
+        ctx.arc(this.posX + 592 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                this.posY + 320 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                0,
+                2 * Math.PI);
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -310,11 +349,25 @@ game.playLargePlaneRight = {
 
         this.posX = engine.width - this.width;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+
+        /* let ctx = engine.context;
+        // Drop Area
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.fillStyle = "purple";
+        ctx.arc(this.posX + 392 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                this.posY + 320 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                0,
+                2 * Math.PI);
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -336,11 +389,25 @@ game.playSmallPlaneLeft = {
 
         this.posX = 0;
         this.posY = engine.height / 2 + this.height / 3;
+
+        /* let ctx = engine.context;
+        // Drop Area
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.fillStyle = "purple";
+        ctx.arc(this.posX + 355 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                this.posY + 230 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                0,
+                2 * Math.PI);
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -362,11 +429,25 @@ game.playSmallPlaneRight = {
 
         this.posX = engine.width - this.width;
         this.posY = engine.height / 2 + this.height / 5;
+
+        /* let ctx = engine.context;
+        // Drop Area
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.fillStyle = "purple";
+        ctx.arc(this.posX + 627 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                this.posY + 294 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                0,
+                2 * Math.PI);
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -386,13 +467,13 @@ game.playLuggageBlue = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (engine.width / 2) - this.width / 2;
-        this.posY = (engine.height - this.height) - 190;
+        // this.posX = (engine.width / 2) - this.width / 2;
+        // this.posY = (engine.height - this.height) - 190;
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -412,13 +493,13 @@ game.playLuggageGreen = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (engine.width / 2) - (this.width / 2) - 95;
-        this.posY = (engine.height - this.height) - 190;
+        // this.posX = (engine.width / 2) - (this.width / 2) - 95;
+        // this.posY = (engine.height - this.height) - 190;
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -426,8 +507,8 @@ game.playLuggagePurple = {
     // Get handle to image
     image: document.getElementById("luggagePurple"),
     // Declare object transform information
-    org_width: 93 * game.scale,
-    org_heigth: 157 * game.scale,
+    org_width: 86 * game.scale,
+    org_heigth: 140 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -438,13 +519,13 @@ game.playLuggagePurple = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (engine.width / 2) - (this.width / 2) - 190;
-        this.posY = (engine.height - this.height) - 190;
+        // this.posX = (engine.width / 2) - (this.width / 2) - 190;
+        // this.posY = (engine.height - this.height) - 190;
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -452,8 +533,8 @@ game.playLuggageRed = {
     // Get handle to image
     image: document.getElementById("luggageRed"),
     // Declare object transform information
-    org_width: 93 * game.scale,
-    org_heigth: 157 * game.scale,
+    org_width: 97 * game.scale,
+    org_heigth: 156 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -464,13 +545,13 @@ game.playLuggageRed = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (engine.width / 2) - (this.width / 2) + 95;
-        this.posY = (engine.height - this.height) - 190;
+        // this.posX = (engine.width / 2) - (this.width / 2) + 95;
+        // this.posY = (engine.height - this.height) - 190;
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -478,8 +559,8 @@ game.playLuggageYellow = {
     // Get handle to image
     image: document.getElementById("luggageYellow"),
     // Declare object transform information
-    org_width: 93 * game.scale,
-    org_heigth: 157 * game.scale,
+    org_width: 125 * game.scale,
+    org_heigth: 78 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -490,13 +571,13 @@ game.playLuggageYellow = {
         this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
-        this.posX = (engine.width / 2) - (this.width / 2) + 190;
-        this.posY = (engine.height - this.height) - 190;
+        // this.posX = (engine.width / 2) - (this.width / 2) + 190;
+        // this.posY = (engine.height - this.height) - 190;
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -518,11 +599,23 @@ game.playLuggageCartLvl1 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        /* let ctx = engine.context;
+        // Cart 1
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.rect(this.posX + 21 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 301 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -544,11 +637,28 @@ game.playLuggageCartLvl2 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        /* let ctx = engine.context;
+        // Cart 1
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.rect(this.posX + 19 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 590 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        // Cart 2
+        ctx.rect(this.posX + 310 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 590 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -570,11 +680,33 @@ game.playLuggageCartLvl3 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        /* let ctx = engine.context;
+        // Cart 1
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.rect(this.posX + 19 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 875 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        // Cart 2
+        ctx.rect(this.posX + 304 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 875 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        // Cart 3
+        ctx.rect(this.posX + 595 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 875 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
 
@@ -596,10 +728,804 @@ game.playLuggageCartLvl4 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        /* let ctx = engine.context;
+        // Cart 1
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "#F41C63";
+        ctx.rect(this.posX + 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        // Cart 2
+        ctx.rect(this.posX + 324 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        // Cart 3
+        ctx.rect(this.posX + 609 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        // Cart 4
+        ctx.rect(this.posX + 900 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.posY + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion)),
+                    this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion)));
+        ctx.stroke();
+        ctx.fill(); */
     },
     // Draw the object
     draw: function () {
         this.resize();
-        engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
+
+// - Gems
+game.gemTriangle = {
+	// Get handle to image
+    image: document.getElementById("gemTriangle"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.gemStar = {
+	// Get handle to image
+    image: document.getElementById("gemStar"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.gemHeart = {
+	// Get handle to image
+    image: document.getElementById("gemHeart"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.gemSquare = {
+	// Get handle to image
+    image: document.getElementById("gemSquare"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.gemCircle = {
+	// Get handle to image
+    image: document.getElementById("gemCircle"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.gemPentagon = {
+	// Get handle to image
+    image: document.getElementById("gemPentagon"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.gemRectangle = {
+	// Get handle to image
+    image: document.getElementById("gemRectangle"),
+    // Declare object transform information
+    org_width: 99 * game.scale,
+    org_heigth: 99 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    shapeScale: 1.0,
+    blueScale: 0.6,
+    greenScale: 0.65,
+    purpleScale: 0.6,
+    redScale: 0.67,
+    yellowScale: 0.5,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    tailTopLeftScale: 0.6,
+    tailTopRightScale: 0.75,
+    tailBottomLeftScale: 0.55,
+    tailBottomRightScale: 0.73,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.shapeScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.shapeScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Tail
+        // - Top Left
+        // this.width = this.tailTopLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.86 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.36 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.tailBottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.82 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.27 - this.height / 2;
+        // - Top Right
+        // this.width = this.tailTopRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailTopRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.15 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.30 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.tailBottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.tailBottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.438 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.26 - this.height / 2;
+
+        // On Stand
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // - Attach to Stand
+        // this.posX = (game.shapeStand.posX + game.shapeStand.width / 2) - this.width / 2;
+        // this.posY = game.shapeStand.posY - this.height + 4 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // On Luggage
+        // - Blue
+        // this.width = this.blueScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.blueScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageBlue.posX + game.playLuggageBlue.width / 2.1 - this.width / 2;
+        // this.posY = game.playLuggageBlue.posY + game.playLuggageBlue.height / 1.8 - this.height / 2;
+        // - Green
+        // this.width = this.greenScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.greenScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageGreen.posX + game.playLuggageGreen.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageGreen.posY + game.playLuggageGreen.height / 2 - this.height / 2;
+        // - Purple
+        // this.width = this.purpleScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.purpleScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggagePurple.posX + game.playLuggagePurple.width / 2 - this.width / 2;
+        // this.posY = game.playLuggagePurple.posY + game.playLuggagePurple.height / 2 - this.height / 2;
+        // - Red
+        // this.width = this.redScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.redScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageRed.posX + game.playLuggageRed.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageRed.posY + game.playLuggageRed.height / 2 - this.height / 2;
+        // - Yellow
+        // this.width = this.yellowScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.yellowScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLuggageYellow.posX + game.playLuggageYellow.width / 2 - this.width / 2;
+        // this.posY = game.playLuggageYellow.posY + game.playLuggageYellow.height / 1.8 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+};
+
+game.shapeStand = {
+	// Get handle to image
+    image: document.getElementById("shapeStand"),
+    // Declare object transform information
+    org_width: 27 * game.scale,
+    org_heigth: 36 * game.scale,
+    width: 0,
+    height: 0,
+    posX: 0,
+    posY: 0,
+    standScale: 1.0,
+    topLeftScale: 0.7,
+    topRightScale: 0.71,
+    bottomLeftScale: 0.65,
+    bottomRightScale: 0.67,
+    // Adjust the object's transform
+    resize: function () {
+        this.width = this.standScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = this.standScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+
+        // this.posX = engine.width / 2 - this.width / 2;
+        // this.posY = engine.height / 2 - this.height / 2;
+
+        // Planes
+        // - Top Left
+        // this.width = this.topLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneLeft.posX + game.playLargePlaneLeft.width * 0.69 - this.width / 2;
+        // this.posY = game.playLargePlaneLeft.posY + game.playLargePlaneLeft.height * 0.90 - this.height / 2;
+        // - Bottom Left
+        // this.width = this.bottomLeftScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomLeftScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneLeft.posX + game.playSmallPlaneLeft.width * 0.62 - this.width / 2;
+        // this.posY = game.playSmallPlaneLeft.posY + game.playSmallPlaneLeft.height * 0.81 - this.height / 2;
+        // - Top Right
+        // this.width = this.topRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.topRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playLargePlaneRight.posX + game.playLargePlaneRight.width * 0.37 - this.width / 2;
+        // this.posY = game.playLargePlaneRight.posY + game.playLargePlaneRight.height * 0.90 - this.height / 2;
+        // - Bottom Right
+        // this.width = this.bottomRightScale * this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.height = this.bottomRightScale * this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.posX = game.playSmallPlaneRight.posX + game.playSmallPlaneRight.width * 0.625 - this.width / 2;
+        // this.posY = game.playSmallPlaneRight.posY + game.playSmallPlaneRight.height * 0.825 - this.height / 2;
+    },
+    // Draw the object
+    draw: function () {
+        this.resize();
+        // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    }
+}
