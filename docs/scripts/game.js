@@ -328,19 +328,19 @@ game.sponsors = {
 // Load dependency scripts
 async function loadScripts() {
     // Load scripts synchronously
-    const scr1 = await $.cachedScript("scripts/scene_start.js").done((script, textStatus) => {
+    const scr1 = await $.cachedScript("scripts/scene_start.js?v=0.0.1").done((script, textStatus) => {
         console.log(`<Game>[Start:Cache] ${textStatus}`);
     });
-    const scr2 = await $.cachedScript("scripts/scene_play.js").done((script, textStatus) => {
+    const scr2 = await $.cachedScript("scripts/scene_play.js?v=0.0.1").done((script, textStatus) => {
         console.log(`<Game>[Play:Cache] ${textStatus}`);
     });
-    const scr3 = await $.cachedScript("scripts/scene_end.js").done((script, textStatus) => {
+    const scr3 = await $.cachedScript("scripts/scene_end.js?v=0.0.1").done((script, textStatus) => {
         console.log(`<Game>[End:Cache] ${textStatus}`);
     });
-    const scr4 = await $.cachedScript("scripts/scene_leaderboard.js").done((script, textStatus) => {
+    const scr4 = await $.cachedScript("scripts/scene_leaderboard.js?v=0.0.1").done((script, textStatus) => {
         console.log(`<Game>[Leaderboard:Cache] ${textStatus}`);
     });
-    const scr5 = await $.cachedScript("scripts/game_manager.js").done((script, textStatus) => {
+    const scr5 = await $.cachedScript("scripts/game_manager.js?v=0.0.1").done((script, textStatus) => {
         console.log(`<Game>[Game Manager:Cache] ${textStatus}`);
     });
 };

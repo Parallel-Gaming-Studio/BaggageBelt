@@ -28,7 +28,7 @@ game.playBackground = {
 
 game.playSponsoredTimer = {
     // Get handle to image
-    image: document.getElementById("playsponsoredTimer"),
+    image: document.getElementById("playSponsoredTimer"),
     // Declare object transform information
     org_width: 450 * game.scale,
     org_heigth: 130 * game.scale,
@@ -235,8 +235,8 @@ game.playSmallPlaneRight = {
     // Get handle to image
     image: document.getElementById("smallPlaneTailRight"),
     // Declare object transform information
-    org_width: 645 * game.scale,
-    org_heigth: 271 * game.scale,
+    org_width: 924 * game.scale,
+    org_heigth: 345 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -248,7 +248,7 @@ game.playSmallPlaneRight = {
         this.height = this.org_heigth * (1 - Math.max(engine.widthProportion, engine.heightProportion));
         
         this.posX = engine.width - this.width;
-        this.posY = engine.height / 2 + this.height / 3;
+        this.posY = engine.height / 2 + this.height / 5;
     },
     // Draw the object
     draw: function () {
@@ -490,4 +490,3 @@ game.playLuggageCartLvl4 = {
         engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };
-//   - Buttons
