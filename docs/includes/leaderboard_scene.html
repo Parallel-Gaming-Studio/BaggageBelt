@@ -1,9 +1,21 @@
     <!-- Leaderboard Scene -->
 		<!-- Images -->
+		<img id="leaderboardBackground" src="images/leaderboard_scene/background.png" alt="Leaderboard Scene Background" style="display:none;">
+		<img id="leaderboardScoreBox" src="images/leaderboard_scene/scoreBox.png" alt="Leaderboard Score Box" style="display:none;">
+		<img id="leaderboardSponsorBox" src="images/leaderboard_scene/sponsorBox.png" alt="Leaderboard Sponsor Box" style="display:none;">
 		
 		<!-- Table -->
-		
+		<div id="top10table" style="display:none; position:absolute;" name="top10s">
+			<div class="leader-title" name="top10s" style="background-image: url('images/leaderboard_scene/title.png'); background-position: center; background-repeat: no-repeat; background-size: contain;"></div>
+			<div class="leader-container" name="top10s">
+				<!--<div id="top10header" class="table-header" name="top10s">TOP PLAYERS</div>-->
+				<div id="top10board" class="table-block" name="top10s"></div>
+			</div>
+		</div>
+			
 		<!-- Score -->
-		
+		<div id="finalPlayerScore" class="score-box" style="display:none; position:absolute; z-index:4;">000</div>
+	    <span id="leaderScoreSpan" style="display: none;"></span>
+
 		<!-- Buttons -->
-		
+		<img id="leaderboardRetryButton" src="images/leaderboard_scene/retryButton.png" alt="Leaderboard Retry Button" style="display:none;">
