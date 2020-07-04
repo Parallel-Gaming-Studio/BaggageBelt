@@ -34,6 +34,7 @@ game.hideElements = {
         this.images();
         this.canvas();
         game.inputKeypad.hideKeypad();
+        game.manager.resetGame();
     }
 };
 
@@ -84,6 +85,9 @@ game.gameController = {
             game.drawOnce();
         }
 
+        // Update the play loop
+        game.playLoop(dt);
+
         // Touch Events
         for (var i = 0; i < game.touch.length; i++) {
             if (engine.input.pressed(game.touch[i])) {
@@ -126,10 +130,10 @@ game.gameController = {
     gsEnd: function (dt) {
         // End Scene
 
-        //Reset Game Timer
+        // Reset Game Timer
         game.playTimer.resetTimer();
 
-        //Pause Play Time
+        // Pause Play Time
         game.playTimer.playTime.paused = true;
 
         // Handle the initials animation
@@ -153,10 +157,10 @@ game.gameController = {
     gsLeaderboard: function (dt) {
         // Leaderboard Scene
 
-        //Reset Game Timer
+        // Reset Game Timer
         game.playTimer.resetTimer();
 
-        //Reset Play time
+        // Reset Play time
         game.endPlayerTimeBoard.resetTimer();
 
         // DEBUG
@@ -209,11 +213,6 @@ game.update = function (dt) {
     // Update all timers
     for (var i = 0; i < game.timers.length; i++) {
         game.timers[i].update(dt);
-        // DEBUG
-        /*if (game.timers[i].timerExpired) {
-            console.log(game.timers[i].toString());
-        }
-        console.log(game.timers[i].displayMinuteSeconds());*/
     }
 
     // Force a draw when the window resizes

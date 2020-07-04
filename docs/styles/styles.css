@@ -6,8 +6,19 @@
 }
 
 body {
-    overflow: -moz-scrollbars-none;
+    clear: both;
+    margin: 0;
+    padding: 0;
+    position: absolute;
     overflow: hidden !important;
+    overflow: -moz-scrollbars-none;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+body.after {
+    clear: both;
 }
 
 /* Play/End Scene Keypads */
@@ -174,14 +185,7 @@ body {
     -moz-animation: glow 1s ease-in-out 1 alternate;
     animation: glow 1s ease-in-out 1 alternate;
 }
-@-webkit-keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
-    }
-}
+
 /* Leaderboard table */
 #top10table {
     position: absolute;
@@ -357,4 +361,36 @@ table td:nth-child(3) {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.gems, .luggage, .planes, .shape-stand, .gem-stand {
+    clear: both;
+    position: absolute;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    pointer-events: none;
+}
+
+.planes {
+    z-index: 20;
+}
+
+.gems {
+    z-index: 21;
+}
+
+.shape-stand {
+    z-index: 22;
+}
+
+.gem-stand {
+    z-index: 23;
+}
+
+.luggage {
+    z-index: 24;
 }

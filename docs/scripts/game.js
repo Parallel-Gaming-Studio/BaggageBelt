@@ -72,6 +72,11 @@ game.player = {
     }
 };
 
+// Visible Debugging Console
+game.myConsole = {
+    
+}
+
 // Google Analytics
 /*		*** WARNING *** WARNING *** WARNING ***
  *** DO NOT UNCOMMENT THE GTAG() FUNCTIONS BEFORE DEPLOYMENT ***/

@@ -287,7 +287,7 @@ game.playScore = {
     },
     // Update the score
     updateScore: function () {
-        this.div.innerHTML = game.player.score;
+        this.div.innerHTML = NumberFormat(game.player.score.toString());
     }
 }
 
