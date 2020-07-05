@@ -1,9 +1,5 @@
 // JavaScript Document
 
-// DEBUG
-console.log("scene_end.js loaded successfully");
-//Start End Scene
-
 // Images
 //End_Scene Play background 
 game.endBackground = {
