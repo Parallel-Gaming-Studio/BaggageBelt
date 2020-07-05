@@ -35,6 +35,9 @@ game.hideElements = {
         this.canvas();
         game.inputKeypad.hideKeypad();
         game.manager.resetGame();
+
+        // DEBUG
+        game.playDEBUGIncreasePoints.level = 0;
     }
 };
 
@@ -301,6 +304,9 @@ game.drawOnce = function () {
 
             // Entities
             this.manager.drawEntities();
+
+            // DEBUG
+            this.playDEBUGIncreasePoints.draw();
 
             break;
         case 'end':

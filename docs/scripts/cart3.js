@@ -11,7 +11,7 @@ class cart3 extends Shape {
         // Height
         var _height = _targetReference.height;
         // Position
-        var _position = new Vector2D(-_width * 1.2, engine.height - _height);
+        var _position = _targetReference.posSpawnLevel3;
         // Points
         var _points = 0;
 
@@ -32,13 +32,13 @@ class cart3 extends Shape {
         this.removeMe = false;
 
         // Level-Based Positions
-        // - Level 1
+        // - Level 3
         //   - Spawn
-        this.level3SpawnPosition = _position;
+        this.level3SpawnPosition = _targetReference.posSpawnLevel3;
         //   - Loading
-        this.level3LoadingPosition = new Vector2D(engine.width * 0.6 - this.width / 2, engine.height - this.height);
+        this.level3LoadingPosition = _targetReference.posLoadLevel3;
         //   - Exit
-        this.level3ExitPosition = new Vector2D(engine.width + 50, engine.height - this.height);
+        this.level3ExitPosition = _targetReference.posExitLevel3;
 
         // Cart Div Builder
         var _divOpen = `<div id="${this.type}_${this.ID()}" class="cart" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
@@ -46,6 +46,9 @@ class cart3 extends Shape {
         this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
         this.setDOM(this.domElement);
         this.setOrigin(_targetReference);
+        
+        // Update all positions
+        this.adjustPosition();
         this.adjustStyles();
 
         // Spawn the cart
@@ -58,10 +61,50 @@ class cart3 extends Shape {
 	| - Note: Not all entity classes or subclasses require a draw.
     \--------------------------------------------------------------------*/
     draw() {
+        this.adjustPosition();
         this.adjustStyles();
         // console.log(`<Cart3>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
         // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
         // super.draw();
+    }
+
+    /*---------------------adjustPosition---------------------------------\
+	| - Adjust the current position, based on game level
+    \--------------------------------------------------------------------*/
+    adjustPosition() {
+        // Level-Based Positions
+        // - Level 3
+        //   - Spawn
+        this.level3SpawnPosition = this.getOrigin().posSpawnLevel3;
+        //   - Loading
+        this.level3LoadingPosition = this.getOrigin().posLoadLevel3;
+        //   - Exit
+        this.level3ExitPosition = this.getOrigin().posExitLevel3;
+
+        // Temporary Position States
+        var posSpawn, posLoad, posExit;
+
+        // Get the game level
+        posSpawn = this.level3SpawnPosition;
+        posLoad = this.level3LoadingPosition;
+        posExit = this.level3ExitPosition;
+
+        // Update Current Position
+        // - Exit State
+        if (this.bagsLeft <= 0) { this.setNewPosition(posExit); return this.adjustDOM(); }
+        // - Spawn State
+        if (!this.ready) { this.setNewPosition(posSpawn); return this.adjustDOM(); }
+        // - Loading State
+        this.setNewPosition(posLoad);
+        return this.adjustDOM();
+    }
+
+    /*---------------------adjustDOM--------------------------------------\
+	| - Move the DOM element based on the current position
+    \--------------------------------------------------------------------*/
+    adjustDOM() {
+        this.domElement.style.top = this.position.y + "px";
+        this.domElement.style.left = this.position.x + "px";
     }
 
     /*---------------------drawLuggageZone--------------------------------\
