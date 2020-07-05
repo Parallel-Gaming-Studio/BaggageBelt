@@ -48,6 +48,7 @@ for (var i = 0; i < game.touch.length; i++) {
 // - Globals
 game.scale = 1.0;                       // Scale for adjusting object sizes
 game.timeoutTime = 120;					// Timeout time before returning to landing page
+game.playTime = 150;                     // Time players have to compete
 game.lastTimeSized = new Date();        // Used to track window resizing without window events
 game.timers = [];                       // Array for all timers
 
@@ -71,6 +72,9 @@ game.player = {
 		game.score = 0;
     }
 };
+
+// Shape List
+game.shapesList = ["circle", "heart", "pentagon", "rectangle", "square", "star", "triangle", "sponsored"];
 
 // Visible Debugging Console
 game.myConsole = {
@@ -328,19 +332,19 @@ game.sponsors = {
 async function loadScripts() {
     // Load scripts synchronously
     const scr1 = await $.cachedScript("scripts/scene_start.js?v=0.0.1").done((script, textStatus) => {
-        console.log(`<Game>[Start:Cache] ${textStatus}`);
+        // console.log(`<Game>[Start:Cache] ${textStatus}`);
     });
     const scr2 = await $.cachedScript("scripts/scene_play.js?v=0.0.1").done((script, textStatus) => {
-        console.log(`<Game>[Play:Cache] ${textStatus}`);
+        // console.log(`<Game>[Play:Cache] ${textStatus}`);
     });
     const scr3 = await $.cachedScript("scripts/scene_end.js?v=0.0.1").done((script, textStatus) => {
-        console.log(`<Game>[End:Cache] ${textStatus}`);
+        // console.log(`<Game>[End:Cache] ${textStatus}`);
     });
     const scr4 = await $.cachedScript("scripts/scene_leaderboard.js?v=0.0.1").done((script, textStatus) => {
-        console.log(`<Game>[Leaderboard:Cache] ${textStatus}`);
+        // console.log(`<Game>[Leaderboard:Cache] ${textStatus}`);
     });
     const scr5 = await $.cachedScript("scripts/game_manager.js?v=0.0.1").done((script, textStatus) => {
-        console.log(`<Game>[Game Manager:Cache] ${textStatus}`);
+        // console.log(`<Game>[Game Manager:Cache] ${textStatus}`);
     });
 };
 loadScripts();

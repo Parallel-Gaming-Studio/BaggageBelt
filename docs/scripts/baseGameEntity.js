@@ -65,7 +65,7 @@ class baseGameEntity {
         
         this.setID(this.id);
 		
-		game.gameEntities.addEntity(this);
+		game.manager.entities.push(this);
     }
 	
 	/*---------------------draw-------------------------------------------\

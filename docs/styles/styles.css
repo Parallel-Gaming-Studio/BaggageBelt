@@ -363,7 +363,7 @@ table td:nth-child(3) {
     }
 }
 
-.gems, .luggage, .planes, .shape-stand, .gem-stand {
+.gems, .luggage, .planes, .shape-stand, .gem-stand, .cart {
     clear: both;
     position: absolute;
     display: block;
@@ -391,6 +391,10 @@ table td:nth-child(3) {
     z-index: 23;
 }
 
-.luggage {
+.cart {
     z-index: 24;
+}
+
+.luggage {
+    z-index: 25;
 }

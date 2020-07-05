@@ -1,8 +1,5 @@
 // JavaScript Document
 
-// DEBUG
-console.log("scene_play.js loaded successfully");
-
 //   - Images
 game.playBackground = {
     // Get handle to image
@@ -96,7 +93,7 @@ game.playTimer = {
     playTime: new Timer(),
     // Initialize the object
     init: function () {
-        this.timer.setup(150, true, "Game Timer");
+        this.timer.setup(game.playTime, true, "Game Timer");
         game.timers.push(this.timer);
         this.playTime.setup(0, true, "Play Time", "up");
         game.timers.push(this.playTime);
@@ -147,7 +144,7 @@ game.playTimer = {
         this.div.innerHTML = this.timer.displayMinuteSeconds();
     },
     resetTimer: function () {
-        this.timer.setup(150, true, "Game Timer");
+        this.timer.setup(game.playTime, true, "Game Timer");
     }
 };
 game.playTimer.init(); // Force initialize playTimer's event listener

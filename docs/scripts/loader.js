@@ -83,6 +83,21 @@ async function loadTimerScript() {
         // console.log(`<Loader>[Triangle:Cache] ${textStatus}`);
     });
 
+    // Carts
+    // Luggage
+    const scrCart1 = await $.cachedScript("scripts/cart1.js?v=0.0.1").done((script, textStatus) => {
+        // console.log(`<Loader>[Cart1:Cache] ${textStatus}`);
+    });
+    const scrCart2 = await $.cachedScript("scripts/cart2.js?v=0.0.1").done((script, textStatus) => {
+        // console.log(`<Loader>[Cart2:Cache] ${textStatus}`);
+    });
+    const scrCart3 = await $.cachedScript("scripts/cart3.js?v=0.0.1").done((script, textStatus) => {
+        // console.log(`<Loader>[Cart3:Cache] ${textStatus}`);
+    });
+    const scrCart4 = await $.cachedScript("scripts/cart4.js?v=0.0.1").done((script, textStatus) => {
+        // console.log(`<Loader>[Cart4:Cache] ${textStatus}`);
+    });
+
     // Luggage
     const scrLuggageBlue = await $.cachedScript("scripts/luggage_blue.js?v=0.0.1").done((script, textStatus) => {
         // console.log(`<Loader>[LuggageBlue:Cache] ${textStatus}`);

@@ -70,6 +70,9 @@ game.gameController = {
     gsPlay: function (dt) {
         // Play Scene
 
+        // Update the play loop
+        game.playLoop(dt);
+
         if (!game.playTimer.timer._timerExpired) {
             game.playTimer.displayTimer();
         } else {
@@ -77,6 +80,8 @@ game.gameController = {
             game.endPlayerInitials.clearInitials();
             // Update game state to End Scene
             game.currState = game.gameState[2];
+            // Reset the game
+            game.manager.resetGame();
             // Hide all elements
             game.hideElements.hideAll();
             // Refresh timeout
@@ -84,9 +89,6 @@ game.gameController = {
             // Redraw all elements
             game.drawOnce();
         }
-
-        // Update the play loop
-        game.playLoop(dt);
 
         // Touch Events
         for (var i = 0; i < game.touch.length; i++) {
@@ -296,6 +298,9 @@ game.drawOnce = function () {
             this.gemCircle.draw();
             this.gemPentagon.draw();
             this.gemRectangle.draw();
+
+            // Entities
+            this.manager.drawEntities();
 
             break;
         case 'end':
