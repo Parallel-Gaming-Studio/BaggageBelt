@@ -1,5 +1,56 @@
 // JavaScript Document
 
+game.playDEBUGIncreasePoints = {
+    div: document.getElementById("myConsole"),
+    width: 300,
+    height: 50,
+    posX: 0,
+    posY: 0,
+    level: 0,
+    init: function() {
+        this.buildbutton();
+        this.div.addEventListener("click", game.playDEBUGIncreasePoints.clickMe);
+    },
+    buildbutton: function() {
+        $(`#${this.div.id}`).html("Increase Level");
+    },
+    resize: function() {
+        this.posX = engine.width - this.width;
+        this.posY = game.playTitle.posY + game.playTitle.height + engine.height * 0.05;
+    },
+    adjustStyle: function() {
+        this.resize();
+        this.div.style.position = "absolute";
+        this.div.style.display = "flex";
+        this.div.style.backgroundColor = "gray";
+        this.div.style.color = "white";
+        this.div.style.fontFamily = "BeBasNeuue-Regular";
+        this.div.style.fontSize = "36pt";
+        this.div.style.textAlign = "center";
+        this.div.style.alignContent = "center";
+        this.div.style.justifyContent = "center";
+        this.div.style.left = this.posX.toString() + "px";
+        this.div.style.top = this.posY.toString() + "px";
+        this.div.style.width = this.width + "px";
+        this.div.style.height = this.height + "px";
+        this.div.style.zIndex = 999;
+    },
+    draw: function() {
+        this.adjustStyle();
+    },
+    clickMe: function(e) {
+        if (game.playDEBUGIncreasePoints.level < game.manager.pointsGoal.length) {
+            console.log("Clicked");
+            game.player.score = game.manager.pointsGoal[game.playDEBUGIncreasePoints.level++];
+        }
+        // Prevent this event from propagation (being called multiple times)
+        e.stopPropagation();
+        // Cancel the event if it's cancelable
+        return e.preventDefault();
+    }
+}
+game.playDEBUGIncreasePoints.init();
+
 //   - Images
 game.playBackground = {
     // Get handle to image
@@ -298,6 +349,23 @@ game.playLargePlaneLeft = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 1
+    posSpawnLevel1: 0,
+    posLoadLevel1: 0,
+    posExitLevel1: 0,
+    // - Level 2
+    posSpawnLevel2: 0,
+    posLoadLevel2: 0,
+    posExitLevel2: 0,
+    // - Level 3
+    posSpawnLevel3: 0,
+    posLoadLevel3: 0,
+    posExitLevel3: 0,
+    // - Level 4
+    posSpawnLevel4: 0,
+    posLoadLevel4: 0,
+    posExitLevel4: 0,
     org_posY: 170,
     // Adjust the object's transform
     resize: function () {
@@ -306,6 +374,63 @@ game.playLargePlaneLeft = {
 
         this.posX = 0;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+
+        // Game Level Based Positions
+        // - Level 1
+        //   - Spawn
+        this.posSpawnLevel1 = new Vector2D(
+            engine.width + 50,
+            engine.height / 2 - this.height / 2);
+        //   - Load
+        this.posLoadLevel1 = new Vector2D(
+            engine.width / 2 - this.width / 2,
+            engine.height / 2 - this.height / 2);
+        //   - Exit
+        this.posExitLevel1 = new Vector2D(
+            -this.width * 1.2,
+            engine.height / 2 - this.height / 2);
+        
+        // - Level 2
+        //   - Spawn
+        this.posSpawnLevel2 = new Vector2D(
+            engine.width + 50,
+            engine.height / 3 - this.height / 2);
+        //   - Load
+        this.posLoadLevel2 = new Vector2D(
+            0.0,
+            engine.height / 3 - this.height / 2);
+        //   - Exit
+        this.posExitLevel2 = new Vector2D(
+            -this.width * 1.2,
+            engine.height / 3 - this.height / 2);
+
+        // - Level 3
+        //   - Spawn
+        this.posSpawnLevel3 = new Vector2D(
+            -this.width * 1.2,
+            engine.height * 0.35 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Load
+        this.posLoadLevel3 = new Vector2D(
+            0.0,
+            engine.height * 0.35 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Exit
+        this.posExitLevel3 = new Vector2D(
+            0.0,
+            engine.height * 0.35 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+
+        // - Level 4
+        //   - Spawn
+        this.posSpawnLevel4 = new Vector2D(
+            -this.width * 1.2,
+            engine.height * 0.35 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Load
+        this.posLoadLevel4 = new Vector2D(
+            0.0,
+            engine.height * 0.35 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Exit
+        this.posExitLevel4 = new Vector2D(
+            -this.width * 1.2,
+            engine.height * 0.35 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -325,8 +450,12 @@ game.playLargePlaneLeft = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Top Left Plane";
     }
 };
+game.playLargePlaneLeft.draw();
 
 game.playLargePlaneRight = {
     // Get handle to image
@@ -338,6 +467,19 @@ game.playLargePlaneRight = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 2
+    posSpawnLevel2: 0,
+    posLoadLevel2: 0,
+    posExitLevel2: 0,
+    // - Level 3
+    posSpawnLevel3: 0,
+    posLoadLevel3: 0,
+    posExitLevel3: 0,
+    // - Level 4
+    posSpawnLevel4: 0,
+    posLoadLevel4: 0,
+    posExitLevel4: 0,
     org_posY: 170,
     // Adjust the object's transform
     resize: function () {
@@ -346,6 +488,49 @@ game.playLargePlaneRight = {
 
         this.posX = engine.width - this.width;
         this.posY = Math.max(engine.height / 5, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+
+        // Game Level Based Positions
+        // - Level 2
+        //   - Spawn
+        this.posSpawnLevel2 = new Vector2D(
+            engine.width + 50,
+            engine.height / 1.8 - this.height / 2);
+        //   - Load
+        this.posLoadLevel2 = new Vector2D(
+            engine.width - this.width,
+            engine.height / 1.8 - this.height / 2);
+        //   - Exit
+        this.posExitLevel2 = new Vector2D(
+            engine.width + 50,
+            engine.height / 1.8 - this.height / 2);
+
+        // - Level 3
+        //   - Spawn
+        this.posSpawnLevel3 = new Vector2D(
+            engine.width + 50,
+            engine.height * 0.45 - this.height / 2);
+        //   - Load
+        this.posLoadLevel3 = new Vector2D(
+            engine.width - this.width,
+            engine.height * 0.45 - this.height / 2);
+        //   - Exit
+        this.posExitLevel3 = new Vector2D(
+            engine.width + 50,
+            engine.height * 0.45 - this.height / 2);
+
+        // - Level 4
+        //   - Spawn
+        this.posSpawnLevel4 = new Vector2D(
+            engine.width + 50,
+            engine.height * 0.34 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Load
+        this.posLoadLevel4 = new Vector2D(
+            engine.width - this.width,
+            engine.height * 0.34 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Exit
+        this.posExitLevel4 = new Vector2D(
+            engine.width + 50,
+            engine.height * 0.34 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -365,8 +550,12 @@ game.playLargePlaneRight = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Top Right Plane";
     }
 };
+game.playLargePlaneRight.draw();
 
 game.playSmallPlaneLeft = {
     // Get handle to image
@@ -378,6 +567,15 @@ game.playSmallPlaneLeft = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 3
+    posSpawnLevel3: 0,
+    posLoadLevel3: 0,
+    posExitLevel3: 0,
+    // - Level 4
+    posSpawnLevel4: 0,
+    posLoadLevel4: 0,
+    posExitLevel4: 0,
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
@@ -386,6 +584,35 @@ game.playSmallPlaneLeft = {
 
         this.posX = 0;
         this.posY = engine.height / 2 + this.height / 3;
+
+        // Game Level Based Positions
+        // - Level 3
+        //   - Spawn
+        this.posSpawnLevel3 = new Vector2D(
+            -this.width * 1.2,
+            engine.height / 2 + this.height / 3);
+        //   - Load
+        this.posLoadLevel3 = new Vector2D(
+            0.0,
+            engine.height / 2 + this.height / 3);
+        //   - Exit
+        this.posExitLevel3 = new Vector2D(
+            -this.width * 1.2,
+            engine.height / 2 + this.height / 3);
+
+        // - Level 4
+        //   - Spawn
+        this.posSpawnLevel4 = new Vector2D(
+            -this.width * 1.2,
+            engine.height * 0.6 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Load
+        this.posLoadLevel4 = new Vector2D(
+            0.0,
+            engine.height * 0.6 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Exit
+        this.posExitLevel4 = new Vector2D(
+            -this.width * 1.2,
+            engine.height * 0.6 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -405,8 +632,12 @@ game.playSmallPlaneLeft = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Bottom Left Plane";
     }
 };
+game.playSmallPlaneLeft.draw();
 
 game.playSmallPlaneRight = {
     // Get handle to image
@@ -418,6 +649,11 @@ game.playSmallPlaneRight = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 4
+    posSpawnLevel4: 0,
+    posLoadLevel4: 0,
+    posExitLevel4: 0,
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
@@ -426,6 +662,21 @@ game.playSmallPlaneRight = {
 
         this.posX = engine.width - this.width;
         this.posY = engine.height / 2 + this.height / 5;
+
+        // Game Level Based Positions
+        // - Level 4
+        //   - Spawn
+        this.posSpawnLevel4 = new Vector2D(
+            engine.width + 50,
+            engine.height * 0.6 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Load
+        this.posLoadLevel4 = new Vector2D(
+            engine.width - this.width,
+            engine.height * 0.6 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
+        //   - Exit
+        this.posExitLevel4 = new Vector2D(
+            engine.width + 50,
+            engine.height * 0.6 * (1 - Math.max(engine.widthProportion, engine.heightProportion)) - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -445,8 +696,12 @@ game.playSmallPlaneRight = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Bottom Right Plane";
     }
 };
+game.playSmallPlaneRight.draw();
 
 game.playLuggageBlue = {
     // Get handle to image
@@ -588,6 +843,11 @@ game.playLuggageCartLvl1 = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 1
+    posSpawnLevel1: 0,
+    posLoadLevel1: 0,
+    posExitLevel1: 0,
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
@@ -596,6 +856,21 @@ game.playLuggageCartLvl1 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        // Game Level Based Positions
+        // - Level 1
+        //   - Spawn
+        this.posSpawnLevel1 = new Vector2D(
+            -this.width * 1.2,
+            engine.height - this.height);
+        //   - Load
+        this.posLoadLevel1 = new Vector2D(
+            engine.width / 2 - this.width / 2,
+            engine.height - this.height);
+        //   - Exit
+        this.posExitLevel1 = new Vector2D(
+            engine.width + 50,
+            engine.height - this.height);
 
         /* let ctx = engine.context;
         // Cart 1
@@ -613,6 +888,9 @@ game.playLuggageCartLvl1 = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Luggage Cart Level 1";
     }
 };
 
@@ -626,6 +904,11 @@ game.playLuggageCartLvl2 = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 2
+    posSpawnLevel2: 0,
+    posLoadLevel2: 0,
+    posExitLevel2: 0,
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
@@ -634,6 +917,21 @@ game.playLuggageCartLvl2 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        // Game Level Based Positions
+        // - Level 2
+        //   - Spawn
+        this.posSpawnLevel2 = new Vector2D(
+            -this.width * 1.2,
+            engine.height - this.height);
+        //   - Load
+        this.posLoadLevel2 = new Vector2D(
+            engine.width / 2 - this.width / 2,
+            engine.height - this.height);
+        //   - Exit
+        this.posExitLevel2 = new Vector2D(
+            engine.width + 50,
+            engine.height - this.height);
 
         /* let ctx = engine.context;
         // Cart 1
@@ -656,6 +954,9 @@ game.playLuggageCartLvl2 = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Luggage Cart Level 2";
     }
 };
 
@@ -669,6 +970,11 @@ game.playLuggageCartLvl3 = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 3
+    posSpawnLevel3: 0,
+    posLoadLevel3: 0,
+    posExitLevel3: 0,
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
@@ -677,6 +983,21 @@ game.playLuggageCartLvl3 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        // Game Level Based Positions
+        // - Level 3
+        //   - Spawn
+        this.posSpawnLevel3 = new Vector2D(
+            -this.width * 1.2,
+            engine.height - this.height);
+        //   - Load
+        this.posLoadLevel3 = new Vector2D(
+            engine.width * 0.6 - this.width / 2,
+            engine.height - this.height);
+        //   - Exit
+        this.posExitLevel3 = new Vector2D(
+            engine.width + 50,
+            engine.height - this.height);
 
         /* let ctx = engine.context;
         // Cart 1
@@ -704,6 +1025,9 @@ game.playLuggageCartLvl3 = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Luggage Cart Level 3";
     }
 };
 
@@ -717,6 +1041,11 @@ game.playLuggageCartLvl4 = {
     height: 0,
     posX: 0,
     posY: 0,
+    // Game Level Based Positions
+    // - Level 4
+    posSpawnLevel4: 0,
+    posLoadLevel4: 0,
+    posExitLevel4: 0,
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
@@ -725,6 +1054,21 @@ game.playLuggageCartLvl4 = {
 
         this.posX = (engine.width / 2) - this.width / 2;
         this.posY = engine.height - this.height;
+
+        // Game Level Based Positions
+        // - Level 1
+        //   - Spawn
+        this.posSpawnLevel4 = new Vector2D(
+            -this.width * 1.2,
+            engine.height - this.height);
+        //   - Load
+        this.posLoadLevel4 = new Vector2D(
+            engine.width / 2 - this.width / 2,
+            engine.height - this.height);
+        //   - Exit
+        this.posExitLevel4 = new Vector2D(
+            engine.width + 50,
+            engine.height - this.height);
 
         /* let ctx = engine.context;
         // Cart 1
@@ -757,6 +1101,9 @@ game.playLuggageCartLvl4 = {
     draw: function () {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+    },
+    toString: function() {
+        return "Luggage Cart Level 4";
     }
 };
 

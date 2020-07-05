@@ -105,7 +105,7 @@ class Shape extends movingEntity {
 		this.setupVertexBuffer();
 	}
 
-	// DEBUG
+	// Abstract Draw Function
 	draw() { }
 
 	/*---------------------updateAttributes-------------------------------\

@@ -261,7 +261,7 @@ table td:nth-child(3) {
 }
 #inputKeypad {
 	flex-flow: row wrap;
-	justify-content: center;
+    justify-content: center;
 }
 /* Timeout Overlay */
 #timeoutOverlay {
@@ -376,7 +376,7 @@ table td:nth-child(3) {
 }
 
 .planes {
-    z-index: 20;
+    z-index: 16;
 }
 
 .gems {

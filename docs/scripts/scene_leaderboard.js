@@ -131,7 +131,7 @@ game.finalPlayerScore = {
     },
     //Update and display the score
     updateScore: function () {
-        this.div.innerHTML = Math.max(0, game.player.score);
+        this.div.innerHTML = NumberFormat(game.player.score.toString());
     }
 };
 
