@@ -1,5 +1,5 @@
 class shape_stand extends Shape {
-    constructor(pos) {
+    constructor(pos, _parentPlane) {
         // Position
         var _position = (typeof pos !== "undefined") ? pos : new Vector2D();
         // Type
@@ -18,20 +18,45 @@ class shape_stand extends Shape {
         // Initialize parent
         super(_position, _type, _width, _height, _points);
 
-        // Define luggage attributes
+        // Define circle's attributes
+        this.reference = _targetReference;
         this.image = _image;
         this.type = _type;
         this.points = _points;
 
-        // Luggage Div Builder
-        var _divOpen = `<div id="${this.type}_${this.ID()}" class="shape-stand" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
-		$("#baseCanvas").after(_divOpen);
-		this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
-		this.setDOM(this.domElement);
-		this.setOrigin(_targetShape);
-		this.adjustStyles();
+        // Reference to this DOM element
+        this.domElement;
+		
+		// Plane Reference (string)
+        this.parentPlane = _parentPlane;
+
+        console.log(`Parent Plane\n${getNameOfType(this.parentPlane.type)}`);
+
+        // $(`#${this.shape.domElement.id}`).after(`#${this.domElement.id}`);
+		// this.setDOM(this.domElement);
+		this.setOrigin(_targetReference);
+        // this.adjustStyles();
+
+        // Update all positions
+        // this.adjustStyles();
+        // this.shape.adjustStyles();
     }
 
+    /*---------------------adjustStyles-----------------------------------\
+    | - Adjust the styles to match the target's
+    \--------------------------------------------------------------------*/
+	adjustStyles() {
+		this.domElement.style.display = "block";
+		this.domElement.style.width = this.width + "px";
+		this.domElement.style.height = this.height + "px";
+        this.domElement.style.top = this.position.y + "px";
+        this.domElement.style.left = this.position.x + "px";
+
+        // this.shape.adjustStyles();
+        // this.updateAttributes();
+		// console.log(`Width: ${this.domElement.style.width} | Height: ${this.domElement.style.height} | Src: ${this.image.src}`);
+    }
+    
 	/*---------------------draw-------------------------------------------\
 	| /\ Inherited from baseGameEntity /\
     | - Override the draw function.

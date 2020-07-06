@@ -117,25 +117,25 @@ class cart4 extends Shape {
 
         // Drop Zone Attributes
         // - Cart 1
-        var dropX = pos.x + 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth = this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX = pos.x + 40 * engine.preserveAspectRatio;
+        var dropY = pos.y + 5 * engine.preserveAspectRatio;
+        var dropWidth = this.width - 1180 * engine.preserveAspectRatio;
+        var dropHeight = this.height - 70 * engine.preserveAspectRatio;
         // - Cart 2
-        var dropX2 = pos.x + 324 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY2 = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth2 = this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight2 = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX2 = pos.x + 324 * engine.preserveAspectRatio;
+        var dropY2 = pos.y + 5 * engine.preserveAspectRatio;
+        var dropWidth2 = this.width - 1180 * engine.preserveAspectRatio;
+        var dropHeight2 = this.height - 70 * engine.preserveAspectRatio;
         // - Cart 3
-        var dropX3 = pos.x + 609 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY3 = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth3 = this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight3 = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX3 = pos.x + 609 * engine.preserveAspectRatio;
+        var dropY3 = pos.y + 5 * engine.preserveAspectRatio;
+        var dropWidth3 = this.width - 1180 * engine.preserveAspectRatio;
+        var dropHeight3 = this.height - 70 * engine.preserveAspectRatio;
         // - Cart 4
-        var dropX4 = pos.x + 900 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY4 = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth4 = this.width - 1180 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight4 = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX4 = pos.x + 900 * engine.preserveAspectRatio;
+        var dropY4 = pos.y + 5 * engine.preserveAspectRatio;
+        var dropWidth4 = this.width - 1180 * engine.preserveAspectRatio;
+        var dropHeight4 = this.height - 70 * engine.preserveAspectRatio;
 
         // Drop Area
         ctx.beginPath();

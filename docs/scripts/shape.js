@@ -154,7 +154,15 @@ class Shape extends movingEntity {
 
 		// console.log(`<Shape>[forceMoveToLocation]\nMoving ${this.domElement.id} to square ${this.attachedSquare.id}\n X: ${this.toCenter.x} | ${this.domElement.style.left}\n Y: ${this.toCenter.y} | ${this.domElement.style.top}`);
 
+		// Children adjustments
+		var adjX = pos.x;
+		var adjY = pos.y;
 
+		// Move Children
+		/*$(`#${this.domElement.id}`).children('.gems').animate({
+			top: `${adjY}px`,
+			left: `${adjX}px`
+		}, 1750, "swing", () => {});*/
 
 		// Move this shape to a higher z-index, then animate to its destination
 		$(`#${this.domElement.id}`).animate({

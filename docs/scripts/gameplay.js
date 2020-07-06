@@ -87,7 +87,7 @@ game.manager = {
     },
 
     // Generate a random shape
-    generatePlaneShape: function(pos) {
+    generatePlaneShape: function() {
         var newShape;
         var getShape = randInt(0, (game.shapesList.length -1));
         switch (getShape) {

@@ -380,10 +380,12 @@ table td:nth-child(3) {
 }
 
 .gems {
+    position: relative !important;
     z-index: 21;
 }
 
 .shape-stand {
+    position: relative !important;
     z-index: 22;
 }
 

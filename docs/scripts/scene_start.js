@@ -37,12 +37,12 @@ game.ButtonsBackdrop = {
     org_posY: 40,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = engine.width / 2 - this.width / 2;
-        this.posY = game.BBTitle.posY + game.BBTitle.height + engine.height * 0.1 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.BBTitle.posY + game.BBTitle.height + engine.height * 0.1 * engine.preserveAspectRatio;
 
-        //this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+        //this.posY = Math.max(40, Math.min(50, this.org_posY * engine.preserveAspectRatio);
     },
     // Draw the object
     draw: function () {
@@ -64,10 +64,10 @@ game.BBTitle = {
     org_posY: 40,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = engine.width / 2 - this.width / 2;
-        this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+        this.posY = Math.max(40, Math.min(50, this.org_posY * engine.preserveAspectRatio));
     },
     // Draw the object
     draw: function () {
@@ -95,12 +95,12 @@ game.menuButton = {
     },
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         // Attach Top-Left Side
         this.posX = 20;
-        this.posY = Math.max(40, Math.min(50, this.org_posY * (1 - Math.max(engine.widthProportion, engine.heightProportion))));
+        this.posY = Math.max(40, Math.min(50, this.org_posY * engine.preserveAspectRatio));
     },
     // Draw the object
     draw: function () {
@@ -166,10 +166,10 @@ game.startButton = {
     },
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = game.ButtonsBackdrop.posX + 15 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
+        this.posX = game.ButtonsBackdrop.posX + 15 * engine.preserveAspectRatio;
+        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -223,10 +223,10 @@ game.leaderboardButton = {
     },
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = game.ButtonsBackdrop.posX + game.ButtonsBackdrop.width / 2 - this.width / 2;
-        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -278,10 +278,10 @@ game.quitButton = {
     },
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = game.ButtonsBackdrop.posX + game.ButtonsBackdrop.width - this.width - 15 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
+        this.posX = game.ButtonsBackdrop.posX + game.ButtonsBackdrop.width - this.width - 15 * engine.preserveAspectRatio;
+        this.posY = game.ButtonsBackdrop.posY + game.ButtonsBackdrop.height - this.height - 22 * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {

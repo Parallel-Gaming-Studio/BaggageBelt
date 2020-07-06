@@ -117,10 +117,10 @@ class cart1 extends Shape {
 
         // Drop Zone Attributes
         // - Cart 1
-        var dropX = pos.x + 21 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth = this.width - 301 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX = pos.x + 21 * engine.preserveAspectRatio;
+        var dropY = pos.y + 5 * engine.preserveAspectRatio;
+        var dropWidth = this.width - 301 * engine.preserveAspectRatio;
+        var dropHeight = this.height - 70 * engine.preserveAspectRatio;
 
         // Drop Area
         ctx.beginPath();
