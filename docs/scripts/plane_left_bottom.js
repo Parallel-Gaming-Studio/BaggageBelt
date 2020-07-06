@@ -33,6 +33,7 @@ class plane_left_bottom extends Shape {
         this.image = _image;
         this.type = _type;
         this.points = _points;
+        this.location = "BottomLeft";
         this.bagsLeft = 5;
         
         // Special Purpose Flags
@@ -56,16 +57,88 @@ class plane_left_bottom extends Shape {
         //   - Exit
         this.level4ExitPosition = _targetReference.posExitLevel4;
 		
-		// Shape Div Builder
-		var _divOpen = `<div id="${this.type}_${this.ID()}" class="planes" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');z-index:18;">`;
-		$("#baseCanvas").after(_divOpen);
+		// Shape
+        this.shape = new rectangle();
+        var tempArray = JSON.parse(this.shape.reference.getTransform(this));
+        console.log(`Shape ${getNameOfType(this.shape.type)}\nDimensions:\nH: ${tempArray.height}\nW: ${tempArray.width}\nX: ${tempArray.x}\nY: ${tempArray.y}`);
+        this.shape.height = tempArray.height;
+        this.shape.width = tempArray.width;
+        this.shape.position = new Vector2D(tempArray.x, tempArray.y);
+
+        // Shape Stand
+        this.shapeStand = new shape_stand(new Vector2D(), this);
+        var tempStand = JSON.parse(this.shapeStand.reference.getTransform(this));
+        console.log(`Shape Stand\nDimensions:\nH: ${tempStand.height}\nW: ${tempStand.width}\nX: ${tempStand.x}\nY: ${tempStand.y}`);
+        this.shapeStand.height = tempStand.height;
+        this.shapeStand.width = tempStand.width;
+        this.shapeStand.position = new Vector2D(tempStand.x, tempStand.y);
+
+        // Shape on Shape Stand
+        this.shapeStandShape;
+        switch(getNameOfType(this.shape.type)) {
+            case "Circle":
+                this.shapeStandShape = new circle();
+                break;
+            case "Heart":
+                this.shapeStandShape = new heart();
+                break;
+            case "Pentagon":
+                this.shapeStandShape = new pentagon();
+                break;
+            case "Rectangle":
+                this.shapeStandShape = new rectangle();
+                break;
+            case "Square":
+                this.shapeStandShape = new square();
+                break;
+            case "Star":
+                this.shapeStandShape = new star();
+                break;
+            case "Triangle":
+                this.shapeStandShape = new triangle();
+                break;
+        }
+        var tempShape = JSON.parse(this.shapeStandShape.reference.getTransform(this.shapeStand, this.location));
+        console.log(`Shape Stand's Shape\n${getNameOfType(this.shapeStandShape.type)}\nDimensions:\nH: ${tempShape.height}\nW: ${tempShape.width}\nX: ${tempShape.x}\nY: ${tempShape.y}`);
+        this.shapeStandShape.height = tempShape.height;
+        this.shapeStandShape.width = tempShape.width;
+        this.shapeStandShape.position = new Vector2D(tempShape.x, tempShape.y);
+
+        // Shape Div Builder
+        // Plane Div
+        var _divOpen = `<div id="${this.type}_${this.ID()}" class="planes" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');z-index:16;">`;
+        // Tail Shape Div
+        var _shapeTail = `<div id="${this.shape.type}_${this.shape.ID()}" class="gems" style="position:relative;display:block;top:${tempArray.y}px;left:${tempArray.x}px;width:${tempArray.width}px;height:${tempArray.height}px;background-image: url('${this.shape.image.src}');">`;
+        // Shape Stand Div
+        var _shapeStand = `<div id="${this.shapeStand.type}_${this.shapeStand.ID()}" class="shape-stand" style="position:relative;display:block;top:${tempStand.y}px;left:${tempStand.x}px;width:${tempStand.width}px;height:${tempStand.height}px;background-image: url('${this.shapeStand.image.src}');">`;
+        var _shapeStandTop = `<div id="${this.shapeStandShape.type}_${this.shapeStandShape.ID()}" class="gems" style="position:relative;display:block;top:${tempShape.y}px;left:${tempShape.x}px;width:${tempShape.width}px;height:${tempShape.height}px;background-image: url('${this.shapeStandShape.image.src}');">`;
+        // Div closer
+        var _divClose = `</div>`;
+        // Div Builder
+        var _divBuilder = _divOpen + _shapeTail + _divClose + _shapeStand + _shapeStandTop + _divClose + _divClose + _divClose;
+        // Place the div stack after the canvas
+        $("#baseCanvas").after(_divBuilder);
+
+        // Update Shape DOM
+        this.shape.domElement = document.getElementById(`${this.shape.type}_${this.shape.ID()}`);
+        this.shape.setOrigin(this.shape.domElement);
+        
+        // Update Shape Stand DOM
+        this.shapeStand.domElement = document.getElementById(`${this.shapeStand.type}_${this.shapeStand.ID()}`);
+        this.shapeStand.setOrigin(this.shapeStand.domElement);
+
+        // Update Shape Stand Shape DOM
+        this.shapeStandShape.domElement = document.getElementById(`${this.shapeStandShape.type}_${this.shapeStandShape.ID()}`);
+        this.shapeStandShape.setOrigin(this.shapeStandShape.domElement);
+        
+        // Update Plane DOM
 		this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
 		this.setDOM(this.domElement);
-		this.setOrigin(_targetReference);
+        this.setOrigin(_targetReference);
         
         // Update all positions
         this.adjustPosition();
-        this.adjustStyles();
+        
         
         // Spawn the plane
         this.spawn();
@@ -82,6 +155,9 @@ class plane_left_bottom extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
+        this.shape.adjustStyles();
+        this.shapeStand.adjustStyles();
+        this.shapeStandShape.adjustStyles();
         // console.log(`<Plane_Left_Bottom>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
         // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
 		// super.draw();
@@ -125,6 +201,25 @@ class plane_left_bottom extends Shape {
                 break;
         }
 
+        // Tail Shape
+        var tempArray = JSON.parse(this.shape.reference.getTransform(this));
+        this.shape.height = tempArray.height;
+        this.shape.width = tempArray.width;
+        this.shape.position = new Vector2D(tempArray.x, tempArray.y);
+
+        // Shape Stand
+        var tempStand = JSON.parse(this.shapeStand.reference.getTransform(this));
+        this.shapeStand.height = tempStand.height;
+        this.shapeStand.width = tempStand.width;
+        this.shapeStand.position = new Vector2D(tempStand.x, tempStand.y);
+        
+
+        // Shape Stand Shape
+        var tempShape = JSON.parse(this.shapeStandShape.reference.getTransform(this.shapeStand, this.location));
+        this.shapeStandShape.height = tempShape.height;
+        this.shapeStandShape.width = tempShape.width;
+        this.shapeStandShape.position = new Vector2D(tempShape.x, tempShape.y);
+
         // Update Current Position
         // - Exit State
         if (this.bagsLeft <= 0) { this.setNewPosition(posExit); return this.adjustDOM(); }
@@ -161,9 +256,9 @@ class plane_left_bottom extends Shape {
         }
 
         // Drop Zone Attributes
-        var dropX = pos.x + 355 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY = pos.y + 230 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropRadius = 150 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX = pos.x + 355 * engine.preserveAspectRatio;
+        var dropY = pos.y + 230 * engine.preserveAspectRatio;
+        var dropRadius = 150 * engine.preserveAspectRatio;
         var dropStart = 0;
         var dropEnd = 2 * Math.PI;
 

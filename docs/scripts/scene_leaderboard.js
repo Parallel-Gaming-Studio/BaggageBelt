@@ -36,8 +36,8 @@ game.leaderboardPlayerScore = {
     posY: 0,
     //Adjust transformation
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = engine.width * 0.73 - this.width / 2;
         this.posY = 0;
     },
@@ -107,7 +107,7 @@ game.finalPlayerScore = {
 
         //Attach Left Side
         this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2;
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 3 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 3 + 0 * engine.preserveAspectRatio;
 
         //Adjust font
         this.textResize();
@@ -149,10 +149,10 @@ game.leaderboardSponsorBox = {
     posY: 0,
     //Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = 20 + 30 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = engine.height - this.height - 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
+        this.posX = 20 + 30 * engine.preserveAspectRatio;
+        this.posY = engine.height - this.height - 5 * engine.preserveAspectRatio;
     },
     //Draw the object
     draw: function () {
@@ -180,7 +180,7 @@ game.leaderboardSponsorLogo = {
         this.width = game.leaderboardSponsorBox.width * 0.70;
         this.height = this.width;
         //Attach Bottom Side
-        this.posX = game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width / 2 - this.width / 2; // game.leaderboardSponsorBox.posX + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width / 2 - this.width / 2; // game.leaderboardSponsorBox.posX + 50 * engine.preserveAspectRatio;
         this.posY = game.leaderboardSponsorBox.posY + game.leaderboardSponsorBox.height / 2 - this.height / 2;
     },
     //Draw the object
@@ -221,19 +221,19 @@ game.top10players = {
     },
     //Adjust the object's transform
     resize: function () {
-        this.width = (game.leaderboardPlayerScore.posX - (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width)) - 110 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = (game.leaderboardPlayerScore.posX - (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width)) - 110 * engine.preserveAspectRatio;
         this.height = engine.height;
 
         //Attach Left Side with Buffer
-        this.posX = (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width) + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width) + 50 * engine.preserveAspectRatio;
         this.posY = 0;
 
         //Update font size
-        this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.table_font_size = this.org_table_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.font_size = this.org_font_size * engine.preserveAspectRatio;
+        this.table_font_size = this.org_table_font_size * engine.preserveAspectRatio;
 
         // Update padding sizes
-        // this.padding = this.org_padding * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.padding = this.org_padding * engine.preserveAspectRatio;
     },
     //Apply changes via CSS
     adjustStyle: function () {
@@ -363,12 +363,12 @@ game.leaderboardRetryButton = {
     },
     //Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         //Remove an additional 25 (proportionate) from the X-position to match the shadow
-        this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2; // game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 86 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height - 150 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2; // game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 86 * engine.preserveAspectRatio;
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height - 150 * engine.preserveAspectRatio;
     },
     //Draw the object
     draw: function () {
