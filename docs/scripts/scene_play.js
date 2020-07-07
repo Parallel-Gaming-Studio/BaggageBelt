@@ -408,29 +408,29 @@ game.playLargePlaneLeft = {
         //   - Spawn
         this.posSpawnLevel3 = new Vector2D(
             -this.width * 1.2,
-            engine.height * 0.35 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
         //   - Load
         this.posLoadLevel3 = new Vector2D(
             0.0,
-            engine.height * 0.35 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
         //   - Exit
         this.posExitLevel3 = new Vector2D(
             0.0,
-            engine.height * 0.35 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
 
         // - Level 4
         //   - Spawn
         this.posSpawnLevel4 = new Vector2D(
             -this.width * 1.2,
-            engine.height * 0.35 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
         //   - Load
         this.posLoadLevel4 = new Vector2D(
             0.0,
-            engine.height * 0.35 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
         //   - Exit
         this.posExitLevel4 = new Vector2D(
             -this.width * 1.2,
-            engine.height * 0.35 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -522,15 +522,15 @@ game.playLargePlaneRight = {
         //   - Spawn
         this.posSpawnLevel4 = new Vector2D(
             engine.width + 50,
-            engine.height * 0.34 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
         //   - Load
         this.posLoadLevel4 = new Vector2D(
             engine.width - this.width,
-            engine.height * 0.34 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
         //   - Exit
         this.posExitLevel4 = new Vector2D(
             engine.width + 50,
-            engine.height * 0.34 - this.height / 2);
+            engine.height * 0.27 - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -2564,9 +2564,9 @@ game.shapeStand = {
                     this.topLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.69 - this.width / 2,
+                    obj.width * 0.71 - this.width / 2,
                     // Y
-                    obj.height * 0.90 - this.height / 2);
+                    obj.height * 0.68 - this.height / 2);
                 break;
             case "PlaneLeftBottom":
                 tempDims = new Vector2D(
@@ -2578,7 +2578,7 @@ game.shapeStand = {
                     // X
                     obj.width * 0.62 - this.width / 2,
                     // Y
-                    obj.height * 0.81 - this.height / 2);
+                    obj.height * 0.61 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -2590,7 +2590,7 @@ game.shapeStand = {
                     // X
                     obj.width * 0.37 - this.width / 2,
                     // Y
-                    obj.height * 0.90 - this.height / 2);
+                    obj.height * 0.68 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -2602,7 +2602,7 @@ game.shapeStand = {
                     // X
                     obj.width * 0.625 - this.width / 2,
                     // Y
-                    obj.height * 0.825 - this.height / 2);
+                    obj.height * 0.605 - this.height / 2);
                 break;
         }
 
