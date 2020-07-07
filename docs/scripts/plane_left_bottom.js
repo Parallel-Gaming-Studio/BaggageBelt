@@ -256,9 +256,9 @@ class plane_left_bottom extends Shape {
         }
 
         // Drop Zone Attributes
-        var dropX = pos.x + 355 * engine.preserveAspectRatio;
-        var dropY = pos.y + 230 * engine.preserveAspectRatio;
-        var dropRadius = 150 * engine.preserveAspectRatio;
+        var dropX = pos.x + 350 * engine.preserveAspectRatio;
+        var dropY = pos.y + 237 * engine.preserveAspectRatio;
+        var dropRadius = 120 * engine.preserveAspectRatio;
         var dropStart = 0;
         var dropEnd = 2 * Math.PI;
 
