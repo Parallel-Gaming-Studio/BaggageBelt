@@ -92,27 +92,35 @@ game.manager = {
         var getShape = randInt(0, (game.shapesList.length -1));
         switch (getShape) {
             case 0:
-                newShape = new circle(pos);
+                newShape = new circle();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Circle"), 1));
                 break;
             case 1:
-                newShape = new heart(pos);
+                newShape = new heart();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Heart"), 1));
                 break;
             case 2:
-                newShape = new pentagon(pos);
+                newShape = new pentagon();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Pentagon"), 1));
                 break;
             case 3:
-                newShape = new rectangle(pos);
+                newShape = new rectangle();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Rectangle"), 1));
                 break;
             case 4:
-                newShape = new square(pos);
+                newShape = new square();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Square"), 1));
                 break;
             case 5:
-                newShape = new star(pos);
+                newShape = new star();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Star"), 1));
                 break;
             case 6:
-                newShape = new triangle(pos);
+                newShape = new triangle();
+                game.shapesUsed.push(game.shapesList.splice(game.shapesList.indexOf("Triangle"), 1));
                 break;
         }
+        console.log(`Shape Arrays Update:\n${game.shapesList}\n${game.shapesUsed}`);
         return newShape;
     },
 
@@ -206,13 +214,17 @@ game.manager = {
         this.level4Luggage4 = [];
 
         // Clear any objects that escaped deletion
-        var z = [];
+        /* var z = [];
         z.push(document.getElementsByClassName("planes"));
         z.push(document.getElementsByClassName("gems"));
         z.push(document.getElementsByClassName("shape-stand"));
         z.push(document.getElementsByClassName("gem-stand"));
         z.push(document.getElementsByClassName("cart"));
         z.push(document.getElementsByClassName("luggage"));
+        while (z.length > 0) {
+            console.log(`Deleting ${z.id}`);
+            z.pop().remove();
+        } */
     },
 
     // Check the level thresholds

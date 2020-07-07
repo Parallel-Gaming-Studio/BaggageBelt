@@ -30,7 +30,7 @@ class shape_stand extends Shape {
 		// Plane Reference (string)
         this.parentPlane = _parentPlane;
 
-        console.log(`Parent Plane\n${getNameOfType(this.parentPlane.type)}`);
+        // console.log(`Parent Plane\n${getNameOfType(this.parentPlane.type)}`);
 
         // $(`#${this.shape.domElement.id}`).after(`#${this.domElement.id}`);
 		// this.setDOM(this.domElement);

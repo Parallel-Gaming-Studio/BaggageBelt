@@ -7,18 +7,18 @@ game.playDEBUGIncreasePoints = {
     posX: 0,
     posY: 0,
     level: 0,
-    init: function() {
+    init: function () {
         this.buildbutton();
         this.div.addEventListener("click", game.playDEBUGIncreasePoints.clickMe);
     },
-    buildbutton: function() {
+    buildbutton: function () {
         $(`#${this.div.id}`).html("Increase Level");
     },
-    resize: function() {
+    resize: function () {
         this.posX = engine.width - this.width;
         this.posY = game.playTitle.posY + game.playTitle.height + engine.height * 0.05;
     },
-    adjustStyle: function() {
+    adjustStyle: function () {
         this.resize();
         this.div.style.position = "absolute";
         this.div.style.display = "flex";
@@ -35,10 +35,10 @@ game.playDEBUGIncreasePoints = {
         this.div.style.height = this.height + "px";
         this.div.style.zIndex = 999;
     },
-    draw: function() {
+    draw: function () {
         this.adjustStyle();
     },
-    clickMe: function(e) {
+    clickMe: function (e) {
         if (game.playDEBUGIncreasePoints.level < game.manager.pointsGoal.length) {
             console.log("Clicked");
             game.player.score = game.manager.pointsGoal[game.playDEBUGIncreasePoints.level++];
@@ -389,7 +389,7 @@ game.playLargePlaneLeft = {
         this.posExitLevel1 = new Vector2D(
             -this.width * 1.2,
             engine.height / 2 - this.height / 2);
-        
+
         // - Level 2
         //   - Spawn
         this.posSpawnLevel2 = new Vector2D(
@@ -451,7 +451,7 @@ game.playLargePlaneLeft = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Top Left Plane";
     }
 };
@@ -551,7 +551,7 @@ game.playLargePlaneRight = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Top Right Plane";
     }
 };
@@ -604,15 +604,15 @@ game.playSmallPlaneLeft = {
         //   - Spawn
         this.posSpawnLevel4 = new Vector2D(
             -this.width * 1.2,
-            engine.height * 0.6 - this.height / 2);
+            engine.height * 0.625 - this.height / 2);
         //   - Load
         this.posLoadLevel4 = new Vector2D(
             0.0,
-            engine.height * 0.6 - this.height / 2);
+            engine.height * 0.625 - this.height / 2);
         //   - Exit
         this.posExitLevel4 = new Vector2D(
             -this.width * 1.2,
-            engine.height * 0.6 - this.height / 2);
+            engine.height * 0.625 - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -633,7 +633,7 @@ game.playSmallPlaneLeft = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Bottom Left Plane";
     }
 };
@@ -668,15 +668,15 @@ game.playSmallPlaneRight = {
         //   - Spawn
         this.posSpawnLevel4 = new Vector2D(
             engine.width + 50,
-            engine.height * 0.6 - this.height / 2);
+            engine.height * 0.625 - this.height / 2);
         //   - Load
         this.posLoadLevel4 = new Vector2D(
             engine.width - this.width,
-            engine.height * 0.6 - this.height / 2);
+            engine.height * 0.625 - this.height / 2);
         //   - Exit
         this.posExitLevel4 = new Vector2D(
             engine.width + 50,
-            engine.height * 0.6 - this.height / 2);
+            engine.height * 0.625 - this.height / 2);
 
         /* let ctx = engine.context;
         // Drop Area
@@ -697,7 +697,7 @@ game.playSmallPlaneRight = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Bottom Right Plane";
     }
 };
@@ -889,7 +889,7 @@ game.playLuggageCartLvl1 = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Luggage Cart Level 1";
     }
 };
@@ -955,7 +955,7 @@ game.playLuggageCartLvl2 = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Luggage Cart Level 2";
     }
 };
@@ -1026,7 +1026,7 @@ game.playLuggageCartLvl3 = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Luggage Cart Level 3";
     }
 };
@@ -1102,14 +1102,14 @@ game.playLuggageCartLvl4 = {
         this.resize();
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
-    toString: function() {
+    toString: function () {
         return "Luggage Cart Level 4";
     }
 };
 
 // - Gems
 game.gemTriangle = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemTriangle"),
     // Declare object transform information
     org_width: 99 * game.scale,
@@ -1128,10 +1128,10 @@ game.gemTriangle = {
     topRightScale: 0.71,
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
-    tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
+    tailTopLeftScale: 0.69,
+    tailTopRightScale: 0.8,
     tailBottomLeftScale: 0.55,
-    tailBottomRightScale: 0.73,
+    tailBottomRightScale: 0.74,
     // Adjust the object's transform
     resize: function () {
         this.width = this.shapeScale * this.org_width * engine.preserveAspectRatio;
@@ -1143,51 +1143,65 @@ game.gemTriangle = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
 
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    -this.height + 4 * engine.preserveAspectRatio);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -1257,7 +1271,7 @@ game.gemTriangle = {
                     this.tailTopLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.875 - this.width / 2,
+                    obj.width * 0.8725 - this.width / 2,
                     // Y
                     obj.height * 0.39 - this.height / 2);
                 break;
@@ -1269,9 +1283,9 @@ game.gemTriangle = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    x + obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.85 - this.width / 2,
                     // Y
-                    y + obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.32 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -1281,9 +1295,9 @@ game.gemTriangle = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    x + obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.17 - this.width / 2,
                     // Y
-                    y + obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.31 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -1293,9 +1307,9 @@ game.gemTriangle = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    x + obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.46 - this.width / 2,
                     // Y
-                    y + obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.29 - this.height / 2);
                 break;
         }
 
@@ -1303,15 +1317,16 @@ game.gemTriangle = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Triangle";
     }
 };
 
 game.gemStar = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemStar"),
     // Declare object transform information
     org_width: 99 * game.scale,
@@ -1331,8 +1346,8 @@ game.gemStar = {
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
     tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
-    tailBottomLeftScale: 0.55,
+    tailTopRightScale: 0.77,
+    tailBottomLeftScale: 0.6,
     tailBottomRightScale: 0.73,
     // Adjust the object's transform
     resize: function () {
@@ -1345,51 +1360,65 @@ game.gemStar = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
-        
+
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    -this.height + 4 * engine.preserveAspectRatio);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -1459,7 +1488,7 @@ game.gemStar = {
                     this.tailTopLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.875 - this.width / 2,
+                    obj.width * 0.8725 - this.width / 2,
                     // Y
                     obj.height * 0.39 - this.height / 2);
                 break;
@@ -1471,9 +1500,9 @@ game.gemStar = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.85 - this.width / 2,
                     // Y
-                    obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.32 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -1483,9 +1512,9 @@ game.gemStar = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.16 - this.width / 2,
                     // Y
-                    obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.31 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -1495,9 +1524,9 @@ game.gemStar = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.45 - this.width / 2,
                     // Y
-                    obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.29 - this.height / 2);
                 break;
         }
 
@@ -1505,19 +1534,20 @@ game.gemStar = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Star";
     }
 };
 
 game.gemHeart = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemHeart"),
     // Declare object transform information
-    org_width: 99 * game.scale,
-    org_height: 99 * game.scale,
+    org_width: 101 * game.scale,
+    org_height: 87 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -1532,9 +1562,9 @@ game.gemHeart = {
     topRightScale: 0.71,
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
-    tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
-    tailBottomLeftScale: 0.55,
+    tailTopLeftScale: 0.72,
+    tailTopRightScale: 0.82,
+    tailBottomLeftScale: 0.6,
     tailBottomRightScale: 0.73,
     // Adjust the object's transform
     resize: function () {
@@ -1547,51 +1577,65 @@ game.gemHeart = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
 
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    -this.height + 4 * engine.preserveAspectRatio);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -1663,7 +1707,7 @@ game.gemHeart = {
                     // X
                     obj.width * 0.875 - this.width / 2,
                     // Y
-                    obj.height * 0.39 - this.height / 2);
+                    obj.height * 0.4 - this.height / 2);
                 break;
             case "PlaneLeftBottom":
                 tempDims = new Vector2D(
@@ -1673,9 +1717,9 @@ game.gemHeart = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.855 - this.width / 2,
                     // Y
-                    obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.33 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -1685,9 +1729,9 @@ game.gemHeart = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.155 - this.width / 2,
                     // Y
-                    obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.32 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -1697,9 +1741,9 @@ game.gemHeart = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.45 - this.width / 2,
                     // Y
-                    obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.3 - this.height / 2);
                 break;
         }
 
@@ -1707,19 +1751,20 @@ game.gemHeart = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Heart";
     }
 };
 
 game.gemSquare = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemSquare"),
     // Declare object transform information
-    org_width: 99 * game.scale,
-    org_height: 99 * game.scale,
+    org_width: 97 * game.scale,
+    org_height: 97 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -1734,10 +1779,10 @@ game.gemSquare = {
     topRightScale: 0.71,
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
-    tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
-    tailBottomLeftScale: 0.55,
-    tailBottomRightScale: 0.73,
+    tailTopLeftScale: 0.58,
+    tailTopRightScale: 0.70,
+    tailBottomLeftScale: 0.48,
+    tailBottomRightScale: 0.61,
     // Adjust the object's transform
     resize: function () {
         this.width = this.shapeScale * this.org_width * engine.preserveAspectRatio;
@@ -1749,51 +1794,65 @@ game.gemSquare = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempArray = [], tempDims, tempPos, x = obj.position.x, y = obj.position.y;
 
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    -this.height + 4 * engine.preserveAspectRatio);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -1863,9 +1922,9 @@ game.gemSquare = {
                     this.tailTopLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.875 - this.width / 2,
+                    obj.width * 0.885 - this.width / 2,
                     // Y
-                    obj.height * 0.39 - this.height / 2);
+                    obj.height * 0.41 - this.height / 2);
                 break;
             case "PlaneLeftBottom":
                 tempDims = new Vector2D(
@@ -1875,9 +1934,9 @@ game.gemSquare = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.87 - this.width / 2,
                     // Y
-                    obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.33 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -1887,9 +1946,9 @@ game.gemSquare = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.1625 - this.width / 2,
                     // Y
-                    obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.325 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -1899,9 +1958,9 @@ game.gemSquare = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.455 - this.width / 2,
                     // Y
-                    obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.31 - this.height / 2);
                 break;
         }
 
@@ -1909,15 +1968,16 @@ game.gemSquare = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Square";
     }
 };
 
 game.gemCircle = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemCircle"),
     // Declare object transform information
     org_width: 99 * game.scale,
@@ -1936,8 +1996,8 @@ game.gemCircle = {
     topRightScale: 0.71,
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
-    tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
+    tailTopLeftScale: 0.71,
+    tailTopRightScale: 0.76,
     tailBottomLeftScale: 0.55,
     tailBottomRightScale: 0.73,
     // Adjust the object's transform
@@ -1951,51 +2011,65 @@ game.gemCircle = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
 
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    -this.height + 4 * engine.preserveAspectRatio);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -2065,7 +2139,7 @@ game.gemCircle = {
                     this.tailTopLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.875 - this.width / 2,
+                    obj.width * 0.8775 - this.width / 2,
                     // Y
                     obj.height * 0.39 - this.height / 2);
                 break;
@@ -2077,9 +2151,9 @@ game.gemCircle = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.86 - this.width / 2,
                     // Y
-                    obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.33 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -2089,9 +2163,9 @@ game.gemCircle = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.16 - this.width / 2,
                     // Y
-                    obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.31 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -2101,9 +2175,9 @@ game.gemCircle = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.45 - this.width / 2,
                     // Y
-                    obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.29 - this.height / 2);
                 break;
         }
 
@@ -2111,15 +2185,16 @@ game.gemCircle = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Circle";
     }
 };
 
 game.gemPentagon = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemPentagon"),
     // Declare object transform information
     org_width: 99 * game.scale,
@@ -2139,9 +2214,9 @@ game.gemPentagon = {
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
     tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
-    tailBottomLeftScale: 0.55,
-    tailBottomRightScale: 0.73,
+    tailTopRightScale: 0.8,
+    tailBottomLeftScale: 0.6,
+    tailBottomRightScale: 0.75,
     // Adjust the object's transform
     resize: function () {
         this.width = this.shapeScale * this.org_width * engine.preserveAspectRatio;
@@ -2153,51 +2228,65 @@ game.gemPentagon = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
 
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    -this.height + 4 * engine.preserveAspectRatio);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -2267,7 +2356,7 @@ game.gemPentagon = {
                     this.tailTopLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.875 - this.width / 2,
+                    obj.width * 0.8725 - this.width / 2,
                     // Y
                     obj.height * 0.39 - this.height / 2);
                 break;
@@ -2279,9 +2368,9 @@ game.gemPentagon = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.85 - this.width / 2,
                     // Y
-                    obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.32 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -2291,9 +2380,9 @@ game.gemPentagon = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.16 - this.width / 2,
                     // Y
-                    obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.31 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -2303,9 +2392,9 @@ game.gemPentagon = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.45 - this.width / 2,
                     // Y
-                    obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.29 - this.height / 2);
                 break;
         }
 
@@ -2313,19 +2402,20 @@ game.gemPentagon = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Pentagon";
     }
 };
 
 game.gemRectangle = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("gemRectangle"),
     // Declare object transform information
-    org_width: 99 * game.scale,
-    org_height: 99 * game.scale,
+    org_width: 103 * game.scale,
+    org_height: 103 * game.scale,
     width: 0,
     height: 0,
     posX: 0,
@@ -2341,9 +2431,9 @@ game.gemRectangle = {
     bottomLeftScale: 0.65,
     bottomRightScale: 0.67,
     tailTopLeftScale: 0.75,
-    tailTopRightScale: 0.75,
-    tailBottomLeftScale: 0.55,
-    tailBottomRightScale: 0.73,
+    tailTopRightScale: 0.83,
+    tailBottomLeftScale: 0.62,
+    tailBottomRightScale: 0.75,
     // Adjust the object's transform
     resize: function () {
         this.width = this.shapeScale * this.org_width * engine.preserveAspectRatio;
@@ -2355,53 +2445,65 @@ game.gemRectangle = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
-        console.log(`${getNameOfType(obj.type)} \ ${loc}`);
+        
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "ShapeStand":
-                if (typeof loc !== "undefined")
-                {
-                    switch(loc) {
+                if (typeof loc !== "undefined") {
+                    switch (loc) {
                         case "TopLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "TopRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.topRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.topRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.topRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.topRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.topRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomLeft":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomLeftScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomLeftScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomLeftScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                         case "BottomRight":
                             tempDims = new Vector2D(
                                 // Width
-                                this.bottomRightScale * this.org_width * engine.preserveAspectRatio,
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_width * engine.preserveAspectRatio,
                                 // Height
-                                this.bottomRightScale * this.org_height * engine.preserveAspectRatio);
+                                (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) * this.org_height * engine.preserveAspectRatio);
+                            tempPos = new Vector2D(
+                                // X
+                                obj.width / 2 - this.width / 2 * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio),
+                                // Y
+                                -this.height * (this.bottomRightScale - 0.2 * engine.preserveAspectRatio) + 2 * engine.preserveAspectRatio);
                             break;
                     }
                 }
-                console.log(`Position:\n${tempDims}`);
-                tempPos = new Vector2D(
-                    // X
-                    obj.width / 2 - this.width / 2,
-                    // Y
-                    this.height + 4 * engine.preserveAspectRatio);
-                    console.log(`Dimensions:\n${tempPos}`);
                 break;
             case "LuggageBlue":
                 tempDims = new Vector2D(
@@ -2471,7 +2573,7 @@ game.gemRectangle = {
                     this.tailTopLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.875 - this.width / 2,
+                    obj.width * 0.8725 - this.width / 2,
                     // Y
                     obj.height * 0.39 - this.height / 2);
                 break;
@@ -2483,9 +2585,9 @@ game.gemRectangle = {
                     this.tailBottomLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.82 - this.width / 2,
+                    obj.width * 0.85 - this.width / 2,
                     // Y
-                    obj.height * 0.27 - this.height / 2);
+                    obj.height * 0.32 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -2495,9 +2597,9 @@ game.gemRectangle = {
                     this.tailTopRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.15 - this.width / 2,
+                    obj.width * 0.16 - this.width / 2,
                     // Y
-                    obj.height * 0.30 - this.height / 2);
+                    obj.height * 0.31 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -2507,9 +2609,9 @@ game.gemRectangle = {
                     this.tailBottomRightScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.438 - this.width / 2,
+                    obj.width * 0.45 - this.width / 2,
                     // Y
-                    obj.height * 0.26 - this.height / 2);
+                    obj.height * 0.29 - this.height / 2);
                 break;
         }
 
@@ -2517,15 +2619,16 @@ game.gemRectangle = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Rectangle";
     }
 };
 
 game.shapeStand = {
-	// Get handle to image
+    // Get handle to image
     image: document.getElementById("shapeStand"),
     // Declare object transform information
     org_width: 27 * game.scale,
@@ -2550,12 +2653,12 @@ game.shapeStand = {
         // engine.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     },
     // Return the transform, given an attached obj (optional:) and location
-    getTransform: function(obj, loc) {
+    getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
 
         // Determine who the requesting object is
-        switch(getNameOfType(obj.type)) {
+        switch (getNameOfType(obj.type)) {
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
                     // Width
@@ -2564,9 +2667,9 @@ game.shapeStand = {
                     this.topLeftScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width * 0.69 - this.width / 2,
+                    obj.width * 0.71 - this.width / 2,
                     // Y
-                    obj.height * 0.90 - this.height / 2);
+                    obj.height * 0.68 - this.height / 2);
                 break;
             case "PlaneLeftBottom":
                 tempDims = new Vector2D(
@@ -2578,7 +2681,7 @@ game.shapeStand = {
                     // X
                     obj.width * 0.62 - this.width / 2,
                     // Y
-                    obj.height * 0.81 - this.height / 2);
+                    obj.height * 0.61 - this.height / 2);
                 break;
             case "PlaneRightTop":
                 tempDims = new Vector2D(
@@ -2590,7 +2693,7 @@ game.shapeStand = {
                     // X
                     obj.width * 0.37 - this.width / 2,
                     // Y
-                    obj.height * 0.90 - this.height / 2);
+                    obj.height * 0.68 - this.height / 2);
                 break;
             case "PlaneRightBottom":
                 tempDims = new Vector2D(
@@ -2602,7 +2705,7 @@ game.shapeStand = {
                     // X
                     obj.width * 0.625 - this.width / 2,
                     // Y
-                    obj.height * 0.825 - this.height / 2);
+                    obj.height * 0.605 - this.height / 2);
                 break;
         }
 
@@ -2610,9 +2713,10 @@ game.shapeStand = {
             width: `${tempDims.x}`,
             height: `${tempDims.y}`,
             x: `${tempPos.x}`,
-            y: `${tempPos.y}`});
+            y: `${tempPos.y}`
+        });
     },
-    toString: function() {
+    toString: function () {
         return "Shape Stand";
     }
 }

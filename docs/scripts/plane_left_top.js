@@ -79,10 +79,14 @@ class plane_left_top extends Shape {
         //   - Exit
         this.level4ExitPosition = _targetReference.posExitLevel4;
 
+        // Drop Zone
+        this.dropZone = new Vector2D(592, 320);
+        this.dropZoneRadius = 130;
+
         // Shape
-        this.shape = new rectangle();
+        this.shape = game.manager.generatePlaneShape();
         var tempArray = JSON.parse(this.shape.reference.getTransform(this));
-        console.log(`Shape ${getNameOfType(this.shape.type)}\nDimensions:\nH: ${tempArray.height}\nW: ${tempArray.width}\nX: ${tempArray.x}\nY: ${tempArray.y}`);
+        // console.log(`Shape ${getNameOfType(this.shape.type)}\nDimensions:\nH: ${tempArray.height}\nW: ${tempArray.width}\nX: ${tempArray.x}\nY: ${tempArray.y}`);
         this.shape.height = tempArray.height;
         this.shape.width = tempArray.width;
         this.shape.position = new Vector2D(tempArray.x, tempArray.y);
@@ -90,7 +94,7 @@ class plane_left_top extends Shape {
         // Shape Stand
         this.shapeStand = new shape_stand(new Vector2D(), this);
         var tempStand = JSON.parse(this.shapeStand.reference.getTransform(this));
-        console.log(`Shape Stand\nDimensions:\nH: ${tempStand.height}\nW: ${tempStand.width}\nX: ${tempStand.x}\nY: ${tempStand.y}`);
+        // console.log(`Shape Stand\nDimensions:\nH: ${tempStand.height}\nW: ${tempStand.width}\nX: ${tempStand.x}\nY: ${tempStand.y}`);
         this.shapeStand.height = tempStand.height;
         this.shapeStand.width = tempStand.width;
         this.shapeStand.position = new Vector2D(tempStand.x, tempStand.y);
@@ -121,7 +125,7 @@ class plane_left_top extends Shape {
                 break;
         }
         var tempShape = JSON.parse(this.shapeStandShape.reference.getTransform(this.shapeStand, this.location));
-        console.log(`Shape Stand's Shape\n${getNameOfType(this.shapeStandShape.type)}\nDimensions:\nH: ${tempShape.height}\nW: ${tempShape.width}\nX: ${tempShape.x}\nY: ${tempShape.y}`);
+        // console.log(`Shape Stand's Shape\n${getNameOfType(this.shapeStandShape.type)}\nDimensions:\nH: ${tempShape.height}\nW: ${tempShape.width}\nX: ${tempShape.x}\nY: ${tempShape.y}`);
         this.shapeStandShape.height = tempShape.height;
         this.shapeStandShape.width = tempShape.width;
         this.shapeStandShape.position = new Vector2D(tempShape.x, tempShape.y);
@@ -310,9 +314,9 @@ class plane_left_top extends Shape {
         }
 
         // Drop Zone Attributes
-        var dropX = pos.x + 592 * engine.preserveAspectRatio;
-        var dropY = pos.y + 320 * engine.preserveAspectRatio;
-        var dropRadius = 160 * engine.preserveAspectRatio;
+        var dropX = pos.x + this.dropZone.x * engine.preserveAspectRatio;
+        var dropY = pos.y + this.dropZone.y * engine.preserveAspectRatio;
+        var dropRadius = this.dropZoneRadius * engine.preserveAspectRatio;
         var dropStart = 0;
         var dropEnd = 2 * Math.PI;
 
@@ -380,6 +384,9 @@ class plane_left_top extends Shape {
     |   the level
     \--------------------------------------------------------------------*/
     exit() {
+        // Clear the plane's shape from the used list
+        game.shapesList.push(game.shapesUsed.splice(game.shapesUsed.indexOf(getNameOfType(this.shape.type)), 1));
+
         // Determine game level and set position
         switch (game.manager.level) {
             case 0:
