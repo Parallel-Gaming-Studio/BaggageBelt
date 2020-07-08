@@ -74,7 +74,9 @@ game.player = {
 };
 
 // Shape List
-game.shapesList = ["circle", "heart", "pentagon", "rectangle", "square", "star", "triangle", "sponsored"];
+game.shapesList = ["Circle", "Heart", "Pentagon", "Rectangle", "Square", "Star", "Triangle"];
+// game.shapesList = ["Pentagon"];
+game.shapesUsed = [];
 
 // Visible Debugging Console
 game.myConsole = {

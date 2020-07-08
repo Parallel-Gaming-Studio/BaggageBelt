@@ -90,30 +90,155 @@ game.manager = {
     generatePlaneShape: function() {
         var newShape;
         var getShape = randInt(0, (game.shapesList.length -1));
-        switch (getShape) {
-            case 0:
-                newShape = new circle(pos);
+        switch (game.shapesList[getShape]) {
+            case "Circle":
+                this.swapShapesToUsed("Circle");
+                newShape = new circle();
                 break;
-            case 1:
-                newShape = new heart(pos);
+            case "Heart":
+                this.swapShapesToUsed("Heart");
+                newShape = new heart();
                 break;
-            case 2:
-                newShape = new pentagon(pos);
+            case "Pentagon":
+                this.swapShapesToUsed("Pentagon");
+                newShape = new pentagon();
                 break;
-            case 3:
-                newShape = new rectangle(pos);
+            case "Rectangle":
+                this.swapShapesToUsed("Rectangle");
+                newShape = new rectangle();
                 break;
-            case 4:
-                newShape = new square(pos);
+            case "Square":
+                this.swapShapesToUsed("Square");
+                newShape = new square();
                 break;
-            case 5:
-                newShape = new star(pos);
+            case "Star":
+                this.swapShapesToUsed("Star");
+                newShape = new star();
                 break;
-            case 6:
-                newShape = new triangle(pos);
+            case "Triangle":
+                this.swapShapesToUsed("Triangle");
+                newShape = new triangle();
                 break;
         }
+        console.log(`Shape Arrays Update:\nList: ${game.shapesList}\nUsed: ${game.shapesUsed}`);
         return newShape;
+    },
+
+    // Generate a random luggage shape
+    generateLuggageShape: function() {
+        // Counts for each type of luggage shape currently in use
+        var lugCount = {"Circle": 0, "Heart": 0, "Pentagon": 0, "Rectangle": 0, "Square": 0, "Star": 0, "Triangle": 0};
+        for (var i = 0; i < this.luggage.length; i++) {
+            // Skip the requesting piece of luggage
+            if (typeof this.luggage[i].shape === "undefined") continue;
+
+            switch (getNameOfType(this.luggage[i].shape.type)) {
+                case "Circle":
+                    lugCount.Circle++;
+                    break;
+                case "Heart":
+                    lugCount.Heart++;
+                    break;
+                case "Pentagon":
+                    lugCount.Pentagon++;
+                    break;
+                case "Rectangle":
+                    lugCount.Rectangle++;
+                    break;
+                case "Square":
+                    lugCount.Square++;
+                    break;
+                case "Star":
+                    lugCount.Star++;
+                    break;
+                case "Triangle":
+                    lugCount.Triangle++;
+                    break;
+            }
+        }
+
+        // Store available shapes
+        var tempPlanes = [];
+        // Get a list of all available planes
+        for (var i = 0; i < this.planes.length; i++) {
+            let tempType = getNameOfType(this.planes[i].shape.type);
+            let bags = this.planes[i].bagsLeft;
+            switch (tempType) {
+                case "Circle":
+                    if (lugCount.Circle < bags) tempPlanes.push(tempType);
+                    break;
+                case "Heart":
+                    if (lugCount.Heart < bags) tempPlanes.push(tempType);
+                    break;
+                case "Pentagon":
+                    if (lugCount.Pentagon < bags) tempPlanes.push(tempType);
+                    break;
+                case "Rectangle":
+                    if (lugCount.Rectangle < bags) tempPlanes.push(tempType);
+                    break;
+                case "Square":
+                    if (lugCount.Square < bags) tempPlanes.push(tempType);
+                    break;
+                case "Star":
+                    if (lugCount.Star < bags) tempPlanes.push(tempType);
+                    break;
+                case "Triangle":
+                    if (lugCount.Triangle < bags) tempPlanes.push(tempType);
+                    break;
+            }
+        }
+
+        var newShape;
+        var getShape = randInt(0, (tempPlanes.length -1));
+        switch (tempPlanes[getShape]) {
+            case "Circle":
+                newShape = new circle();
+                break;
+            case "Heart":
+                newShape = new heart();
+                break;
+            case "Pentagon":
+                newShape = new pentagon();
+                break;
+            case "Rectangle":
+                newShape = new rectangle();
+                break;
+            case "Square":
+                newShape = new square();
+                break;
+            case "Star":
+                newShape = new star();
+                break;
+            case "Triangle":
+                newShape = new triangle();
+                break;
+        }
+        console.log(`Luggage Shape Update:\nList: ${tempPlanes}\nUsed: ${newShape}`);
+        return newShape;
+    },
+
+    // Move shapes to the used lists
+    swapShapesToUsed: function(val) {
+        var tempArray = [];
+        for (var i = 0; i < game.shapesList.length; i++) {
+            if (game.shapesList[i] != val) { tempArray.push(game.shapesList[i]); } else {
+                game.shapesUsed.push(game.shapesList[i]);
+                // console.log(`<TO USED>\nVal: ${game.shapesList[i]}`);
+            }
+        }
+        game.shapesList = tempArray;
+    },
+
+    // Move shapes to the available lists
+    swapShapesToList: function(val) {
+        var tempArray = [];
+        for (var i = 0; i < game.shapesUsed.length; i++) {
+            if (game.shapesUsed[i] != val) { tempArray.push(game.shapesUsed[i]); } else { 
+                game.shapesList.push(game.shapesUsed[i]);
+                // console.log(`<TO LIST>\nVal: ${game.shapesUsed[i]}`);
+            }
+        }
+        game.shapesUsed = tempArray;
     },
 
     // Level-Dependent Items
@@ -205,14 +330,23 @@ game.manager = {
         this.level4Luggage3 = [];
         this.level4Luggage4 = [];
 
+        // Restore Shapes Lists
+        game.shapesList = ["Circle", "Heart", "Pentagon", "Rectangle", "Square", "Star", "Triangle"];
+        // game.shapesList = ["Pentagon"];
+        game.shapesUsed = [];
+
         // Clear any objects that escaped deletion
-        var z = [];
+        /* var z = [];
         z.push(document.getElementsByClassName("planes"));
         z.push(document.getElementsByClassName("gems"));
         z.push(document.getElementsByClassName("shape-stand"));
         z.push(document.getElementsByClassName("gem-stand"));
         z.push(document.getElementsByClassName("cart"));
         z.push(document.getElementsByClassName("luggage"));
+        while (z.length > 0) {
+            console.log(`Deleting ${z.id}`);
+            z.pop().remove();
+        } */
     },
 
     // Check the level thresholds
@@ -246,15 +380,21 @@ game.manager = {
                     this.level4Cart.exit();
                     break;
             }
+            // Remove luggage
+            for (var i = 0; i < this.luggage.length; i++) {
+                this.luggage[i].exit();
+            }
             // Activate the next level
-            setTimeout(this.nextLevel(), 1800);
+            setTimeout(this.nextLevel(), 2000);
+
+            console.log(`Level: ${this.level}`);
         }
     },
 
     // Increase the level
     nextLevel: function() {
         this.level++;
-        setTimeout(game.drawOnce(), 200);
+        setTimeout(game.drawOnce(), 2000);
     },
 
     // Increase the player's score
@@ -285,6 +425,7 @@ game.manager = {
                 break;
             case 1:
                 if (this.level2Cart == null) {
+                    setTimeout(randInt(100, 800));
                     this.level2Cart = new cart2();
                 } else if (this.level2Cart.bagsLeft <= 0 && !this.level2Cart.ready) {
                     this.level2Cart = null;
@@ -292,6 +433,7 @@ game.manager = {
                 break;
             case 2:
                 if (this.level3Cart == null) {
+                    setTimeout(randInt(100, 800));
                     this.level3Cart = new cart3();
                 } else if (this.level3Cart.bagsLeft <= 0 && !this.level3Cart.ready) {
                     this.level3Cart = null;
@@ -299,6 +441,7 @@ game.manager = {
                 break;
             default:
                 if (this.level4Cart == null) {
+                    setTimeout(randInt(1000, 8000));
                     this.level4Cart = new cart4();
                 } else if (this.level4Cart.bagsLeft <= 0 && !this.level4Cart.ready) {
                     this.level4Cart = null;
