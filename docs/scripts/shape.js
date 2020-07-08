@@ -190,7 +190,7 @@ class Shape extends movingEntity {
 			}
 
 			// Remove if flag is set
-			if (this.removeMe) this.remove();
+			if (this.removeMe) this.destroyDiv();
 
 			// Perform CallBack
 			if (typeof CallBack !== "undefined") return CallBack();

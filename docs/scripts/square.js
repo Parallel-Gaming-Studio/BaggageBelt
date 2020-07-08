@@ -24,13 +24,8 @@ class square extends Shape {
         this.type = _type;
         this.points = _points;
 		
-		// Shape Div Builder
-		// var _divOpen = `<div id="${this.type}_${this.ID()}" class="gems" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
-		// $("#baseCanvas").after(_divOpen);
-		this.domElement; // = document.getElementById(`${this.type}_${this.ID()}`);
-		// this.setDOM(this.domElement);
+		this.domElement;
 		this.setOrigin(_targetShape);
-		// this.adjustStyles();
     }
 
     /*---------------------adjustStyles-----------------------------------\
@@ -42,9 +37,6 @@ class square extends Shape {
 		this.domElement.style.height = this.height + "px";
         this.domElement.style.top = this.position.y + "px";
         this.domElement.style.left = this.position.x + "px";
-
-        // this.updateAttributes();
-		// console.log(`Width: ${this.domElement.style.width} | Height: ${this.domElement.style.height} | Src: ${this.image.src}`);
     }
     
 	/*---------------------draw-------------------------------------------\
@@ -54,9 +46,6 @@ class square extends Shape {
     \--------------------------------------------------------------------*/
     draw() {
 		this.adjustStyles();
-        // console.log(`<Square>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
-        // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-		// super.draw();
     }
 	
 	/*---------------------destroyDiv-------------------------------------\

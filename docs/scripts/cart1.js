@@ -25,7 +25,12 @@ class cart1 extends Shape {
         this.image = _image;
         this.type = _type;
         this.points = _points;
-        this.bagsLeft = 5;
+        this.bagsLeft = randInt(1,5);
+
+        // Drop Zone
+        // - Cart 1
+        this.dropZonePos = new Vector2D(21, 5);
+        this.dropZoneDim = new Vector2D(301, 70);
 
         // Special Purpose Flags
         this.ready = false;
@@ -46,6 +51,15 @@ class cart1 extends Shape {
         this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
         this.setDOM(this.domElement);
         this.setOrigin(_targetReference);
+
+        // Draw all luggage
+        this.myOffset = new Vector2D(100, 100);
+        this.myOffset2 = new Vector2D(100, -100);
+        game.manager.luggage.push(new luggage_blue(this.level1LoadingPosition));
+        game.manager.luggage.push(new luggage_green(vecAdd(this.level1LoadingPosition, this.myOffset)));
+        game.manager.luggage.push(new luggage_purple(vecSubtract(this.level1LoadingPosition, this.myOffset)));
+        game.manager.luggage.push(new luggage_red(vecSubtract(this.level1LoadingPosition, this.myOffset2)));
+        game.manager.luggage.push(new luggage_yellow(vecAdd(this.level1LoadingPosition, this.myOffset2)));
         
         // Update all positions
         this.adjustPosition();
@@ -63,9 +77,6 @@ class cart1 extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
-        // console.log(`<Cart1>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
-        // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-        // super.draw();
     }
 
     /*---------------------adjustPosition---------------------------------\
@@ -117,10 +128,10 @@ class cart1 extends Shape {
 
         // Drop Zone Attributes
         // - Cart 1
-        var dropX = pos.x + 21 * engine.preserveAspectRatio;
-        var dropY = pos.y + 5 * engine.preserveAspectRatio;
-        var dropWidth = this.width - 301 * engine.preserveAspectRatio;
-        var dropHeight = this.height - 70 * engine.preserveAspectRatio;
+        var dropX = pos.x + this.dropZonePos.x * engine.preserveAspectRatio;
+        var dropY = pos.y + this.dropZonePos.y * engine.preserveAspectRatio;
+        var dropWidth = this.width - this.dropZoneDim.x * engine.preserveAspectRatio;
+        var dropHeight = this.height - this.dropZoneDim.y * engine.preserveAspectRatio;
 
         // Drop Area
         ctx.beginPath();

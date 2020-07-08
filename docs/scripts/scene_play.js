@@ -40,8 +40,8 @@ game.playDEBUGIncreasePoints = {
     },
     clickMe: function (e) {
         if (game.playDEBUGIncreasePoints.level < game.manager.pointsGoal.length) {
-            console.log("Clicked");
             game.player.score = game.manager.pointsGoal[game.playDEBUGIncreasePoints.level++];
+            console.log(`Increased level to ${game.manager.level + 1}`);
         }
         // Prevent this event from propagation (being called multiple times)
         e.stopPropagation();
@@ -1122,7 +1122,7 @@ game.gemTriangle = {
     blueScale: 0.6,
     greenScale: 0.65,
     purpleScale: 0.6,
-    redScale: 0.67,
+    redScale: 0.65,
     yellowScale: 0.5,
     topLeftScale: 0.7,
     topRightScale: 0.71,
@@ -1211,9 +1211,9 @@ game.gemTriangle = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.67 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -1223,9 +1223,9 @@ game.gemTriangle = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -1235,9 +1235,9 @@ game.gemTriangle = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.72 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.65 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -1247,9 +1247,9 @@ game.gemTriangle = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -1259,9 +1259,9 @@ game.gemTriangle = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.85 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
@@ -1428,9 +1428,9 @@ game.gemStar = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.67 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -1440,9 +1440,9 @@ game.gemStar = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -1452,9 +1452,9 @@ game.gemStar = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.72 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.65 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -1464,9 +1464,9 @@ game.gemStar = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -1476,9 +1476,9 @@ game.gemStar = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.85 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
@@ -1645,9 +1645,9 @@ game.gemHeart = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.67 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -1657,9 +1657,9 @@ game.gemHeart = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -1669,9 +1669,9 @@ game.gemHeart = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.72 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.65 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -1681,9 +1681,9 @@ game.gemHeart = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -1693,9 +1693,9 @@ game.gemHeart = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.85 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
@@ -1862,9 +1862,9 @@ game.gemSquare = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.67 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.67 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -1874,9 +1874,9 @@ game.gemSquare = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -1886,9 +1886,9 @@ game.gemSquare = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.72 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.65 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -1898,9 +1898,9 @@ game.gemSquare = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -1910,9 +1910,9 @@ game.gemSquare = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.88 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
@@ -2079,9 +2079,9 @@ game.gemCircle = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.67 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.67 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -2091,9 +2091,9 @@ game.gemCircle = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -2103,9 +2103,9 @@ game.gemCircle = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.71 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.65 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -2115,9 +2115,9 @@ game.gemCircle = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -2127,9 +2127,9 @@ game.gemCircle = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.89 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
@@ -2296,9 +2296,9 @@ game.gemPentagon = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.675 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.68 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -2308,9 +2308,9 @@ game.gemPentagon = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.685 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.61 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -2320,9 +2320,9 @@ game.gemPentagon = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.72 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.65 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -2332,9 +2332,9 @@ game.gemPentagon = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.675 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.61 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -2344,9 +2344,9 @@ game.gemPentagon = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.87 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(
@@ -2448,7 +2448,7 @@ game.gemRectangle = {
     getTransform: function (obj, loc) {
         // Temporary variables to store, combined, and return
         var tempDims, tempPos, x = obj.position.x, y = obj.position.y;
-        
+
         // Determine who the requesting object is
         switch (getNameOfType(obj.type)) {
             case "ShapeStand":
@@ -2513,9 +2513,9 @@ game.gemRectangle = {
                     this.blueScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2.1 - this.width / 2,
+                    obj.width * 0.68 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.69 - this.height / 2);
                 break;
             case "LuggageGreen":
                 tempDims = new Vector2D(
@@ -2525,9 +2525,9 @@ game.gemRectangle = {
                     this.greenScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggagePurple":
                 tempDims = new Vector2D(
@@ -2537,9 +2537,9 @@ game.gemRectangle = {
                     this.purpleScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.73 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.66 - this.height / 2);
                 break;
             case "LuggageRed":
                 tempDims = new Vector2D(
@@ -2549,9 +2549,9 @@ game.gemRectangle = {
                     this.redScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 2 - this.height / 2);
+                    obj.height * 0.63 - this.height / 2);
                 break;
             case "LuggageYellow":
                 tempDims = new Vector2D(
@@ -2561,9 +2561,9 @@ game.gemRectangle = {
                     this.yellowScale * this.org_height * engine.preserveAspectRatio);
                 tempPos = new Vector2D(
                     // X
-                    obj.width / 2 - this.width / 2,
+                    obj.width * 0.70 - this.width / 2,
                     // Y
-                    obj.height / 1.8 - this.height / 2);
+                    obj.height * 0.88 - this.height / 2);
                 break;
             case "PlaneLeftTop":
                 tempDims = new Vector2D(

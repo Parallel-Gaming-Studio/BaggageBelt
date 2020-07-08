@@ -63,9 +63,6 @@ class cart3 extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
-        // console.log(`<Cart3>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
-        // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-        // super.draw();
     }
 
     /*---------------------adjustPosition---------------------------------\
