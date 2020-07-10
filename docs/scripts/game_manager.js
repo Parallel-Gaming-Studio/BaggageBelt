@@ -100,8 +100,12 @@ game.gameController = {
                     var touchInfo = engine.input.getTouch(j);
                     if (touchInfo.type == "START") {
                         // Perform actions when start is pressed
+                        game.manager.selectLuggage(new Vector2D(touchInfo.x, touchInfo.y));
+                        game.timeoutOverlay.refreshTimer();
                     } else if (touchInfo.type == "END") {
                         // Perform actions when end is pressed
+                        game.manager.dropLuggage(new Vector2D(touchInfo.x, touchInfo.y));
+                        game.timeoutOverlay.refreshTimer();
                     }
                 }
             }
@@ -359,7 +363,7 @@ game.drawOnce = function () {
             break;
     }
     // DEBUG
-    console.log("<GAME> Loaded Scene: " + this.currState);
+    // console.log("<GAME> Loaded Scene: " + this.currState);
 };
 //   - First draw event
 window.onload = function () {

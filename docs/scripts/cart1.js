@@ -46,21 +46,81 @@ class cart1 extends Shape {
         this.level1ExitPosition = _targetReference.posExitLevel1;
 
         // Cart Div Builder
-        var _divOpen = `<div id="${this.type}_${this.ID()}" class="cart" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
-        $("#baseCanvas").after(_divOpen);
+        var _divOpen = `<div id="${this.type}_${this.ID()}" class="cart" style="display:block;top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
+        
+        // Div closer
+        var _divClose = `</div>`;
+
+        // Div Builder
+        var _divBuilder = _divOpen;
+
+        // Generate random luggage for each cart
+        this.luggagePieces = [];
+        this.luggageShapes = [];
+        // - Cart 1
+        for (var i = 0; i < this.bagsLeft; i++) {
+            // Generate a random piece of luggage
+            let tempLuggage = game.manager.generateLuggage();
+            // Update the luggage dimensions
+            tempLuggage.width = tempLuggage.reference.width;
+            tempLuggage.height = tempLuggage.reference.height;
+            
+            // Set a random position within the cart for the piece of luggage
+            tempLuggage.setNewPosition(new Vector2D(
+                // X
+                randInt(this.dropZonePos.x * engine.preserveAspectRatio, this.dropZonePos.x * engine.preserveAspectRatio + tempLuggage.width / 2),
+                // Y
+                this.dropZonePos.y * engine.preserveAspectRatio + (this.height - this.dropZoneDim.y) * engine.preserveAspectRatio - tempLuggage.height
+            ));
+            // Add to this truck's list of luggage pieces
+            this.luggagePieces.push(tempLuggage);
+            // Luggage Div
+            var _luggageDiv = `<div id="${tempLuggage.type}_${tempLuggage.ID()}" class="luggage" style="top:${tempLuggage.position.y}px;left:${tempLuggage.position.x}px;width:${tempLuggage.width}px;height:${tempLuggage.height}px;background-image: url('${tempLuggage.image.src}');z-index:${25+i};">`;
+
+            // Generate a shape for the luggage
+            tempLuggage.shape = game.manager.generateLuggageShape();
+            // Store the luggage shape's transform
+            let tempArray = JSON.parse(tempLuggage.shape.reference.getTransform(tempLuggage));
+            tempLuggage.shape.height = tempArray.height;
+            tempLuggage.shape.width = tempArray.width;
+            tempLuggage.shape.position = new Vector2D(tempArray.x, tempArray.y);
+
+            // Shape Div
+            var _shapeDiv = `<div id="${tempLuggage.shape.type}_${tempLuggage.shape.ID()}" class="gems" style="position:relative;display:block;top:${tempArray.y}px;left:${tempArray.x}px;width:${tempArray.width}px;height:${tempArray.height}px;background-image: url('${tempLuggage.shape.image.src}');">`;
+
+            // Add to div builder
+            _divBuilder += _luggageDiv + _shapeDiv + _divClose + _divClose;
+        }
+        
+        // Close the cart's div
+        _divBuilder += _divClose;
+        $("#baseCanvas").after(_divBuilder);
+
+        // Update the DOM for each piece of luggage and their respective shapes
+        for (var i = 0; i < this.luggagePieces.length; i++) {
+            // Define the luggage DOM
+            this.luggagePieces[i].domElement = document.getElementById(`${this.luggagePieces[i].type}_${this.luggagePieces[i].ID()}`);
+            // Register the luggage DOM
+            this.luggagePieces[i].setDOM(this.luggagePieces[i].domElement);
+            // Register the luggage reference
+            this.luggagePieces[i].setOrigin(this.luggagePieces[i].reference);
+
+            // Define the luggage shape's DOM
+            this.luggagePieces[i].shape.domElement = document.getElementById(`${this.luggagePieces[i].shape.type}_${this.luggagePieces[i].shape.ID()}`);
+            // Register the luggage shape's DOM
+            this.luggagePieces[i].shape.setDOM(this.luggagePieces[i].shape.domElement);
+            // Register the luggage shape's reference
+            this.luggagePieces[i].shape.setOrigin(this.luggagePieces[i].shape.reference);
+
+            // Update the luggage's position
+            this.luggagePieces[i].adjustPosition();
+        }
+
+        // Update the cart's DOM
         this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
         this.setDOM(this.domElement);
         this.setOrigin(_targetReference);
 
-        // Draw all luggage
-        this.myOffset = new Vector2D(100, 100);
-        this.myOffset2 = new Vector2D(100, -100);
-        game.manager.luggage.push(new luggage_blue(this.level1LoadingPosition));
-        game.manager.luggage.push(new luggage_green(vecAdd(this.level1LoadingPosition, this.myOffset)));
-        game.manager.luggage.push(new luggage_purple(vecSubtract(this.level1LoadingPosition, this.myOffset)));
-        game.manager.luggage.push(new luggage_red(vecSubtract(this.level1LoadingPosition, this.myOffset2)));
-        game.manager.luggage.push(new luggage_yellow(vecAdd(this.level1LoadingPosition, this.myOffset2)));
-        
         // Update all positions
         this.adjustPosition();
         this.adjustStyles();
@@ -147,6 +207,9 @@ class cart1 extends Shape {
     | - Removes this cart from the game
     \--------------------------------------------------------------------*/
     remove() {
+        for (var i = 0; i < this.luggagePieces.length; i++) {
+            try { this.luggagePieces[i].exit() } catch (e) {}
+        }
         game.manager.removeEntity(this);
     }
 

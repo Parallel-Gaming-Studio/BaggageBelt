@@ -291,7 +291,7 @@ class plane_right_bottom extends Shape {
     \--------------------------------------------------------------------*/
     exit() {
         // Clear the plane's shape from the used list
-        game.manager.swapShapesToList(getNameOfType(this.shape.type));
+        // game.manager.swapShapesToList(getNameOfType(this.shape.type));
 
         // Determine game level and set position
         switch (game.manager.level) {

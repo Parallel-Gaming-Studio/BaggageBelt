@@ -78,6 +78,9 @@ game.shapesList = ["Circle", "Heart", "Pentagon", "Rectangle", "Square", "Star",
 // game.shapesList = ["Pentagon"];
 game.shapesUsed = [];
 
+// Luggage List
+game.luggageList = ["Blue", "Green", "Purple", "Red", "Yellow"];
+
 // Visible Debugging Console
 game.myConsole = {
     
