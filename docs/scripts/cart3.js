@@ -26,7 +26,7 @@ class cart3 extends Shape {
         this.type = _type;
         this.points = _points;
         this.numberOfCarts = 3;
-        this.bagsLeft = randInt(this.numberOfCarts, this.numberOfCarts * 5);
+        this.bagsLeft = randInt(Math.min(this.numberOfCarts, game.manager.getBagsLeft()), Math.max(this.numberOfCarts * 5, game.manager.getBagsLeft()));
 
         // Drop Zones
         // - Cart 1
@@ -64,15 +64,15 @@ class cart3 extends Shape {
         // Generate random luggage for each cart
         this.luggagePieces = [];
         this.luggageShapes = [];
-        let totalBagsToFill = 0;
-        for (var b = 0; b < game.manager.planes.length; b++) {
-            totalBagsToFill += game.manager.planes[b].bagsLeft;
-        }
+        let totalBagsToFill = this.bagsLeft;
+
+        console.log(`\n\n<Truck 3> has ${this.bagsLeft} bags.\nPlanes have room for ${game.manager.getBagsLeft()} bags.\n\n`);
+
         // - Carts
         // Loop through the carts
         for (var c = 0; c < this.numberOfCarts; c++) {
             let bagsLeftToFill = 0;
-            console.log(`Cart 3 - Bags to Fill (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            console.log(`<Truck 3> Bags to fill in cart ${c} (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
             if (totalBagsToFill > 5) {
                 bagsLeftToFill = Math.round(totalBagsToFill / this.numberOfCarts);
                 totalBagsToFill -= bagsLeftToFill;
@@ -80,7 +80,7 @@ class cart3 extends Shape {
                 bagsLeftToFill = totalBagsToFill;
                 totalBagsToFill = 0;
             }
-            console.log(`Cart 3 - Bags to Fill (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            console.log(`<Truck 3> Bags to fill in cart ${c} (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
             for (var i = 0; i < bagsLeftToFill; i++) {
                 // Generate a random piece of luggage
                 let tempLuggage = game.manager.generateLuggage();
@@ -272,6 +272,7 @@ class cart3 extends Shape {
     \--------------------------------------------------------------------*/
     destroyDiv() {
         this.domElement.remove();
+        // game.manager.removeEntity(this);
     }
 
 	/*---------------------getPoints--------------------------------------\

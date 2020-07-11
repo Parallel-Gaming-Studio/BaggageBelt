@@ -168,7 +168,7 @@ class Shape extends movingEntity {
 		$(`#${this.domElement.id}`).animate({
 			top: `${pos.y}px`, // - this.toCenter.y}px`,
 			left: `${pos.x}px` // - this.toCenter.x}px`
-		}, 1750, "swing", () => {
+		}, 750, "swing", () => {
 			// Clear moving flag
 			this.isMoving = false;
 
@@ -196,7 +196,7 @@ class Shape extends movingEntity {
 				typeName == "LuggageRed" ||
 				typeName == "LuggageYellow") {
 				this.updateAttributes();
-				game.manager.compareLuggageWithPlane(this);
+				if (!this.ready) game.manager.compareLuggageWithPlane(this);
 			}
 
 			// Remove if flag is set
@@ -222,11 +222,11 @@ class Shape extends movingEntity {
 
 		// Pop animation
 		// Update the z-index, placing it on the top-most layer, then animate
-		$(`#${this.domElement.id}`).css("z-index", 22).animate({
-			top: "0px",
-			left: "0px",
+		$(`#${this.domElement.id}`).css("z-index", 40).animate({
+			top: `${pos.y}px`,
+			left: `${pos.x}px`,
 			opacity: "0.0"
-		}, 750, () => {
+		}, 500, () => {
 
 			// Clear this shape's moving flag, enabling it for deletion
 			this.isMoving = false;
@@ -246,7 +246,7 @@ class Shape extends movingEntity {
 
 			// Remove this shape
 			// game.gameEntities.removeEntity(this);
-			this.exit(pos);
+			this.exit();
 
 			// Return the Callback if it's requested
 			if (Callback !== "undefined") return Callback;

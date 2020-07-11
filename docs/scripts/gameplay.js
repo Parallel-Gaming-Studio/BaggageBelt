@@ -53,16 +53,16 @@ game.manager = {
         // Carts
         switch (this.level) {
             case 0:
-                this.level1Cart.drawDropZone();
+                if (this.level1Cart != null) this.level1Cart.drawDropZone();
                 break;
             case 1:
-                this.level2Cart.drawDropZone();
+                if (this.level2Cart != null) this.level2Cart.drawDropZone();
                 break;
             case 2:
-                this.level3Cart.drawDropZone();
+                if (this.level3Cart != null) this.level3Cart.drawDropZone();
                 break;
             default:
-                this.level4Cart.drawDropZone();
+                if (this.level4Cart != null) this.level4Cart.drawDropZone();
                 break;
         }
     },
@@ -105,6 +105,15 @@ game.manager = {
         return newShape;
     },
 
+    // Get the number of bags left in each plane
+    getBagsLeft: function () {
+        let count = 0;
+        for (var i = 0; i < this.planes.length; i++) {
+            count += this.planes[i].bagsLeft;
+        }
+        return count;
+    },
+
     // Container for all luggage
     luggage: [],
     // Remove luggage
@@ -121,9 +130,9 @@ game.manager = {
 
     // Compare Luggage With Plane
     compareLuggageWithPlane: function (bag) {
-        console.log(`Compare luggage with each plane...`);
+        // console.log(`Compare luggage with each plane...`);
         // Ignore the action if no luggage is passed
-        if (bag == null || this.selectedLuggage == null) return;
+        if (bag == null) return;
 
         // Use the location of this luggage's parent
         let tempParent;
@@ -142,29 +151,42 @@ game.manager = {
                 break;
         }
         // Convert this luggage's local space position (within the parent) to a world space position
-        console.log(`Comparing Luggage Positions:\nParent: ${tempParent.position}\nLuggage: ${bag.center}`);
+        // console.log(`Comparing Luggage Positions:\nParent: ${tempParent.position}\nLuggage: ${bag.center}`);
         let tempCenter = vecAdd(tempParent.position, bag.center);
         // Adjust the center for the luggage's center offset
         tempCenter = vecSubtract(tempCenter, bag.toCenter);
-        
+
         let foundMatch = false;
         for (var i = 0; i < this.planes.length; i++) {
             // Convert the drop zone's local space to world space
             let dzWorld = vecAdd(this.planes[i].position, this.planes[i].dropZone);
-            console.log(`Comparing ${getNameOfType(bag.type)} ${bag.ID()}\n@ ${tempCenter}\nWith ${getNameOfType(this.planes[i].type)}\n@ ${dzWorld}\nRadius: ${this.planes[i].dropZoneRadius}\nDist: ${vec2DDistance(dzWorld, tempCenter)}`);
+            // console.log(`Comparing ${getNameOfType(bag.type)} ${bag.ID()}\n@ ${tempCenter}\nWith ${getNameOfType(this.planes[i].type)}\n@ ${dzWorld}\nRadius: ${this.planes[i].dropZoneRadius}\nDist: ${vec2DDistance(dzWorld, tempCenter)}`);
+
             // Check if the shape is within the drop zone's radius
             if (vec2DDistance(dzWorld, tempCenter) <= this.planes[i].dropZoneRadius) {
-                console.log(`Shape and plane match!`);
-                foundMatch = true;
-                // Convert the dzWorld position to the luggage's local space
-                let dzWorldCenter = vecAdd(vecSubtract(dzWorld, bag.center), bag.toCenter);
-                bag.popShape(dzWorldCenter);
-                break;
+                // console.log(`Comparing:\nBag: ${getNameOfType(bag.shape.type)}\nPlane: ${getNameOfType(this.planes[i].shape.type)}`)
+                if (bag.shape.type == this.planes[i].shape.type) {
+                    foundMatch = true;
+                    // Convert the dzWorld position to the luggage's local space
+                    let dzWorldCenter = vecSubtract(dzWorld, tempParent.position);
+                    dzWorldCenter = vecSubtract(dzWorldCenter, bag.toCenter);
+
+                    // console.log(`Shape and plane match!\ndzWorldCenter:\n${dzWorldCenter}\ndzWorld:\n${dzWorld}`);
+
+                    bag.popShape(dzWorldCenter);
+                    this.planes[i].bagsLeft--;
+                    tempParent.bagsLeft--;
+                    console.log(`${this.planes[i].type} has ${this.planes[i].bagsLeft} left.\nCart has ${tempParent.bagsLeft} left.`);
+                    break;
+                }
             }
         }
 
         // Return the luggage to its original position on the cart
-        if (!foundMatch) bag.forceMoveToLocation(bag.lastPosition);
+        if (!foundMatch) {
+            bag.forceMoveToLocation(bag.lastPosition);
+            bag.ready = true;
+        }
 
         // Clear the selected luggage
         this.selectedLuggage = null;
@@ -202,32 +224,32 @@ game.manager = {
 
         // Counts each type of luggage shape currently in use
         var lugCount = { "Circle": 0, "Heart": 0, "Pentagon": 0, "Rectangle": 0, "Square": 0, "Star": 0, "Triangle": 0 };
-        for (var i = 0; i < this.luggage.length; i++) {
+        for (var i = 0; i < this.planes.length; i++) {
             // console.log(`Luggage: ${getNameOfType(this.luggage[i].type)}`);
             // Skip the requesting piece of luggage
-            if (typeof this.luggage[i].shape === "undefined") continue;
+            if (typeof this.planes[i].shape === "undefined") continue;
 
-            switch (getNameOfType(this.luggage[i].shape.type)) {
+            switch (getNameOfType(this.planes[i].shape.type)) {
                 case "Circle":
-                    lugCount.Circle++;
+                    lugCount.Circle += this.planes[i].bagsLeft;
                     break;
                 case "Heart":
-                    lugCount.Heart++;
+                    lugCount.Heart += this.planes[i].bagsLeft;
                     break;
                 case "Pentagon":
-                    lugCount.Pentagon++;
+                    lugCount.Pentagon += this.planes[i].bagsLeft;
                     break;
                 case "Rectangle":
-                    lugCount.Rectangle++;
+                    lugCount.Rectangle += this.planes[i].bagsLeft;
                     break;
                 case "Square":
-                    lugCount.Square++;
+                    lugCount.Square += this.planes[i].bagsLeft;
                     break;
                 case "Star":
-                    lugCount.Star++;
+                    lugCount.Star += this.planes[i].bagsLeft;
                     break;
                 case "Triangle":
-                    lugCount.Triangle++;
+                    lugCount.Triangle += this.planes[i].bagsLeft;
                     break;
             }
         }
@@ -240,70 +262,70 @@ game.manager = {
             let bags = this.planes[i].bagsLeft;
             switch (tempType) {
                 case "Circle":
-                    if (lugCount.Circle <= bags) {
-                        lugCount.Circle++;
+                    if (lugCount.Circle > 0) {
+                        lugCount.Circle--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Circle > bags) {
+                        if (lugCount.Circle <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Circle"), 1);
                             // console.log(`Removed "Circle" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Circle}`);
                         }
                     }
                     break;
                 case "Heart":
-                    if (lugCount.Heart <= bags) {
-                        lugCount.Heart++;
+                    if (lugCount.Heart > 0) {
+                        lugCount.Heart--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Heart > bags) {
+                        if (lugCount.Heart <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Heart"), 1);
                             // console.log(`Removed "Heart" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Heart}`);
                         }
                     }
                     break;
                 case "Pentagon":
-                    if (lugCount.Pentagon <= bags) {
-                        lugCount.Pentagon++;
+                    if (lugCount.Pentagon > 0) {
+                        lugCount.Pentagon--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Pentagon > bags) {
+                        if (lugCount.Pentagon <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Pentagon"), 1);
                             // console.log(`Removed "Pentagon" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Pentagon}`);
                         }
                     }
                     break;
                 case "Rectangle":
-                    if (lugCount.Rectangle <= bags) {
-                        lugCount.Rectangle++;
+                    if (lugCount.Rectangle > 0) {
+                        lugCount.Rectangle--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Rectangle > bags) {
+                        if (lugCount.Rectangle <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Rectangle"), 1);
                             // console.log(`Removed "Rectangle" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Rectangle}`);
                         }
                     }
                     break;
                 case "Square":
-                    if (lugCount.Square <= bags) {
-                        lugCount.Square++;
+                    if (lugCount.Square > 0) {
+                        lugCount.Square--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Square > bags) {
+                        if (lugCount.Square <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Square"), 1);
                             // console.log(`Removed "Square" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Square}`);
                         }
                     }
                     break;
                 case "Star":
-                    if (lugCount.Star <= bags) {
-                        lugCount.Star++;
+                    if (lugCount.Star > 0) {
+                        lugCount.Star--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Star > bags) {
+                        if (lugCount.Star <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Star"), 1);
                             // console.log(`Removed "Star" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Star}`);
                         }
                     }
                     break;
                 case "Triangle":
-                    if (lugCount.Triangle <= bags) {
-                        lugCount.Triangle++;
+                    if (lugCount.Triangle > 0) {
+                        lugCount.Triangle--;
                         tempPlanes.push(tempType);
-                        if (lugCount.Triangle > bags) {
+                        if (lugCount.Triangle <= 0) {
                             tempPlanes.splice(tempPlanes.indexOf("Triangle"), 1);
                             // console.log(`Removed "Triangle" from TempPlanes:\nList: ${tempPlanes}\nCounts: ${lugCount.Triangle}`);
                         }
@@ -360,26 +382,31 @@ game.manager = {
     // Select a piece of luggage at the given position
     selectedLuggage: null,
     selectLuggage: function (pos) {
-        console.log(`Looking for luggage @ ${pos}...`);
+        // console.log(`Looking for luggage @ ${pos}...`);
         try {
             this.selectedLuggage = this.getLuggageAtCursor(pos);
-            console.log(`Luggage found:\n${this.selectedLuggage}`);
+            // Set this luggage's "lastPosition"
+            this.selectedLuggage.lastPosition = this.selectedLuggage.position;
+            // console.log(`Luggage found:\n${this.selectedLuggage}`);
             return true;
         } catch (e) {
             this.selectedLuggage = null;
-            console.log(`No luggage found!`);
+            // console.log(`No luggage found!`);
             return false;
         }
     },
 
     // Drop the selected piece of luggage
     dropLuggage: function (pos) {
-        console.log(`Dropping luggage at...\n${pos}`);
+        // console.log(`Dropping luggage at...\n${pos}`);
         // Ignore the action if no luggage is selected
         if (this.selectedLuggage == null) return;
 
+        // Get a new pointer for the luggage
+        let bag = this.selectedLuggage;
+
         // Remove the luggage's ready state
-        this.selectedLuggage.ready = false;
+        bag.ready = false;
 
         // Convert the cursor location to local space
         let tempParent;
@@ -397,19 +424,20 @@ game.manager = {
                 tempParent = this.level4Cart;
                 break;
         }
-        
+
         // Convert the click to local space
         tempCenter = vecSubtract(pos, tempParent.position);
         // Offset the location by the luggage's center
-        let localPos = vecSubtract(tempCenter, this.selectedLuggage.toCenter);
-        
+        let localPos = vecSubtract(tempCenter, bag.toCenter);
+
         // Move luggage to location for its comparison test
-        console.log(`Moving ${this.selectedLuggage.type} to:\nWorld: ${pos}\nLocal: ${localPos}`);
-        this.selectedLuggage.forceMoveToLocation(localPos);
+        // console.log(`Moving ${this.selectedLuggage.type} to:\nWorld: ${pos}\nLocal: ${localPos}`);
+        bag.forceMoveToLocation(localPos);
     },
 
     // Find luggage at the provided position
     getLuggageAtCursor: function (pos) {
+        var returnLuggage = null;
         for (var i = 0; i < this.luggage.length; i++) {
             // Store this piece of luggage
             let testLuggage = this.luggage[i];
@@ -432,17 +460,25 @@ game.manager = {
                     break;
             }
             // Convert this luggage's local space position (within the parent) to a world space position
-            console.log(`Luggage Positions:\nParent: ${tempParent.position}\nLuggage: ${testLuggage.center}`);
+            // console.log(`Luggage Positions:\nParent: ${tempParent.position}\nLuggage: ${testLuggage.center}`);
             let tempCenter = vecAdd(tempParent.position, testLuggage.center);
-            console.log(`${testLuggage.type} ${testLuggage.ID()} @ ${tempCenter} | W: ${testLuggage.width / 2}\nDist: ${vec2DDistance(tempCenter, pos)}`);
+            // console.log(`${testLuggage.type} ${testLuggage.ID()} @ ${tempCenter} | W: ${testLuggage.width / 2}\nDist: ${vec2DDistance(tempCenter, pos)}`);
             if (vec2DDistance(tempCenter, pos) < testLuggage.width / 2) {
                 // this.selectedLuggage = testLuggage;
-                console.log(`Selected Luggage:\n${testLuggage}`);
-                this.luggage[i].lastPosition = this.luggage[i].position;
-                return testLuggage;
+                // console.log(`Selected Luggage:\n${testLuggage}`);
+                if (returnLuggage == null) {
+                    this.luggage[i].lastPosition = this.luggage[i].position;
+                    returnLuggage = testLuggage;
+                } else {
+                    if (returnLuggage.domElement.style.getPropertyValue("z-index") < testLuggage.domElement.style.getPropertyValue("z-index")) {
+                        returnLuggage = testLuggage;
+                    }
+                }
+
+
             }
         }
-        return null;
+        return returnLuggage;
     },
 
     // Move shapes to the used lists
@@ -580,6 +616,7 @@ game.manager = {
                 this.planes[i].bagsLeft = 0;
                 this.planes[i].exit();
             }
+            this.planes = [];
             // Remove Cart
             switch (this.level) {
                 case 0:
@@ -603,6 +640,7 @@ game.manager = {
             for (var i = 0; i < this.luggage.length; i++) {
                 this.luggage[i].exit();
             }
+            this.luggage = [];
             // Activate the next level
             setTimeout(this.nextLevel(), 2000);
 
@@ -668,6 +706,41 @@ game.manager = {
                     this.level4Cart = new cart4();
                 } else if (this.level4Cart.bagsLeft <= 0 && !this.level4Cart.ready) {
                     this.level4Cart = null;
+                }
+                break;
+        }
+    },
+
+    // Check the cart's capacity
+    checkCartCapacity: function () {
+        // Perform actions based on the current level
+        switch (this.level) {
+            case 0:
+                if (this.level1Cart != null) {
+                    if (this.level1Cart.bagsLeft <= 0) {
+                        this.level1Cart.exit();
+                    }
+                }
+                break;
+            case 1:
+                if (this.level2Cart != null) {
+                    if (this.level2Cart.bagsLeft <= 0) {
+                        this.level2Cart.exit();
+                    }
+                }
+                break;
+            case 2:
+                if (this.level3Cart != null) {
+                    if (this.level3Cart.bagsLeft <= 0) {
+                        this.level3Cart.exit();
+                    }
+                }
+                break;
+            default:
+                if (this.level4Cart != null) {
+                    if (this.level4Cart.bagsLeft <= 0) {
+                        this.level4Cart.exit();
+                    }
                 }
                 break;
         }
@@ -751,6 +824,9 @@ game.manager = {
 
         // Manage the carts
         this.cartControl();
+
+        // Check cart capacity
+        this.checkCartCapacity();
 
         // Manage the luggage
         this.luggageControl();

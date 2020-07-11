@@ -25,7 +25,7 @@ class cart1 extends Shape {
         this.image = _image;
         this.type = _type;
         this.points = _points;
-        this.bagsLeft = randInt(1,5);
+        this.bagsLeft = randInt(1,Math.min(5, game.manager.getBagsLeft()));
 
         // Drop Zone
         // - Cart 1
@@ -218,6 +218,7 @@ class cart1 extends Shape {
     \--------------------------------------------------------------------*/
     destroyDiv() {
         this.domElement.remove();
+        // game.manager.removeEntity(this);
     }
 
 	/*---------------------getPoints--------------------------------------\
