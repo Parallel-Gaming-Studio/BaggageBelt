@@ -25,7 +25,9 @@ class cart1 extends Shape {
         this.image = _image;
         this.type = _type;
         this.points = _points;
-        this.bagsLeft = randInt(1,Math.min(5, game.manager.getBagsLeft()));
+        this.numberOfCarts = 1;
+        let planeBags = game.manager.getBagsLeft();
+        this.bagsLeft = randInt(Math.min(this.numberOfCarts, planeBags), planeBags);
 
         // Drop Zone
         // - Cart 1

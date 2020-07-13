@@ -107,15 +107,45 @@ game.manager = {
 
     // Get the number of bags left in each plane
     getBagsLeft: function () {
+        // Reset luggage counts
+        this.lugCount = { "Circle": 0, "Heart": 0, "Pentagon": 0, "Rectangle": 0, "Square": 0, "Star": 0, "Triangle": 0 };
+
         let count = 0;
         for (var i = 0; i < this.planes.length; i++) {
+            // Add to the total number of baggage slots available
             count += this.planes[i].bagsLeft;
+
+            // Store the baggage counts by shape
+            switch (getNameOfType(this.planes[i].shape.type)) {
+                case "Circle":
+                    this.lugCount.Circle += this.planes[i].bagsLeft;
+                    break;
+                case "Heart":
+                    this.lugCount.Heart += this.planes[i].bagsLeft;
+                    break;
+                case "Pentagon":
+                    this.lugCount.Pentagon += this.planes[i].bagsLeft;
+                    break;
+                case "Rectangle":
+                    this.lugCount.Rectangle += this.planes[i].bagsLeft;
+                    break;
+                case "Square":
+                    this.lugCount.Square += this.planes[i].bagsLeft;
+                    break;
+                case "Star":
+                    this.lugCount.Star += this.planes[i].bagsLeft;
+                    break;
+                case "Triangle":
+                    this.lugCount.Triangle += this.planes[i].bagsLeft;
+                    break;
+            }
         }
         return count;
     },
 
     // Container for all luggage
     luggage: [],
+    lugCount: { "Circle": 0, "Heart": 0, "Pentagon": 0, "Rectangle": 0, "Square": 0, "Star": 0, "Triangle": 0 },
     // Remove luggage
     removeLuggage: function (delLuggage) {
         let tempList = [];
@@ -221,7 +251,67 @@ game.manager = {
     generateLuggageShape: function () {
         // Ensure any old luggage is removed
         this.luggageControl();
+        
+        // Update the baggage slot counts
+        this.getBagsLeft();
 
+        // Temporary luggage count object
+        let luggageCounts = [];
+
+        // Store all the available shapes currently available
+        for (x in this.lugCount) {
+            if (this.lugCount[x] > 0) {
+                luggageCounts.push(x);
+            }
+        }
+
+        var newShape;
+        var getShape = randInt(0, (luggageCounts.length - 1));
+        // console.log(`Luggage Selecting Shape:\nList: ${tempPlanes}\nIndex: ${getShape}\nShape: ${tempPlanes[getShape]}`);
+        switch (luggageCounts[getShape]) {
+            case "Circle":
+                newShape = new circle();
+                this.lugCount["Circle"]--;
+                break;
+            case "Heart":
+                newShape = new heart();
+                this.lugCount["Heart"]--;
+                break;
+            case "Pentagon":
+                newShape = new pentagon();
+                this.lugCount["Pentagon"]--;
+                break;
+            case "Rectangle":
+                newShape = new rectangle();
+                this.lugCount["Rectangle"]--;
+                break;
+            case "Square":
+                newShape = new square();
+                this.lugCount["Square"]--;
+                break;
+            case "Star":
+                newShape = new star();
+                this.lugCount["Star"]--;
+                break;
+            case "Triangle":
+                newShape = new triangle();
+                this.lugCount["Triangle"]--;
+                break;
+        }
+        // console.log(`Luggage Shape Update:\nList: ${tempPlanes}\nUsed: ${newShape}`);
+        return newShape;
+
+        // Perform ONCE and return the lugCount object
+
+
+
+
+
+
+
+
+
+        /*
         // Counts each type of luggage shape currently in use
         var lugCount = { "Circle": 0, "Heart": 0, "Pentagon": 0, "Rectangle": 0, "Square": 0, "Star": 0, "Triangle": 0 };
         for (var i = 0; i < this.planes.length; i++) {
@@ -256,6 +346,12 @@ game.manager = {
 
         // Store available shapes
         var tempPlanes = [];
+        for (x in tempPlanes) {
+            if (tempPlanes[x] > 0) {
+                console.log(`Generate Luggage\nAdding ${x} to tempPlanes.`);
+                tempPlanes.push(x);
+            }
+        }
         // Get a list of all available planes
         for (var i = 0; i < this.planes.length; i++) {
             let tempType = getNameOfType(this.planes[i].shape.type);
@@ -362,6 +458,7 @@ game.manager = {
         }
         // console.log(`Luggage Shape Update:\nList: ${tempPlanes}\nUsed: ${newShape}`);
         return newShape;
+        */
     },
 
     // Manage luggage items
@@ -685,28 +782,28 @@ game.manager = {
                     this.level1Cart = new cart1();
                 } else if (this.level1Cart.bagsLeft <= 0 && !this.level1Cart.ready) {
                     this.level1Cart = null;
-                }
+                } else if (this.luggage.length <= 0) this.level1Cart.exit();
                 break;
             case 1:
                 if (this.level2Cart == null) {
                     this.level2Cart = new cart2();
                 } else if (this.level2Cart.bagsLeft <= 0 && !this.level2Cart.ready) {
                     this.level2Cart = null;
-                }
+                } else if (this.luggage.length <= 0) this.level2Cart.exit();
                 break;
             case 2:
                 if (this.level3Cart == null) {
                     this.level3Cart = new cart3();
                 } else if (this.level3Cart.bagsLeft <= 0 && !this.level3Cart.ready) {
                     this.level3Cart = null;
-                }
+                } else if (this.luggage.length <= 0) this.level3Cart.exit();
                 break;
             default:
                 if (this.level4Cart == null) {
                     this.level4Cart = new cart4();
                 } else if (this.level4Cart.bagsLeft <= 0 && !this.level4Cart.ready) {
                     this.level4Cart = null;
-                }
+                } else if (this.luggage.length <= 0) this.level4Cart.exit();
                 break;
         }
     },
@@ -754,6 +851,12 @@ game.manager = {
                 if (this.level1Plane == null) {
                     this.level1Plane = new plane_left_top();
                 } else if (this.level1Plane.bagsLeft <= 0 && !this.level1Plane.ready) {
+                    for (var i = 0; i < this.level1Cart.luggagePieces.length; i++) {
+                        if (this.level1Cart.luggagePieces[i].shape.type == this.level1Plane.shape.type) {
+                            this.level1Cart.luggagePieces[i].exit();
+                            this.level1Cart.bagsLeft--;
+                        }
+                    }
                     this.level1Plane = null;
                 }
                 break;
@@ -761,11 +864,23 @@ game.manager = {
                 if (this.level2PlaneLeft == null) {
                     this.level2PlaneLeft = new plane_left_top();
                 } else if (this.level2PlaneLeft.bagsLeft <= 0 && !this.level2PlaneLeft.ready) {
+                    for (var i = 0; i < this.level2Cart.luggagePieces.length; i++) {
+                        if (this.level2Cart.luggagePieces[i].shape.type == this.level2PlaneLeft.shape.type) {
+                            this.level2Cart.luggagePieces[i].exit();
+                            this.level2Cart.bagsLeft--;
+                        }
+                    }
                     this.level2PlaneLeft = null;
                 }
                 if (this.level2PlaneRight == null) {
                     this.level2PlaneRight = new plane_right_top();
                 } else if (this.level2PlaneRight.bagsLeft <= 0 && !this.level2PlaneRight.ready) {
+                    for (var i = 0; i < this.level2Cart.luggagePieces.length; i++) {
+                        if (this.level2Cart.luggagePieces[i].shape.type == this.level2PlaneRight.shape.type) {
+                            this.level2Cart.luggagePieces[i].exit();
+                            this.level2Cart.bagsLeft--;
+                        }
+                    }
                     this.level2PlaneRight = null;
                 }
                 break;
@@ -773,16 +888,34 @@ game.manager = {
                 if (this.level3PlaneLeft == null) {
                     this.level3PlaneLeft = new plane_left_top();
                 } else if (this.level3PlaneLeft.bagsLeft <= 0 && !this.level3PlaneLeft.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level3Cart.luggagePieces[i].shape.type == this.level3PlaneLeft.shape.type) {
+                            this.level3Cart.luggagePieces[i].exit();
+                            this.level3Cart.bagsLeft--;
+                        }
+                    }
                     this.level3PlaneLeft = null;
                 }
                 if (this.level3PlaneRight == null) {
                     this.level3PlaneRight = new plane_right_top();
                 } else if (this.level3PlaneRight.bagsLeft <= 0 && !this.level3PlaneRight.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level3Cart.luggagePieces[i].shape.type == this.level3PlaneRight.shape.type) {
+                            this.level3Cart.luggagePieces[i].exit();
+                            this.level3Cart.bagsLeft--;
+                        }
+                    }
                     this.level3PlaneRight = null;
                 }
                 if (this.level3PlaneBottom == null) {
                     this.level3PlaneBottom = new plane_left_bottom();
                 } else if (this.level3PlaneBottom.bagsLeft <= 0 && !this.level3PlaneBottom.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level3Cart.luggagePieces[i].shape.type == this.level3PlaneBottom.shape.type) {
+                            this.level3Cart.luggagePieces[i].exit();
+                            this.level3Cart.bagsLeft--;
+                        }
+                    }
                     this.level3PlaneBottom = null;
                 }
                 break;
@@ -790,21 +923,45 @@ game.manager = {
                 if (this.level4PlaneLeftTop == null) {
                     this.level4PlaneLeftTop = new plane_left_top();
                 } else if (this.level4PlaneLeftTop.bagsLeft <= 0 && !this.level4PlaneLeftTop.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level4Cart.luggagePieces[i].shape.type == this.level4PlaneLeftTop.shape.type) {
+                            this.level4Cart.luggagePieces[i].exit();
+                            this.level4Cart.bagsLeft--;
+                        }
+                    }
                     this.level4PlaneLeftTop = null;
                 }
                 if (this.level4PlaneRightTop == null) {
                     this.level4PlaneRightTop = new plane_right_top();
                 } else if (this.level4PlaneRightTop.bagsLeft <= 0 && !this.level4PlaneRightTop.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level4Cart.luggagePieces[i].shape.type == this.level4PlaneRightTop.shape.type) {
+                            this.level4Cart.luggagePieces[i].exit();
+                            this.level4Cart.bagsLeft--;
+                        }
+                    }
                     this.level4PlaneRightTop = null;
                 }
                 if (this.level4PlaneLeftBottom == null) {
                     this.level4PlaneLeftBottom = new plane_left_bottom();
                 } else if (this.level4PlaneLeftBottom.bagsLeft <= 0 && !this.level4PlaneLeftBottom.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level4Cart.luggagePieces[i].shape.type == this.level4PlaneLeftBottom.shape.type) {
+                            this.level4Cart.luggagePieces[i].exit();
+                            this.level4Cart.bagsLeft--;
+                        }
+                    }
                     this.level4PlaneLeftBottom = null;
                 }
                 if (this.level4PlaneRightBottom == null) {
                     this.level4PlaneRightBottom = new plane_right_bottom();
                 } else if (this.level4PlaneRightBottom.bagsLeft <= 0 && !this.level4PlaneRightBottom.ready) {
+                    for (var i = 0; i < this.level3Cart.luggagePieces.length; i++) {
+                        if (this.level4Cart.luggagePieces[i].shape.type == this.level4PlaneRightBottom.shape.type) {
+                            this.level4Cart.luggagePieces[i].exit();
+                            this.level4Cart.bagsLeft--;
+                        }
+                    }
                     this.level4PlaneRightBottom = null;
                 }
                 break;
