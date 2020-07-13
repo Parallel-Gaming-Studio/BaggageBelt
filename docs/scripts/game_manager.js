@@ -114,9 +114,13 @@ game.gameController = {
         // Mouse Events
         if (engine.input.pressed(game.mouse[0])) {
             // Perform actions when left mouse button is pressed
+            game.manager.selectLuggage(new Vector2D(engine.input.mouse.x, engine.input.mouse.y));
+            game.timeoutOverlay.refreshTimer();
         }
         if (engine.input.released(game.mouse[0])) {
             // Perform actions when left mouse button is released
+            game.manager.dropLuggage(new Vector2D(engine.input.mouse.x, engine.input.mouse.y));
+            game.timeoutOverlay.refreshTimer();
         }
 
         // DEBUG
