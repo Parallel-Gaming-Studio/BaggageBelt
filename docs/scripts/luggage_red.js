@@ -85,7 +85,8 @@ class luggage_red extends Shape {
     | - Removes this shape's div element from the page
     \--------------------------------------------------------------------*/
 	destroyDiv() {
-		this.domElement.remove();
+        this.domElement.remove();
+        // game.manager.removeLuggage(this);
 	}
 
 	/*---------------------getPoints--------------------------------------\
@@ -96,10 +97,8 @@ class luggage_red extends Shape {
     /*---------------------exit-------------------------------------------\
     | - Fades the luggage out
     \--------------------------------------------------------------------*/
-    exit(pos) {
-        if (typeof pos !== "undefined") this.position = pos;
+    exit() {
         this.ready = false;
         this.removeMe = true;
-        this.forceMoveToLocation(this.position);
     }
 }

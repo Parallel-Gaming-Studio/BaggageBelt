@@ -258,7 +258,8 @@ class plane_right_bottom extends Shape {
     | - Removes this shape's div element from the page
     \--------------------------------------------------------------------*/
 	destroyDiv() {
-		this.domElement.remove();
+        this.domElement.remove();
+        // game.manager.removePlane(this);
 	}
 
 	/*---------------------getPoints--------------------------------------\

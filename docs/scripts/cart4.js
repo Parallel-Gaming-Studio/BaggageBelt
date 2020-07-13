@@ -26,7 +26,8 @@ class cart4 extends Shape {
         this.type = _type;
         this.points = _points;
         this.numberOfCarts = 4;
-        this.bagsLeft = randInt(this.numberOfCarts, this.numberOfCarts * 5);
+        let planeBags = game.manager.getBagsLeft();
+        this.bagsLeft = randInt(Math.min(this.numberOfCarts, planeBags), planeBags);
 
         // Drop Zones
         // - Cart 1
@@ -67,10 +68,7 @@ class cart4 extends Shape {
         // Generate random luggage for each cart
         this.luggagePieces = [];
         this.luggageShapes = [];
-        let totalBagsToFill = 0;
-        for (var b = 0; b < game.manager.planes.length; b++) {
-            totalBagsToFill += game.manager.planes[b].bagsLeft;
-        }
+        let totalBagsToFill = this.bagsLeft;
         // - Carts
         // Loop through the carts
         for (var c = 0; c < this.numberOfCarts; c++) {
@@ -289,6 +287,7 @@ class cart4 extends Shape {
     \--------------------------------------------------------------------*/
     destroyDiv() {
         this.domElement.remove();
+        // game.manager.removeEntity(this);
     }
 
 	/*---------------------getPoints--------------------------------------\
