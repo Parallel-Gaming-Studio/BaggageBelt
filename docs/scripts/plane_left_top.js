@@ -41,7 +41,7 @@ class plane_left_top extends Shape {
         this.points = _points;
         this.location = "TopLeft";
         this.bagsLeft = 5;
-        
+
         // Special Purpose Flags
         this.ready = false;
         this.removeMe = false;
@@ -83,6 +83,9 @@ class plane_left_top extends Shape {
         this.dropZone = new Vector2D(592, 320);
         this.dropZoneRadius = 130;
 
+        // Update the DZs
+        this.updateDropZone();
+
         // Shape
         this.shape = game.manager.generatePlaneShape();
         var tempArray = JSON.parse(this.shape.reference.getTransform(this));
@@ -101,7 +104,7 @@ class plane_left_top extends Shape {
 
         // Shape on Shape Stand
         this.shapeStandShape;
-        switch(getNameOfType(this.shape.type)) {
+        switch (getNameOfType(this.shape.type)) {
             case "Circle":
                 this.shapeStandShape = new circle();
                 break;
@@ -148,7 +151,7 @@ class plane_left_top extends Shape {
         // Update Shape DOM
         this.shape.domElement = document.getElementById(`${this.shape.type}_${this.shape.ID()}`);
         this.shape.setOrigin(this.shape.domElement);
-        
+
         // Update Shape Stand DOM
         this.shapeStand.domElement = document.getElementById(`${this.shapeStand.type}_${this.shapeStand.ID()}`);
         this.shapeStand.setOrigin(this.shapeStand.domElement);
@@ -156,16 +159,16 @@ class plane_left_top extends Shape {
         // Update Shape Stand Shape DOM
         this.shapeStandShape.domElement = document.getElementById(`${this.shapeStandShape.type}_${this.shapeStandShape.ID()}`);
         this.shapeStandShape.setOrigin(this.shapeStandShape.domElement);
-        
+
         // Update Plane DOM
-		this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
-		this.setDOM(this.domElement);
+        this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
+        this.setDOM(this.domElement);
         this.setOrigin(_targetReference);
-        
+
         // Update all positions
         this.adjustPosition();
-        
-        
+
+
         // Spawn the plane
         this.spawn();
 
@@ -181,12 +184,21 @@ class plane_left_top extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
+        this.updateDropZone();
         this.shape.adjustStyles();
         this.shapeStand.adjustStyles();
         this.shapeStandShape.adjustStyles();
         // console.log(`<Plane_Left_Top>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
         // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-		// super.draw();
+        // super.draw();
+    }
+
+    /*---------------------updateDropZone---------------------------------\
+	| - Adjust the size and position of the drop zones
+    \--------------------------------------------------------------------*/
+    updateDropZone() {
+        this.dropZone = vecMultiply(new Vector2D(592, 320), engine.preserveAspectRatio);
+        this.dropZoneRadius = 130 * engine.preserveAspectRatio;
     }
 
     /*---------------------adjustPosition---------------------------------\
@@ -264,7 +276,7 @@ class plane_left_top extends Shape {
         this.shapeStand.height = tempStand.height;
         this.shapeStand.width = tempStand.width;
         this.shapeStand.position = new Vector2D(tempStand.x, tempStand.y);
-        
+
 
         // Shape Stand Shape
         var tempShape = JSON.parse(this.shapeStandShape.reference.getTransform(this.shapeStand, this.location));
@@ -314,9 +326,9 @@ class plane_left_top extends Shape {
         }
 
         // Drop Zone Attributes
-        var dropX = pos.x + this.dropZone.x * engine.preserveAspectRatio;
-        var dropY = pos.y + this.dropZone.y * engine.preserveAspectRatio;
-        var dropRadius = this.dropZoneRadius * engine.preserveAspectRatio;
+        var dropX = pos.x + this.dropZone.x;
+        var dropY = pos.y + this.dropZone.y;
+        var dropRadius = this.dropZoneRadius;
         var dropStart = 0;
         var dropEnd = 2 * Math.PI;
 
@@ -331,7 +343,7 @@ class plane_left_top extends Shape {
         ctx.stroke();
         ctx.fill();
     }
-    
+
     /*---------------------remove-----------------------------------------\
     | - Removes this plane from the game
     \--------------------------------------------------------------------*/
@@ -342,10 +354,10 @@ class plane_left_top extends Shape {
 	/*---------------------destroyDiv-------------------------------------\
     | - Removes this shape's div element from the page
     \--------------------------------------------------------------------*/
-	destroyDiv() {
+    destroyDiv() {
         this.domElement.remove();
         // game.manager.removePlane(this);
-	}
+    }
 
 	/*---------------------getPoints--------------------------------------\
     | - Returns star's point value

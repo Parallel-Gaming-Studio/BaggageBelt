@@ -190,7 +190,7 @@ game.manager = {
         for (var i = 0; i < this.planes.length; i++) {
             // Convert the drop zone's local space to world space
             let dzWorld = vecAdd(this.planes[i].position, this.planes[i].dropZone);
-            // console.log(`Comparing ${getNameOfType(bag.type)} ${bag.ID()}\n@ ${tempCenter}\nWith ${getNameOfType(this.planes[i].type)}\n@ ${dzWorld}\nRadius: ${this.planes[i].dropZoneRadius}\nDist: ${vec2DDistance(dzWorld, tempCenter)}`);
+            console.log(`Comparing ${getNameOfType(bag.type)} ${bag.ID()}\n@ ${tempCenter}\nWith ${getNameOfType(this.planes[i].type)}\n@ ${dzWorld}\nRadius: ${this.planes[i].dropZoneRadius}\nDist: ${vec2DDistance(dzWorld, tempCenter)}`);
 
             // Check if the shape is within the drop zone's radius
             if (vec2DDistance(dzWorld, tempCenter) <= this.planes[i].dropZoneRadius) {
@@ -782,28 +782,48 @@ game.manager = {
                     this.level1Cart = new cart1();
                 } else if (this.level1Cart.bagsLeft <= 0 && !this.level1Cart.ready) {
                     this.level1Cart = null;
-                } else if (this.luggage.length <= 0) this.level1Cart.exit();
+                } else if (this.luggage.length <= 0) {
+                    this.level1Cart.exit();
+                } else if (vec2DDistanceSq(this.level1Cart.position, this.level1Cart.level1ExitPosition) < 10) {
+                    this.level1Cart.ready = false;
+                    this.level1Cart.removeMe = true;
+                }
                 break;
             case 1:
                 if (this.level2Cart == null) {
                     this.level2Cart = new cart2();
                 } else if (this.level2Cart.bagsLeft <= 0 && !this.level2Cart.ready) {
                     this.level2Cart = null;
-                } else if (this.luggage.length <= 0) this.level2Cart.exit();
+                } else if (this.luggage.length <= 0) {
+                    this.level2Cart.exit();
+                } else if (vec2DDistanceSq(this.level2Cart.position, this.level2Cart.level2ExitPosition) < 10) {
+                    this.level2Cart.ready = false;
+                    this.level2Cart.removeMe = true;
+                }
                 break;
             case 2:
                 if (this.level3Cart == null) {
                     this.level3Cart = new cart3();
                 } else if (this.level3Cart.bagsLeft <= 0 && !this.level3Cart.ready) {
                     this.level3Cart = null;
-                } else if (this.luggage.length <= 0) this.level3Cart.exit();
+                } else if (this.luggage.length <= 0) {
+                    this.level3Cart.exit();
+                } else if (vec2DDistanceSq(this.level3Cart.position, this.level3Cart.level3ExitPosition) < 10) {
+                    this.level3Cart.ready = false;
+                    this.level3Cart.removeMe = true;
+                }
                 break;
             default:
                 if (this.level4Cart == null) {
                     this.level4Cart = new cart4();
                 } else if (this.level4Cart.bagsLeft <= 0 && !this.level4Cart.ready) {
                     this.level4Cart = null;
-                } else if (this.luggage.length <= 0) this.level4Cart.exit();
+                } else if (this.luggage.length <= 0) {
+                    this.level4Cart.exit();
+                } else if (vec2DDistanceSq(this.level4Cart.position, this.level4Cart.level4ExitPosition) < 10) {
+                    this.level4Cart.ready = false;
+                    this.level4Cart.removeMe = true;
+                }
                 break;
         }
     },

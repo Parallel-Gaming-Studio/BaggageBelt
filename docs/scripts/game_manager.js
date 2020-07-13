@@ -114,9 +114,17 @@ game.gameController = {
         // Mouse Events
         if (engine.input.pressed(game.mouse[0])) {
             // Perform actions when left mouse button is pressed
+            let myMouse = new Vector2D(engine.input.mouse.x, engine.input.mouse.y);
+            game.manager.selectLuggage(myMouse);
+            game.timeoutOverlay.refreshTimer();
+            console.log(`Mouse pressed at ${myMouse}`);
         }
         if (engine.input.released(game.mouse[0])) {
             // Perform actions when left mouse button is released
+            let myMouse = new Vector2D(engine.input.mouse.x, engine.input.mouse.y)
+            game.manager.dropLuggage(myMouse);
+            game.timeoutOverlay.refreshTimer();
+            console.log(`Mouse released at ${myMouse}`);
         }
 
         // DEBUG
