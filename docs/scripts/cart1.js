@@ -47,6 +47,9 @@ class cart1 extends Shape {
         //   - Exit
         this.level1ExitPosition = _targetReference.posExitLevel1;
 
+        // Update the DZs
+        this.updateDropZone();
+
         // Cart Div Builder
         var _divOpen = `<div id="${this.type}_${this.ID()}" class="cart" style="display:block;top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
         
@@ -70,9 +73,9 @@ class cart1 extends Shape {
             // Set a random position within the cart for the piece of luggage
             tempLuggage.setNewPosition(new Vector2D(
                 // X
-                randInt(this.dropZonePos.x * engine.preserveAspectRatio, this.dropZonePos.x * engine.preserveAspectRatio + tempLuggage.width / 2),
+                randInt(this.dropZonePos.x, this.dropZonePos.x + tempLuggage.width / 2),
                 // Y
-                this.dropZonePos.y * engine.preserveAspectRatio + (this.height - this.dropZoneDim.y) * engine.preserveAspectRatio - tempLuggage.height
+                this.dropZonePos.y + (this.height - this.dropZoneDim.y) - tempLuggage.height
             ));
             // Add to this truck's list of luggage pieces
             this.luggagePieces.push(tempLuggage);
@@ -139,6 +142,15 @@ class cart1 extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
+        this.updateDropZone();
+    }
+
+    /*---------------------updateDropZone---------------------------------\
+	| - Adjust the size and position of the drop zones
+    \--------------------------------------------------------------------*/
+    updateDropZone() {
+        this.dropZonePos = vecMultiply(new Vector2D(21, 5), engine.preserveAspectRatio);
+        this.dropZoneDim = vecMultiply(new Vector2D(301, 70), engine.preserveAspectRatio);
     }
 
     /*---------------------adjustPosition---------------------------------\
@@ -190,10 +202,10 @@ class cart1 extends Shape {
 
         // Drop Zone Attributes
         // - Cart 1
-        var dropX = pos.x + this.dropZonePos.x * engine.preserveAspectRatio;
-        var dropY = pos.y + this.dropZonePos.y * engine.preserveAspectRatio;
-        var dropWidth = this.width - this.dropZoneDim.x * engine.preserveAspectRatio;
-        var dropHeight = this.height - this.dropZoneDim.y * engine.preserveAspectRatio;
+        var dropX = pos.x + this.dropZonePos.x;
+        var dropY = pos.y + this.dropZonePos.y;
+        var dropWidth = this.width - this.dropZoneDim.x;
+        var dropHeight = this.height - this.dropZoneDim.y;
 
         // Drop Area
         ctx.beginPath();

@@ -39,6 +39,9 @@ class cart3 extends Shape {
         // - Cart 3
         this.dropZonePos3 = new Vector2D(595, 5);
         this.dropZoneDim3 = new Vector2D(875, 70);
+        
+        // Update the DZs
+        this.updateDropZone();
 
         // Special Purpose Flags
         this.ready = false;
@@ -94,25 +97,25 @@ class cart3 extends Shape {
                     case 0:
                         tempLuggage.setNewPosition(new Vector2D(
                             // X
-                            randInt(this.dropZonePos.x * engine.preserveAspectRatio, this.dropZonePos.x * engine.preserveAspectRatio + tempLuggage.width / 2),
+                            randInt(this.dropZonePos.x, this.dropZonePos.x + tempLuggage.width / 2),
                             // Y
-                            this.dropZonePos.y * engine.preserveAspectRatio + (this.height - this.dropZoneDim.y) * engine.preserveAspectRatio - tempLuggage.height
+                            this.dropZonePos.y + (this.height - this.dropZoneDim.y) - tempLuggage.height
                         ));
                         break;
                     case 1:
                         tempLuggage.setNewPosition(new Vector2D(
                             // X
-                            randInt(this.dropZonePos2.x * engine.preserveAspectRatio, this.dropZonePos2.x * engine.preserveAspectRatio + tempLuggage.width / 2),
+                            randInt(this.dropZonePos2.x, this.dropZonePos2.x + tempLuggage.width / 2),
                             // Y
-                            this.dropZonePos2.y * engine.preserveAspectRatio + (this.height - this.dropZoneDim2.y) * engine.preserveAspectRatio - tempLuggage.height
+                            this.dropZonePos2.y + (this.height - this.dropZoneDim2.y) - tempLuggage.height
                         ));
                         break;
                     case 2:
                         tempLuggage.setNewPosition(new Vector2D(
                             // X
-                            randInt(this.dropZonePos3.x * engine.preserveAspectRatio, this.dropZonePos3.x * engine.preserveAspectRatio + tempLuggage.width / 2),
+                            randInt(this.dropZonePos3.x, this.dropZonePos3.x + tempLuggage.width / 2),
                             // Y
-                            this.dropZonePos3.y * engine.preserveAspectRatio + (this.height - this.dropZoneDim3.y) * engine.preserveAspectRatio - tempLuggage.height
+                            this.dropZonePos3.y + (this.height - this.dropZoneDim3.y) - tempLuggage.height
                         ));
                         break;
                 }
@@ -183,6 +186,21 @@ class cart3 extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
+        this.updateDropZone();
+    }
+
+    /*---------------------updateDropZone---------------------------------\
+	| - Adjust the size and position of the drop zones
+    \--------------------------------------------------------------------*/
+    updateDropZone() {
+        this.dropZonePos = vecMultiply(new Vector2D(19, 5), engine.preserveAspectRatio);
+        this.dropZoneDim = vecMultiply(new Vector2D(875, 70), engine.preserveAspectRatio);
+
+        this.dropZonePos2 = vecMultiply(new Vector2D(304, 5), engine.preserveAspectRatio);
+        this.dropZoneDim2 = vecMultiply(new Vector2D(875, 70), engine.preserveAspectRatio);
+
+        this.dropZonePos3 = vecMultiply(new Vector2D(595, 5), engine.preserveAspectRatio);
+        this.dropZoneDim3 = vecMultiply(new Vector2D(875, 70), engine.preserveAspectRatio);
     }
 
     /*---------------------adjustPosition---------------------------------\
@@ -234,20 +252,20 @@ class cart3 extends Shape {
 
         // Drop Zone Attributes
         // - Cart 1
-        var dropX = pos.x + this.dropZonePos.x * engine.preserveAspectRatio;
-        var dropY = pos.y + this.dropZonePos.y * engine.preserveAspectRatio;
-        var dropWidth = this.width - this.dropZoneDim.x * engine.preserveAspectRatio;
-        var dropHeight = this.height - this.dropZoneDim.y * engine.preserveAspectRatio;
+        var dropX = pos.x + this.dropZonePos.x;
+        var dropY = pos.y + this.dropZonePos.y;
+        var dropWidth = this.width - this.dropZoneDim.x;
+        var dropHeight = this.height - this.dropZoneDim.y;
         // - Cart 2
-        var dropX2 = pos.x + this.dropZonePos2.x * engine.preserveAspectRatio;
-        var dropY2 = pos.y + this.dropZonePos2.y * engine.preserveAspectRatio;
-        var dropWidth2 = this.width - this.dropZoneDim2.x * engine.preserveAspectRatio;
-        var dropHeight2 = this.height - this.dropZoneDim2.y * engine.preserveAspectRatio;
+        var dropX2 = pos.x + this.dropZonePos2.x;
+        var dropY2 = pos.y + this.dropZonePos2.y;
+        var dropWidth2 = this.width - this.dropZoneDim2.x;
+        var dropHeight2 = this.height - this.dropZoneDim2.y;
         // - Cart 3
-        var dropX3 = pos.x + this.dropZonePos3.x * engine.preserveAspectRatio;
-        var dropY3 = pos.y + this.dropZonePos3.y * engine.preserveAspectRatio;
-        var dropWidth3 = this.width - this.dropZoneDim3.x * engine.preserveAspectRatio;
-        var dropHeight3 = this.height - this.dropZoneDim3.y * engine.preserveAspectRatio;
+        var dropX3 = pos.x + this.dropZonePos3.x;
+        var dropY3 = pos.y + this.dropZonePos3.y;
+        var dropWidth3 = this.width - this.dropZoneDim3.x;
+        var dropHeight3 = this.height - this.dropZoneDim3.y;
 
         // Drop Area
         ctx.beginPath();

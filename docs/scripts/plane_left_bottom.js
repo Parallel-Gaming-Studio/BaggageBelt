@@ -60,6 +60,9 @@ class plane_left_bottom extends Shape {
         // Drop Zone
         this.dropZone = new Vector2D(350, 237);
         this.dropZoneRadius = 120;
+        
+        // Update the DZs
+        this.updateDropZone();
 		
 		// Shape
         this.shape = game.manager.generatePlaneShape();
@@ -159,12 +162,21 @@ class plane_left_bottom extends Shape {
     draw() {
         this.adjustPosition();
         this.adjustStyles();
+        this.updateDropZone();
         this.shape.adjustStyles();
         this.shapeStand.adjustStyles();
         this.shapeStandShape.adjustStyles();
         // console.log(`<Plane_Left_Bottom>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
         // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
 		// super.draw();
+    }
+
+    /*---------------------updateDropZone---------------------------------\
+	| - Adjust the size and position of the drop zones
+    \--------------------------------------------------------------------*/
+    updateDropZone() {
+        this.dropZone = vecMultiply(new Vector2D(350, 237), engine.preserveAspectRatio);
+        this.dropZoneRadius = 120 * engine.preserveAspectRatio;
     }
 
     /*---------------------adjustPosition---------------------------------\
@@ -260,9 +272,9 @@ class plane_left_bottom extends Shape {
         }
 
         // Drop Zone Attributes
-        var dropX = pos.x + this.dropZone.x * engine.preserveAspectRatio;
-        var dropY = pos.y + this.dropZone.y * engine.preserveAspectRatio;
-        var dropRadius = this.dropZoneRadius * engine.preserveAspectRatio;
+        var dropX = pos.x + this.dropZone.x;
+        var dropY = pos.y + this.dropZone.y;
+        var dropRadius = this.dropZoneRadius;
         var dropStart = 0;
         var dropEnd = 2 * Math.PI;
 
