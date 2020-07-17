@@ -37,6 +37,7 @@ class cart1 extends Shape {
         // Special Purpose Flags
         this.ready = false;
         this.removeMe = false;
+        this.leftTheBuilding = false;
 
         // Level-Based Positions
         // - Level 1
@@ -208,13 +209,13 @@ class cart1 extends Shape {
         var dropHeight = this.height - this.dropZoneDim.y;
 
         // Drop Area
-        ctx.beginPath();
+        /* ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "#555875";
         ctx.fillStyle = "#7f829d";
         ctx.rect(dropX, dropY, dropWidth, dropHeight);
         ctx.stroke();
-        ctx.fill();
+        ctx.fill(); */
     }
 
     /*---------------------remove-----------------------------------------\
@@ -231,6 +232,7 @@ class cart1 extends Shape {
     | - Removes this shape's div element from the page
     \--------------------------------------------------------------------*/
     destroyDiv() {
+        this.domElement.display = "none";
         this.domElement.remove();
         // game.manager.removeEntity(this);
     }
@@ -252,6 +254,8 @@ class cart1 extends Shape {
     |   the level
     \--------------------------------------------------------------------*/
     exit() {
+        if (this.leftTheBuilding) return;
+        this.leftTheBuilding = true;
         this.forceMoveToLocation(this.level1ExitPosition);
     }
 }

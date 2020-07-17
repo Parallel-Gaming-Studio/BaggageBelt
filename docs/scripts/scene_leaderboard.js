@@ -356,25 +356,25 @@ game.leaderboardRetryButton = {
     height: 0,
     posX: 0,
     posY: 0,
-    //Initialize the object
+    // Initialize the object
     init: function () {
-        //Add event listener to the button
+        // Add event listener to the button
         this.image.addEventListener("click", game.leaderboardRetryButton.retry);
     },
-    //Adjust the object's transform
+    // Adjust the object's transform
     resize: function () {
         this.width = this.org_width * engine.preserveAspectRatio;
         this.height = this.org_height * engine.preserveAspectRatio;
 
-        //Remove an additional 25 (proportionate) from the X-position to match the shadow
+        // Remove an additional 25 (proportionate) from the X-position to match the shadow
         this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2; // game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 86 * engine.preserveAspectRatio;
         this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height - 150 * engine.preserveAspectRatio;
     },
-    //Draw the object
+    // Draw the object
     draw: function () {
         this.adjustStyle();
     },
-    //Apply changes via CSS
+    // Apply changes via CSS
     adjustStyle: function () {
         this.resize();
         this.image.style.position = "absolute";
@@ -385,23 +385,25 @@ game.leaderboardRetryButton = {
         this.image.style.height = this.height + "px";
         this.image.style.zIndex = 1;
     },
-    //Actions when clicking this button
+    // Actions when clicking this button
     retry: function () {
-        //Inform Google the player is starting a new game
-        //game.google.start();    --un note when ready for google analytics
+        // Inform Google the player is starting a new game
+        // game.google.start();    --un note when ready for google analytics
         // Clear the initials on the End Scene
         game.endPlayerInitials.clearInitials();
-        //Set the game state to Play Scene
+        // Set the game state to Play Scene
         game.currState = game.gameState[1];
-        //Reset the player object
+        // Reset the player object
         game.player.reset();
-        //Reset leaderboard table
+        // Reset the game manager
+        game.manager.resetGame();
+        // Reset leaderboard table
         game.top10players.hideTable();
-        //Refresh the timeout timer
+        // Refresh the timeout timer
         game.timeoutOverlay.refreshTimer();
-        //Hide all elements
+        // Hide all elements
         game.hideElements.hideAll();
-        //Redraw all elements
+        // Redraw all elements
         game.drawOnce();
     }
 };

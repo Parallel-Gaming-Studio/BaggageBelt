@@ -235,7 +235,7 @@ engine.input = {
     },
 
     // When the user's finger moves across the screen
-    ontouchmove: function(event) {
+    ontouchmove: function(event, e) {
         // Clear the START
         if (this._down["START"]) this._down["START"] = false;
         if (this._pressed["START"]) this._pressed["START"] = false;
@@ -246,6 +246,9 @@ engine.input = {
 
         // Set the touchmove into the _down state
         this._down[event] = true;
+
+        // Prevent scrolling
+        e.preventDefault();
     },
 
     // When the user's finger lifts off the screen
@@ -286,7 +289,7 @@ engine.input = {
                 this.ontouchstart(event);
                 break;
             case "MOVE":
-                this.ontouchmove(event);
+                this.ontouchmove(event, e);
                 break;
             case "END":
                 this.ontouchend(event);

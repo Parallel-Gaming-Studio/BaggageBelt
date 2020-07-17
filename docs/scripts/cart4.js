@@ -49,6 +49,7 @@ class cart4 extends Shape {
         // Special Purpose Flags
         this.ready = false;
         this.removeMe = false;
+        this.leftTheBuilding = false;
 
         // Level-Based Positions
         // - Level 4
@@ -76,7 +77,7 @@ class cart4 extends Shape {
         // Loop through the carts
         for (var c = 0; c < this.numberOfCarts; c++) {
             let bagsLeftToFill = 0;
-            console.log(`Cart 4 - Bags to Fill (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            // console.log(`Cart 4 - Bags to Fill (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
             if (totalBagsToFill > 5) {
                 bagsLeftToFill = Math.round(totalBagsToFill / this.numberOfCarts);
                 totalBagsToFill -= bagsLeftToFill;
@@ -84,7 +85,7 @@ class cart4 extends Shape {
                 bagsLeftToFill = totalBagsToFill;
                 totalBagsToFill = 0;
             }
-            console.log(`Cart 4 - Bags to Fill (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            // console.log(`Cart 4 - Bags to Fill (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
             for (var i = 0; i < bagsLeftToFill; i++) {
                 // Generate a random piece of luggage
                 let tempLuggage = game.manager.generateLuggage();
@@ -284,7 +285,7 @@ class cart4 extends Shape {
         var dropHeight4 = this.height - this.dropZoneDim4.y;
 
         // Drop Area
-        ctx.beginPath();
+        /* ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "#555875";
         ctx.fillStyle = "#7f829d";
@@ -293,7 +294,7 @@ class cart4 extends Shape {
         ctx.rect(dropX3, dropY3, dropWidth3, dropHeight3);
         ctx.rect(dropX4, dropY4, dropWidth4, dropHeight4);
         ctx.stroke();
-        ctx.fill();
+        ctx.fill(); */
     }
 
     /*---------------------remove-----------------------------------------\
@@ -328,6 +329,8 @@ class cart4 extends Shape {
     |   the level
     \--------------------------------------------------------------------*/
     exit() {
+        if (this.leftTheBuilding) return;
+        this.leftTheBuilding = true;
         this.forceMoveToLocation(this.level4ExitPosition);
     }
 }

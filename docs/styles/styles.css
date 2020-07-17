@@ -20,6 +20,9 @@ body {
 body.after {
     clear: both;
 }
+canvas {
+    overflow: hidden;
+}
 
 /* Play/End Scene Keypads */
 .keypad-container {

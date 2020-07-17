@@ -106,6 +106,8 @@ game.gameController = {
                         // Perform actions when end is pressed
                         game.manager.dropLuggage(new Vector2D(touchInfo.x, touchInfo.y));
                         game.timeoutOverlay.refreshTimer();
+                    } else if (touchInfo.type == "MOVE") {
+                        
                     }
                 }
             }
@@ -117,14 +119,14 @@ game.gameController = {
             let myMouse = new Vector2D(engine.input.mouse.x, engine.input.mouse.y);
             game.manager.selectLuggage(myMouse);
             game.timeoutOverlay.refreshTimer();
-            console.log(`Mouse pressed at ${myMouse}`);
+            // console.log(`Mouse pressed at ${myMouse}`);
         }
         if (engine.input.released(game.mouse[0])) {
             // Perform actions when left mouse button is released
             let myMouse = new Vector2D(engine.input.mouse.x, engine.input.mouse.y)
             game.manager.dropLuggage(myMouse);
             game.timeoutOverlay.refreshTimer();
-            console.log(`Mouse released at ${myMouse}`);
+            // console.log(`Mouse released at ${myMouse}`);
         }
 
         // DEBUG
@@ -318,7 +320,7 @@ game.drawOnce = function () {
             this.manager.drawEntities();
 
             // DEBUG
-            this.playDEBUGIncreasePoints.draw();
+            // this.playDEBUGIncreasePoints.draw();
 
             break;
         case 'end':

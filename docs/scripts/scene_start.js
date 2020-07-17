@@ -137,6 +137,8 @@ game.menuButton = {
                 game.endPlayerInitials.clearInitials();
                 // Reset the player object
                 game.player.reset();
+                // Reset the game manager
+                game.manager.resetGame();
                 // Refresh the timeout timer
                 game.timeoutOverlay.refreshTimer();
                 // Set the new game state to the Start Scene

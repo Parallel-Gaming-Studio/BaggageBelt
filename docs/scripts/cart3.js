@@ -46,6 +46,7 @@ class cart3 extends Shape {
         // Special Purpose Flags
         this.ready = false;
         this.removeMe = false;
+        this.leftTheBuilding = false;
 
         // Level-Based Positions
         // - Level 3
@@ -70,13 +71,13 @@ class cart3 extends Shape {
         this.luggageShapes = [];
         let totalBagsToFill = this.bagsLeft;
 
-        console.log(`\n\n<Truck 3> has ${this.bagsLeft} bags.\nPlanes have room for ${game.manager.getBagsLeft()} bags.\n\n`);
+        // console.log(`\n\n<Truck 3> has ${this.bagsLeft} bags.\nPlanes have room for ${game.manager.getBagsLeft()} bags.\n\n`);
 
         // - Carts
         // Loop through the carts
         for (var c = 0; c < this.numberOfCarts; c++) {
             let bagsLeftToFill = 0;
-            console.log(`<Truck 3> Bags to fill in cart ${c} (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            // console.log(`<Truck 3> Bags to fill in cart ${c} (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
             if (totalBagsToFill > 5) {
                 bagsLeftToFill = Math.round(totalBagsToFill / this.numberOfCarts);
                 totalBagsToFill -= bagsLeftToFill;
@@ -84,7 +85,7 @@ class cart3 extends Shape {
                 bagsLeftToFill = totalBagsToFill;
                 totalBagsToFill = 0;
             }
-            console.log(`<Truck 3> Bags to fill in cart ${c} (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            // console.log(`<Truck 3> Bags to fill in cart ${c} (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
             for (var i = 0; i < bagsLeftToFill; i++) {
                 // Generate a random piece of luggage
                 let tempLuggage = game.manager.generateLuggage();
@@ -268,7 +269,7 @@ class cart3 extends Shape {
         var dropHeight3 = this.height - this.dropZoneDim3.y;
 
         // Drop Area
-        ctx.beginPath();
+        /* ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "#555875";
         ctx.fillStyle = "#7f829d";
@@ -276,7 +277,7 @@ class cart3 extends Shape {
         ctx.rect(dropX2, dropY2, dropWidth2, dropHeight2);
         ctx.rect(dropX3, dropY3, dropWidth3, dropHeight3);
         ctx.stroke();
-        ctx.fill();
+        ctx.fill(); */
     }
 
     /*---------------------remove-----------------------------------------\
@@ -311,6 +312,8 @@ class cart3 extends Shape {
     |   the level
     \--------------------------------------------------------------------*/
     exit() {
+        if (this.leftTheBuilding) return;
+        this.leftTheBuilding = true;
         this.forceMoveToLocation(this.level3ExitPosition);
     }
 }
