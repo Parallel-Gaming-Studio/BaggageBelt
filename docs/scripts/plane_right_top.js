@@ -382,5 +382,8 @@ class plane_right_top extends Shape {
                 this.forceMoveToLocation(this.level4ExitPosition);
                 break;
         }
+
+        // Place the shape back in the list of available shapes
+        game.manager.swapShapesToList(getNameOfType(this.shape.type));
     }
 }

@@ -614,6 +614,8 @@ game.manager = {
         for (var i = 0; i < this.planes.length; i++) {
             // Clear the plane's shape from the used list
             game.manager.swapShapesToList(getNameOfType(this.planes[i].shape.type));
+            this.planes[i].bagsLeft = 0;
+            this.planes[i].exit();
         }
         // Clear the current luggage
         this.luggage = [];
@@ -634,7 +636,9 @@ game.manager = {
     // Check planes' capacity
     checkPlaneCapacity: function () {
         for (var i = 0; i < this.planes.length; i++) {
-            if (this.planes[i].bagsLeft <= 0 && this.planes[i].ready) this.planes[i].exit();
+            if (this.planes[i].bagsLeft <= 0 && this.planes[i].ready) {
+                this.planes[i].exit();
+            }
         }
     },
 
@@ -769,6 +773,8 @@ game.manager = {
     // Manage Planes
     planeControl: function () {
         let tempLuggage = [];
+        let myPlane = null;
+        // Clean up any 
         // Perform actions based on the current level
         switch (this.level) {
             case 0:

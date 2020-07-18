@@ -168,7 +168,7 @@ class Shape extends movingEntity {
 		$(`#${this.domElement.id}`).animate({
 			top: `${pos.y}px`, // - this.toCenter.y}px`,
 			left: `${pos.x}px` // - this.toCenter.x}px`
-		}, 750, "swing", () => {
+		}, 800, "swing", () => {
 			// Clear moving flag
 			this.isMoving = false;
 
@@ -187,6 +187,7 @@ class Shape extends movingEntity {
 				this.ready = !this.ready;
 				// if (!this.ready) {this.ready = true;} // else {this.ready = false;}
 				if (this.bagsLeft <= 0) { this.removeMe = true; this.ready = false; }
+				// if (this.removeMe && !this.ready) { this.remove(); }
 			}
 
 			// If this is a piece of luggage it, compare it with the planes' drop zones
@@ -200,7 +201,7 @@ class Shape extends movingEntity {
 			}
 
 			// Remove if flag is set
-			if (this.removeMe) this.destroyDiv();
+			if (this.removeMe) { this.destroyDiv(); this.remove(); }
 
 			// Perform CallBack
 			if (typeof CallBack !== "undefined") return CallBack();

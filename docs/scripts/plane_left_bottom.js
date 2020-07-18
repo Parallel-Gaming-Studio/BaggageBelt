@@ -349,5 +349,8 @@ class plane_left_bottom extends Shape {
                 this.forceMoveToLocation(this.level4ExitPosition);
                 break;
         }
+
+        // Place the shape back in the list of available shapes
+        game.manager.swapShapesToList(getNameOfType(this.shape.type));
     }
 }
