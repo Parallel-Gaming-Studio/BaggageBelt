@@ -67,7 +67,7 @@ function getNameOfType(w) {
             s = "Square";
             break;
         case typeEnum.type_gem_star:
-            s = "Start";
+            s = "Star";
             break;
         case typeEnum.type_gem_triangle:
             s = "Triangle";
@@ -152,7 +152,7 @@ function getTypeByName(w) {
         case "Square":
             s = typeEnum.type_gem_square;
             break;
-        case "Start":
+        case "Star":
             s = typeEnum.type_gem_star;
             break;
         case "Triangle":

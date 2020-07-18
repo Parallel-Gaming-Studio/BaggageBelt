@@ -75,10 +75,6 @@ class Shape extends movingEntity {
 		// Points
 		this.points = points;
 
-		// Attached grid square references
-		this.attachedSquare = "undefined";
-		this.lastAttachedSquare = "undefined";
-
 		// Determine whether this shape is moving
 		this.isMoving = false;
 
@@ -105,7 +101,7 @@ class Shape extends movingEntity {
 		this.setupVertexBuffer();
 	}
 
-	// DEBUG
+	// Abstract Draw Function
 	draw() { }
 
 	/*---------------------updateAttributes-------------------------------\
@@ -131,7 +127,7 @@ class Shape extends movingEntity {
 	adjustStyles() {
 		this.updateAttributes();
 
-		this.domElement.style.display = "block";
+		// this.domElement.style.display = "block";
 		this.domElement.style.width = this.getOrigin().width + "px";
 		this.domElement.style.height = this.getOrigin().height + "px";
 		if (this.attachedSquare !== "undefined") {
@@ -154,13 +150,25 @@ class Shape extends movingEntity {
 
 		// console.log(`<Shape>[forceMoveToLocation]\nMoving ${this.domElement.id} to square ${this.attachedSquare.id}\n X: ${this.toCenter.x} | ${this.domElement.style.left}\n Y: ${this.toCenter.y} | ${this.domElement.style.top}`);
 
+		// Children adjustments
+		var adjX = pos.x;
+		var adjY = pos.y;
 
+		// If this is a piece of luggage, set it as not ready
+		let typeName = getNameOfType(this.type);
+		/*if (typeName == "LuggageBlue" ||
+			typeName == "LuggageGreen" ||
+			typeName == "LuggagePurple" ||
+			typeName == "LuggageRed" ||
+			typeName == "LuggageYellow") {
+			this.ready = !this.ready;
+		}*/
 
 		// Move this shape to a higher z-index, then animate to its destination
 		$(`#${this.domElement.id}`).animate({
 			top: `${pos.y}px`, // - this.toCenter.y}px`,
 			left: `${pos.x}px` // - this.toCenter.x}px`
-		}, 1750, "swing", () => {
+		}, 750, "swing", () => {
 			// Clear moving flag
 			this.isMoving = false;
 
@@ -181,8 +189,18 @@ class Shape extends movingEntity {
 				if (this.bagsLeft <= 0) { this.removeMe = true; this.ready = false; }
 			}
 
+			// If this is a piece of luggage it, compare it with the planes' drop zones
+			if (typeName == "LuggageBlue" ||
+				typeName == "LuggageGreen" ||
+				typeName == "LuggagePurple" ||
+				typeName == "LuggageRed" ||
+				typeName == "LuggageYellow") {
+				this.updateAttributes();
+				if (!this.ready) game.manager.compareLuggageWithPlane(this);
+			}
+
 			// Remove if flag is set
-			if (this.removeMe) this.remove();
+			if (this.removeMe) this.destroyDiv();
 
 			// Perform CallBack
 			if (typeof CallBack !== "undefined") return CallBack();
@@ -193,40 +211,42 @@ class Shape extends movingEntity {
 	| - Pops the shape, removes it from its attached square
 	| - arg types: Vector2D
 	\--------------------------------------------------------------------*/
-	popShape(Callback) {
+	popShape(pos, Callback) {
 
 		// console.log(`<Shape>[PopShape]\nID: ${this.id}`);
 		// Set this shape as moving
 		this.isMoving = true;
 
 		// Add to the list of animating entities
-		game.gameEntities.animatingList.push(this);
+		// game.gameEntities.animatingList.push(this);
 
 		// Pop animation
 		// Update the z-index, placing it on the top-most layer, then animate
-		$(`#${this.domElement.id}`).css("z-index", 22).animate({
-			top: "0px",
-			left: "0px",
+		$(`#${this.domElement.id}`).css("z-index", 40).animate({
+			top: `${pos.y}px`,
+			left: `${pos.x}px`,
 			opacity: "0.0"
-		}, 750, () => {
+		}, 500, () => {
 
 			// Clear this shape's moving flag, enabling it for deletion
 			this.isMoving = false;
 
 			// Remove from animating list
-			game.gameEntities.removeAnimating(this);
+			// game.gameEntities.removeAnimating(this);
 
 			// Update player score
-			game.player.score += this.points;
+			// game.player.score += this.points;
+			game.manager.addPoints(this.points);
 
 			// Remove from the square's shape attachment
-			this.attachedSquare.removeShape();
+			// this.attachedSquare.removeShape();
 
 			// Enable the popped flag
 			this.popped = true;
 
 			// Remove this shape
-			game.gameEntities.removeEntity(this);
+			// game.gameEntities.removeEntity(this);
+			this.exit();
 
 			// Return the Callback if it's requested
 			if (Callback !== "undefined") return Callback;

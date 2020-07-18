@@ -51,6 +51,7 @@ game.timeoutTime = 120;					// Timeout time before returning to landing page
 game.playTime = 150;                     // Time players have to compete
 game.lastTimeSized = new Date();        // Used to track window resizing without window events
 game.timers = [];                       // Array for all timers
+game.firstPlayThrough = true;           // Flag for the first play through
 
 // Sponsors
 game.lastSponsor = ""; // Previously used sponsor
@@ -74,7 +75,12 @@ game.player = {
 };
 
 // Shape List
-game.shapesList = ["circle", "heart", "pentagon", "rectangle", "square", "star", "triangle", "sponsored"];
+game.shapesList = ["Circle", "Heart", "Pentagon", "Rectangle", "Square", "Star", "Triangle"];
+// game.shapesList = ["Pentagon"];
+game.shapesUsed = [];
+
+// Luggage List
+game.luggageList = ["Blue", "Green", "Purple", "Red", "Yellow"];
 
 // Visible Debugging Console
 game.myConsole = {
@@ -246,6 +252,219 @@ game.timeoutOverlay = {
 };
 game.timeoutOverlay.init(); // Force initialization of the timer during script load
 
+// Tutorial Overlay
+game.tutorialOverlay = {
+    div: document.getElementById("tutorialOverlay"),
+    divContent: document.getElementById("tutorialContent"),
+    closeButton: document.getElementById("tutorialCloseButton"),
+    img01: document.getElementsByName("tutImg01"),
+    img02: document.getElementsByName("tutImg02"),
+    img03: document.getElementsByName("tutImg03"),
+    tutImg01: document.getElementById("tutorialImg01"),
+    tutImg02: document.getElementById("tutorialImg02"),
+    tutImg03: document.getElementById("tutorialImg03"),
+    tutTxt1: document.getElementById("tutorialTxt01"),
+    tutTxt2: document.getElementById("tutorialTxt02"),
+    tutTxt3: document.getElementById("tutorialTxt03"),
+    tutorialPages: document.getElementById("tutorialPages"),
+    org_header_size: 90,
+    org_select_size: 53,
+    org_action_size: 80,
+    org_closer_size: 60,
+    activeE: 0,
+    altOpen: false,
+    orgTimeStart: null,
+    init: function () {
+        // Images
+        this.tutImg01.addEventListener("click", this.nextSlide);
+        this.tutImg02.addEventListener("click", this.nextSlide);
+        this.tutImg03.addEventListener("click", this.nextSlide);
+        // Text
+        this.tutTxt1.addEventListener("click", this.nextSlide);
+        this.tutTxt2.addEventListener("click", this.nextSlide);
+        this.tutTxt3.addEventListener("click", this.nextSlide);
+        // Pagination
+        $("#tutorialPages a:nth-child(1)").on("click", function () { game.tutorialOverlay.pagesUpdate(0); });
+        $("#tutorialPages a:nth-child(2)").on("click", function () { game.tutorialOverlay.pagesUpdate(1); });
+        $("#tutorialPages a:nth-child(3)").on("click", function () { game.tutorialOverlay.pagesUpdate(2); });
+        // Close Button
+        this.closeButton.addEventListener("click", this.close);
+    },
+    // Open the tutorial overlay
+    open: function () {
+        // Reset the height
+        this.div.style.height = "0%";
+        game.tutorialOverlay.div.style.display = "block";
+        game.tutorialOverlay.divContent.style.display = "block";
+        game.tutorialOverlay.div.style.height = "100%";
+
+        for (var i = 0; i < game.tutorialOverlay.img01.length; i++) {
+            game.tutorialOverlay.img01[i].style.display = "block";
+        }
+        for (var i = 0; i < game.tutorialOverlay.img02.length; i++) {
+            game.tutorialOverlay.img02[i].style.display = "none";
+        }
+        for (var i = 0; i < game.tutorialOverlay.img03.length; i++) {
+            game.tutorialOverlay.img03[i].style.display = "none";
+        }
+
+        $("#tutorialPages").css("display", "inline-block");
+
+        // console.log("<Game:Tutorial> Open");
+    },
+    openAlternate: function () {
+        // Reset the overlay
+        game.tutorialOverlay.tutorialPages.childNodes[1].classList.add("active");
+        game.tutorialOverlay.tutorialPages.childNodes[3].classList.remove("active");
+        game.tutorialOverlay.tutorialPages.childNodes[5].classList.remove("active");
+        // Reset the counter
+        game.tutorialOverlay.activeE = 0;
+        // Open the overlay
+        game.tutorialOverlay.open();
+        // console.log("<Game:Tutorial> Open Alternate");
+        // Notify of alternate opening
+        game.tutorialOverlay.altOpen = true;
+        // Get the player's current play time
+        // game.tutorialOverlay.orgTimeStart = Date.now() - game.playTimerBox.timeStart;
+        game.playTimer.timer.pauseTimer();
+        game.playTimer.playTime.pauseTimer();
+    },
+    // Close the tutorial overlay
+    close: function () {
+        game.tutorialOverlay.div.style.height = "0%";
+        // console.log("<Game:Tutorial> Close");
+        game.tutorialOverlay.startGame();
+    },  
+    resize: function () {
+        this.divContent.style.fontSize = this.org_select_size * engine.preserveAspectRatio + "px";
+        this.closeButton.style.fontSize = this.org_closer_size * engine.preserveAspectRatio + "px";
+    },
+    pagesUpdate: (key) => {
+        game.tutorialOverlay.activeE = key - 1;
+        game.tutorialOverlay.nextSlide();
+    },
+    nextSlide: function () {
+        // Refresh the timeout timer
+        game.timeoutOverlay.refreshTimer();
+        // Get the active slide
+        game.tutorialOverlay.activeE += 1;
+        // Update the slide
+        switch (game.tutorialOverlay.activeE) {
+            case 0:
+                game.tutorialOverlay.tutorialPages.childNodes[1].classList.add("active");
+                game.tutorialOverlay.tutorialPages.childNodes[3].classList.remove("active");
+                game.tutorialOverlay.tutorialPages.childNodes[5].classList.remove("active");
+                for (var i = 0; i < game.tutorialOverlay.img01.length; i++) {
+                    game.tutorialOverlay.img01[i].style.display = "block";
+                }
+                for (var i = 0; i < game.tutorialOverlay.img02.length; i++) {
+                    game.tutorialOverlay.img02[i].style.display = "none";
+                }
+                for (var i = 0; i < game.tutorialOverlay.img03.length; i++) {
+                    game.tutorialOverlay.img03[i].style.display = "none";
+                }
+                break;
+            case 1:
+                game.tutorialOverlay.tutorialPages.childNodes[1].classList.remove("active");
+                game.tutorialOverlay.tutorialPages.childNodes[3].classList.add("active");
+                game.tutorialOverlay.tutorialPages.childNodes[5].classList.remove("active");
+                for (var i = 0; i < game.tutorialOverlay.img01.length; i++) {
+                    game.tutorialOverlay.img01[i].style.display = "none";
+                }
+                for (var i = 0; i < game.tutorialOverlay.img02.length; i++) {
+                    game.tutorialOverlay.img02[i].style.display = "block";
+                }
+                for (var i = 0; i < game.tutorialOverlay.img03.length; i++) {
+                    game.tutorialOverlay.img03[i].style.display = "none";
+                }
+                break;
+            case 2:
+                game.tutorialOverlay.tutorialPages.childNodes[1].classList.remove("active");
+                game.tutorialOverlay.tutorialPages.childNodes[3].classList.remove("active");
+                game.tutorialOverlay.tutorialPages.childNodes[5].classList.add("active");
+                for (var i = 0; i < game.tutorialOverlay.img01.length; i++) {
+                    game.tutorialOverlay.img01[i].style.display = "none";
+                }
+                for (var i = 0; i < game.tutorialOverlay.img02.length; i++) {
+                    game.tutorialOverlay.img02[i].style.display = "none";
+                }
+                for (var i = 0; i < game.tutorialOverlay.img03.length; i++) {
+                    game.tutorialOverlay.img03[i].style.display = "block";
+                }
+                break;
+            default:
+                // Exit tutorial (aka start game)
+                game.tutorialOverlay.close();
+                // Start the game
+                // game.tutorialOverlay.startGame();
+                // Reset the overlay
+                game.tutorialOverlay.tutorialPages.childNodes[1].classList.add("active");
+                game.tutorialOverlay.tutorialPages.childNodes[3].classList.remove("active");
+                game.tutorialOverlay.tutorialPages.childNodes[5].classList.remove("active");
+                break;
+        }
+    },
+    clickMe: () => {
+        // console.log("Clicked!");
+    },
+    sceneTransition: function () {
+        // console.log("<Game:TutorialOverlay> Transition Scenes");
+        // Display the tutorial overlay if this is the first playthrough
+        if (game.firstPlayThrough) {
+            // Open tutorial overlay
+            game.tutorialOverlay.open();
+        } else {
+            // Start the game
+            this.startGame();
+            // Activate tutorial helper
+            game.playTutorial.play();
+        }
+    },
+    startGame: function() {
+        // If tutorial opened from the play scene
+        if (game.tutorialOverlay.altOpen) {
+            // Set the new end time based on time within the tutorial
+            // game.playTimerBox.startTimerAlternate(Date.now() + (game.playTime - game.tutorialOverlay.orgTimeStart));
+            // Start the game's timers
+            game.playTimer.timer.unpauseTimer();
+            game.playTimer.playTime.unpauseTimer();
+            // Reset altOpen
+            game.tutorialOverlay.altOpen = false;
+            // Refresh the timeout timer
+            game.timeoutOverlay.refreshTimer();
+            // Redraw all elements
+            // game.drawOnce();
+        } else {
+            // Otherwise, start the game
+            // No longer the first play through
+            game.firstPlayThrough = false;
+            // Inform Google the user started playing a game
+            game.google.start();
+            // Clear the initials on the End Scene
+            game.endPlayerInitials.clearInitials();
+            // Reset the player object
+            game.player.reset();
+            // Reset the game manager
+            game.manager.resetGame();
+            // Refresh the timeout timer
+            game.timeoutOverlay.refreshTimer();
+            // Set the new game state to Play Scene
+            game.currState = game.gameState[1];
+            // Hide all elements
+            game.hideElements.hideAll();
+            // Start the game's timers
+            game.playTimer.timer.unpauseTimer();
+            game.playTimer.playTime.unpauseTimer();
+            // Redraw all elements
+            game.drawOnce();
+        }
+    },
+    tester: (key) => {
+        // console.log(`Key: ${key}`);
+    }
+};
+game.tutorialOverlay.init();  //Force initialize all event listeners
+
 // Sponsor control
 game.sponsors = {
     sponsorArray: ['ARGO TEA', 'AUNTIE ANNES', 'BROOKSTONE', 'BSMOOTH', 'BURRITO BEACH', 'CHICAGO SPORTS', 'CNN', 'COACH', 'DUNKIN DONUTS', 'DUTY FREE STORE', 'FIELD', 'HUDSON', 'MAC COSMETICS', 'NUTS ON CLARK', 'ROCKY MOUNTAIN CHOCOLATE', 'SARAHS CANDIES', 'SHOE HOSPITAL', 'SPIRIT OF THE RED HORSE', 'TALIE'],
@@ -331,19 +550,19 @@ game.sponsors = {
 // Load dependency scripts
 async function loadScripts() {
     // Load scripts synchronously
-    const scr1 = await $.cachedScript("scripts/scene_start.js?v=0.0.1").done((script, textStatus) => {
+    const scr1 = await $.cachedScript("scripts/scene_start.js?v=0.1.0").done((script, textStatus) => {
         // console.log(`<Game>[Start:Cache] ${textStatus}`);
     });
-    const scr2 = await $.cachedScript("scripts/scene_play.js?v=0.0.1").done((script, textStatus) => {
+    const scr2 = await $.cachedScript("scripts/scene_play.js?v=0.1.0").done((script, textStatus) => {
         // console.log(`<Game>[Play:Cache] ${textStatus}`);
     });
-    const scr3 = await $.cachedScript("scripts/scene_end.js?v=0.0.1").done((script, textStatus) => {
+    const scr3 = await $.cachedScript("scripts/scene_end.js?v=0.1.0").done((script, textStatus) => {
         // console.log(`<Game>[End:Cache] ${textStatus}`);
     });
-    const scr4 = await $.cachedScript("scripts/scene_leaderboard.js?v=0.0.1").done((script, textStatus) => {
+    const scr4 = await $.cachedScript("scripts/scene_leaderboard.js?v=0.1.0").done((script, textStatus) => {
         // console.log(`<Game>[Leaderboard:Cache] ${textStatus}`);
     });
-    const scr5 = await $.cachedScript("scripts/game_manager.js?v=0.0.1").done((script, textStatus) => {
+    const scr5 = await $.cachedScript("scripts/game_manager.js?v=0.1.0").done((script, textStatus) => {
         // console.log(`<Game>[Game Manager:Cache] ${textStatus}`);
     });
 };

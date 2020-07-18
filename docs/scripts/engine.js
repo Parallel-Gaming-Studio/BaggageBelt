@@ -235,7 +235,7 @@ engine.input = {
     },
 
     // When the user's finger moves across the screen
-    ontouchmove: function(event) {
+    ontouchmove: function(event, e) {
         // Clear the START
         if (this._down["START"]) this._down["START"] = false;
         if (this._pressed["START"]) this._pressed["START"] = false;
@@ -246,6 +246,9 @@ engine.input = {
 
         // Set the touchmove into the _down state
         this._down[event] = true;
+
+        // Prevent scrolling
+        e.preventDefault();
     },
 
     // When the user's finger lifts off the screen
@@ -286,7 +289,7 @@ engine.input = {
                 this.ontouchstart(event);
                 break;
             case "MOVE":
-                this.ontouchmove(event);
+                this.ontouchmove(event, e);
                 break;
             case "END":
                 this.ontouchend(event);
@@ -413,6 +416,7 @@ engine.canvas.ontouchend = engine.input.touchHandler.bind(engine.input);
 // React proportions
 engine.widthProportion = (Math.abs(1920 - window.innerWidth) / 1920).toPrecision(4);
 engine.heightProportion = (Math.abs(1080 - window.innerHeight) / 1080).toPrecision(4);
+engine.preserveAspectRatio = (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
 engine.windowControl = {
     updateWindow: () => {
@@ -434,6 +438,7 @@ engine.windowControl = {
         engine.widthProportion = ((engine.widthDifference) / 1920).toPrecision(4);
         engine.heightProportion = ((engine.heightDifference) / 1080).toPrecision(4);
         engine.dimensionProportion = engine.widthProportion > engine.heightProportion ? engine.widthProportion : engine.heightProportion;
+        engine.preserveAspectRatio = (1 - Math.max(engine.widthProportion, engine.heightProportion));
 
         // Set the engine's width to the canvas' width
         engine.width = engine.canvas.width;

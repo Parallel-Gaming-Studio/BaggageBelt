@@ -40,11 +40,11 @@ game.endTimeBoardBG = {
     org_posY: 50,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         // Attach Top-Left Side
-        this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width + 20 + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width + 20 + 50 * engine.preserveAspectRatio;
         this.posY = 0;
     },
     // Draw the object
@@ -77,15 +77,15 @@ game.endSponsoredTimerBox = {
     // Adjust the object's transform
     resize: function () {
 
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width / 2) - this.width / 2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 220 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 220 * engine.preserveAspectRatio;
 
         // Adjust font size
-        this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.font_size = this.org_font_size * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -110,7 +110,7 @@ game.endSponsorLogo = {
     posY: 0,
     // Adjust transformation
     resize: function () {
-        this.height = game.endSponsoredTimerBox.posY - game.endPlayerTimeBoard.posY - 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.height = game.endSponsoredTimerBox.posY - game.endPlayerTimeBoard.posY - 10 * engine.preserveAspectRatio;
         this.width = this.height;
         // Attach Bottom Side
         this.posX = game.endSponsoredTimerBox.posX + game.endSponsoredTimerBox.width / 2 - this.width / 2;
@@ -148,15 +148,15 @@ game.endPlayerTimeBoard = {
     // Adjust the object's transform
     resize: function () {
 
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         // Attach Left Side
         this.posX = (game.endTimeBoardBG.posX + game.endTimeBoardBG.width / 2) - this.width / 2;
-        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 190 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endTimeBoardBG.posY + game.endTimeBoardBG.height - this.height - 190 * engine.preserveAspectRatio;
 
         // Adjust font size
-        this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.font_size = this.org_font_size * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -202,8 +202,8 @@ game.endTitle = {
     posY: 0,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         this.posX = game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2 - this.width / 2;
         this.posY = Math.max(40, game.endKeypadBackdrop.posY / 2 - this.height / 2);
@@ -230,10 +230,10 @@ game.endGamePoints = {
     font_size: 0,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = game.endTimeBoardBG.posX + game.endTimeBoardBG.width / 2 - this.width / 2;
-        this.posY = game.endSponsoredTimerBox.posY + game.endSponsoredTimerBox.height + 20 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endSponsoredTimerBox.posY + game.endSponsoredTimerBox.height + 20 * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -298,7 +298,7 @@ game.endPlayerScore = {
         this.width = game.endGamePoints.width;
         this.height = game.endGamePoints.height / 2;
         this.posX = game.endGamePoints.posX + game.endGamePoints.width / 2 - this.width / 2;
-        this.posY = game.endGamePoints.posY + game.endGamePoints.height / 2 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.endGamePoints.posY + game.endGamePoints.height / 2 + 0 * engine.preserveAspectRatio;
         // Adjust font size
         this.textResize();
     },
@@ -320,7 +320,7 @@ game.endPlayerScore = {
     },
     // Update the score
     updateScore: function () {
-        this.div.innerHTML = game.player.score;
+        this.div.innerHTML = NumberFormat(game.player.score.toString());
     }
 };
 
@@ -339,8 +339,8 @@ game.endGameOver = {
     // Adjust the object's transform
     resize: function () {
 
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         this.posX = game.endKeypadBackdrop.posX + (game.endKeypadBackdrop.width / 2) - (this.width / 2);
         this.posY = game.endKeypadBackdrop.posY + (game.endKeypadBackdrop.height * 0.05 * (1 - (this.height / game.endKeypadBackdrop.height)));
@@ -365,8 +365,8 @@ game.endInitialsBox = {
     poxY: 0,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2 - this.width / 2);
         this.posY = (game.endGameOver.posY + game.endGameOver.height) + (game.endKeypadBackdrop.height * 0.05 * ((this.height / game.endKeypadBackdrop.height)));
     },
@@ -418,8 +418,8 @@ game.endPlayerInitials = {
         this.posY = game.endInitialsBox.posY + game.endInitialsBox.height * 0.025;
 
         // Adjust font size
-        this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY -= this.font_size * 0.05 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.font_size = this.org_font_size * engine.preserveAspectRatio;
+        this.posY -= this.font_size * 0.05 * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -501,10 +501,10 @@ game.endKeypadBackdrop = {
     posY: 0,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
-        this.posX = (engine.width / 2 - this.width / 2) - 75 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = (engine.width / 2 - this.width / 2) - 75 * engine.preserveAspectRatio;
         this.posY = engine.height / 2 - this.height / 2;
     },
     // Draw the object
@@ -528,8 +528,8 @@ game.playKeyPadSpace = {
     posY: 0,
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
     },
     // Draw the object
     draw: function () {
@@ -565,12 +565,12 @@ game.inputKeypad = {
     resize: function () {
         // Adjust based on game state
 
-        this.width = game.endInitialsBox.width; //game.endKeypadBackdrop.width - 40 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = game.endSubmitButton.posY - (game.endPlayerInitials.posY + game.endPlayerInitials.height) - 60 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = game.endInitialsBox.width; //game.endKeypadBackdrop.width - 40 * engine.preserveAspectRatio;
+        this.height = game.endSubmitButton.posY - (game.endPlayerInitials.posY + game.endPlayerInitials.height) - 60 * engine.preserveAspectRatio;
 
         // Attach to Top-Left of Keyboard Background
-        this.posX = game.endInitialsBox.posX; // game.endKeypadBackdrop.posX + 10 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = (game.endInitialsBox.posY + game.endInitialsBox.height) + 20 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.endInitialsBox.posX; // game.endKeypadBackdrop.posX + 10 * engine.preserveAspectRatio;
+        this.posY = (game.endInitialsBox.posY + game.endInitialsBox.height) + 20 * engine.preserveAspectRatio;
 
         this.btnWidth = this.width / 9.1;
 
@@ -723,8 +723,8 @@ game.endSubmitButton = {
     },
     // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
         this.posX = (game.endKeypadBackdrop.posX + game.endKeypadBackdrop.width / 2) - this.width / 2;
         this.posY = (game.endKeypadBackdrop.posY + game.endKeypadBackdrop.height - this.height) * 0.95;

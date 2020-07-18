@@ -11,7 +11,7 @@ class cart2 extends Shape {
         // Height
         var _height = _targetReference.height;
         // Position
-        var _position = new Vector2D(-_width * 1.2, engine.height - _height);
+        var _position = _targetReference.posSpawnLevel2;
         // Points
         var _points = 0;
 
@@ -25,27 +25,143 @@ class cart2 extends Shape {
         this.image = _image;
         this.type = _type;
         this.points = _points;
-        this.bagsLeft = 10;
+        this.numberOfCarts = 2;
+        let planeBags = game.manager.getBagsLeft();
+        this.bagsLeft = randInt(Math.min(this.numberOfCarts, planeBags), planeBags);
+        
+        // Drop Zones
+        // - Cart 1
+        this.dropZonePos = new Vector2D(19, 5);
+        this.dropZoneDim = new Vector2D(590, 70);
+        // - Cart 2
+        this.dropZonePos2 = new Vector2D(310, 5);
+        this.dropZoneDim2 = new Vector2D(590, 70);
+        
+        // Update the DZs
+        this.updateDropZone();
 
         // Special Purpose Flags
         this.ready = false;
         this.removeMe = false;
+        this.leftTheBuilding = false;
 
         // Level-Based Positions
-        // - Level 1
+        // - Level 2
         //   - Spawn
-        this.level2SpawnPosition = _position;
+        this.level2SpawnPosition = _targetReference.posSpawnLevel2;
         //   - Loading
-        this.level2LoadingPosition = new Vector2D(engine.width / 2 - this.width / 2, engine.height - this.height);
+        this.level2LoadingPosition = _targetReference.posLoadLevel2;
         //   - Exit
-        this.level2ExitPosition = new Vector2D(engine.width + 50, engine.height - this.height);
+        this.level2ExitPosition = _targetReference.posExitLevel2;
 
         // Cart Div Builder
-        var _divOpen = `<div id="${this.type}_${this.ID()}" class="cart" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
-        $("#baseCanvas").after(_divOpen);
+        var _divOpen = `<div id="${this.type}_${this.ID()}" class="cart" style="display:block;top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
+
+        // Div closer
+        var _divClose = `</div>`;
+
+        // Div Builder
+        var _divBuilder = _divOpen;
+
+        // Generate random luggage for each cart
+        this.luggagePieces = [];
+        this.luggageShapes = [];
+        let totalBagsToFill = this.bagsLeft;
+
+        // console.log(`\n\n<Truck 2> has ${this.bagsLeft} bags.\nPlanes have room for ${game.manager.getBagsLeft()} bags.\n\n`);
+
+        // - Carts
+        // Loop through the carts
+        for (var c = 0; c < this.numberOfCarts; c++) {
+            let bagsLeftToFill = 0;
+            // console.log(`<Truck 2> Bags to fill in cart ${c} (Before):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            if (totalBagsToFill > 5) {
+                bagsLeftToFill = Math.round(totalBagsToFill / this.numberOfCarts);
+                totalBagsToFill -= bagsLeftToFill;
+            } else {
+                bagsLeftToFill = totalBagsToFill;
+                totalBagsToFill = 0;
+            }
+            // console.log(`<Truck 2> Bags to fill in cart ${c} (After):\n${bagsLeftToFill} of ${totalBagsToFill}`);
+            for (var i = 0; i < bagsLeftToFill; i++) {
+                // Generate a random piece of luggage
+                let tempLuggage = game.manager.generateLuggage();
+                // Update the luggage dimensions
+                tempLuggage.width = tempLuggage.reference.width;
+                tempLuggage.height = tempLuggage.reference.height;
+
+                // Set a random position within the cart for the piece of luggage
+                switch (c) {
+                    case 0:
+                        tempLuggage.setNewPosition(new Vector2D(
+                            // X
+                            randInt(this.dropZonePos.x, this.dropZonePos.x + tempLuggage.width / 2),
+                            // Y
+                            this.dropZonePos.y + (this.height - this.dropZoneDim.y) - tempLuggage.height
+                        ));
+                        break;
+                    case 1:
+                        tempLuggage.setNewPosition(new Vector2D(
+                            // X
+                            randInt(this.dropZonePos2.x, this.dropZonePos2.x + tempLuggage.width / 2),
+                            // Y
+                            this.dropZonePos2.y + (this.height - this.dropZoneDim2.y) - tempLuggage.height
+                        ));
+                        break;
+                }
+
+                // Add to this truck's list of luggage pieces
+                this.luggagePieces.push(tempLuggage);
+                // Luggage Div
+                var _luggageDiv = `<div id="${tempLuggage.type}_${tempLuggage.ID()}" class="luggage" style="top:${tempLuggage.position.y}px;left:${tempLuggage.position.x}px;width:${tempLuggage.width}px;height:${tempLuggage.height}px;background-image: url('${tempLuggage.image.src}');z-index:${25 + i};">`;
+
+                // Generate a shape for the luggage
+                tempLuggage.shape = game.manager.generateLuggageShape();
+                // Store the luggage shape's transform
+                let tempArray = JSON.parse(tempLuggage.shape.reference.getTransform(tempLuggage));
+                tempLuggage.shape.height = tempArray.height;
+                tempLuggage.shape.width = tempArray.width;
+                tempLuggage.shape.position = new Vector2D(tempArray.x, tempArray.y);
+
+                // Shape Div
+                var _shapeDiv = `<div id="${tempLuggage.shape.type}_${tempLuggage.shape.ID()}" class="gems" style="position:relative;display:block;top:${tempArray.y}px;left:${tempArray.x}px;width:${tempArray.width}px;height:${tempArray.height}px;background-image: url('${tempLuggage.shape.image.src}');">`;
+
+                // Add to div builder
+                _divBuilder += _luggageDiv + _shapeDiv + _divClose + _divClose;
+            }
+        }
+
+        // Close the cart's div
+        _divBuilder += _divClose;
+        $("#baseCanvas").after(_divBuilder);
+
+        // Update the DOM for each piece of luggage and their respective shapes
+        for (var i = 0; i < this.luggagePieces.length; i++) {
+            // Define the luggage DOM
+            this.luggagePieces[i].domElement = document.getElementById(`${this.luggagePieces[i].type}_${this.luggagePieces[i].ID()}`);
+            // Register the luggage DOM
+            this.luggagePieces[i].setDOM(this.luggagePieces[i].domElement);
+            // Register the luggage reference
+            this.luggagePieces[i].setOrigin(this.luggagePieces[i].reference);
+
+            // Define the luggage shape's DOM
+            this.luggagePieces[i].shape.domElement = document.getElementById(`${this.luggagePieces[i].shape.type}_${this.luggagePieces[i].shape.ID()}`);
+            // Register the luggage shape's DOM
+            this.luggagePieces[i].shape.setDOM(this.luggagePieces[i].shape.domElement);
+            // Register the luggage shape's reference
+            this.luggagePieces[i].shape.setOrigin(this.luggagePieces[i].shape.reference);
+
+            // Update the luggage's position
+            this.luggagePieces[i].adjustPosition();
+        }
+
+        // Update the cart's DOM
         this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
         this.setDOM(this.domElement);
         this.setOrigin(_targetReference);
+
+        // Update all positions
+        this.adjustPosition();
         this.adjustStyles();
 
         // Spawn the cart
@@ -58,10 +174,59 @@ class cart2 extends Shape {
 	| - Note: Not all entity classes or subclasses require a draw.
     \--------------------------------------------------------------------*/
     draw() {
+        this.adjustPosition();
         this.adjustStyles();
-        // console.log(`<Cart2>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
-        // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-        // super.draw();
+        this.updateDropZone();
+    }
+
+    /*---------------------updateDropZone---------------------------------\
+	| - Adjust the size and position of the drop zones
+    \--------------------------------------------------------------------*/
+    updateDropZone() {
+        this.dropZonePos = vecMultiply(new Vector2D(19, 5), engine.preserveAspectRatio);
+        this.dropZoneDim = vecMultiply(new Vector2D(590, 70), engine.preserveAspectRatio);
+
+        this.dropZonePos2 = vecMultiply(new Vector2D(310, 5), engine.preserveAspectRatio);
+        this.dropZoneDim2 = vecMultiply(new Vector2D(590, 70), engine.preserveAspectRatio);
+    }
+
+    /*---------------------adjustPosition---------------------------------\
+	| - Adjust the current position, based on game level
+    \--------------------------------------------------------------------*/
+    adjustPosition() {
+        // Level-Based Positions
+        // - Level 2
+        //   - Spawn
+        this.level2SpawnPosition = this.getOrigin().posSpawnLevel2;
+        //   - Loading
+        this.level2LoadingPosition = this.getOrigin().posLoadLevel2;
+        //   - Exit
+        this.level2ExitPosition = this.getOrigin().posExitLevel2;
+
+        // Temporary Position States
+        var posSpawn, posLoad, posExit;
+
+        // Get the game level
+        posSpawn = this.level2SpawnPosition;
+        posLoad = this.level2LoadingPosition;
+        posExit = this.level2ExitPosition;
+
+        // Update Current Position
+        // - Exit State
+        if (this.bagsLeft <= 0) { this.setNewPosition(posExit); return this.adjustDOM(); }
+        // - Spawn State
+        if (!this.ready) { this.setNewPosition(posSpawn); return this.adjustDOM(); }
+        // - Loading State
+        this.setNewPosition(posLoad);
+        return this.adjustDOM();
+    }
+
+    /*---------------------adjustDOM--------------------------------------\
+	| - Move the DOM element based on the current position
+    \--------------------------------------------------------------------*/
+    adjustDOM() {
+        this.domElement.style.top = this.position.y + "px";
+        this.domElement.style.left = this.position.x + "px";
     }
 
     /*---------------------drawLuggageZone--------------------------------\
@@ -74,25 +239,25 @@ class cart2 extends Shape {
 
         // Drop Zone Attributes
         // - Cart 1
-        var dropX = pos.x + 19 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth = this.width - 590 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX = pos.x + this.dropZonePos.x;
+        var dropY = pos.y + this.dropZonePos.y;
+        var dropWidth = this.width - this.dropZoneDim.x;
+        var dropHeight = this.height - this.dropZoneDim.y;
         // - Cart 2
-        var dropX2 = pos.x + 310 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropY2 = pos.y + 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropWidth2 = this.width - 590 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        var dropHeight2 = this.height - 70 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        var dropX2 = pos.x + this.dropZonePos2.x;
+        var dropY2 = pos.y + this.dropZonePos2.y;
+        var dropWidth2 = this.width - this.dropZoneDim2.x;
+        var dropHeight2 = this.height - this.dropZoneDim2.y;
 
         // Drop Area
-        ctx.beginPath();
+        /* ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "#555875";
         ctx.fillStyle = "#7f829d";
         ctx.rect(dropX, dropY, dropWidth, dropHeight);
         ctx.rect(dropX2, dropY2, dropWidth2, dropHeight2);
         ctx.stroke();
-        ctx.fill();
+        ctx.fill(); */
     }
 
     /*---------------------remove-----------------------------------------\
@@ -107,6 +272,7 @@ class cart2 extends Shape {
     \--------------------------------------------------------------------*/
     destroyDiv() {
         this.domElement.remove();
+        // game.manager.removeEntity(this);
     }
 
 	/*---------------------getPoints--------------------------------------\
@@ -126,6 +292,8 @@ class cart2 extends Shape {
     |   the level
     \--------------------------------------------------------------------*/
     exit() {
+        if (this.leftTheBuilding) return;
+        this.leftTheBuilding = true;
         this.forceMoveToLocation(this.level2ExitPosition);
     }
 }

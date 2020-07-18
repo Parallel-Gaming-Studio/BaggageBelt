@@ -19,17 +19,23 @@ class luggage_green extends Shape {
         super(_position, _type, _width, _height, _points);
 
         // Define luggage attributes
+        this.reference = _targetLuggage;
         this.image = _image;
         this.type = _type;
         this.points = _points;
 
-        // Luggage Div Builder
-        var _divOpen = `<div id="${this.type}_${this.ID()}" class="luggage" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
-		$("#baseCanvas").after(_divOpen);
-		this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
-		this.setDOM(this.domElement);
-		this.setOrigin(_targetShape);
-		this.adjustStyles();
+        // Special Purpose Flags
+        this.ready = true;
+        this.removeMe = false;
+
+        // Shape
+        this.shape;
+
+        // DOM reference
+        this.domElement;
+
+        // Add to the game manager
+        game.manager.luggage.push(this);
     }
 
 	/*---------------------draw-------------------------------------------\
@@ -38,21 +44,61 @@ class luggage_green extends Shape {
 	| - Note: Not all entity classes or subclasses require a draw.
     \--------------------------------------------------------------------*/
     draw() {
+        this.adjustPosition();
 		this.adjustStyles();
-        // console.log(`<LuggageGreen>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
-        // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-		// super.draw();
+        this.shape.adjustStyles();
     }
 	
+    /*---------------------adjustPosition---------------------------------\
+	| - Adjust the current position, based on game level
+    \--------------------------------------------------------------------*/
+    adjustPosition() {
+
+        // Luggage Shape
+        var tempArray = JSON.parse(this.shape.reference.getTransform(this));
+        this.shape.height = tempArray.height;
+        this.shape.width = tempArray.width;
+        this.shape.position = new Vector2D(tempArray.x, tempArray.y);
+
+        // Update Current Position
+        return this.adjustDOM();
+    }
+
+    /*---------------------adjustDOM--------------------------------------\
+	| - Move the DOM element based on the current position
+    \--------------------------------------------------------------------*/
+    adjustDOM() {
+        this.updateAttributes();
+        // this.domElement.style.display = "inline-flex !important";
+        this.domElement.style.top = this.position.y + "px";
+        this.domElement.style.left = this.position.x + "px";
+    }
+
+    /*---------------------remove-----------------------------------------\
+    | - Removes this luggage from the game
+    \--------------------------------------------------------------------*/
+    remove() {
+        game.manager.removeLuggage(this);
+    }
+
 	/*---------------------destroyDiv-------------------------------------\
     | - Removes this shape's div element from the page
     \--------------------------------------------------------------------*/
 	destroyDiv() {
-		this.domElement.remove();
+        this.domElement.remove();
+        // game.manager.removeLuggage(this);
 	}
 
 	/*---------------------getPoints--------------------------------------\
     | - Returns star's point value
     \--------------------------------------------------------------------*/
     getPoints() { return this.points; }
+
+    /*---------------------exit-------------------------------------------\
+    | - Fades the luggage out
+    \--------------------------------------------------------------------*/
+    exit() {
+        this.ready = false;
+        this.removeMe = true;
+    }
 }

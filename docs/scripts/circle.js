@@ -19,19 +19,26 @@ class circle extends Shape {
         super(_position, _type, _width, _height, _points);
 
         // Define circle's attributes
+        this.reference = _targetShape;
         this.image = _image;
         this.type = _type;
         this.points = _points;
 		
-		// Shape Div Builder
-		var _divOpen = `<div id="${this.type}_${this.ID()}" class="gems" style="top:${this.position.y}px;left:${this.position.x}px;width:${this.width}px;height:${this.height}px;background-image: url('${this.image.src}');">`;
-		$("#baseCanvas").after(_divOpen);
-		this.domElement = document.getElementById(`${this.type}_${this.ID()}`);
-		this.setDOM(this.domElement);
+		this.domElement;
 		this.setOrigin(_targetShape);
-		this.adjustStyles();
     }
 
+    /*---------------------adjustStyles-----------------------------------\
+    | - Adjust the styles to match the target's
+    \--------------------------------------------------------------------*/
+	adjustStyles() {
+		this.domElement.style.display = "block";
+		this.domElement.style.width = this.width + "px";
+		this.domElement.style.height = this.height + "px";
+        this.domElement.style.top = this.position.y + "px";
+        this.domElement.style.left = this.position.x + "px";
+    }
+    
 	/*---------------------draw-------------------------------------------\
 	| /\ Inherited from baseGameEntity /\
     | - Override the draw function.
@@ -39,9 +46,6 @@ class circle extends Shape {
     \--------------------------------------------------------------------*/
     draw() {
 		this.adjustStyles();
-        // console.log(`<Circle>[Draw] Image: ${this.image.id}\nX: ${this.center.x} | Y: ${this.center.y}\nW: ${this.width} | H: ${this.height}`);
-        // engine.context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-		// super.draw();
     }
 	
 	/*---------------------destroyDiv-------------------------------------\

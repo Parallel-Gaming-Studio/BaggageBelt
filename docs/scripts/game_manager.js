@@ -35,6 +35,9 @@ game.hideElements = {
         this.canvas();
         game.inputKeypad.hideKeypad();
         game.manager.resetGame();
+
+        // DEBUG
+        game.playDEBUGIncreasePoints.level = 0;
     }
 };
 
@@ -97,8 +100,14 @@ game.gameController = {
                     var touchInfo = engine.input.getTouch(j);
                     if (touchInfo.type == "START") {
                         // Perform actions when start is pressed
+                        game.manager.selectLuggage(new Vector2D(touchInfo.x, touchInfo.y));
+                        game.timeoutOverlay.refreshTimer();
                     } else if (touchInfo.type == "END") {
                         // Perform actions when end is pressed
+                        game.manager.dropLuggage(new Vector2D(touchInfo.x, touchInfo.y));
+                        game.timeoutOverlay.refreshTimer();
+                    } else if (touchInfo.type == "MOVE") {
+                        
                     }
                 }
             }
@@ -107,9 +116,17 @@ game.gameController = {
         // Mouse Events
         if (engine.input.pressed(game.mouse[0])) {
             // Perform actions when left mouse button is pressed
+            let myMouse = new Vector2D(engine.input.mouse.x, engine.input.mouse.y);
+            game.manager.selectLuggage(myMouse);
+            game.timeoutOverlay.refreshTimer();
+            // console.log(`Mouse pressed at ${myMouse}`);
         }
         if (engine.input.released(game.mouse[0])) {
             // Perform actions when left mouse button is released
+            let myMouse = new Vector2D(engine.input.mouse.x, engine.input.mouse.y)
+            game.manager.dropLuggage(myMouse);
+            game.timeoutOverlay.refreshTimer();
+            // console.log(`Mouse released at ${myMouse}`);
         }
 
         // DEBUG
@@ -302,6 +319,12 @@ game.drawOnce = function () {
             // Entities
             this.manager.drawEntities();
 
+            // DEBUG
+            // this.playDEBUGIncreasePoints.draw();
+
+            // Display Snackbar
+            this.playTutorial.draw();
+
             break;
         case 'end':
             // Draw images on the canvas
@@ -353,7 +376,7 @@ game.drawOnce = function () {
             break;
     }
     // DEBUG
-    console.log("<GAME> Loaded Scene: " + this.currState);
+    // console.log("<GAME> Loaded Scene: " + this.currState);
 };
 //   - First draw event
 window.onload = function () {

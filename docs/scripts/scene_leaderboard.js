@@ -36,8 +36,8 @@ game.leaderboardPlayerScore = {
     posY: 0,
     //Adjust transformation
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
         this.posX = engine.width * 0.73 - this.width / 2;
         this.posY = 0;
     },
@@ -107,7 +107,7 @@ game.finalPlayerScore = {
 
         //Attach Left Side
         this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2;
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 3 + 0 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height / 3 + 0 * engine.preserveAspectRatio;
 
         //Adjust font
         this.textResize();
@@ -131,7 +131,7 @@ game.finalPlayerScore = {
     },
     //Update and display the score
     updateScore: function () {
-        this.div.innerHTML = Math.max(0, game.player.score);
+        this.div.innerHTML = NumberFormat(game.player.score.toString());
     }
 };
 
@@ -149,10 +149,10 @@ game.leaderboardSponsorBox = {
     posY: 0,
     //Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posX = 20 + 30 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = engine.height - this.height - 5 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
+        this.posX = 20 + 30 * engine.preserveAspectRatio;
+        this.posY = engine.height - this.height - 5 * engine.preserveAspectRatio;
     },
     //Draw the object
     draw: function () {
@@ -180,7 +180,7 @@ game.leaderboardSponsorLogo = {
         this.width = game.leaderboardSponsorBox.width * 0.70;
         this.height = this.width;
         //Attach Bottom Side
-        this.posX = game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width / 2 - this.width / 2; // game.leaderboardSponsorBox.posX + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width / 2 - this.width / 2; // game.leaderboardSponsorBox.posX + 50 * engine.preserveAspectRatio;
         this.posY = game.leaderboardSponsorBox.posY + game.leaderboardSponsorBox.height / 2 - this.height / 2;
     },
     //Draw the object
@@ -221,19 +221,19 @@ game.top10players = {
     },
     //Adjust the object's transform
     resize: function () {
-        this.width = (game.leaderboardPlayerScore.posX - (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width)) - 110 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = (game.leaderboardPlayerScore.posX - (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width)) - 110 * engine.preserveAspectRatio;
         this.height = engine.height;
 
         //Attach Left Side with Buffer
-        this.posX = (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width) + 50 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.posX = (game.leaderboardSponsorBox.posX + game.leaderboardSponsorBox.width) + 50 * engine.preserveAspectRatio;
         this.posY = 0;
 
         //Update font size
-        this.font_size = this.org_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.table_font_size = this.org_table_font_size * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.font_size = this.org_font_size * engine.preserveAspectRatio;
+        this.table_font_size = this.org_table_font_size * engine.preserveAspectRatio;
 
         // Update padding sizes
-        // this.padding = this.org_padding * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // this.padding = this.org_padding * engine.preserveAspectRatio;
     },
     //Apply changes via CSS
     adjustStyle: function () {
@@ -356,25 +356,25 @@ game.leaderboardRetryButton = {
     height: 0,
     posX: 0,
     posY: 0,
-    //Initialize the object
+    // Initialize the object
     init: function () {
-        //Add event listener to the button
+        // Add event listener to the button
         this.image.addEventListener("click", game.leaderboardRetryButton.retry);
     },
-    //Adjust the object's transform
+    // Adjust the object's transform
     resize: function () {
-        this.width = this.org_width * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.height = this.org_height * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        this.width = this.org_width * engine.preserveAspectRatio;
+        this.height = this.org_height * engine.preserveAspectRatio;
 
-        //Remove an additional 25 (proportionate) from the X-position to match the shadow
-        this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2; // game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 86 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
-        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height - 150 * (1 - Math.max(engine.widthProportion, engine.heightProportion));
+        // Remove an additional 25 (proportionate) from the X-position to match the shadow
+        this.posX = game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width / 2 - this.width / 2; // game.leaderboardPlayerScore.posX + game.leaderboardPlayerScore.width - this.width - 86 * engine.preserveAspectRatio;
+        this.posY = game.leaderboardPlayerScore.posY + game.leaderboardPlayerScore.height - 150 * engine.preserveAspectRatio;
     },
-    //Draw the object
+    // Draw the object
     draw: function () {
         this.adjustStyle();
     },
-    //Apply changes via CSS
+    // Apply changes via CSS
     adjustStyle: function () {
         this.resize();
         this.image.style.position = "absolute";
@@ -385,24 +385,28 @@ game.leaderboardRetryButton = {
         this.image.style.height = this.height + "px";
         this.image.style.zIndex = 1;
     },
-    //Actions when clicking this button
+    // Actions when clicking this button
     retry: function () {
-        //Inform Google the player is starting a new game
-        //game.google.start();    --un note when ready for google analytics
+        // Open the tutorial overlay
+        game.tutorialOverlay.sceneTransition();
+        // Inform Google the player is starting a new game
+        // game.google.start();    --un note when ready for google analytics
         // Clear the initials on the End Scene
-        game.endPlayerInitials.clearInitials();
-        //Set the game state to Play Scene
+        /* game.endPlayerInitials.clearInitials();
+        // Set the game state to Play Scene
         game.currState = game.gameState[1];
-        //Reset the player object
+        // Reset the player object
         game.player.reset();
-        //Reset leaderboard table
+        // Reset the game manager
+        game.manager.resetGame();
+        // Reset leaderboard table
         game.top10players.hideTable();
-        //Refresh the timeout timer
+        // Refresh the timeout timer
         game.timeoutOverlay.refreshTimer();
-        //Hide all elements
+        // Hide all elements
         game.hideElements.hideAll();
-        //Redraw all elements
-        game.drawOnce();
+        // Redraw all elements
+        game.drawOnce(); */
     }
 };
 game.leaderboardRetryButton.init(); // Force initialize object on first script load
