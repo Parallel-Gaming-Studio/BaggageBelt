@@ -322,6 +322,9 @@ game.drawOnce = function () {
             // DEBUG
             // this.playDEBUGIncreasePoints.draw();
 
+            // Display Snackbar
+            this.playTutorial.draw();
+
             break;
         case 'end':
             // Draw images on the canvas

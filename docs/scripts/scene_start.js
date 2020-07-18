@@ -190,8 +190,10 @@ game.startButton = {
     },
     // Handle user interaction based on game state
     clickMe: function () {
+        // Open the tutorial overlay
+        game.tutorialOverlay.sceneTransition();
         // Inform Google the user started playing a game
-        game.google.start();
+        /* game.google.start();
         // Clear the initials on the End Scene
         game.endPlayerInitials.clearInitials();
         // Reset the player object
@@ -203,7 +205,7 @@ game.startButton = {
         // Hide all elements
         game.hideElements.hideAll();
         // Redraw all elements
-        game.drawOnce();
+        game.drawOnce(); */
     }
 };
 game.startButton.init(); // Force object initialization on first script load

@@ -387,10 +387,12 @@ game.leaderboardRetryButton = {
     },
     // Actions when clicking this button
     retry: function () {
+        // Open the tutorial overlay
+        game.tutorialOverlay.sceneTransition();
         // Inform Google the player is starting a new game
         // game.google.start();    --un note when ready for google analytics
         // Clear the initials on the End Scene
-        game.endPlayerInitials.clearInitials();
+        /* game.endPlayerInitials.clearInitials();
         // Set the game state to Play Scene
         game.currState = game.gameState[1];
         // Reset the player object
@@ -404,7 +406,7 @@ game.leaderboardRetryButton = {
         // Hide all elements
         game.hideElements.hideAll();
         // Redraw all elements
-        game.drawOnce();
+        game.drawOnce(); */
     }
 };
 game.leaderboardRetryButton.init(); // Force initialize object on first script load
